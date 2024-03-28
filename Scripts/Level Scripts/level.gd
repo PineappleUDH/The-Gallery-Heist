@@ -17,3 +17,5 @@ func _ready():
 
 func _on_player_died():
 	SceneManager.restart_scene()
+	
+

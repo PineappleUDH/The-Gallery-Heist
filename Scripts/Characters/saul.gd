@@ -271,3 +271,14 @@ func _state_attack_ph_process(delta: float):
 
 func _on_took_hit_timeout():
 	_taking_hit = false
+
+
+
+func _on_camera_trigger_body_entered(body):
+	pass # Replace with function body.
+
+
+func _on_camera_trigger_2_body_entered(body):
+	pass # Replace with function body.
+	
+	print("Entered")
