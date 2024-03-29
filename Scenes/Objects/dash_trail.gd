@@ -4,7 +4,6 @@ extends Line2D
 #@onready var _point_timer : Timer = $PointTimer
 var _is_active : bool = false
 
-
 func set_active(active : bool):
 	_is_active = active
 

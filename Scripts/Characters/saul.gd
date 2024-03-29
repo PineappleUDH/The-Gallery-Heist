@@ -21,6 +21,8 @@ extends "res://Scripts/Characters/character.gd"
 @onready var _took_hit : Timer = $Timers/TookHit
 @onready var _sprite : AnimatedSprite2D = $Sprite
 @onready var _debug_vars_visualizer : PanelContainer = $DebugVarsVisualizer
+const _dash_sprite = preload("res://Scenes/Objects/dash_sprite.tscn")
+
 # TEMP
 @onready var _attack_sprite : Sprite2D = $HurtBox/AttackSprite
 
@@ -224,14 +226,15 @@ func _state_wall_slide_ph_process(delta: float):
 func _state_dash_switch_to(from : StringName):
 	World.level.level_camera.shake(LevelCamera.ShakeLevel.low, _dash_shake_duration)
 	_sfx["dash"].play()
-	_dash_trail.set_active(true)
+	#_dash_trail.set_active(true)
 	_dash_timer.start()
 	velocity = Vector2(0,0)
 	_can_dash = false
+	_sprite.play("Dashing")
 
 func _state_dash_switch_from(to: StringName):
 	_dash_cooldown.start()
-	_dash_trail.set_active(false)
+	#_dash_trail.set_active(false)
 
 func _state_dash_ph_process(delta: float):
 	# Trying to reduce the power of vertical dashes, which affect diagonal 
@@ -241,6 +244,11 @@ func _state_dash_ph_process(delta: float):
 	velocity.y = (_dash_speed * _facing.y) * 0.8
 	
 	move_and_slide()
+	
+	var _dash_smear = _dash_sprite.instantiate()
+	_dash_smear.global_position = global_position
+	_dash_smear.flip_h = _sprite.flip_h
+	get_parent().add_child(_dash_smear)
 	
 	if _dash_timer.is_stopped() or is_on_wall():
 		_dash_timer.stop()
