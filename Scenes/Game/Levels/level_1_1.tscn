@@ -117,9 +117,6 @@ layer_0/tile_data = PackedInt32Array(-327701, 65536, 1, -262165, 65536, 1, -1966
 [node name="Saul" parent="Characters" index="0"]
 position = Vector2(-201, -66)
 
-[node name="LevelCamera" parent="." index="4" node_paths=PackedStringArray("_starting_trigger")]
-_starting_trigger = NodePath("")
-
 [node name="MusicPlayer" parent="." index="6"]
 stream = ExtResource("2_psurl")
 autoplay = true

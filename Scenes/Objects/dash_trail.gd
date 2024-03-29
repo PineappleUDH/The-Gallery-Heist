@@ -1,7 +1,7 @@
 extends Line2D
 
 @export var _max_length : int
-@onready var _point_timer : Timer = $PointTimer
+#@onready var _point_timer : Timer = $PointTimer
 var _is_active : bool = false
 
 

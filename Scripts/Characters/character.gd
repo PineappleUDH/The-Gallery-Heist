@@ -5,10 +5,13 @@ signal died
 
 @onready var _damaged_sfx : AudioStreamPlayer2D = $Sounds/Damaged
 
+@warning_ignore("unused_private_class_variable")
 var _direction : Vector2 = Vector2.RIGHT
+@warning_ignore("unused_private_class_variable")
 var _max_health : float
 var _health : float
 var _knockback_multiplier : float = 1.0
+@warning_ignore("unused_private_class_variable")
 var _gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 

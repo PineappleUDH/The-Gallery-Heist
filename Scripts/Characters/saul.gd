@@ -7,7 +7,7 @@ extends "res://Scripts/Characters/character.gd"
 @onready var _dash_cooldown : Timer = $Timers/DashCooldown
 @onready var _dash_timer : Timer = $Timers/DashTimer
 @onready var _dash_trail : Line2D = $DashTrail
-@onready var _dust_trail : GPUParticles2D = $DustTrail
+#@onready var _dust_trail : GPUParticles2D = $DustTrail
 @onready var _slide_delay : Timer = $Timers/SlideDelay
 @onready var _detect_right : RayCast2D = $Detection/Right
 @onready var _detect_left : RayCast2D = $Detection/Left

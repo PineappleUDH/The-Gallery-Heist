@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bbgah45f5xn5c"]
+[gd_scene load_steps=8 format=3 uid="uid://bbgah45f5xn5c"]
 
 [ext_resource type="PackedScene" uid="uid://b84n1i2bwxbmr" path="res://Scenes/Game/Levels/level.tscn" id="1_esp2y"]
 [ext_resource type="Texture2D" uid="uid://biaaj6ja3o556" path="res://Resources/Textures/Discord Level Tilesets/Tiles.png" id="2_bvfly"]
 [ext_resource type="PackedScene" uid="uid://3xg1cdwrnu1c" path="res://Scenes/Objects/camera_trigger.tscn" id="3_n05d4"]
-[ext_resource type="Script" path="res://Scripts/Camera System/camera_trigger.gd" id="4_2qg1t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wtdd3"]
 texture = ExtResource("2_bvfly")
@@ -435,7 +434,7 @@ layer_3/tile_data = PackedInt32Array()
 position = Vector2(-1, -251)
 
 [node name="LevelCamera" parent="." index="4" node_paths=PackedStringArray("_starting_trigger")]
-_starting_trigger = NodePath("../CameraTriggers/CameraTrigger2")
+_starting_trigger = NodePath("../CameraTriggers/CameraTrigger")
 
 [node name="CameraTrigger" parent="CameraTriggers" index="0" instance=ExtResource("3_n05d4")]
 position = Vector2(231, -153)
@@ -443,21 +442,20 @@ _change_state = true
 _change_zoom = true
 _change_lock = true
 _idle_position = Vector2(7, -179)
+_release_x_bound = false
+_release_y_bound = false
+_x_bound = Vector2(-606, 1455)
+_y_bound = Vector2(-1422, 0)
 _zoom = Vector2(0.8, 0.8)
 
-[node name="Marker2D" type="Marker2D" parent="CameraTriggers/CameraTrigger" index="0"]
-position = Vector2(497, -179)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger" index="1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger" index="0"]
 position = Vector2(2, -4)
 shape = SubResource("RectangleShape2D_0dbns")
 
-[node name="CameraTrigger2" type="Area2D" parent="CameraTriggers" index="1"]
-position = Vector2(294, -155)
-script = ExtResource("4_2qg1t")
+[node name="CameraTrigger2" parent="CameraTriggers" index="1" instance=ExtResource("3_n05d4")]
+position = Vector2(319, -150)
 _change_state = true
 _change_zoom = true
-_change_lock = true
 _idle_position = Vector2(497, 0)
 _zoom = Vector2(0.6, 0.6)
 
@@ -466,4 +464,3 @@ position = Vector2(-1, -3)
 shape = SubResource("RectangleShape2D_njoti")
 
 [connection signal="body_entered" from="CameraTriggers/CameraTrigger" to="Characters/Saul" method="_on_camera_trigger_body_entered"]
-[connection signal="body_entered" from="CameraTriggers/CameraTrigger2" to="Characters/Saul" method="_on_camera_trigger_2_body_entered"]
