@@ -1,7 +1,7 @@
 extends Sprite2D
 
 var _direction
-var _shrink_factor : int = 0.05
+var _shrink_factor : float = 0.05
 
 
 func _process(delta):

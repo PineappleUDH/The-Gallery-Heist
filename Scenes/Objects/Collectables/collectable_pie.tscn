@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://catjkp55gq8oi"]
+
+[ext_resource type="PackedScene" uid="uid://tx6swqaimuyw" path="res://Scenes/Objects/Collectables/collectable.tscn" id="1_xpsje"]
+[ext_resource type="Script" path="res://Scenes/Objects/Collectables/collectable_pie.gd" id="2_0trnc"]
+[ext_resource type="Texture2D" uid="uid://dmidv2u6q32gb" path="res://Resources/Textures/PLACEHOLDERS/Pie-Sheet.png" id="2_eluy1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o4316"]
+radius = 5.09902
+
+[node name="CollectablePie" instance=ExtResource("1_xpsje")]
+script = ExtResource("2_0trnc")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_eluy1")
+hframes = 8
+frame = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_o4316")

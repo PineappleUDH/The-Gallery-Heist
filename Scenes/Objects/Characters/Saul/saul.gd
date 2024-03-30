@@ -82,7 +82,7 @@ func _process(delta : float):
 func _physics_process(delta : float):
 	_state_machine.state_physics_process(delta)
 
-func get_score(amount : float):
+func add_score(amount : float):
 	_player_score += amount
 	_sfx["coin_pickup"].play()
 	if amount > 1 :

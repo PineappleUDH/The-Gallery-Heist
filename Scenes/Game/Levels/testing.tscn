@@ -1,15 +1,14 @@
-[gd_scene load_steps=22 format=3 uid="uid://mlvn8cvywr4c"]
+[gd_scene load_steps=21 format=3 uid="uid://mlvn8cvywr4c"]
 
 [ext_resource type="PackedScene" uid="uid://b84n1i2bwxbmr" path="res://Scenes/Objects/Level/level.tscn" id="1_gs8pa"]
 [ext_resource type="Script" path="res://Scenes/Game/Levels/testing.gd" id="2_qem0p"]
 [ext_resource type="Texture2D" uid="uid://bwog48d20oq2s" path="res://Resources/Textures/PLACEHOLDERS/Template1.png" id="2_ys7fm"]
 [ext_resource type="PackedScene" uid="uid://3xg1cdwrnu1c" path="res://Scenes/Objects/Level/camera_trigger.tscn" id="3_guy7c"]
 [ext_resource type="PackedScene" uid="uid://dvik7v57h3mcf" path="res://Scenes/Objects/Characters/Enemies/enemy_patrolling.tscn" id="4_3y8bi"]
-[ext_resource type="PackedScene" uid="uid://c1oa5jpq72qev" path="res://Scenes/Objects/Collectables/coin.tscn" id="4_jedpn"]
-[ext_resource type="PackedScene" uid="uid://dry3qo2qrpmsi" path="res://Scenes/Objects/Collectables/3coin_h.tscn" id="5_s8ymi"]
-[ext_resource type="PackedScene" uid="uid://bjync0nv5kgfk" path="res://Scenes/Objects/Collectables/3coin_v.tscn" id="6_2es2q"]
-[ext_resource type="PackedScene" uid="uid://b025nhkacoy05" path="res://Scenes/Objects/Collectables/Pie.tscn" id="7_hlryh"]
+[ext_resource type="PackedScene" uid="uid://c31bicd5mqe8o" path="res://Scenes/Objects/Collectables/collectable_coin.tscn" id="6_odhtu"]
+[ext_resource type="PackedScene" uid="uid://bbfrw50tycm64" path="res://Scenes/Objects/Collectables/collectables_stack.tscn" id="7_pfgp5"]
 [ext_resource type="AudioStream" uid="uid://d1xj5v2xumqvm" path="res://Resources/Audio/Music/saul_gallery_theme.mp3" id="9_7cnyk"]
+[ext_resource type="PackedScene" uid="uid://catjkp55gq8oi" path="res://Scenes/Objects/Collectables/collectable_pie.tscn" id="9_pqw76"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7m7wu"]
 texture = ExtResource("2_ys7fm")
@@ -239,12 +238,6 @@ _change_state = true
 _change_zoom = true
 _change_lock = true
 _trigger_state = 1
-_idle_position = Vector2(0, 0)
-_release_x_bound = true
-_release_y_bound = true
-_x_bound = Vector2(0, 0)
-_y_bound = Vector2(0, 0)
-_zoom = Vector2(1, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger" index="0"]
 position = Vector2(0, -77)
@@ -260,12 +253,8 @@ _change_state = true
 _change_zoom = true
 _change_lock = true
 _trigger_state = 1
-_idle_position = Vector2(0, 0)
 _release_x_bound = false
-_release_y_bound = true
 _x_bound = Vector2(1010, 1010)
-_y_bound = Vector2(0, 0)
-_zoom = Vector2(1, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger2" index="0"]
 position = Vector2(0, -240.5)
@@ -276,12 +265,7 @@ position = Vector2(378, -346)
 _change_state = true
 _change_zoom = true
 _change_lock = true
-_trigger_state = 0
 _idle_position = Vector2(370, -541)
-_release_x_bound = true
-_release_y_bound = true
-_x_bound = Vector2(0, 0)
-_y_bound = Vector2(0, 0)
 _zoom = Vector2(0.5, 0.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger3" index="0"]
@@ -298,186 +282,292 @@ zoom = Vector2(0.5, 0.5)
 
 [node name="Coins" type="Node2D" parent="." index="9"]
 
-[node name="Coin" parent="Coins" index="0" instance=ExtResource("4_jedpn")]
+[node name="CollectableCoin" parent="Coins" index="0" instance=ExtResource("6_odhtu")]
 position = Vector2(131, -155)
 
-[node name="Coin2" parent="Coins" index="1" instance=ExtResource("4_jedpn")]
+[node name="CollectableCoin2" parent="Coins" index="1" instance=ExtResource("6_odhtu")]
 position = Vector2(149, -155)
 
-[node name="Coin3" parent="Coins" index="2" instance=ExtResource("4_jedpn")]
+[node name="CollectableCoin3" parent="Coins" index="2" instance=ExtResource("6_odhtu")]
 position = Vector2(109, -155)
 
-[node name="Coin20" parent="Coins" index="3" instance=ExtResource("4_jedpn")]
+[node name="CollectableCoin4" parent="Coins" index="3" instance=ExtResource("6_odhtu")]
 position = Vector2(967, -389)
 
-[node name="Coin22" parent="Coins" index="4" instance=ExtResource("4_jedpn")]
+[node name="CollectableCoin5" parent="Coins" index="4" instance=ExtResource("6_odhtu")]
 position = Vector2(908, -440)
 
-[node name="Coin36" parent="Coins" index="5" instance=ExtResource("4_jedpn")]
+[node name="CollectableCoin6" parent="Coins" index="5" instance=ExtResource("6_odhtu")]
 position = Vector2(905, -342)
 
-[node name="Coin25" parent="Coins" index="6" instance=ExtResource("4_jedpn")]
+[node name="CollectableCoin7" parent="Coins" index="6" instance=ExtResource("6_odhtu")]
 position = Vector2(671, -397)
 
-[node name="Coin26" parent="Coins" index="7" instance=ExtResource("4_jedpn")]
+[node name="CollectableCoin8" parent="Coins" index="7" instance=ExtResource("6_odhtu")]
 position = Vector2(578, -399)
 
-[node name="Coin27" parent="Coins" index="8" instance=ExtResource("4_jedpn")]
+[node name="CollectableCoin9" parent="Coins" index="8" instance=ExtResource("6_odhtu")]
 position = Vector2(777, -619)
 
-[node name="Coin28" parent="Coins" index="9" instance=ExtResource("4_jedpn")]
+[node name="CollectableCoin10" parent="Coins" index="9" instance=ExtResource("6_odhtu")]
 position = Vector2(823, -621)
 
-[node name="Coin29" parent="Coins" index="10" instance=ExtResource("4_jedpn")]
+[node name="CollectableCoin11" parent="Coins" index="10" instance=ExtResource("6_odhtu")]
 position = Vector2(703, -672)
 
-[node name="Coin30" parent="Coins" index="11" instance=ExtResource("4_jedpn")]
+[node name="CollectableCoin12" parent="Coins" index="11" instance=ExtResource("6_odhtu")]
 position = Vector2(771, -739)
 
-[node name="Coin31" parent="Coins" index="12" instance=ExtResource("4_jedpn")]
+[node name="CollectableCoin13" parent="Coins" index="12" instance=ExtResource("6_odhtu")]
 position = Vector2(839, -738)
 
-[node name="Coin32" parent="Coins" index="13" instance=ExtResource("4_jedpn")]
+[node name="CollectableCoin14" parent="Coins" index="13" instance=ExtResource("6_odhtu")]
 position = Vector2(660, -780)
 
-[node name="Coin42" parent="Coins" index="14" instance=ExtResource("4_jedpn")]
+[node name="CollectableCoin15" parent="Coins" index="14" instance=ExtResource("6_odhtu")]
 position = Vector2(145, -433)
 
-[node name="Coin43" parent="Coins" index="15" instance=ExtResource("4_jedpn")]
+[node name="CollectableCoin16" parent="Coins" index="15" instance=ExtResource("6_odhtu")]
 position = Vector2(236, -431)
 
-[node name="Coin44" parent="Coins" index="16" instance=ExtResource("4_jedpn")]
+[node name="CollectableCoin17" parent="Coins" index="16" instance=ExtResource("6_odhtu")]
 position = Vector2(141, -545)
 
-[node name="Coin45" parent="Coins" index="17" instance=ExtResource("4_jedpn")]
+[node name="CollectableCoin18" parent="Coins" index="17" instance=ExtResource("6_odhtu")]
 position = Vector2(241, -546)
 
-[node name="Coin40" parent="Coins" index="18" instance=ExtResource("4_jedpn")]
+[node name="CollectableCoin19" parent="Coins" index="18" instance=ExtResource("6_odhtu")]
 position = Vector2(360, -389)
 
-[node name="Coin41" parent="Coins" index="19" instance=ExtResource("4_jedpn")]
+[node name="CollectableCoin20" parent="Coins" index="19" instance=ExtResource("6_odhtu")]
 position = Vector2(440, -388)
 
-[node name="3 stack" parent="Coins" index="20" instance=ExtResource("5_s8ymi")]
-position = Vector2(367, -659)
+[node name="CollectablesStack" parent="Coins" index="20" instance=ExtResource("7_pfgp5")]
+position = Vector2(347, -659)
+_collectable = ExtResource("6_odhtu")
+_horizontal_count = 3
+_vertical_count = 1
+_spacing = 20
 
-[node name="3 stack3" parent="Coins" index="21" instance=ExtResource("5_s8ymi")]
-position = Vector2(437, -659)
+[node name="CollectablesStack2" parent="Coins" index="21" instance=ExtResource("7_pfgp5")]
+position = Vector2(418, -659)
+_collectable = ExtResource("6_odhtu")
+_horizontal_count = 3
+_vertical_count = 1
+_spacing = 20
 
-[node name="3 stack4" parent="Coins" index="22" instance=ExtResource("5_s8ymi")]
-position = Vector2(526, -149)
+[node name="CollectablesStack3" parent="Coins" index="22" instance=ExtResource("7_pfgp5")]
+position = Vector2(506, -149)
+_collectable = ExtResource("6_odhtu")
+_horizontal_count = 3
+_vertical_count = 1
+_spacing = 20
 
-[node name="3 stack5" parent="Coins" index="23" instance=ExtResource("5_s8ymi")]
-position = Vector2(363, -149)
+[node name="CollectablesStack4" parent="Coins" index="23" instance=ExtResource("7_pfgp5")]
+position = Vector2(343, -149)
+_collectable = ExtResource("6_odhtu")
+_horizontal_count = 3
+_vertical_count = 1
+_spacing = 20
 
-[node name="3 stack26" parent="Coins" index="24" instance=ExtResource("5_s8ymi")]
-position = Vector2(1027, -307)
+[node name="CollectablesStack5" parent="Coins" index="24" instance=ExtResource("7_pfgp5")]
+position = Vector2(1007, -307)
+_collectable = ExtResource("6_odhtu")
+_horizontal_count = 3
+_vertical_count = 1
+_spacing = 20
 
-[node name="3 stack27" parent="Coins" index="25" instance=ExtResource("5_s8ymi")]
-position = Vector2(956, -307)
+[node name="CollectablesStack6" parent="Coins" index="25" instance=ExtResource("7_pfgp5")]
+position = Vector2(937, -307)
+_collectable = ExtResource("6_odhtu")
+_horizontal_count = 3
+_vertical_count = 1
+_spacing = 20
 
-[node name="3 stack7" parent="Coins" index="26" instance=ExtResource("6_2es2q")]
-position = Vector2(1153, -405)
+[node name="CollectablesStack7" parent="Coins" index="26" instance=ExtResource("7_pfgp5")]
+position = Vector2(1153, -425)
+_collectable = ExtResource("6_odhtu")
+_horizontal_count = 1
+_vertical_count = 3
+_spacing = 20
 
-[node name="3 stack28" parent="Coins" index="27" instance=ExtResource("6_2es2q")]
-position = Vector2(1195, -242)
+[node name="CollectablesStack8" parent="Coins" index="27" instance=ExtResource("7_pfgp5")]
+position = Vector2(1195, -262)
+_collectable = ExtResource("6_odhtu")
+_horizontal_count = 1
+_vertical_count = 3
+_spacing = 20
 
-[node name="3 stack29" parent="Coins" index="28" instance=ExtResource("6_2es2q")]
-position = Vector2(1235, -331)
+[node name="CollectablesStack9" parent="Coins" index="28" instance=ExtResource("7_pfgp5")]
+position = Vector2(1235, -351)
+_collectable = ExtResource("6_odhtu")
+_horizontal_count = 1
+_vertical_count = 3
+_spacing = 20
 
-[node name="3 stack8" parent="Coins" index="29" instance=ExtResource("6_2es2q")]
-position = Vector2(1240, -473)
+[node name="CollectablesStack10" parent="Coins" index="29" instance=ExtResource("7_pfgp5")]
+position = Vector2(1240, -493)
+_collectable = ExtResource("6_odhtu")
+_horizontal_count = 1
+_vertical_count = 3
+_spacing = 20
 
-[node name="3 stack9" parent="Coins" index="30" instance=ExtResource("6_2es2q")]
-position = Vector2(1150, -542)
+[node name="CollectablesStack11" parent="Coins" index="30" instance=ExtResource("7_pfgp5")]
+position = Vector2(1150, -562)
+_collectable = ExtResource("6_odhtu")
+_horizontal_count = 1
+_vertical_count = 3
+_spacing = 20
 
-[node name="3 stack10" parent="Coins" index="31" instance=ExtResource("5_s8ymi")]
-position = Vector2(1100, -607)
+[node name="CollectablesStack12" parent="Coins" index="31" instance=ExtResource("7_pfgp5")]
+position = Vector2(1080, -607)
+_collectable = ExtResource("6_odhtu")
+_horizontal_count = 3
+_vertical_count = 1
+_spacing = 20
 
-[node name="3 stack16" parent="Coins" index="32" instance=ExtResource("5_s8ymi")]
-position = Vector2(1100, -619)
+[node name="CollectablesStack13" parent="Coins" index="32" instance=ExtResource("7_pfgp5")]
+position = Vector2(1080, -619)
+_collectable = ExtResource("6_odhtu")
+_horizontal_count = 3
+_vertical_count = 1
+_spacing = 20
 
-[node name="3 stack11" parent="Coins" index="33" instance=ExtResource("5_s8ymi")]
-position = Vector2(1002, -605)
+[node name="CollectablesStack14" parent="Coins" index="33" instance=ExtResource("7_pfgp5")]
+position = Vector2(982, -605)
+_collectable = ExtResource("6_odhtu")
+_horizontal_count = 3
+_vertical_count = 1
+_spacing = 20
 
-[node name="3 stack15" parent="Coins" index="34" instance=ExtResource("5_s8ymi")]
-position = Vector2(1002, -618)
+[node name="CollectablesStack15" parent="Coins" index="34" instance=ExtResource("7_pfgp5")]
+position = Vector2(982, -618)
+_collectable = ExtResource("6_odhtu")
+_horizontal_count = 3
+_vertical_count = 1
+_spacing = 20
 
-[node name="3 stack2" parent="Coins" index="35" instance=ExtResource("6_2es2q")]
-position = Vector2(646, -562)
+[node name="CollectablesStack16" parent="Coins" index="35" instance=ExtResource("7_pfgp5")]
+position = Vector2(646, -582)
+_collectable = ExtResource("6_odhtu")
+_horizontal_count = 1
+_vertical_count = 3
+_spacing = 20
 
-[node name="3 stack17" parent="Coins" index="36" instance=ExtResource("6_2es2q")]
-position = Vector2(665, -557)
+[node name="CollectablesStack17" parent="Coins" index="36" instance=ExtResource("7_pfgp5")]
+position = Vector2(665, -577)
+_collectable = ExtResource("6_odhtu")
+_horizontal_count = 1
+_vertical_count = 3
+_spacing = 20
 
-[node name="3 stack12" parent="Coins" index="37" instance=ExtResource("5_s8ymi")]
-position = Vector2(650, -165)
+[node name="CollectablesStack18" parent="Coins" index="37" instance=ExtResource("7_pfgp5")]
+position = Vector2(630, -165)
+_collectable = ExtResource("6_odhtu")
+_horizontal_count = 3
+_vertical_count = 1
+_spacing = 20
 
-[node name="3 stack13" parent="Coins" index="38" instance=ExtResource("5_s8ymi")]
-position = Vector2(847, -165)
+[node name="CollectablesStack19" parent="Coins" index="38" instance=ExtResource("7_pfgp5")]
+position = Vector2(827, -165)
+_collectable = ExtResource("6_odhtu")
+_horizontal_count = 3
+_vertical_count = 1
+_spacing = 20
 
-[node name="3 stack14" parent="Coins" index="39" instance=ExtResource("5_s8ymi")]
-position = Vector2(121, -758)
+[node name="CollectablesStack20" parent="Coins" index="39" instance=ExtResource("7_pfgp5")]
+position = Vector2(101, -758)
+_collectable = ExtResource("6_odhtu")
+_horizontal_count = 3
+_vertical_count = 1
+_spacing = 20
 
-[node name="3 stack18" parent="Coins" index="40" instance=ExtResource("6_2es2q")]
-position = Vector2(21, -701)
+[node name="CollectablesStack22" parent="Coins" index="40" instance=ExtResource("7_pfgp5")]
+position = Vector2(21, -721)
+_collectable = ExtResource("6_odhtu")
+_horizontal_count = 1
+_vertical_count = 3
+_spacing = 20
 
-[node name="3 stack19" parent="Coins" index="41" instance=ExtResource("5_s8ymi")]
-position = Vector2(1057, -742)
+[node name="CollectablesStack23" parent="Coins" index="41" instance=ExtResource("7_pfgp5")]
+position = Vector2(1037, -742)
+_collectable = ExtResource("6_odhtu")
+_horizontal_count = 3
+_vertical_count = 1
+_spacing = 20
 
-[node name="3 stack20" parent="Coins" index="42" instance=ExtResource("5_s8ymi")]
-position = Vector2(1057, -756)
+[node name="CollectablesStack24" parent="Coins" index="42" instance=ExtResource("7_pfgp5")]
+position = Vector2(1037, -756)
+_collectable = ExtResource("6_odhtu")
+_horizontal_count = 3
+_vertical_count = 1
+_spacing = 20
 
-[node name="3 stack21" parent="Coins" index="43" instance=ExtResource("6_2es2q")]
-position = Vector2(627, -444)
+[node name="CollectablesStack25" parent="Coins" index="43" instance=ExtResource("7_pfgp5")]
+position = Vector2(627, -464)
+_collectable = ExtResource("6_odhtu")
+_horizontal_count = 1
+_vertical_count = 3
+_spacing = 20
 
-[node name="3 stack22" parent="Coins" index="44" instance=ExtResource("5_s8ymi")]
-position = Vector2(787, -464)
+[node name="CollectablesStack26" parent="Coins" index="44" instance=ExtResource("7_pfgp5")]
+position = Vector2(767, -464)
+_collectable = ExtResource("6_odhtu")
+_horizontal_count = 3
+_vertical_count = 1
+_spacing = 20
 
-[node name="3 stack23" parent="Coins" index="45" instance=ExtResource("5_s8ymi")]
-position = Vector2(857, -464)
+[node name="CollectablesStack27" parent="Coins" index="45" instance=ExtResource("7_pfgp5")]
+position = Vector2(837, -464)
+_collectable = ExtResource("6_odhtu")
+_horizontal_count = 3
+_vertical_count = 1
+_spacing = 20
 
-[node name="3 stack24" parent="Coins" index="46" instance=ExtResource("6_2es2q")]
-position = Vector2(766, -509)
+[node name="CollectablesStack28" parent="Coins" index="46" instance=ExtResource("7_pfgp5")]
+position = Vector2(766, -529)
+_collectable = ExtResource("6_odhtu")
+_horizontal_count = 1
+_vertical_count = 3
+_spacing = 20
 
-[node name="3 stack25" parent="Coins" index="47" instance=ExtResource("6_2es2q")]
-position = Vector2(877, -507)
-
-[node name="Coin4" parent="Coins" index="48" instance=ExtResource("4_jedpn")]
-position = Vector2(821, -521)
+[node name="CollectablesStack29" parent="Coins" index="47" instance=ExtResource("7_pfgp5")]
+position = Vector2(877, -527)
+_collectable = ExtResource("6_odhtu")
+_horizontal_count = 1
+_vertical_count = 3
+_spacing = 20
 
 [node name="Pies" type="Node2D" parent="." index="10"]
 
-[node name="Pie" parent="Pies" index="0" instance=ExtResource("7_hlryh")]
+[node name="CollectablePie" parent="Pies" index="0" instance=ExtResource("9_pqw76")]
 position = Vector2(181, -155)
 
-[node name="pie2" parent="Pies" index="1" instance=ExtResource("7_hlryh")]
+[node name="CollectablePie2" parent="Pies" index="1" instance=ExtResource("9_pqw76")]
 position = Vector2(443, -148)
 
-[node name="Pie4" parent="Pies" index="2" instance=ExtResource("7_hlryh")]
-position = Vector2(936, -413)
-
-[node name="Pie2" parent="Pies" index="3" instance=ExtResource("7_hlryh")]
+[node name="CollectablePie3" parent="Pies" index="2" instance=ExtResource("9_pqw76")]
 position = Vector2(1196, -471)
 
-[node name="Pie3" parent="Pies" index="4" instance=ExtResource("7_hlryh")]
+[node name="CollectablePie4" parent="Pies" index="3" instance=ExtResource("9_pqw76")]
 position = Vector2(192, -561)
 
-[node name="Pie5" parent="Pies" index="5" instance=ExtResource("7_hlryh")]
+[node name="CollectablePie5" parent="Pies" index="4" instance=ExtResource("9_pqw76")]
 position = Vector2(401, -692)
 
-[node name="Pie6" parent="Pies" index="6" instance=ExtResource("7_hlryh")]
+[node name="CollectablePie6" parent="Pies" index="5" instance=ExtResource("9_pqw76")]
 position = Vector2(22, -781)
 
-[node name="Pie7" parent="Pies" index="7" instance=ExtResource("7_hlryh")]
+[node name="CollectablePie7" parent="Pies" index="6" instance=ExtResource("9_pqw76")]
 position = Vector2(627, -482)
 
-[node name="Pie8" parent="Pies" index="8" instance=ExtResource("7_hlryh")]
+[node name="CollectablePie8" parent="Pies" index="7" instance=ExtResource("9_pqw76")]
 position = Vector2(798, -490)
 
-[node name="Pie9" parent="Pies" index="9" instance=ExtResource("7_hlryh")]
+[node name="CollectablePie9" parent="Pies" index="8" instance=ExtResource("9_pqw76")]
 position = Vector2(847, -490)
 
-[node name="Pie10" parent="Pies" index="10" instance=ExtResource("7_hlryh")]
+[node name="CollectablePie10" parent="Pies" index="9" instance=ExtResource("9_pqw76")]
 position = Vector2(400, -408)
 
 [node name="MainTheme" type="AudioStreamPlayer2D" parent="." index="11"]

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbfrw50tycm64"]
+
+[ext_resource type="Script" path="res://Scenes/Objects/Collectables/collectables_stack.gd" id="1_v86xg"]
+
+[node name="CollectablesStack" type="Node2D"]
+script = ExtResource("1_v86xg")
+
+[node name="Stack" type="Node2D" parent="."]

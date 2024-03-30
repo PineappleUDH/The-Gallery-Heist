@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://c31bicd5mqe8o"]
+
+[ext_resource type="PackedScene" uid="uid://tx6swqaimuyw" path="res://Scenes/Objects/Collectables/collectable.tscn" id="1_2unn2"]
+[ext_resource type="Script" path="res://Scenes/Objects/Collectables/collectable_coin.gd" id="2_dm6xu"]
+[ext_resource type="Texture2D" uid="uid://cb1ay8g75ne4c" path="res://Resources/Textures/PLACEHOLDERS/Coin1-Sheet.png" id="3_pfonf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f0yg2"]
+radius = 5.09902
+
+[sub_resource type="Animation" id="Animation_tymqm"]
+resource_name = "default"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 0, 13, 13), Rect2(13, 0, 13, 13), Rect2(26, 0, 13, 13), Rect2(39, 0, 13, 13), Rect2(52, 0, 13, 13)]
+}
+
+[sub_resource type="Animation" id="Animation_wdfue"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 14, 14)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1fa5y"]
+_data = {
+"RESET": SubResource("Animation_wdfue"),
+"default": SubResource("Animation_tymqm")
+}
+
+[node name="CollectableCoin" instance=ExtResource("1_2unn2")]
+script = ExtResource("2_dm6xu")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("3_pfonf")
+region_enabled = true
+region_rect = Rect2(0, 0, 14, 14)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_f0yg2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_1fa5y")
+}
+autoplay = "default"
