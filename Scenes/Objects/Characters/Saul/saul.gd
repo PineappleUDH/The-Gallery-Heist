@@ -1,5 +1,5 @@
 class_name Player
-extends "res://Scripts/Characters/character.gd"
+extends "res://Scenes/Objects/Characters/character.gd"
 
 @onready var _cling_time : Timer = $Timers/ClingTime
 @onready var _coyote_timer : Timer = $Timers/CoyoteTimer
@@ -21,7 +21,7 @@ extends "res://Scripts/Characters/character.gd"
 @onready var _took_hit : Timer = $Timers/TookHit
 @onready var _sprite : AnimatedSprite2D = $Sprite
 @onready var _debug_vars_visualizer : PanelContainer = $DebugVarsVisualizer
-const _dash_sprite = preload("res://Scenes/Objects/dash_sprite.tscn")
+const _dash_sprite = preload("res://Scenes/Objects/Characters/Saul/dash_sprite.tscn")
 
 # TEMP
 @onready var _attack_sprite : Sprite2D = $HurtBox/AttackSprite

@@ -1,12 +1,12 @@
 [gd_scene load_steps=5 format=3 uid="uid://b84n1i2bwxbmr"]
 
-[ext_resource type="Script" path="res://Scripts/Level Scripts/level.gd" id="1_b5vho"]
-[ext_resource type="Script" path="res://Scripts/Level Scripts/level_pause_manager.gd" id="2_at6do"]
-[ext_resource type="PackedScene" uid="uid://crjtftvmkahqx" path="res://Scenes/Characters/Saul/saul.tscn" id="2_wyn7p"]
-[ext_resource type="PackedScene" uid="uid://dhssfh3cjjl5q" path="res://Scenes/Objects/level_camera.tscn" id="3_ro6gx"]
+[ext_resource type="Script" path="res://Scenes/Objects/Level/level.gd" id="1_qee75"]
+[ext_resource type="Script" path="res://Scenes/Objects/Level/level_pause_manager.gd" id="2_2cj76"]
+[ext_resource type="PackedScene" uid="uid://crjtftvmkahqx" path="res://Scenes/Objects/Characters/Saul/saul.tscn" id="2_wyn7p"]
+[ext_resource type="PackedScene" uid="uid://dhssfh3cjjl5q" path="res://Scenes/Objects/Level/level_camera.tscn" id="4_h0vsv"]
 
 [node name="Level" type="Node2D"]
-script = ExtResource("1_b5vho")
+script = ExtResource("1_qee75")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -18,7 +18,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("2_at6do")
+script = ExtResource("2_2cj76")
 
 [node name="ColorRect" type="ColorRect" parent="UI/PauseManager"]
 modulate = Color(1, 1, 1, 0.392157)
@@ -58,7 +58,7 @@ format = 2
 
 [node name="Collectables" type="Node2D" parent="."]
 
-[node name="LevelCamera" parent="." instance=ExtResource("3_ro6gx")]
+[node name="LevelCamera" parent="." instance=ExtResource("4_h0vsv")]
 
 [node name="CameraTriggers" type="Node2D" parent="."]
 

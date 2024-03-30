@@ -1,10 +1,10 @@
 [gd_scene load_steps=22 format=3 uid="uid://mlvn8cvywr4c"]
 
-[ext_resource type="PackedScene" uid="uid://b84n1i2bwxbmr" path="res://Scenes/Game/Levels/level.tscn" id="1_gs8pa"]
-[ext_resource type="Script" path="res://Scripts/Level Scripts/testing.gd" id="2_qem0p"]
+[ext_resource type="PackedScene" uid="uid://b84n1i2bwxbmr" path="res://Scenes/Objects/Level/level.tscn" id="1_gs8pa"]
+[ext_resource type="Script" path="res://Scenes/Game/Levels/testing.gd" id="2_qem0p"]
 [ext_resource type="Texture2D" uid="uid://bwog48d20oq2s" path="res://Resources/Textures/PLACEHOLDERS/Template1.png" id="2_ys7fm"]
-[ext_resource type="PackedScene" uid="uid://3xg1cdwrnu1c" path="res://Scenes/Objects/camera_trigger.tscn" id="3_guy7c"]
-[ext_resource type="PackedScene" uid="uid://dvik7v57h3mcf" path="res://Scenes/Characters/Enemies/enemy_patrolling.tscn" id="4_3y8bi"]
+[ext_resource type="PackedScene" uid="uid://3xg1cdwrnu1c" path="res://Scenes/Objects/Level/camera_trigger.tscn" id="3_guy7c"]
+[ext_resource type="PackedScene" uid="uid://dvik7v57h3mcf" path="res://Scenes/Objects/Characters/Enemies/enemy_patrolling.tscn" id="4_3y8bi"]
 [ext_resource type="PackedScene" uid="uid://c1oa5jpq72qev" path="res://Scenes/Objects/Collectables/coin.tscn" id="4_jedpn"]
 [ext_resource type="PackedScene" uid="uid://dry3qo2qrpmsi" path="res://Scenes/Objects/Collectables/3coin_h.tscn" id="5_s8ymi"]
 [ext_resource type="PackedScene" uid="uid://bjync0nv5kgfk" path="res://Scenes/Objects/Collectables/3coin_v.tscn" id="6_2es2q"]
@@ -239,6 +239,12 @@ _change_state = true
 _change_zoom = true
 _change_lock = true
 _trigger_state = 1
+_idle_position = Vector2(0, 0)
+_release_x_bound = true
+_release_y_bound = true
+_x_bound = Vector2(0, 0)
+_y_bound = Vector2(0, 0)
+_zoom = Vector2(1, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger" index="0"]
 position = Vector2(0, -77)
@@ -254,8 +260,12 @@ _change_state = true
 _change_zoom = true
 _change_lock = true
 _trigger_state = 1
+_idle_position = Vector2(0, 0)
 _release_x_bound = false
+_release_y_bound = true
 _x_bound = Vector2(1010, 1010)
+_y_bound = Vector2(0, 0)
+_zoom = Vector2(1, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger2" index="0"]
 position = Vector2(0, -240.5)
@@ -266,7 +276,12 @@ position = Vector2(378, -346)
 _change_state = true
 _change_zoom = true
 _change_lock = true
+_trigger_state = 0
 _idle_position = Vector2(370, -541)
+_release_x_bound = true
+_release_y_bound = true
+_x_bound = Vector2(0, 0)
+_y_bound = Vector2(0, 0)
 _zoom = Vector2(0.5, 0.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger3" index="0"]

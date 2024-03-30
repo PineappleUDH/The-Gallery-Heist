@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b1kjxca7t8px"]
 
-[ext_resource type="Script" path="res://Scripts/Managers/scene_manager.gd" id="1_2ux1k"]
-[ext_resource type="Shader" path="res://Resources/Shaders/scene_transition.gdshader" id="2_oaiko"]
+[ext_resource type="Script" path="res://Scenes/Autoloads/scene_manager.gd" id="1_qo84u"]
+[ext_resource type="Shader" path="res://Resources/Shaders/scene_transition.gdshader" id="2_2fsa7"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_rephp"]
 frequency = 0.0045
@@ -11,14 +11,14 @@ seamless = true
 noise = SubResource("FastNoiseLite_rephp")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vwehv"]
-shader = ExtResource("2_oaiko")
+shader = ExtResource("2_2fsa7")
 shader_parameter/factor = 1.0
 shader_parameter/noise = SubResource("NoiseTexture2D_7ksfy")
 
 [node name="SceneManager" type="CanvasLayer"]
 process_mode = 3
 layer = 99
-script = ExtResource("1_2ux1k")
+script = ExtResource("1_qo84u")
 
 [node name="ScreenTransition" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_vwehv")

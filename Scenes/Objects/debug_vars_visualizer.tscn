@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d4hvse6k4r8rh"]
 
-[ext_resource type="Script" path="res://Scripts/Object scripts/debug_vars_visualizer.gd" id="1_dp741"]
+[ext_resource type="Script" path="res://Scenes/Objects/debug_vars_visualizer.gd" id="1_dp741"]
 
 [node name="DebugVarsVisualizer" type="PanelContainer"]
 visible = false

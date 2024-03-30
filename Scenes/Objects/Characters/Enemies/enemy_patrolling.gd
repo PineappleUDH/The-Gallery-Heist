@@ -1,4 +1,4 @@
-extends "res://Scripts/Characters/enemy.gd"
+extends "res://Scenes/Objects/Characters/Enemies/enemy.gd"
 
 @export var _wander_speed : float = 50.0
 

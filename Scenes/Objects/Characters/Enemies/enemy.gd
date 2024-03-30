@@ -1,5 +1,5 @@
 class_name Enemy
-extends "res://Scripts/Characters/character.gd"
+extends "res://Scenes/Objects/Characters/character.gd"
 
 # enemies are named based on their behavior rather than type
 # a "patroling" enemy may have different skins for different areas but always

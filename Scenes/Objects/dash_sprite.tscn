@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://ckw12igh1dbr4"]
-
-[ext_resource type="Texture2D" uid="uid://cdhv5eao2yy7a" path="res://Resources/Textures/SaulSprites/dashsmear (AddinSachen).png" id="1_i88w4"]
-[ext_resource type="Script" path="res://dashtrail2.gd" id="2_2uu20"]
-
-[node name="DashSprite" type="Sprite2D"]
-texture = ExtResource("1_i88w4")
-script = ExtResource("2_2uu20")

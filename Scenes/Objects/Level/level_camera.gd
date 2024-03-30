@@ -54,15 +54,19 @@ func _process(delta : float):
 		target_position.x = player.global_position.x + sign(player.velocity.x) * (velocity_offset.x)
 		target_position.y = player.global_position.y + sign(player.velocity.y) * (velocity_offset.y)
 	
-	# bounds
+	# bounds, clamp camera edges rather than camera center
 	var camera_half_size : Vector2 = (get_viewport_rect().size * zoom) / 2.0
 	if _axis_bounds.has("x"):
 		target_position.x = clamp(
-			target_position.x, _axis_bounds["x"][0] + camera_half_size.x, _axis_bounds["x"][1] - camera_half_size.x
+			target_position.x,
+			min(_axis_bounds["x"][0] + camera_half_size.x, _axis_bounds["x"][1]),
+			max(_axis_bounds["x"][1] - camera_half_size.x, _axis_bounds["x"][0])
 		)
 	if _axis_bounds.has("y"):
 		target_position.y = clamp(
-			target_position.y, _axis_bounds["y"][0] + camera_half_size.y, _axis_bounds["y"][1] - camera_half_size.y
+			target_position.y,
+			min(_axis_bounds["y"][0] + camera_half_size.y, _axis_bounds["y"][1]),
+			max(_axis_bounds["y"][1] - camera_half_size.y, _axis_bounds["y"][0])
 		)
 	
 	# calc camera speed

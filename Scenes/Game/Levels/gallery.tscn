@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://bbgah45f5xn5c"]
 
-[ext_resource type="PackedScene" uid="uid://b84n1i2bwxbmr" path="res://Scenes/Game/Levels/level.tscn" id="1_esp2y"]
+[ext_resource type="PackedScene" uid="uid://b84n1i2bwxbmr" path="res://Scenes/Objects/Level/level.tscn" id="1_esp2y"]
 [ext_resource type="Texture2D" uid="uid://biaaj6ja3o556" path="res://Resources/Textures/Discord Level Tilesets/Tiles.png" id="2_bvfly"]
-[ext_resource type="PackedScene" uid="uid://3xg1cdwrnu1c" path="res://Scenes/Objects/camera_trigger.tscn" id="3_n05d4"]
+[ext_resource type="PackedScene" uid="uid://3xg1cdwrnu1c" path="res://Scenes/Objects/Level/camera_trigger.tscn" id="3_n05d4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wtdd3"]
 texture = ExtResource("2_bvfly")

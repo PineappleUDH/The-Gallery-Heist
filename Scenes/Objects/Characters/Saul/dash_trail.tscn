@@ -1,12 +1,12 @@
 [gd_scene load_steps=2 format=3 uid="uid://yxxgx3h82w35"]
 
-[ext_resource type="Script" path="res://Scenes/Objects/dash_trail.gd" id="1_cb0hb"]
+[ext_resource type="Script" path="res://Scenes/Objects/Characters/Saul/dash_trail.gd" id="1_8glea"]
 
 [node name="DashTrail" type="Line2D"]
 texture_mode = 2
 begin_cap_mode = 1
 end_cap_mode = 1
-script = ExtResource("1_cb0hb")
+script = ExtResource("1_8glea")
 _max_length = 20
 
 [node name="PointTimer" type="Timer" parent="."]

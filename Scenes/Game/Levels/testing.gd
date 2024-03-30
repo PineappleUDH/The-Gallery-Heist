@@ -1,4 +1,4 @@
-extends "res://Scripts/Level Scripts/level.gd"
+extends "res://Scenes/Objects/Level/level.gd"
 
 @onready var camera_2d : Camera2D = $Camera2D
 @onready var label : Label = $Label
