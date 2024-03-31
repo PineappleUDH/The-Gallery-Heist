@@ -2,26 +2,56 @@ extends CanvasLayer
 
 signal scene_changed
 
-@onready var _transition_rect : TextureRect = $ScreenTransition
+enum _TransitionDirection {left_to_right, right_to_left, up_to_down, down_to_up, scaled}
 
-const _tween_time : float = 1.2
+@onready var _transition_tex : TextureRect = $ScreenTransition
+@onready var _mouse_blocker : Control = $MouseBlocker
+
+const _transitions : Array[Dictionary] = [
+	{"texture":"res://Resources/Textures/SceneTrainsitions/ArrowHorizontal.png", "transition":_TransitionDirection.left_to_right},
+	{"texture":"res://Resources/Textures/SceneTrainsitions/ArrowVertical.png", "transition":_TransitionDirection.down_to_up},
+	{"texture":"res://Resources/Textures/SceneTrainsitions/Rectangle.png", "transition":_TransitionDirection.scaled},
+]
+const _transition_positions : Dictionary = {
+	# based on edges of TransitionTemplate.png
+	"center":Vector2(160,20), "left":Vector2(-800,20), "right":Vector2(1120,20), "up":Vector2(160,-800), "down":Vector2(160,840)
+}
 var _is_transitioning : bool
+const _tween_time : float = 0.5
+const _transition_tex_scale : Vector2 = Vector2.ONE * 4.0
 
 
 func change_scene(scene_path : String):
 	if _is_transitioning: return
 	_is_transitioning = true
 	
-	# block mouse
-	_transition_rect.mouse_filter = Control.MOUSE_FILTER_STOP
+	# setup
+	_mouse_blocker.mouse_filter = Control.MOUSE_FILTER_STOP
+	var random_trans : Dictionary = _transitions.pick_random()
+	_transition_tex.texture = load(random_trans["texture"])
 	
-	# get screen frame
-	await get_tree().process_frame
-	var viewport_img : Image = get_viewport().get_texture().get_image()
-	var texture : ImageTexture = ImageTexture.create_from_image(viewport_img)
-	_transition_rect.texture = texture
+	# cover screen
+	var tween : Tween = create_tween()
+	match random_trans["transition"]:
+		_TransitionDirection.left_to_right:
+			tween.tween_property(_transition_tex, "position", _transition_positions["center"], _tween_time)\
+				.from(_transition_positions["left"])
+		_TransitionDirection.right_to_left:
+			tween.tween_property(_transition_tex, "position", _transition_positions["center"], _tween_time)\
+				.from(_transition_positions["right"])
+		_TransitionDirection.up_to_down:
+			tween.tween_property(_transition_tex, "position", _transition_positions["center"], _tween_time)\
+				.from(_transition_positions["up"])
+		_TransitionDirection.down_to_up:
+			tween.tween_property(_transition_tex, "position", _transition_positions["center"], _tween_time)\
+				.from(_transition_positions["down"])
+		_TransitionDirection.scaled:
+			tween.tween_property(_transition_tex, "scale", _transition_tex_scale, _tween_time)\
+				.from(Vector2.ZERO)
+	await tween.finished
 	
 	# change scene
+	await get_tree().process_frame
 	get_tree().change_scene_to_file(scene_path)
 	get_tree().process_frame.connect(
 		# there is no emit_deferred, so we do it manually
@@ -29,17 +59,26 @@ func change_scene(scene_path : String):
 		CONNECT_ONE_SHOT
 	)
 	
-	# transition out
-	var transition_tween : Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
-	transition_tween.tween_property(
-		_transition_rect.material, "shader_parameter/factor", -1.0, _tween_time
-	)
-	await transition_tween.finished
+	# uncover screen
+	tween = create_tween()
+	match random_trans["transition"]:
+		_TransitionDirection.left_to_right:
+			tween.tween_property(_transition_tex, "position", _transition_positions["right"], _tween_time)
+		_TransitionDirection.right_to_left:
+			tween.tween_property(_transition_tex, "position", _transition_positions["left"], _tween_time)
+		_TransitionDirection.up_to_down:
+			tween.tween_property(_transition_tex, "position", _transition_positions["down"], _tween_time)
+		_TransitionDirection.down_to_up:
+			tween.tween_property(_transition_tex, "position", _transition_positions["up"], _tween_time)
+		_TransitionDirection.scaled:
+			tween.tween_property(_transition_tex, "scale", Vector2.ZERO, _tween_time)
+	await tween.finished
 	
 	# cleanup
-	_transition_rect.texture = null
-	_transition_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_transition_rect.material.set_shader_parameter("factor", 1.0)
+	_transition_tex.texture = null
+	_transition_tex.position = _transition_positions["center"]
+	_transition_tex.scale = _transition_tex_scale
+	_mouse_blocker.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_is_transitioning = false
 
 func restart_scene():

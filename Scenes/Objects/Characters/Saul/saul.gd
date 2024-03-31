@@ -12,8 +12,9 @@ extends "res://Scenes/Objects/Characters/character.gd"
 @onready var _detect_right : RayCast2D = $Detection/Right
 @onready var _detect_left : RayCast2D = $Detection/Left
 @onready var _hurtbox : Area2D = $HurtBox
+@onready var _collider : CollisionShape2D = $CollisionShape2D
 @onready var _sfx : Dictionary = {
-	# TODO: some sounds are not the responsability of this class like coin sfx
+	# TODO: some sounds are not the responsability of this class like coin, pie, game_over
 	"jump":$Sounds/Jump, "dash":$Sounds/Dash, "hit_wall":$Sounds/HitWall, "coin_pickup":$Sounds/CoinPickup,
 	"hurt":$Sounds/Hurt, "pie_pickup":$Sounds/PiePickup, "hit":$Sounds/Hit,
 	"game_over":$Sounds/GameOver
@@ -45,6 +46,7 @@ const _dash_shake_duration : float = 0.2
 const _wall_jump_force : float = 260
 const _pushoff_force : float = 200.0
 
+# TODO: damage cooldown, make the sprite flash as well
 const _damage_shake_duration : float = 0.3
 var _player_score : float = 0 # TODO: move to lavel class
 var _taking_hit : bool = false
@@ -59,6 +61,7 @@ func _ready():
 	_state_machine.add_state("dash", _state_dash_switch_to, _state_dash_switch_from, Callable(), _state_dash_ph_process)
 	_state_machine.add_state("wall_slide", _state_wall_slide_switch_to, Callable(), Callable(), _state_wall_slide_ph_process)
 	_state_machine.add_state("attack", _state_attack_switch_to, _state_attack_switch_from, Callable(), _state_attack_ph_process)
+	_state_machine.add_state("dead", _state_dead_switch_to, Callable(), Callable(), Callable())
 	_state_machine.change_state("normal")
 	
 	_debug_vars_visualizer.add_var("Score")
@@ -93,8 +96,9 @@ func add_score(amount : float):
 
 func take_damage(damage : int, knockback : float, from : Vector2, is_deadly : bool = false):
 	super.take_damage(damage, knockback, from, is_deadly)
-	_taking_hit = true
-	_took_hit.start()
+	if _is_invincible == false:
+		_taking_hit = true
+		_took_hit.start()
 
 # This is in place to pass the input value to other things that players expect to
 # respond to input such as attack direction
@@ -105,7 +109,7 @@ func _damage_taken(damage : int, die : bool):
 	if die:
 		# we never free the player
 		_sfx["game_over"].play()
-		died.emit()
+		_state_machine.call_deferred("change_state", "dead")
 	else:
 		World.level.level_camera.shake(LevelCamera.ShakeLevel.low, _damage_shake_duration)
 		_damaged_sfx.play()
@@ -277,16 +281,11 @@ func _state_attack_ph_process(delta: float):
 		_hit_timer = _hit_time
 		_state_machine.change_state("normal")
 
+func _state_dead_switch_to(from : StringName):
+	_collider.disabled = true
+	_is_invincible = true
+	# TODO: death animation, player can die both on ground and in mid-air
+	died.emit()
+
 func _on_took_hit_timeout():
 	_taking_hit = false
-
-
-
-func _on_camera_trigger_body_entered(body):
-	pass # Replace with function body.
-
-
-func _on_camera_trigger_2_body_entered(body):
-	pass # Replace with function body.
-	
-	print("Entered")

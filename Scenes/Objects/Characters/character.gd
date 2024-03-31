@@ -6,13 +6,14 @@ signal died
 @onready var _damaged_sfx : AudioStreamPlayer2D = $Sounds/Damaged
 
 @warning_ignore("unused_private_class_variable")
+var _gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
+@warning_ignore("unused_private_class_variable")
 var _direction : Vector2 = Vector2.RIGHT
 @warning_ignore("unused_private_class_variable")
 var _max_health : float
 var _health : float
+var _is_invincible : bool
 var _knockback_multiplier : float = 1.0
-@warning_ignore("unused_private_class_variable")
-var _gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 
 func _process(delta : float):
@@ -21,6 +22,8 @@ func _process(delta : float):
 
 # override
 func take_damage(damage : int, knockback : float, from : Vector2, is_deadly : bool = false):
+	if _is_invincible: return
+	
 	if is_deadly:
 		_health = 0
 	else:

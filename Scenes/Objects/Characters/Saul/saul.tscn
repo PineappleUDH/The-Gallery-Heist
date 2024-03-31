@@ -370,6 +370,9 @@ script = ExtResource("2_rhth6")
 position = Vector2(1, 1.5)
 shape = SubResource("RectangleShape2D_ypg7h")
 
+[node name="HurtBox" parent="." index="1"]
+monitoring = false
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2(19, 0)
 shape = SubResource("CircleShape2D_jtpw0")
@@ -418,11 +421,9 @@ one_shot = true
 [node name="Detection" type="Node2D" parent="." index="4"]
 
 [node name="Right" type="RayCast2D" parent="Detection" index="0"]
-position = Vector2(0, -5)
-target_position = Vector2(14, 0)
+target_position = Vector2(15, 0)
 
 [node name="Left" type="RayCast2D" parent="Detection" index="1"]
-position = Vector2(0, -5)
 target_position = Vector2(-15, 0)
 
 [node name="AudioListener2D" type="AudioListener2D" parent="." index="5"]
