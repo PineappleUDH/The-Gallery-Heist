@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://hu5mofx88bpj"]
+
+[ext_resource type="PackedScene" uid="uid://tx6swqaimuyw" path="res://Scenes/Objects/Collectables/collectable.tscn" id="1_d5430"]
+[ext_resource type="Script" path="res://Scenes/Objects/Collectables/collectable_dash_refiller.gd" id="2_dsrdd"]
+[ext_resource type="Texture2D" uid="uid://dmidv2u6q32gb" path="res://Resources/Textures/PLACEHOLDERS/Pie-Sheet.png" id="3_rk4yi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c40f3"]
+atlas = ExtResource("3_rk4yi")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ls5ur"]
+
+[node name="CollectableDashRefiller" instance=ExtResource("1_d5430")]
+script = ExtResource("2_dsrdd")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = SubResource("AtlasTexture_c40f3")
+flip_v = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_ls5ur")
+
+[node name="ResetTimer" type="Timer" parent="." index="2"]
+wait_time = 1.6
+one_shot = true
+
+[connection signal="timeout" from="ResetTimer" to="." method="_on_reset_timer_timeout"]

@@ -24,9 +24,9 @@ const _transition_tex_scale : Vector2 = Vector2.ONE * 4.0
 func change_scene(scene_path : String):
 	if _is_transitioning: return
 	_is_transitioning = true
+	_mouse_blocker.mouse_filter = Control.MOUSE_FILTER_STOP
 	
 	# setup
-	_mouse_blocker.mouse_filter = Control.MOUSE_FILTER_STOP
 	var random_trans : Dictionary = _transitions.pick_random()
 	_transition_tex.texture = load(random_trans["texture"])
 	
@@ -53,11 +53,8 @@ func change_scene(scene_path : String):
 	# change scene
 	await get_tree().process_frame
 	get_tree().change_scene_to_file(scene_path)
-	get_tree().process_frame.connect(
-		# there is no emit_deferred, so we do it manually
-		func(): scene_changed.emit(),
-		CONNECT_ONE_SHOT
-	)
+	await get_tree().process_frame
+	scene_changed.emit()
 	
 	# uncover screen
 	tween = create_tween()
@@ -75,10 +72,10 @@ func change_scene(scene_path : String):
 	await tween.finished
 	
 	# cleanup
+	_mouse_blocker.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_transition_tex.texture = null
 	_transition_tex.position = _transition_positions["center"]
 	_transition_tex.scale = _transition_tex_scale
-	_mouse_blocker.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_is_transitioning = false
 
 func restart_scene():

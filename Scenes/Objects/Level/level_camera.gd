@@ -14,11 +14,10 @@ const _zoom_speed : float = 1.6
 var _target_zoom : Vector2 = Vector2.ONE
 var _target_position : Vector2
 const _speed : float = 120.0
-const _distance_speed_factor : Vector2 = Vector2(0.022, 0.5)
+const _distance_speed_factor : Vector2 = Vector2(0.022, 0.05)
 
 const _player_velocity_factor : Vector2 = Vector2(0.7, 0.0)
 const _player_velocity_max_offset : float = 140.0
-
 var _axis_bounds : Dictionary
 
 const _shake_data : Dictionary = {
@@ -27,6 +26,9 @@ const _shake_data : Dictionary = {
 	ShakeLevel.high:  {"max_offset":9.0}
 }
 var _curr_shake_level : ShakeLevel
+
+var _player_y_look_direction : int = 0
+const _player_y_look_offset : float = 80.0
 
 
 func _ready():
@@ -54,6 +56,9 @@ func _process(delta : float):
 		target_position.x = player.global_position.x + sign(player.velocity.x) * (velocity_offset.x)
 		target_position.y = player.global_position.y + sign(player.velocity.y) * (velocity_offset.y)
 	
+	if _player_y_look_direction:
+		target_position.y += _player_y_look_offset * _player_y_look_direction
+	
 	# bounds, clamp camera edges rather than camera center
 	var camera_half_size : Vector2 = (get_viewport_rect().size * zoom) / 2.0
 	if _axis_bounds.has("x"):
@@ -69,8 +74,8 @@ func _process(delta : float):
 			max(_axis_bounds["y"][1] - camera_half_size.y, _axis_bounds["y"][0])
 		)
 	
-	# calc camera speed
-	# speed is influenced by the camera's distance to target. the further away the faster we move to catch up
+	# calc camera speed. speed is influenced by the camera's distance to target
+	# the further away the faster we move to catch up
 	var distance : float = global_position.distance_to(target_position)
 	var final_speed : Vector2 = Vector2(
 		_speed * distance * _distance_speed_factor.x * delta,
@@ -93,6 +98,9 @@ func shake(shake_level : ShakeLevel, duration : float):
 	
 	_shake_timer.wait_time = duration
 	_shake_timer.start()
+
+func player_look_offset(y_dir : int):
+	_player_y_look_direction = y_dir
 
 func set_target_zoom(zoom_ : Vector2):
 	_target_zoom = zoom_

@@ -47,6 +47,7 @@ func apply_camera_state():
 	
 	if _change_state == false && _change_zoom == false && _change_lock == false:
 		push_warning("Camera trigger has no effect")
+		return
 	
 	if _change_state:
 		match _trigger_state:

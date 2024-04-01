@@ -4,6 +4,7 @@ extends "res://Scenes/Objects/Characters/character.gd"
 @onready var _cling_time : Timer = $Timers/ClingTime
 @onready var _coyote_timer : Timer = $Timers/CoyoteTimer
 @onready var _jump_buffer_timer : Timer = $Timers/JumpBufferTimer
+@onready var _slide_cancel_timer : Timer = $Timers/SlideCancelTimer
 @onready var _dash_cooldown : Timer = $Timers/DashCooldown
 @onready var _dash_timer : Timer = $Timers/DashTimer
 @onready var _dash_trail : Line2D = $DashTrail
@@ -22,7 +23,7 @@ extends "res://Scenes/Objects/Characters/character.gd"
 @onready var _took_hit : Timer = $Timers/TookHit
 @onready var _sprite : AnimatedSprite2D = $Sprite
 @onready var _debug_vars_visualizer : PanelContainer = $DebugVarsVisualizer
-const _dash_sprite = preload("res://Scenes/Objects/Characters/Saul/dash_sprite.tscn")
+const _dash_sprite : PackedScene = preload("res://Scenes/Objects/Characters/Saul/dash_sprite.tscn")
 
 # TEMP
 @onready var _attack_sprite : Sprite2D = $HurtBox/AttackSprite
@@ -40,11 +41,11 @@ const _slide_speed : float = 60
 
 var _can_dash : bool = true
 const _dash_speed: float = 300
-const _dash_decel: float = 1000
 const _dash_shake_duration : float = 0.2
 
-const _wall_jump_force : float = 260
-const _pushoff_force : float = 200.0
+const _wall_jump_force : float = 260.0
+const _wall_push_force_high : float = 230.0
+const _wall_push_force_low : float = 100.0
 
 # TODO: damage cooldown, make the sprite flash as well
 const _damage_shake_duration : float = 0.3
@@ -54,12 +55,12 @@ var _taking_hit : bool = false
 var _state_machine : StateMachine = StateMachine.new()
 
 func _ready():
-	_max_health = 2
+	_max_health = 4
 	_health = _max_health
 	
 	_state_machine.add_state("normal", Callable(), Callable(), _state_normal_process, _state_normal_ph_process)
 	_state_machine.add_state("dash", _state_dash_switch_to, _state_dash_switch_from, Callable(), _state_dash_ph_process)
-	_state_machine.add_state("wall_slide", _state_wall_slide_switch_to, Callable(), Callable(), _state_wall_slide_ph_process)
+	_state_machine.add_state("wall_slide", _state_wall_slide_switch_to, _state_wall_slide_switch_from, Callable(), _state_wall_slide_ph_process)
 	_state_machine.add_state("attack", _state_attack_switch_to, _state_attack_switch_from, Callable(), _state_attack_ph_process)
 	_state_machine.add_state("dead", _state_dead_switch_to, Callable(), Callable(), Callable())
 	_state_machine.change_state("normal")
@@ -72,9 +73,9 @@ func _ready():
 func _process(delta : float):
 	super._process(delta)
 	_state_machine.state_process(delta)
-	if velocity.x > 0:
+	if _facing.x > 0:
 		_sprite.flip_h = false
-	if velocity.x < 0:
+	if _facing.x < 0:
 		_sprite.flip_h = true
 	
 	_debug_vars_visualizer.edit_var("Score", _player_score)
@@ -93,6 +94,14 @@ func add_score(amount : float):
 		if _health < _max_health:
 			_health += 1
 	World.current_score = _player_score
+
+func can_dash():
+	return _can_dash
+
+func refill_dash():
+	if _can_dash == false:
+		_can_dash = true
+		_dash_cooldown.stop()
 
 func take_damage(damage : int, knockback : float, from : Vector2, is_deadly : bool = false):
 	super.take_damage(damage, knockback, from, is_deadly)
@@ -121,6 +130,7 @@ func _play_animation(anim_name : String, ignore_if_playing : bool = false):
 	_sprite.play(anim_name)
 
 func _state_normal_switch_from(to : String):
+	World.level.level_camera.y_look_offset(0)
 	_coyote_timer.stop()
 	_jump_buffer_timer.stop()
 
@@ -158,10 +168,18 @@ func _state_normal_ph_process(delta : float):
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, _decel * delta)
 	
+	if velocity.x == 0 && is_on_floor() && _direction.y != 0:
+		# TODO: some "looking up" and down animations would be nice
+		World.level.level_camera.player_look_offset(_direction.y)
+	else:
+		World.level.level_camera.player_look_offset(0) # TODO: dying triggers a break here, not entirely sure why. ran out of time to fix |:-()|
+	
 	# Allow player to jump
+	var just_jumped : bool = false
 	if Input.is_action_just_pressed("jump"):
 		if is_on_floor() or not _coyote_timer.is_stopped():
 			velocity.y = -_jump_force
+			just_jumped = true
 			_sfx["jump"].play()
 		elif is_on_floor() == false:
 			_jump_buffer_timer.start()
@@ -171,17 +189,17 @@ func _state_normal_ph_process(delta : float):
 	move_and_slide()
 	
 	# Coyote Timer
-	if was_on_floor and is_on_floor() == false and velocity.y >= 0:
-		# just jumped
-		_coyote_timer.start()
+	if was_on_floor and is_on_floor() == false:
+		if just_jumped == false:
+			# just fell off
+			_coyote_timer.start()
 	elif was_on_floor == false and is_on_floor():
-		# jump landed
+		# just landed
 		_play_animation("Landing")
 		if _jump_buffer_timer.is_stopped() == false:
 			velocity.y = -_jump_force
 	
 	# TODO: is_on_wall is true when climbing on other bodies, should ensure we're only clinging to tiles
-	# TODO: is detect_left and detect_right rays necessary?
 	if is_on_wall() == true \
 		and is_on_floor() == false\
 		and _slide_delay.is_stopped() \
@@ -202,38 +220,58 @@ func _state_normal_ph_process(delta : float):
 		_state_machine.change_state("attack")
 
 func _state_wall_slide_switch_to(from : StringName):
-	_facing = Vector2.RIGHT if _detect_left.is_colliding() else Vector2.LEFT
+	_facing = Vector2.LEFT if _detect_left.is_colliding() else Vector2.RIGHT
 	velocity = Vector2(0,0)
 	_cling_time.start()
 	_play_animation("Cling")
-	
+
+func _state_wall_slide_switch_from(to : StringName):
+	_facing *= -1
+	_slide_cancel_timer.stop()
+	_slide_delay.start()
+
 func _state_wall_slide_ph_process(delta: float):
 	if _cling_time.is_stopped():
 		_play_animation("Sliding")
 		velocity.y = _slide_speed
 	
-	if Input.is_action_just_pressed("jump") :
+	# jump off
+	if Input.is_action_just_pressed("jump"):
 		_sfx["jump"].play()
-		_slide_delay.start()
-		_play_animation("Wall Jump", true)
-		velocity.x = _pushoff_force * _facing.x
+		velocity.x = _wall_push_force_high * -_facing.x
 		velocity.y = -_wall_jump_force
+		_play_animation("Wall Jump", true)
 		_state_machine.change_state("normal")
 		return
 	
+	# wall out of reach
 	if (is_on_floor() or
 	(_detect_left.is_colliding() == false and _detect_right.is_colliding() == false)):
 		_state_machine.change_state("normal")
+		return
+	
+	var opposite_dir_input : String = "left" if _facing.x == 1 else "right"
+	if Input.is_action_just_pressed(opposite_dir_input):
+		_slide_cancel_timer.start()
+	elif Input.is_action_just_released(opposite_dir_input):
+		_slide_cancel_timer.stop()
+	
+	# cancel sliding
+	elif (Input.is_action_just_pressed("down") or
+	(Input.is_action_pressed(opposite_dir_input) and _slide_cancel_timer.is_stopped())):
+		velocity.x = _wall_push_force_low * -_facing.x
+		_state_machine.change_state("normal")
+		return
 	
 	move_and_slide()
 
 func _state_dash_switch_to(from : StringName):
 	World.level.level_camera.shake(LevelCamera.ShakeLevel.low, _dash_shake_duration)
+	_can_dash = false
 	_sfx["dash"].play()
 	#_dash_trail.set_active(true)
 	_dash_timer.start()
-	velocity = Vector2(0,0)
-	_can_dash = false
+	velocity = Vector2.ZERO
 	_sprite.play("Dashing")
 
 func _state_dash_switch_from(to: StringName):
@@ -241,11 +279,8 @@ func _state_dash_switch_from(to: StringName):
 	#_dash_trail.set_active(false)
 
 func _state_dash_ph_process(delta: float):
-	# Trying to reduce the power of vertical dashes, which affect diagonal 
-	# dashes
 	_direction = Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down"))
-	velocity.x = _dash_speed * _facing.x
-	velocity.y = (_dash_speed * _facing.y) * 0.8
+	velocity = _dash_speed * _facing.normalized()
 	
 	move_and_slide()
 	

@@ -23,4 +23,5 @@ func _input(event : InputEvent):
 		camera_2d.make_current()
 
 func _on_button_toggled(toggled_on : bool):
-	main_theme.stream_paused = toggled_on
+	if toggled_on: main_theme.play()
+	else: main_theme.stop()

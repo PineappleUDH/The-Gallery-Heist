@@ -28,7 +28,7 @@
 [ext_resource type="AudioStream" uid="uid://dftb7ej7uoibk" path="res://Resources/Audio/SFX/explosion 3.wav" id="26_4djtq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ypg7h"]
-size = Vector2(13, 31)
+size = Vector2(13, 30)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jtpw0"]
 
@@ -364,10 +364,11 @@ stream_1/stream = ExtResource("20_dgphi")
 stream_1/weight = 1.0
 
 [node name="Saul" instance=ExtResource("1_regtg")]
+platform_on_leave = 2
 script = ExtResource("2_rhth6")
 
 [node name="CollisionShape2D" parent="." index="0"]
-position = Vector2(1, 1.5)
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_ypg7h")
 
 [node name="HurtBox" parent="." index="1"]
@@ -407,14 +408,18 @@ wait_time = 0.3
 one_shot = true
 
 [node name="SlideDelay" type="Timer" parent="Timers" index="4"]
-wait_time = 0.15
+wait_time = 0.2
 one_shot = true
 
-[node name="TookHit" type="Timer" parent="Timers" index="5"]
+[node name="SlideCancelTimer" type="Timer" parent="Timers" index="5"]
+wait_time = 0.1
+one_shot = true
+
+[node name="TookHit" type="Timer" parent="Timers" index="6"]
 wait_time = 0.5
 one_shot = true
 
-[node name="ClingTime" type="Timer" parent="Timers" index="6"]
+[node name="ClingTime" type="Timer" parent="Timers" index="7"]
 wait_time = 0.5
 one_shot = true
 
@@ -430,7 +435,6 @@ target_position = Vector2(-15, 0)
 current = true
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." index="6"]
-position = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_vg3q4")
 animation = &"Idle"
 
