@@ -1,11 +1,28 @@
-[gd_scene load_steps=8 format=3 uid="uid://c31bicd5mqe8o"]
+[gd_scene load_steps=10 format=3 uid="uid://c31bicd5mqe8o"]
 
 [ext_resource type="PackedScene" uid="uid://tx6swqaimuyw" path="res://Scenes/Objects/Collectables/collectable.tscn" id="1_2unn2"]
 [ext_resource type="Script" path="res://Scenes/Objects/Collectables/collectable_coin.gd" id="2_dm6xu"]
 [ext_resource type="Texture2D" uid="uid://cb1ay8g75ne4c" path="res://Resources/Textures/PLACEHOLDERS/Coin1-Sheet.png" id="3_pfonf"]
+[ext_resource type="PackedScene" uid="uid://wv1eoc7qi2wo" path="res://Scenes/Objects/persistent_nodes_container.tscn" id="4_k343i"]
+[ext_resource type="AudioStream" uid="uid://d4d6pbcnalx0p" path="res://Resources/Audio/SFX/coin_collected.wav" id="5_dg4uq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f0yg2"]
 radius = 5.09902
+
+[sub_resource type="Animation" id="Animation_wdfue"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 14, 14)]
+}
 
 [sub_resource type="Animation" id="Animation_tymqm"]
 resource_name = "default"
@@ -21,21 +38,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [Rect2(0, 0, 13, 13), Rect2(13, 0, 13, 13), Rect2(26, 0, 13, 13), Rect2(39, 0, 13, 13), Rect2(52, 0, 13, 13)]
-}
-
-[sub_resource type="Animation" id="Animation_wdfue"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:region_rect")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Rect2(0, 0, 14, 14)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1fa5y"]
@@ -60,3 +62,10 @@ libraries = {
 "": SubResource("AnimationLibrary_1fa5y")
 }
 autoplay = "default"
+
+[node name="PersistentNodesContainer" parent="." index="3" node_paths=PackedStringArray("_kill_audio") instance=ExtResource("4_k343i")]
+_kill_type = 2
+_kill_audio = NodePath("Collected")
+
+[node name="Collected" type="AudioStreamPlayer" parent="PersistentNodesContainer" index="0"]
+stream = ExtResource("5_dg4uq")

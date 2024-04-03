@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b84n1i2bwxbmr"]
+[gd_scene load_steps=6 format=3 uid="uid://b84n1i2bwxbmr"]
 
 [ext_resource type="Script" path="res://Scenes/Objects/Level/level.gd" id="1_qee75"]
 [ext_resource type="Script" path="res://Scenes/Objects/Level/level_pause_manager.gd" id="2_2cj76"]
 [ext_resource type="PackedScene" uid="uid://crjtftvmkahqx" path="res://Scenes/Objects/Characters/Saul/saul.tscn" id="2_wyn7p"]
 [ext_resource type="PackedScene" uid="uid://dhssfh3cjjl5q" path="res://Scenes/Objects/Level/level_camera.tscn" id="4_h0vsv"]
+[ext_resource type="Script" path="res://Scenes/Objects/Level/level_music_player.gd" id="5_j8si2"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_qee75")
@@ -60,9 +61,18 @@ format = 2
 
 [node name="LevelCamera" parent="." instance=ExtResource("4_h0vsv")]
 
-[node name="CameraTriggers" type="Node2D" parent="."]
+[node name="Triggers" type="Node2D" parent="."]
 
-[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+[node name="Audio" type="Node" parent="."]
+
+[node name="MusicPlayer" type="Node" parent="Audio"]
+script = ExtResource("5_j8si2")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Audio/MusicPlayer"]
+
+[node name="ScheduleTimer" type="Timer" parent="Audio/MusicPlayer"]
+one_shot = true
 
 [connection signal="pressed" from="UI/PauseManager/VBoxContainer/Resume" to="UI/PauseManager" method="_on_resume_pressed"]
 [connection signal="pressed" from="UI/PauseManager/VBoxContainer/Quit" to="UI/PauseManager" method="_on_quit_pressed"]
+[connection signal="timeout" from="Audio/MusicPlayer/ScheduleTimer" to="Audio/MusicPlayer" method="_on_schedule_timer_timeout"]

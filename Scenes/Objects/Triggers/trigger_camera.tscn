@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://botpmwf2b2ybo"]
+
+[ext_resource type="PackedScene" uid="uid://cgq0re7ysx50h" path="res://Scenes/Objects/Triggers/trigger.tscn" id="1_jwdqx"]
+[ext_resource type="Script" path="res://Scenes/Objects/Triggers/trigger_camera.gd" id="2_klv88"]
+
+[node name="TriggerCamera" instance=ExtResource("1_jwdqx")]
+script = ExtResource("2_klv88")
+_change_state = false
+_change_zoom = false
+_change_lock = false
+_trigger_state = 0
+_idle_position = Vector2(0, 0)
+_release_x_bound = true
+_release_y_bound = true
+_x_bound = Vector2(0, 0)
+_y_bound = Vector2(0, 0)
+_zoom = Vector2(1, 1)

@@ -15,10 +15,8 @@ extends "res://Scenes/Objects/Characters/character.gd"
 @onready var _hurtbox : Area2D = $HurtBox
 @onready var _collider : CollisionShape2D = $CollisionShape2D
 @onready var _sfx : Dictionary = {
-	# TODO: some sounds are not the responsability of this class like coin, pie, game_over
-	"jump":$Sounds/Jump, "dash":$Sounds/Dash, "hit_wall":$Sounds/HitWall, "coin_pickup":$Sounds/CoinPickup,
-	"hurt":$Sounds/Hurt, "pie_pickup":$Sounds/PiePickup, "hit":$Sounds/Hit,
-	"game_over":$Sounds/GameOver
+	"jump":$Sounds/Jump, "dash":$Sounds/Dash, "hit_wall":$Sounds/HitWall,
+	"attack":$Sounds/Attack, "died":$Sounds/Died
 }
 @onready var _took_hit : Timer = $Timers/TookHit
 @onready var _sprite : AnimatedSprite2D = $Sprite
@@ -88,9 +86,7 @@ func _physics_process(delta : float):
 
 func add_score(amount : float):
 	_player_score += amount
-	_sfx["coin_pickup"].play()
 	if amount > 1 :
-		_sfx["pie_pickup"].play()
 		if _health < _max_health:
 			_health += 1
 	World.current_score = _player_score
@@ -116,8 +112,7 @@ func get_direction() -> Vector2:
 
 func _damage_taken(damage : int, die : bool):
 	if die:
-		# we never free the player
-		_sfx["game_over"].play()
+		_sfx["died"].play()
 		_state_machine.call_deferred("change_state", "dead")
 	else:
 		World.level.level_camera.shake(LevelCamera.ShakeLevel.low, _damage_shake_duration)
@@ -172,7 +167,7 @@ func _state_normal_ph_process(delta : float):
 		# TODO: some "looking up" and down animations would be nice
 		World.level.level_camera.player_look_offset(_direction.y)
 	else:
-		World.level.level_camera.player_look_offset(0) # TODO: dying triggers a break here, not entirely sure why. ran out of time to fix |:-()|
+		World.level.level_camera.player_look_offset(0)
 	
 	# Allow player to jump
 	var just_jumped : bool = false
@@ -296,9 +291,9 @@ func _state_dash_ph_process(delta: float):
 
 func _state_attack_switch_to(from : StringName):
 	_attack_sprite.visible = true
-	_hurtbox.scale.x = 1 if _facing.x == 1 else -1
+	_hurtbox.scale.x = 1 if !_sprite.flip_h else -1
 	_hurtbox.monitoring = true
-	_sfx["hit"].play()
+	_sfx["attack"].play()
 
 func _state_attack_switch_from(from : StringName):
 	_attack_sprite.visible = false

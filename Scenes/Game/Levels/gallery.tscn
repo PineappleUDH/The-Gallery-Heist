@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bbgah45f5xn5c"]
+[gd_scene load_steps=5 format=3 uid="uid://bbgah45f5xn5c"]
 
 [ext_resource type="PackedScene" uid="uid://b84n1i2bwxbmr" path="res://Scenes/Objects/Level/level.tscn" id="1_esp2y"]
 [ext_resource type="Texture2D" uid="uid://biaaj6ja3o556" path="res://Resources/Textures/Discord Level Tilesets/Tiles.png" id="2_bvfly"]
-[ext_resource type="PackedScene" uid="uid://3xg1cdwrnu1c" path="res://Scenes/Objects/Level/camera_trigger.tscn" id="3_n05d4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wtdd3"]
 texture = ExtResource("2_bvfly")
@@ -411,12 +410,6 @@ texture = ExtResource("2_bvfly")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_wtdd3")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0dbns"]
-size = Vector2(20, 145)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_njoti"]
-size = Vector2(20, 138.5)
-
 [node name="Gallery" instance=ExtResource("1_esp2y")]
 
 [node name="TileMap" parent="." index="1"]
@@ -434,33 +427,4 @@ layer_3/tile_data = PackedInt32Array()
 position = Vector2(-1, -251)
 
 [node name="LevelCamera" parent="." index="4" node_paths=PackedStringArray("_starting_trigger")]
-_starting_trigger = NodePath("../CameraTriggers/CameraTrigger")
-
-[node name="CameraTrigger" parent="CameraTriggers" index="0" instance=ExtResource("3_n05d4")]
-position = Vector2(231, -153)
-_change_state = true
-_change_zoom = true
-_change_lock = true
-_idle_position = Vector2(7, -179)
-_release_x_bound = false
-_release_y_bound = false
-_x_bound = Vector2(-606, 1455)
-_y_bound = Vector2(-1422, 0)
-_zoom = Vector2(0.8, 0.8)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger" index="0"]
-position = Vector2(2, -4)
-shape = SubResource("RectangleShape2D_0dbns")
-
-[node name="CameraTrigger2" parent="CameraTriggers" index="1" instance=ExtResource("3_n05d4")]
-position = Vector2(319, -150)
-_change_state = true
-_change_zoom = true
-_idle_position = Vector2(497, 0)
-_zoom = Vector2(0.6, 0.6)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger2" index="0"]
-position = Vector2(-1, -3)
-shape = SubResource("RectangleShape2D_njoti")
-
-[connection signal="body_entered" from="CameraTriggers/CameraTrigger" to="Characters/Saul" method="_on_camera_trigger_body_entered"]
+_starting_trigger = NodePath("")

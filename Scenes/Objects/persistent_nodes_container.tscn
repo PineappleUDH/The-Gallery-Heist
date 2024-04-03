@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://wv1eoc7qi2wo"]
+
+[ext_resource type="Script" path="res://Scenes/Objects/persistent_nodes_container.gd" id="1_jqix6"]
+
+[node name="PersistentNodesContainer" type="Node"]
+script = ExtResource("1_jqix6")
+_kill_type = 1

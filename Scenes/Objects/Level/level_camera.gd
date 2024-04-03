@@ -1,11 +1,10 @@
 class_name LevelCamera
 extends Camera2D
 
-# TODO: addon to show camera constraints when a trigger node is selected
 enum CameraState {idle, follow}
 enum ShakeLevel {low, medium, high}
 
-@export var _starting_trigger : CameraTrigger
+@export var _starting_trigger : TriggerCamera
 
 @onready var _shake_timer : Timer = $ShakeTimer
 
@@ -21,7 +20,7 @@ const _player_velocity_max_offset : float = 140.0
 var _axis_bounds : Dictionary
 
 const _shake_data : Dictionary = {
-	ShakeLevel.low:   {"max_offset":1.0},
+	ShakeLevel.low:   {"max_offset":1.5},
 	ShakeLevel.medium:{"max_offset":4.0},
 	ShakeLevel.high:  {"max_offset":9.0}
 }

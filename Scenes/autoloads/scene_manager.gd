@@ -50,10 +50,12 @@ func change_scene(scene_path : String):
 				.from(Vector2.ZERO)
 	await tween.finished
 	
-	# change scene
+	# change scene. manual change is the only way to ensure that scene_changed emits right after the new scene is ready
 	await get_tree().process_frame
-	get_tree().change_scene_to_file(scene_path)
-	await get_tree().process_frame
+	get_tree().current_scene.free()
+	var new_scene : Node = load(scene_path).instantiate()
+	get_tree().root.add_child(new_scene)
+	get_tree().current_scene = new_scene
 	scene_changed.emit()
 	
 	# uncover screen

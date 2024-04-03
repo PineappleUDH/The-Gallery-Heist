@@ -1,15 +1,16 @@
-[gd_scene load_steps=28 format=3 uid="uid://mlvn8cvywr4c"]
+[gd_scene load_steps=33 format=3 uid="uid://mlvn8cvywr4c"]
 
 [ext_resource type="PackedScene" uid="uid://b84n1i2bwxbmr" path="res://Scenes/Objects/Level/level.tscn" id="1_gs8pa"]
 [ext_resource type="Script" path="res://Scenes/Game/Levels/testing.gd" id="2_qem0p"]
 [ext_resource type="Texture2D" uid="uid://bwog48d20oq2s" path="res://Resources/Textures/PLACEHOLDERS/Template1.png" id="2_ys7fm"]
-[ext_resource type="PackedScene" uid="uid://3xg1cdwrnu1c" path="res://Scenes/Objects/Level/camera_trigger.tscn" id="3_guy7c"]
 [ext_resource type="PackedScene" uid="uid://dvik7v57h3mcf" path="res://Scenes/Objects/Characters/Enemies/enemy_patrolling.tscn" id="4_3y8bi"]
+[ext_resource type="PackedScene" uid="uid://botpmwf2b2ybo" path="res://Scenes/Objects/Triggers/trigger_camera.tscn" id="5_7n87s"]
 [ext_resource type="PackedScene" uid="uid://c31bicd5mqe8o" path="res://Scenes/Objects/Collectables/collectable_coin.tscn" id="6_odhtu"]
 [ext_resource type="PackedScene" uid="uid://bbfrw50tycm64" path="res://Scenes/Objects/Collectables/collectables_stack.tscn" id="7_pfgp5"]
 [ext_resource type="PackedScene" uid="uid://hu5mofx88bpj" path="res://Scenes/Objects/Collectables/collectable_dash_refiller.tscn" id="9_0quoo"]
-[ext_resource type="AudioStream" uid="uid://d1xj5v2xumqvm" path="res://Resources/Audio/Music/saul_gallery_theme.mp3" id="9_7cnyk"]
 [ext_resource type="PackedScene" uid="uid://catjkp55gq8oi" path="res://Scenes/Objects/Collectables/collectable_pie.tscn" id="9_pqw76"]
+[ext_resource type="PackedScene" uid="uid://n4juq1gu3j6k" path="res://Scenes/Objects/Triggers/trigger_music.tscn" id="10_vskx1"]
+[ext_resource type="AudioStream" uid="uid://cvre63btw3yev" path="res://Resources/Audio/Music/gallery_test.ogg" id="11_32noh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7m7wu"]
 texture = ExtResource("2_ys7fm")
@@ -119,6 +120,18 @@ size = Vector2(20, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6hpo5"]
 size = Vector2(20, 64)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ptaqm"]
+size = Vector2(20, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0e7v8"]
+size = Vector2(20, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6k62g"]
+size = Vector2(20, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wx62s"]
+size = Vector2(20, 64)
+
 [node name="Testing" instance=ExtResource("1_gs8pa")]
 script = ExtResource("2_qem0p")
 
@@ -130,7 +143,7 @@ layer_1/name = "Art"
 layer_1/tile_data = PackedInt32Array()
 
 [node name="Saul" parent="Characters" index="0"]
-position = Vector2(54, -145)
+position = Vector2(54, -144)
 
 [node name="EnemyPatrolling" parent="Characters" index="1" instance=ExtResource("4_3y8bi")]
 position = Vector2(191, -556)
@@ -147,203 +160,14 @@ position = Vector2(801, -712)
 [node name="EnemyPatrolling5" parent="Characters" index="5" instance=ExtResource("4_3y8bi")]
 position = Vector2(1045, -610)
 
-[node name="Lables" type="Node2D" parent="." index="3"]
-modulate = Color(1, 1, 1, 0.435294)
-
-[node name="Label" type="Label" parent="Lables" index="0"]
-offset_left = 348.0
-offset_top = -328.0
-offset_right = 530.0
-offset_bottom = -253.0
-text = "Welcome to the 
-Saultoons Secret Squad
-Alpha Testing!"
-label_settings = SubResource("LabelSettings_p1yce")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label2" type="Label" parent="Lables" index="1"]
-offset_left = 326.0
-offset_top = -248.0
-offset_right = 566.0
-offset_bottom = -173.0
-text = "Enemy AI is a WIP 
-so dodge the scorpion's stinger!
-Punch them from behind"
-label_settings = SubResource("LabelSettings_o4cdh")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label3" type="Label" parent="Lables" index="2"]
-offset_left = 28.0
-offset_top = -308.0
-offset_right = 268.0
-offset_bottom = -171.0
-text = "Controls:
-Jump:
-Space // Xbox A
-Dash:
-Shift // Right Trigger
-Attack: 
-Left Click // Xbox X
-"
-label_settings = SubResource("LabelSettings_nmf1t")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label4" type="Label" parent="Lables" index="3"]
-offset_left = 612.0
-offset_top = -303.0
-offset_right = 897.0
-offset_bottom = -176.0
-text = "Play around with the controls 
-and just give me your thoughts!
-Also try breaking the mechanics and report bugs!
- (the scorpions don't count until they're finished)"
-label_settings = SubResource("LabelSettings_nmf1t")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label6" type="Label" parent="Lables" index="4"]
-offset_left = 413.0
-offset_top = -752.0
-offset_right = 698.0
-offset_bottom = -515.0
-text = "Credits:
-Programing Team:
-DissonantVoid
-Valsprites
-
-Art team:
-AddinSachen (player sprite)
-AxelMode (scorpion sprite)
-Potent (app icon)
-Valsprites (other bits)
-
-Music by:
-DissonantVoid
-
-SFX by:
-Valsprites"
-label_settings = SubResource("LabelSettings_nmf1t")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label5" type="Label" parent="Lables" index="5"]
-offset_left = 1002.0
-offset_top = -234.0
-offset_right = 1287.0
-offset_bottom = -107.0
-text = "You can wall slide and jump!"
-label_settings = SubResource("LabelSettings_nmf1t")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label" type="Label" parent="." index="4"]
-offset_left = 397.0
-offset_top = -77.0
-offset_right = 525.0
-offset_bottom = -54.0
-text = "High Score:"
-label_settings = SubResource("LabelSettings_anlf8")
-vertical_alignment = 1
-
-[node name="LevelCamera" parent="." index="6" node_paths=PackedStringArray("_starting_trigger")]
-_starting_trigger = NodePath("../CameraTriggers/CameraTrigger")
-
-[node name="CameraTrigger" parent="CameraTriggers" index="0" instance=ExtResource("3_guy7c")]
-position = Vector2(725, -155)
-_change_state = true
-_change_zoom = true
-_change_lock = true
-_trigger_state = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger" index="0"]
-position = Vector2(0, -77)
-shape = SubResource("RectangleShape2D_uqgan")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger" index="1"]
-position = Vector2(-358, -154)
-shape = SubResource("RectangleShape2D_rbrgu")
-
-[node name="CameraTrigger2" parent="CameraTriggers" index="1" instance=ExtResource("3_guy7c")]
-position = Vector2(762, -231)
-_change_state = true
-_change_zoom = true
-_change_lock = true
-_trigger_state = 1
-_release_x_bound = false
-_x_bound = Vector2(1010, 1010)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger2" index="0"]
-position = Vector2(0, -240.5)
-shape = SubResource("RectangleShape2D_qfciy")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger2" index="1"]
-position = Vector2(497, 47)
-shape = SubResource("RectangleShape2D_0by6y")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger2" index="2"]
-position = Vector2(496, -521)
-shape = SubResource("RectangleShape2D_3dn3a")
-
-[node name="CameraTrigger3" parent="CameraTriggers" index="2" instance=ExtResource("3_guy7c")]
-position = Vector2(378, -346)
-_change_state = true
-_change_zoom = true
-_change_lock = true
-_idle_position = Vector2(370, -541)
-_zoom = Vector2(0.5, 0.5)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger3" index="0"]
-position = Vector2(-9, 0)
-shape = SubResource("RectangleShape2D_0bf6u")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger3" index="1"]
-position = Vector2(351, -222)
-shape = SubResource("RectangleShape2D_el05e")
-
-[node name="CameraTrigger4" parent="CameraTriggers" index="3" instance=ExtResource("3_guy7c")]
-position = Vector2(1292, -189)
-_change_state = true
-_change_zoom = true
-_change_lock = true
-_trigger_state = 1
-_release_y_bound = false
-_y_bound = Vector2(-180, -180)
-_zoom = Vector2(1.5, 1.5)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger4" index="0"]
-position = Vector2(0, 5)
-shape = SubResource("RectangleShape2D_q41yd")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger4" index="1"]
-position = Vector2(634, -19)
-shape = SubResource("RectangleShape2D_rjdjt")
-
-[node name="CameraTrigger5" parent="CameraTriggers" index="4" instance=ExtResource("3_guy7c")]
-position = Vector2(1914, -205)
-_change_state = true
-_change_zoom = true
-_change_lock = true
-_trigger_state = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger5" index="0"]
-position = Vector2(64, -51)
-shape = SubResource("RectangleShape2D_vjrk6")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger5" index="1"]
-position = Vector2(-631, -547)
-shape = SubResource("RectangleShape2D_6hpo5")
-
-[node name="Camera2D" type="Camera2D" parent="." index="8"]
+[node name="Camera2D" type="Camera2D" parent="." index="3"]
 position = Vector2(624, -465)
 zoom = Vector2(0.5, 0.5)
 
-[node name="Coins" type="Node2D" parent="." index="9"]
+[node name="Coins" type="Node2D" parent="." index="4"]
 
 [node name="CollectableCoin" parent="Coins" index="0" instance=ExtResource("6_odhtu")]
-position = Vector2(131, -155)
+position = Vector2(128, -155)
 
 [node name="CollectableCoin2" parent="Coins" index="1" instance=ExtResource("6_odhtu")]
 position = Vector2(149, -155)
@@ -598,7 +422,7 @@ _horizontal_count = 1
 _vertical_count = 3
 _spacing = 20
 
-[node name="Pies" type="Node2D" parent="." index="10"]
+[node name="Pies" type="Node2D" parent="." index="5"]
 
 [node name="CollectablePie" parent="Pies" index="0" instance=ExtResource("9_pqw76")]
 position = Vector2(181, -155)
@@ -630,22 +454,215 @@ position = Vector2(847, -490)
 [node name="CollectablePie10" parent="Pies" index="9" instance=ExtResource("9_pqw76")]
 position = Vector2(400, -408)
 
-[node name="CollectableDashRefiller" parent="." index="11" instance=ExtResource("9_0quoo")]
+[node name="CollectableDashRefiller" parent="." index="6" instance=ExtResource("9_0quoo")]
 position = Vector2(1432, -611)
 
-[node name="MainTheme" type="AudioStreamPlayer2D" parent="." index="12"]
-stream = ExtResource("9_7cnyk")
-autoplay = true
+[node name="Lables" type="Node2D" parent="." index="7"]
+modulate = Color(1, 1, 1, 0.435294)
 
-[node name="Button" type="Button" parent="." index="13"]
-offset_left = 36.0
-offset_top = -99.0
-offset_right = 145.0
-offset_bottom = -68.0
-scale = Vector2(0.644563, 0.847448)
-focus_mode = 0
-toggle_mode = true
-button_pressed = true
-text = "Toggle Tunes"
+[node name="Label" type="Label" parent="Lables" index="0"]
+offset_left = 348.0
+offset_top = -328.0
+offset_right = 530.0
+offset_bottom = -253.0
+text = "Welcome to the 
+Saultoons Secret Squad
+Alpha Testing!"
+label_settings = SubResource("LabelSettings_p1yce")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[connection signal="toggled" from="Button" to="." method="_on_button_toggled"]
+[node name="Label2" type="Label" parent="Lables" index="1"]
+offset_left = 326.0
+offset_top = -248.0
+offset_right = 566.0
+offset_bottom = -173.0
+text = "Enemy AI is a WIP 
+so dodge the scorpion's stinger!
+Punch them from behind"
+label_settings = SubResource("LabelSettings_o4cdh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="Lables" index="2"]
+offset_left = 28.0
+offset_top = -308.0
+offset_right = 268.0
+offset_bottom = -171.0
+text = "Controls:
+Jump:
+Space // Xbox A
+Dash:
+Shift // Right Trigger
+Attack: 
+Left Click // Xbox X
+"
+label_settings = SubResource("LabelSettings_nmf1t")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="Lables" index="3"]
+offset_left = 612.0
+offset_top = -303.0
+offset_right = 897.0
+offset_bottom = -176.0
+text = "Play around with the controls 
+and just give me your thoughts!
+Also try breaking the mechanics and report bugs!
+ (the scorpions don't count until they're finished)"
+label_settings = SubResource("LabelSettings_nmf1t")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label6" type="Label" parent="Lables" index="4"]
+offset_left = 413.0
+offset_top = -752.0
+offset_right = 698.0
+offset_bottom = -515.0
+text = "Credits:
+Programing Team:
+DissonantVoid
+Valsprites
+
+Art team:
+AddinSachen (player sprite)
+AxelMode (scorpion sprite)
+Potent (app icon)
+Valsprites (other bits)
+
+Music by:
+DissonantVoid
+
+SFX by:
+Valsprites"
+label_settings = SubResource("LabelSettings_nmf1t")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label5" type="Label" parent="Lables" index="5"]
+offset_left = 1002.0
+offset_top = -234.0
+offset_right = 1287.0
+offset_bottom = -107.0
+text = "You can wall slide and jump!"
+label_settings = SubResource("LabelSettings_nmf1t")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="." index="8"]
+offset_left = 397.0
+offset_top = -77.0
+offset_right = 525.0
+offset_bottom = -54.0
+text = "High Score:"
+label_settings = SubResource("LabelSettings_anlf8")
+vertical_alignment = 1
+
+[node name="LevelCamera" parent="." index="10" node_paths=PackedStringArray("_starting_trigger")]
+_starting_trigger = NodePath("../Triggers/CameraTriggers#TriggerCamera")
+
+[node name="CameraTriggers#TriggerCamera" parent="Triggers" index="0" instance=ExtResource("5_7n87s")]
+_change_state = true
+_change_zoom = true
+_change_lock = true
+_trigger_state = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/CameraTriggers#TriggerCamera" index="0"]
+position = Vector2(725, -232)
+shape = SubResource("RectangleShape2D_uqgan")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Triggers/CameraTriggers#TriggerCamera" index="1"]
+position = Vector2(367, -309)
+shape = SubResource("RectangleShape2D_rbrgu")
+
+[node name="CameraTriggers#TriggerCamera2" parent="Triggers" index="1" instance=ExtResource("5_7n87s")]
+_change_state = true
+_change_zoom = true
+_change_lock = true
+_trigger_state = 1
+_release_x_bound = false
+_x_bound = Vector2(1010, 1010)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/CameraTriggers#TriggerCamera2" index="0"]
+position = Vector2(762, -471.5)
+shape = SubResource("RectangleShape2D_qfciy")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Triggers/CameraTriggers#TriggerCamera2" index="1"]
+position = Vector2(1259, -184)
+shape = SubResource("RectangleShape2D_0by6y")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Triggers/CameraTriggers#TriggerCamera2" index="2"]
+position = Vector2(1258, -752)
+shape = SubResource("RectangleShape2D_3dn3a")
+
+[node name="CameraTriggers#TriggerCamera3" parent="Triggers" index="2" instance=ExtResource("5_7n87s")]
+_change_state = true
+_change_zoom = true
+_change_lock = true
+_idle_position = Vector2(370, -541)
+_zoom = Vector2(0.5, 0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/CameraTriggers#TriggerCamera3" index="0"]
+position = Vector2(369, -346)
+shape = SubResource("RectangleShape2D_0bf6u")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Triggers/CameraTriggers#TriggerCamera3" index="1"]
+position = Vector2(729, -568)
+shape = SubResource("RectangleShape2D_el05e")
+
+[node name="CameraTriggers#TriggerCamera4" parent="Triggers" index="3" instance=ExtResource("5_7n87s")]
+_change_state = true
+_change_zoom = true
+_change_lock = true
+_trigger_state = 1
+_release_y_bound = false
+_y_bound = Vector2(-180, -180)
+_zoom = Vector2(1.5, 1.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/CameraTriggers#TriggerCamera4" index="0"]
+position = Vector2(1292, -184)
+shape = SubResource("RectangleShape2D_q41yd")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Triggers/CameraTriggers#TriggerCamera4" index="1"]
+position = Vector2(1926, -208)
+shape = SubResource("RectangleShape2D_rjdjt")
+
+[node name="CameraTriggers#TriggerCamera5" parent="Triggers" index="4" instance=ExtResource("5_7n87s")]
+_change_state = true
+_change_zoom = true
+_change_lock = true
+_trigger_state = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/CameraTriggers#TriggerCamera5" index="0"]
+position = Vector2(1978, -256)
+shape = SubResource("RectangleShape2D_vjrk6")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Triggers/CameraTriggers#TriggerCamera5" index="1"]
+position = Vector2(1283, -752)
+shape = SubResource("RectangleShape2D_6hpo5")
+
+[node name="TriggerMusic" parent="Triggers" index="5" instance=ExtResource("10_vskx1")]
+_music = ExtResource("11_32noh")
+_bpm = 120.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/TriggerMusic" index="0"]
+position = Vector2(1259, -184)
+shape = SubResource("RectangleShape2D_ptaqm")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Triggers/TriggerMusic" index="1"]
+position = Vector2(1258, -752)
+shape = SubResource("RectangleShape2D_0e7v8")
+
+[node name="TriggerMusic2" parent="Triggers" index="6" instance=ExtResource("10_vskx1")]
+_trigger_type = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/TriggerMusic2" index="0"]
+position = Vector2(1292, -184)
+shape = SubResource("RectangleShape2D_6k62g")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Triggers/TriggerMusic2" index="1"]
+position = Vector2(1283, -752)
+shape = SubResource("RectangleShape2D_wx62s")
+
+[node name="MusicPlayer" parent="Audio" index="0" node_paths=PackedStringArray("_starting_trigger")]
+_starting_trigger = NodePath("../../Triggers/TriggerMusic")

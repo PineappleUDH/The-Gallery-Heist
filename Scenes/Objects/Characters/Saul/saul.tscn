@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://crjtftvmkahqx"]
+[gd_scene load_steps=70 format=3 uid="uid://crjtftvmkahqx"]
 
 [ext_resource type="PackedScene" uid="uid://bb8fvvxo2nhq1" path="res://Scenes/Objects/Characters/character.tscn" id="1_regtg"]
 [ext_resource type="Script" path="res://Scenes/Objects/Characters/Saul/saul.gd" id="2_rhth6"]
@@ -22,10 +22,9 @@
 [ext_resource type="AudioStream" uid="uid://cqinx1if47psh" path="res://Resources/Audio/SFX/jump2.wav" id="20_dgphi"]
 [ext_resource type="AudioStream" uid="uid://bxe2502g4y2iv" path="res://Resources/Audio/SFX/dash.wav" id="21_3ncd7"]
 [ext_resource type="AudioStream" uid="uid://mkt04tcqr0em" path="res://Resources/Audio/SFX/hit_wall.wav" id="22_tm1ie"]
-[ext_resource type="AudioStream" uid="uid://d4d6pbcnalx0p" path="res://Resources/Audio/SFX/coin_get.wav" id="23_eqcan"]
-[ext_resource type="AudioStream" uid="uid://byyxktqliudlb" path="res://Resources/Audio/SFX/click.wav" id="24_6ydcq"]
-[ext_resource type="AudioStream" uid="uid://ck8td3x687ool" path="res://Resources/Audio/SFX/hitHurt 2.wav" id="25_vhhi4"]
-[ext_resource type="AudioStream" uid="uid://dftb7ej7uoibk" path="res://Resources/Audio/SFX/explosion 3.wav" id="26_4djtq"]
+[ext_resource type="AudioStream" uid="uid://ck8td3x687ool" path="res://Resources/Audio/SFX/attack2.wav" id="24_82yp3"]
+[ext_resource type="AudioStream" uid="uid://bo3dmd83ceyvo" path="res://Resources/Audio/SFX/attack1.wav" id="24_ur4w1"]
+[ext_resource type="AudioStream" uid="uid://dftb7ej7uoibk" path="res://Resources/Audio/SFX/damaged.wav" id="26_lxbau"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ypg7h"]
 size = Vector2(13, 30)
@@ -363,6 +362,19 @@ stream_0/weight = 1.0
 stream_1/stream = ExtResource("20_dgphi")
 stream_1/weight = 1.0
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_52uk5"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("21_3ncd7")
+stream_0/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wdyio"]
+streams_count = 2
+stream_0/stream = ExtResource("24_ur4w1")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("24_82yp3")
+stream_1/weight = 1.0
+
 [node name="Saul" instance=ExtResource("1_regtg")]
 platform_on_leave = 2
 script = ExtResource("2_rhth6")
@@ -454,7 +466,7 @@ stream = SubResource("AudioStreamRandomizer_5o1wf")
 volume_db = -6.0
 
 [node name="Dash" type="AudioStreamPlayer" parent="Sounds" index="2"]
-stream = ExtResource("21_3ncd7")
+stream = SubResource("AudioStreamRandomizer_52uk5")
 volume_db = -6.0
 
 [node name="HitWall" type="AudioStreamPlayer" parent="Sounds" index="3"]
@@ -462,23 +474,12 @@ stream = ExtResource("22_tm1ie")
 volume_db = -2.0
 pitch_scale = 2.05
 
-[node name="CoinPickup" type="AudioStreamPlayer" parent="Sounds" index="4"]
-stream = ExtResource("23_eqcan")
-
-[node name="Hurt" type="AudioStreamPlayer" parent="Sounds" index="5"]
-stream = ExtResource("24_6ydcq")
-pitch_scale = 1.6
-
-[node name="PiePickup" type="AudioStreamPlayer" parent="Sounds" index="6"]
-stream = ExtResource("24_6ydcq")
-
-[node name="Hit" type="AudioStreamPlayer" parent="Sounds" index="7"]
-stream = ExtResource("25_vhhi4")
+[node name="Attack" type="AudioStreamPlayer" parent="Sounds" index="4"]
+stream = SubResource("AudioStreamRandomizer_wdyio")
 volume_db = -2.0
-pitch_scale = 1.5
 
-[node name="GameOver" type="AudioStreamPlayer" parent="Sounds" index="8"]
-stream = ExtResource("26_4djtq")
+[node name="Died" type="AudioStreamPlayer" parent="Sounds" index="5"]
+stream = ExtResource("26_lxbau")
 volume_db = 1.0
 pitch_scale = 0.5
 
