@@ -23,7 +23,7 @@ position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_mm7tx")
 
 [node name="HurtBox" parent="." index="1"]
-knockback = 100.0
+knockback = 200.0
 
 [node name="Top" type="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2(0, -9)
@@ -47,14 +47,14 @@ target_position = Vector2(0, 18)
 position = Vector2(25, 0)
 target_position = Vector2(0, 18)
 
-[node name="TookHit" type="Timer" parent="." index="4"]
+[node name="TookHit" type="Timer" parent="Timers" index="0"]
 wait_time = 0.5
 one_shot = true
 
-[node name="DebugVarsVisualizer" parent="." index="6" instance=ExtResource("4_qxwfe")]
+[node name="DebugVarsVisualizer" parent="." index="5" instance=ExtResource("4_qxwfe")]
 offset_left = 20.0
 offset_top = -15.0
 offset_right = 28.0
 offset_bottom = -7.0
 
-[connection signal="timeout" from="TookHit" to="." method="_on_took_hit_timeout"]
+[connection signal="timeout" from="Timers/TookHit" to="." method="_on_took_hit_timeout"]

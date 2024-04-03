@@ -11,7 +11,14 @@ script = ExtResource("1_xfsue")
 
 [node name="HurtBox" parent="." instance=ExtResource("2_6ny8n")]
 
+[node name="Timers" type="Node" parent="."]
+
+[node name="DamageCooldownTimer" type="Timer" parent="Timers"]
+one_shot = true
+
 [node name="Sounds" type="Node2D" parent="."]
 
 [node name="Damaged" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("3_iixss")
+
+[connection signal="timeout" from="Timers/DamageCooldownTimer" to="." method="_on_damage_cooldown_timer_timeout"]

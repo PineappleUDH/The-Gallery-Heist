@@ -4,33 +4,46 @@ extends CharacterBody2D
 signal died
 
 @onready var _damaged_sfx : AudioStreamPlayer2D = $Sounds/Damaged
+@onready var _damage_cooldown_timer : Timer = $Timers/DamageCooldownTimer
 
 @warning_ignore("unused_private_class_variable")
 var _gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 @warning_ignore("unused_private_class_variable")
 var _direction : Vector2 = Vector2.RIGHT
 @warning_ignore("unused_private_class_variable")
-var _max_health : float
-var _health : float
+var _max_health : int
+var _health : int
+var _damage_cooldown_time : float
 var _is_invincible : bool
 var _knockback_multiplier : float = 1.0
 
 
 func _process(delta : float):
+	# fell off the map
 	if global_position.y > Level.death_height_y:
 		take_damage(0, 0.0, Vector2.ZERO, true)
+	
+	if _damage_cooldown_timer.is_stopped() == false:
+		modulate.a = (sin(_damage_cooldown_timer.time_left * 10.0) + 1.0) / 2.0
 
 # override
 func take_damage(damage : int, knockback : float, from : Vector2, is_deadly : bool = false):
 	if _is_invincible: return
 	
+	var cooldown : bool = _damage_cooldown_timer.is_stopped() == false
+	
 	if is_deadly:
 		_health = 0
-	else:
+	elif cooldown == false:
 		_health -= damage
+	else:
+		# no damage applied due to cooldown, nothing more to do
+		return
 	
 	if _health > 0:
 		velocity -= (from - global_position).normalized() * knockback * _knockback_multiplier
+		_damage_cooldown_timer.wait_time = _damage_cooldown_time
+		_damage_cooldown_timer.start()
 		_damage_taken(damage, false)
 		
 	else:
@@ -43,3 +56,6 @@ func _damage_taken(damage : int, die : bool):
 		died.emit()
 	else:
 		_damaged_sfx.play()
+
+func _on_damage_cooldown_timer_timeout():
+	modulate.a = 1.0

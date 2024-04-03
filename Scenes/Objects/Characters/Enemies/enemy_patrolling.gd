@@ -6,7 +6,7 @@ extends "res://Scenes/Objects/Characters/Enemies/enemy.gd"
 @onready var _gap_detect_left : RayCast2D = $Detectors/GapDetectLeft
 @onready var _gap_detect_right : RayCast2D = $Detectors/GapDetectRight
 @onready var _hurtbox : Area2D = $HurtBox
-@onready var _took_hit_timer : Timer = $TookHit
+@onready var _took_hit_timer : Timer = $Timers/TookHit
 @onready var _debug_vars_visualizer : PanelContainer = $DebugVarsVisualizer
 
 var _state_machine : StateMachine = StateMachine.new()
@@ -17,6 +17,7 @@ const _max_wander_time : float = 7.0
 
 func _ready():
 	_max_health = 2
+	_damage_cooldown_time = 1.0
 	_health = _max_health
 	
 	_gap_detect_left.add_exception(self)

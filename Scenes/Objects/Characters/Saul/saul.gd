@@ -18,7 +18,6 @@ extends "res://Scenes/Objects/Characters/character.gd"
 	"jump":$Sounds/Jump, "dash":$Sounds/Dash, "hit_wall":$Sounds/HitWall,
 	"attack":$Sounds/Attack, "died":$Sounds/Died
 }
-@onready var _took_hit : Timer = $Timers/TookHit
 @onready var _sprite : AnimatedSprite2D = $Sprite
 @onready var _debug_vars_visualizer : PanelContainer = $DebugVarsVisualizer
 const _dash_sprite : PackedScene = preload("res://Scenes/Objects/Characters/Saul/dash_sprite.tscn")
@@ -33,8 +32,8 @@ const _accel : float = 450.0
 const _decel : float = 600.0
 const _jump_force : float = 260.0
 const _run_anim_threshold : float = 150.0
-const _hit_time : float = 0.2
-var _hit_timer : float = _hit_time
+const _attack_time : float = 0.2
+var _attack_timer : float = _attack_time
 const _slide_speed : float = 60
 
 var _can_dash : bool = true
@@ -45,15 +44,14 @@ const _wall_jump_force : float = 260.0
 const _wall_push_force_high : float = 230.0
 const _wall_push_force_low : float = 100.0
 
-# TODO: damage cooldown, make the sprite flash as well
 const _damage_shake_duration : float = 0.3
 var _player_score : float = 0 # TODO: move to lavel class
-var _taking_hit : bool = false
 
 var _state_machine : StateMachine = StateMachine.new()
 
 func _ready():
 	_max_health = 4
+	_damage_cooldown_time = 2.0
 	_health = _max_health
 	
 	_state_machine.add_state("normal", Callable(), Callable(), _state_normal_process, _state_normal_ph_process)
@@ -101,9 +99,6 @@ func refill_dash():
 
 func take_damage(damage : int, knockback : float, from : Vector2, is_deadly : bool = false):
 	super.take_damage(damage, knockback, from, is_deadly)
-	if _is_invincible == false:
-		_taking_hit = true
-		_took_hit.start()
 
 # This is in place to pass the input value to other things that players expect to
 # respond to input such as attack direction
@@ -158,7 +153,7 @@ func _state_normal_ph_process(delta : float):
 	_direction = Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down"))
 	if _direction: _facing = _direction
 	
-	if _direction.x and _taking_hit == false:
+	if _direction.x:
 		velocity.x = move_toward(velocity.x, _max_move_speed * sign(_direction.x), _accel * delta)
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, _decel * delta)
@@ -306,9 +301,9 @@ func _state_attack_ph_process(delta: float):
 	
 	move_and_slide()
 	
-	_hit_timer -= delta
-	if _hit_timer <= 0.0:
-		_hit_timer = _hit_time
+	_attack_timer -= delta
+	if _attack_timer <= 0.0:
+		_attack_timer = _attack_time
 		_state_machine.change_state("normal")
 
 func _state_dead_switch_to(from : StringName):
@@ -316,6 +311,3 @@ func _state_dead_switch_to(from : StringName):
 	_is_invincible = true
 	# TODO: death animation, player can die both on ground and in mid-air
 	died.emit()
-
-func _on_took_hit_timeout():
-	_taking_hit = false
