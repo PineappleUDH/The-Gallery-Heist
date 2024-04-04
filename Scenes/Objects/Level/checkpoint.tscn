@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://uc8w4v327aj"]
+
+[ext_resource type="Script" path="res://Scenes/Objects/Level/checkpoint.gd" id="1_0uyco"]
+[ext_resource type="Texture2D" uid="uid://ds224g0kq7qgs" path="res://Resources/Textures/checkpoint.png" id="2_k45uq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3hut0"]
+size = Vector2(60, 60)
+
+[node name="Checkpoint" type="Area2D"]
+monitorable = false
+script = ExtResource("1_0uyco")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -30)
+shape = SubResource("RectangleShape2D_3hut0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -32)
+texture = ExtResource("2_k45uq")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+
+[node name="SpawnMarker" type="Marker2D" parent="."]
+position = Vector2(0, -30)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

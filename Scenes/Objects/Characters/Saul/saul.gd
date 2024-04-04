@@ -1,6 +1,8 @@
 class_name Player
 extends "res://Scenes/Objects/Characters/character.gd"
 
+signal respawned
+
 @onready var _cling_time : Timer = $Timers/ClingTime
 @onready var _coyote_timer : Timer = $Timers/CoyoteTimer
 @onready var _jump_buffer_timer : Timer = $Timers/JumpBufferTimer
@@ -58,7 +60,7 @@ func _ready():
 	_state_machine.add_state("dash", _state_dash_switch_to, _state_dash_switch_from, Callable(), _state_dash_ph_process)
 	_state_machine.add_state("wall_slide", _state_wall_slide_switch_to, _state_wall_slide_switch_from, Callable(), _state_wall_slide_ph_process)
 	_state_machine.add_state("attack", _state_attack_switch_to, _state_attack_switch_from, Callable(), _state_attack_ph_process)
-	_state_machine.add_state("dead", _state_dead_switch_to, Callable(), Callable(), Callable())
+	_state_machine.add_state("dead", _state_dead_switch_to, _state_dead_switch_from, Callable(), Callable())
 	_state_machine.change_state("normal")
 	
 	_debug_vars_visualizer.add_var("Score")
@@ -99,6 +101,18 @@ func refill_dash():
 
 func take_damage(damage : int, knockback : float, from : Vector2, is_deadly : bool = false):
 	super.take_damage(damage, knockback, from, is_deadly)
+
+func reset_from_checkpoint(checkpoint_position : Vector2):
+	assert(_state_machine.get_current_state() == "dead")
+	
+	_health = _max_health
+	_facing = Vector2.RIGHT
+	_direction = Vector2.RIGHT
+	_player_score = 0
+	global_position = checkpoint_position
+	_state_machine.change_state("normal")
+	
+	respawned.emit()
 
 # This is in place to pass the input value to other things that players expect to
 # respond to input such as attack direction
@@ -209,13 +223,13 @@ func _state_normal_ph_process(delta : float):
 	if Input.is_action_just_pressed("attack_basic"):
 		_state_machine.change_state("attack")
 
-func _state_wall_slide_switch_to(from : StringName):
+func _state_wall_slide_switch_to(from : String):
 	_facing = Vector2.LEFT if _detect_left.is_colliding() else Vector2.RIGHT
 	velocity = Vector2(0,0)
 	_cling_time.start()
 	_play_animation("Cling")
 
-func _state_wall_slide_switch_from(to : StringName):
+func _state_wall_slide_switch_from(to : String):
 	_facing *= -1
 	_slide_cancel_timer.stop()
 	_slide_delay.start()
@@ -255,7 +269,7 @@ func _state_wall_slide_ph_process(delta: float):
 	
 	move_and_slide()
 
-func _state_dash_switch_to(from : StringName):
+func _state_dash_switch_to(from : String):
 	World.level.level_camera.shake(LevelCamera.ShakeLevel.low, _dash_shake_duration)
 	_can_dash = false
 	_sfx["dash"].play()
@@ -264,7 +278,7 @@ func _state_dash_switch_to(from : StringName):
 	velocity = Vector2.ZERO
 	_sprite.play("Dashing")
 
-func _state_dash_switch_from(to: StringName):
+func _state_dash_switch_from(to: String):
 	_dash_cooldown.start()
 	#_dash_trail.set_active(false)
 
@@ -284,13 +298,13 @@ func _state_dash_ph_process(delta: float):
 		_state_machine.change_state("normal")
 		return
 
-func _state_attack_switch_to(from : StringName):
+func _state_attack_switch_to(from : String):
 	_attack_sprite.visible = true
 	_hurtbox.scale.x = 1 if !_sprite.flip_h else -1
 	_hurtbox.monitoring = true
 	_sfx["attack"].play()
 
-func _state_attack_switch_from(from : StringName):
+func _state_attack_switch_from(from : String):
 	_attack_sprite.visible = false
 	_hurtbox.monitoring = false
 
@@ -306,8 +320,13 @@ func _state_attack_ph_process(delta: float):
 		_attack_timer = _attack_time
 		_state_machine.change_state("normal")
 
-func _state_dead_switch_to(from : StringName):
+func _state_dead_switch_to(from : String):
+	velocity = Vector2.ZERO
 	_collider.disabled = true
 	_is_invincible = true
 	# TODO: death animation, player can die both on ground and in mid-air
 	died.emit()
+
+func _state_dead_switch_from(to : String):
+	_collider.disabled = false
+	_is_invincible = false

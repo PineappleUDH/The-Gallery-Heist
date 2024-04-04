@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://mlvn8cvywr4c"]
+[gd_scene load_steps=34 format=3 uid="uid://mlvn8cvywr4c"]
 
 [ext_resource type="PackedScene" uid="uid://b84n1i2bwxbmr" path="res://Scenes/Objects/Level/level.tscn" id="1_gs8pa"]
 [ext_resource type="Script" path="res://Scenes/Game/Levels/testing.gd" id="2_qem0p"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://catjkp55gq8oi" path="res://Scenes/Objects/Collectables/collectable_pie.tscn" id="9_pqw76"]
 [ext_resource type="PackedScene" uid="uid://n4juq1gu3j6k" path="res://Scenes/Objects/Triggers/trigger_music.tscn" id="10_vskx1"]
 [ext_resource type="AudioStream" uid="uid://cvre63btw3yev" path="res://Resources/Audio/Music/gallery_test.ogg" id="11_32noh"]
+[ext_resource type="PackedScene" uid="uid://uc8w4v327aj" path="res://Scenes/Objects/Level/checkpoint.tscn" id="12_3mity"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7m7wu"]
 texture = ExtResource("2_ys7fm")
@@ -142,23 +143,11 @@ layer_0/tile_data = PackedInt32Array(-3538959, 65536, 1, -3473423, 65536, 1, -34
 layer_1/name = "Art"
 layer_1/tile_data = PackedInt32Array()
 
-[node name="Saul" parent="Characters" index="0"]
-position = Vector2(54, -144)
+[node name="Checkpoint" parent="Checkpoints" index="0" instance=ExtResource("12_3mity")]
+position = Vector2(627, -384)
 
-[node name="EnemyPatrolling" parent="Characters" index="1" instance=ExtResource("4_3y8bi")]
-position = Vector2(191, -556)
-
-[node name="EnemyPatrolling2" parent="Characters" index="2" instance=ExtResource("4_3y8bi")]
-position = Vector2(407, -145)
-
-[node name="EnemyPatrolling3" parent="Characters" index="3" instance=ExtResource("4_3y8bi")]
-position = Vector2(400, -679)
-
-[node name="EnemyPatrolling4" parent="Characters" index="4" instance=ExtResource("4_3y8bi")]
-position = Vector2(801, -712)
-
-[node name="EnemyPatrolling5" parent="Characters" index="5" instance=ExtResource("4_3y8bi")]
-position = Vector2(1045, -610)
+[node name="Checkpoint2" parent="Checkpoints" index="1" instance=ExtResource("12_3mity")]
+position = Vector2(1288, -720)
 
 [node name="Camera2D" type="Camera2D" parent="." index="3"]
 position = Vector2(624, -465)
@@ -558,7 +547,25 @@ text = "High Score:"
 label_settings = SubResource("LabelSettings_anlf8")
 vertical_alignment = 1
 
-[node name="LevelCamera" parent="." index="10" node_paths=PackedStringArray("_starting_trigger")]
+[node name="Saul" parent="Characters" index="0"]
+position = Vector2(54, -144)
+
+[node name="EnemyPatrolling" parent="Characters" index="1" instance=ExtResource("4_3y8bi")]
+position = Vector2(191, -556)
+
+[node name="EnemyPatrolling2" parent="Characters" index="2" instance=ExtResource("4_3y8bi")]
+position = Vector2(407, -145)
+
+[node name="EnemyPatrolling3" parent="Characters" index="3" instance=ExtResource("4_3y8bi")]
+position = Vector2(400, -679)
+
+[node name="EnemyPatrolling4" parent="Characters" index="4" instance=ExtResource("4_3y8bi")]
+position = Vector2(801, -712)
+
+[node name="EnemyPatrolling5" parent="Characters" index="5" instance=ExtResource("4_3y8bi")]
+position = Vector2(1045, -610)
+
+[node name="LevelCamera" parent="." index="11" node_paths=PackedStringArray("_starting_trigger")]
 _starting_trigger = NodePath("../Triggers/CameraTriggers#TriggerCamera")
 
 [node name="CameraTriggers#TriggerCamera" parent="Triggers" index="0" instance=ExtResource("5_7n87s")]

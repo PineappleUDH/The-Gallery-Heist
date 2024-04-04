@@ -50,7 +50,7 @@ func take_damage(damage : int, knockback : float, from : Vector2, is_deadly : bo
 	_taking_hit = true
 	_took_hit_timer.start()
 
-func _state_wander_switch_to(from : StringName):
+func _state_wander_switch_to(from : String):
 	_wander_time = randf_range(_min_wander_time, _max_wander_time)
 
 func _state_wander_ph_process(delta: float):

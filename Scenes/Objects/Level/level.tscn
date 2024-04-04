@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://b84n1i2bwxbmr"]
+[gd_scene load_steps=7 format=3 uid="uid://b84n1i2bwxbmr"]
 
 [ext_resource type="Script" path="res://Scenes/Objects/Level/level.gd" id="1_qee75"]
 [ext_resource type="Script" path="res://Scenes/Objects/Level/level_pause_manager.gd" id="2_2cj76"]
 [ext_resource type="PackedScene" uid="uid://crjtftvmkahqx" path="res://Scenes/Objects/Characters/Saul/saul.tscn" id="2_wyn7p"]
+[ext_resource type="Script" path="res://Scenes/Objects/Level/level_transition.gd" id="3_mds04"]
 [ext_resource type="PackedScene" uid="uid://dhssfh3cjjl5q" path="res://Scenes/Objects/Level/level_camera.tscn" id="4_h0vsv"]
 [ext_resource type="Script" path="res://Scenes/Objects/Level/level_music_player.gd" id="5_j8si2"]
 
@@ -50,8 +51,26 @@ size_flags_horizontal = 4
 focus_mode = 0
 text = "Quit"
 
+[node name="ScreenTransition" type="TextureRect" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 160.0
+offset_top = 20.0
+offset_right = -160.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 4)
+pivot_offset = Vector2(160, 160)
+mouse_filter = 2
+stretch_mode = 5
+script = ExtResource("3_mds04")
+
 [node name="TileMap" type="TileMap" parent="."]
 format = 2
+
+[node name="Checkpoints" type="Node2D" parent="."]
 
 [node name="Characters" type="Node2D" parent="."]
 

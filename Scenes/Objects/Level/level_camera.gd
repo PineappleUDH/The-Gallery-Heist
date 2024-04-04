@@ -31,8 +31,10 @@ const _player_y_look_offset : float = 80.0
 
 
 func _ready():
+	await get_tree().process_frame # wait for World.level to be set
+	World.level.player.respawned.connect(_on_player_respawned)
+	
 	if _starting_trigger:
-		await get_tree().process_frame # wait for World.level to be set
 		_starting_trigger.apply_camera_state()
 
 func _process(delta : float):
@@ -120,3 +122,12 @@ func set_state_follow():
 
 func _on_shake_timer_timeout():
 	offset = Vector2.ZERO
+
+func _on_player_respawned():
+	global_position = World.level.player.global_position
+	# TODO: we reapply initial state but that's not always accurate
+	#       a trigger could change the camera state right before the checkpoint
+	#       not sure what to do about that.. same thing for other types of triggers
+	# a cheap solution would be to place an additional trigger collider on the checkpoint
+	# so player hits it on respawn
+	_starting_trigger.apply_camera_state()

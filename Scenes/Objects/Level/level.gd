@@ -4,16 +4,38 @@ extends Node2D
 # TODO: level should handles:
 #       UI and score
 #       dialogue player object
-const death_height_y : float = 0.0
 
 # level dependencies
 @onready var player : Player = $Characters/Saul
 @onready var level_camera : LevelCamera = $LevelCamera
 @onready var music_player : Node = $Audio/MusicPlayer
 
+@onready var _screen_transition : TextureRect = $UI/ScreenTransition
+
+const death_height_y : float = 0.0
+
+var _player_starting_position : Vector2
+var _checkpoint : Checkpoint = null
+
+
 
 func _ready():
 	player.died.connect(_on_player_died)
+	
+	# initial checkpoint is spawn point
+	_player_starting_position = player.global_position
+
+func set_checkpoint(checkpoint : Checkpoint):
+	if _checkpoint:
+		_checkpoint.uncheck()
+	
+	_checkpoint = checkpoint
 
 func _on_player_died():
-	SceneManager.restart_scene()
+	_screen_transition.transition()
+	await _screen_transition.screen_hidden
+	
+	if _checkpoint:
+		player.reset_from_checkpoint(_checkpoint.get_spawn_position())
+	else:
+		player.reset_from_checkpoint(_player_starting_position)

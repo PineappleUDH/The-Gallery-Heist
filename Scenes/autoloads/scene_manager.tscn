@@ -7,20 +7,14 @@ process_mode = 3
 layer = 99
 script = ExtResource("1_qo84u")
 
-[node name="ScreenTransition" type="TextureRect" parent="."]
+[node name="BlackFade" type="ColorRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 160.0
-offset_top = 20.0
-offset_right = -160.0
-offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(4, 4)
-pivot_offset = Vector2(160, 160)
 mouse_filter = 2
-stretch_mode = 5
+color = Color(0, 0, 0, 0)
 
 [node name="MouseBlocker" type="Control" parent="."]
 layout_mode = 3
