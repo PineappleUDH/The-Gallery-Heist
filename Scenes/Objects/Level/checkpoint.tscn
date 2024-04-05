@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://uc8w4v327aj"]
+[gd_scene load_steps=18 format=3 uid="uid://uc8w4v327aj"]
 
 [ext_resource type="Script" path="res://Scenes/Objects/Level/checkpoint.gd" id="1_0uyco"]
 [ext_resource type="Texture2D" uid="uid://boy10rqbomu3b" path="res://Resources/Textures/checkpointv2-Sheet(Addin-Val Collab).png" id="2_mwktt"]
@@ -35,10 +35,6 @@ atlas = ExtResource("2_mwktt")
 region = Rect2(96, 0, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0ivr7"]
-atlas = ExtResource("2_mwktt")
-region = Rect2(64, 0, 32, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kt6a1"]
 atlas = ExtResource("2_mwktt")
 region = Rect2(64, 0, 32, 48)
 
@@ -79,14 +75,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kt6a1")
-}],
-"loop": false,
-"name": &"active",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_vd1ii")
 }],
 "loop": false,
@@ -96,6 +84,23 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_31ilg"]
 size = Vector2(32, 18)
+
+[sub_resource type="Curve" id="Curve_mcdbu"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.74269, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_030ff"]
+curve = SubResource("Curve_mcdbu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_phm30"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 60.0
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 6.0
+scale_curve = SubResource("CurveTexture_030ff")
 
 [node name="Checkpoint" type="Area2D"]
 collision_layer = 4
@@ -111,6 +116,7 @@ shape = SubResource("RectangleShape2D_3hut0")
 position = Vector2(0, -25)
 sprite_frames = SubResource("SpriteFrames_oq15q")
 animation = &"inactive"
+autoplay = "inactive"
 
 [node name="SpawnMarker" type="Marker2D" parent="."]
 position = Vector2(0, -30)
@@ -120,5 +126,13 @@ position = Vector2(0, -30)
 [node name="Shape" type="CollisionShape2D" parent="Platform"]
 position = Vector2(0, -9)
 shape = SubResource("RectangleShape2D_31ilg")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(0, -30)
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_phm30")
+one_shot = true
+explosiveness = 1.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

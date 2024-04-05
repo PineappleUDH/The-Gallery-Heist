@@ -9,7 +9,7 @@ signal respawned
 @onready var _slide_cancel_timer : Timer = $Timers/SlideCancelTimer
 @onready var _dash_cooldown : Timer = $Timers/DashCooldown
 @onready var _dash_timer : Timer = $Timers/DashTimer
-@onready var _dash_trail : Line2D = $DashTrail
+@onready var _dash_trail2 : Node2D = $DashTrail2
 #@onready var _dust_trail : GPUParticles2D = $DustTrail
 @onready var _slide_delay : Timer = $Timers/SlideDelay
 @onready var _detect_right : RayCast2D = $Detection/Right
@@ -22,7 +22,6 @@ signal respawned
 }
 @onready var _sprite : AnimatedSprite2D = $Sprite
 @onready var _debug_vars_visualizer : PanelContainer = $DebugVarsVisualizer
-const _dash_sprite : PackedScene = preload("res://Scenes/Objects/Characters/Saul/dash_sprite.tscn")
 
 # TEMP
 @onready var _attack_sprite : Sprite2D = $HurtBox/AttackSprite
@@ -114,10 +113,8 @@ func reset_from_checkpoint(checkpoint_position : Vector2):
 	
 	respawned.emit()
 
-# This is in place to pass the input value to other things that players expect to
-# respond to input such as attack direction
-func get_direction() -> Vector2:
-	return _direction
+func get_facing() -> Vector2:
+	return _facing
 
 func _damage_taken(damage : int, die : bool):
 	if die:
@@ -272,26 +269,21 @@ func _state_wall_slide_ph_process(delta: float):
 func _state_dash_switch_to(from : String):
 	World.level.level_camera.shake(LevelCamera.ShakeLevel.low, _dash_shake_duration)
 	_can_dash = false
-	_sfx["dash"].play()
-	#_dash_trail.set_active(true)
-	_dash_timer.start()
 	velocity = Vector2.ZERO
+	_dash_trail2.set_active(true)
+	_sfx["dash"].play()
+	_dash_timer.start()
 	_sprite.play("Dashing")
 
 func _state_dash_switch_from(to: String):
 	_dash_cooldown.start()
-	#_dash_trail.set_active(false)
+	_dash_trail2.set_active(false)
 
 func _state_dash_ph_process(delta: float):
 	_direction = Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down"))
 	velocity = _dash_speed * _facing.normalized()
 	
 	move_and_slide()
-	
-	var _dash_smear = _dash_sprite.instantiate()
-	_dash_smear.global_position = global_position
-	_dash_smear.flip_h = _sprite.flip_h
-	get_parent().add_child(_dash_smear)
 	
 	if _dash_timer.is_stopped() or is_on_wall():
 		_dash_timer.stop()
