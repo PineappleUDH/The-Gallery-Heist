@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://crjtftvmkahqx"]
+[gd_scene load_steps=72 format=3 uid="uid://crjtftvmkahqx"]
 
 [ext_resource type="PackedScene" uid="uid://bb8fvvxo2nhq1" path="res://Scenes/Objects/Characters/character.tscn" id="1_regtg"]
 [ext_resource type="Script" path="res://Scenes/Objects/Characters/Saul/saul.gd" id="2_rhth6"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cdhv5eao2yy7a" path="res://Resources/Textures/SaulSprites/dashsmear (AddinSachen).png" id="5_6q34m"]
 [ext_resource type="Texture2D" uid="uid://buql8wtc73qsp" path="res://Resources/Textures/SaulSprites/WallHang_Extra (AddinSachen).png" id="6_o7kle"]
 [ext_resource type="Texture2D" uid="uid://wfolyvshid67" path="res://Resources/Textures/SaulSprites/JumpMID (AddinSachen).png" id="7_7scej"]
+[ext_resource type="Texture2D" uid="uid://dmqwdl5ax0d80" path="res://Resources/Textures/SaulSprites/dashnodetail (AddinSachen).png" id="7_r8r50"]
 [ext_resource type="Texture2D" uid="uid://0r7bmjic63s5" path="res://Resources/Textures/SaulSprites/Idle (AddinSachen).png" id="8_njfhj"]
 [ext_resource type="Texture2D" uid="uid://5do3awtnco2e" path="res://Resources/Textures/SaulSprites/JumpAnticipation (AddinSachen).png" id="9_k3qw0"]
 [ext_resource type="Texture2D" uid="uid://cxj30n7000v7j" path="res://Resources/Textures/SaulSprites/JumpUP (AddinSachen).png" id="10_5c87x"]
@@ -38,6 +39,10 @@ point_count = 2
 [sub_resource type="AtlasTexture" id="AtlasTexture_euce1"]
 atlas = ExtResource("6_o7kle")
 region = Rect2(16, 16, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6smc"]
+atlas = ExtResource("7_r8r50")
+region = Rect2(0, 16, 32, 32)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_78ayj"]
 
@@ -193,7 +198,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_6q34m")
+"texture": SubResource("AtlasTexture_m6smc")
 }],
 "loop": true,
 "name": &"Dashing",
@@ -415,8 +420,10 @@ target_position = Vector2(-15, 0)
 current = true
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." index="5"]
+z_index = 1
 sprite_frames = SubResource("SpriteFrames_vg3q4")
-animation = &"Idle"
+animation = &"Dashing"
+frame_progress = 0.480509
 
 [node name="DebugVarsVisualizer" parent="." index="6" instance=ExtResource("17_q1cbf")]
 offset_left = 13.0
