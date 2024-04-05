@@ -6,3 +6,6 @@ Build/
 
 # Godot temp files problem https://github.com/godotengine/godot/issues/82270
 *.TMP
+
+# Gameplay records
+addons/gameplay_recorder_interface/records

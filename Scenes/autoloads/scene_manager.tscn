@@ -4,7 +4,7 @@
 
 [node name="SceneManager" type="CanvasLayer"]
 process_mode = 3
-layer = 99
+layer = 10
 script = ExtResource("1_qo84u")
 
 [node name="BlackFade" type="ColorRect" parent="."]

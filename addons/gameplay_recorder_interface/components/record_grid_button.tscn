@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgluod7wpyyek"]
+
+[ext_resource type="Script" path="res://addons/gameplay_recorder_interface/components/record_grid_button.gd" id="1_v07go"]
+
+[node name="RecordGridButton" type="Button"]
+custom_minimum_size = Vector2(64, 40)
+text = "Date"
+script = ExtResource("1_v07go")

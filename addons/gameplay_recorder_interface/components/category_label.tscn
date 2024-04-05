@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://cunaqykp50nqw"]
+
+[ext_resource type="Script" path="res://addons/gameplay_recorder_interface/components/category_label.gd" id="1_28f34"]
+
+[node name="CategoryLabel" type="ScrollContainer"]
+offset_right = 61.0
+offset_bottom = 23.0
+mouse_filter = 0
+vertical_scroll_mode = 0
+script = ExtResource("1_28f34")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Category.."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
