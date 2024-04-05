@@ -148,7 +148,7 @@ layer_1/tile_data = PackedInt32Array()
 position = Vector2(627, -384)
 
 [node name="Checkpoint2" parent="Checkpoints" index="1" instance=ExtResource("12_3mity")]
-position = Vector2(1288, -720)
+position = Vector2(1311, -720)
 
 [node name="Camera2D" type="Camera2D" parent="." index="3"]
 position = Vector2(624, -465)

@@ -11,6 +11,8 @@ func _process(delta):
 		scale.y -= 0.05
 	if _direction.y > 0 or _direction.y < 0:
 		scale.x -= 0.05
+	else:
+		scale -= Vector2(.05,.05)
 	
 	if scale.y <= 0 or scale.x <= 0:
 		queue_free()

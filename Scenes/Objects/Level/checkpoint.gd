@@ -1,7 +1,7 @@
 class_name Checkpoint
 extends Area2D
 
-@onready var _sprite : Sprite2D = $Sprite2D
+@onready var _sprite : AnimatedSprite2D = $Sprite2D
 @onready var _spawn_marker : Marker2D = $SpawnMarker
 
 var _is_checked : bool

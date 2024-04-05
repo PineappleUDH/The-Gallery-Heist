@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://yxxgx3h82w35" path="res://Scenes/Objects/Characters/Saul/dash_trail.tscn" id="4_6x0l7"]
 [ext_resource type="Texture2D" uid="uid://cdhv5eao2yy7a" path="res://Resources/Textures/SaulSprites/dashsmear (AddinSachen).png" id="5_6q34m"]
 [ext_resource type="Texture2D" uid="uid://buql8wtc73qsp" path="res://Resources/Textures/SaulSprites/WallHang_Extra (AddinSachen).png" id="6_o7kle"]
+[ext_resource type="Texture2D" uid="uid://cfefmmpanysh2" path="res://Resources/Textures/SaulSprites/Dash (AddinSachen).png" id="7_1d3qm"]
 [ext_resource type="Texture2D" uid="uid://wfolyvshid67" path="res://Resources/Textures/SaulSprites/JumpMID (AddinSachen).png" id="7_7scej"]
-[ext_resource type="Texture2D" uid="uid://dmqwdl5ax0d80" path="res://Resources/Textures/SaulSprites/dashnodetail (AddinSachen).png" id="7_r8r50"]
 [ext_resource type="Texture2D" uid="uid://0r7bmjic63s5" path="res://Resources/Textures/SaulSprites/Idle (AddinSachen).png" id="8_njfhj"]
 [ext_resource type="Texture2D" uid="uid://5do3awtnco2e" path="res://Resources/Textures/SaulSprites/JumpAnticipation (AddinSachen).png" id="9_k3qw0"]
 [ext_resource type="Texture2D" uid="uid://cxj30n7000v7j" path="res://Resources/Textures/SaulSprites/JumpUP (AddinSachen).png" id="10_5c87x"]
@@ -40,9 +40,9 @@ point_count = 2
 atlas = ExtResource("6_o7kle")
 region = Rect2(16, 16, 16, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_m6smc"]
-atlas = ExtResource("7_r8r50")
-region = Rect2(0, 16, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_t5qkt"]
+atlas = ExtResource("7_1d3qm")
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_78ayj"]
 
@@ -198,7 +198,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_m6smc")
+"texture": SubResource("AtlasTexture_t5qkt")
 }],
 "loop": true,
 "name": &"Dashing",
