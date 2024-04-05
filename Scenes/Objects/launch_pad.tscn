@@ -1,0 +1,97 @@
+[gd_scene load_steps=13 format=3 uid="uid://cor2s0svaqrii"]
+
+[ext_resource type="Script" path="res://LaunchPad.gd" id="1_nhp1a"]
+[ext_resource type="Texture2D" uid="uid://cmudh8y3r7px5" path="res://Resources/Textures/LaunchPad(AddinSachen).png" id="2_55127"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_51suv"]
+size = Vector2(32, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7w34d"]
+atlas = ExtResource("2_55127")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jiqwh"]
+atlas = ExtResource("2_55127")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xei0e"]
+atlas = ExtResource("2_55127")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3kce"]
+atlas = ExtResource("2_55127")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lrslw"]
+atlas = ExtResource("2_55127")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2n8s3"]
+atlas = ExtResource("2_55127")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sm2yl"]
+atlas = ExtResource("2_55127")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_atgpx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7w34d")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jiqwh")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_xei0e")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_o3kce")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_lrslw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2n8s3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sm2yl")
+}],
+"loop": false,
+"name": &"pressed",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i7ypf"]
+size = Vector2(32, 1)
+
+[node name="LaunchPad" type="Node2D"]
+script = ExtResource("1_nhp1a")
+
+[node name="Base" type="StaticBody2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Base"]
+position = Vector2(0, 7.5)
+shape = SubResource("RectangleShape2D_51suv")
+
+[node name="Animation" type="AnimatedSprite2D" parent="Base"]
+sprite_frames = SubResource("SpriteFrames_atgpx")
+
+[node name="ActivationZone" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="ActivationShape" type="CollisionShape2D" parent="ActivationZone"]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_i7ypf")
+
+[node name="LaunchDelay" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="ActivationZone" to="." method="_on_activation_zone_body_entered"]

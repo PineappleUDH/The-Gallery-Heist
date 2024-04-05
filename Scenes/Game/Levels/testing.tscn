@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://mlvn8cvywr4c"]
+[gd_scene load_steps=35 format=3 uid="uid://mlvn8cvywr4c"]
 
 [ext_resource type="PackedScene" uid="uid://b84n1i2bwxbmr" path="res://Scenes/Objects/Level/level.tscn" id="1_gs8pa"]
 [ext_resource type="Script" path="res://Scenes/Game/Levels/testing.gd" id="2_qem0p"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://n4juq1gu3j6k" path="res://Scenes/Objects/Triggers/trigger_music.tscn" id="10_vskx1"]
 [ext_resource type="AudioStream" uid="uid://cvre63btw3yev" path="res://Resources/Audio/Music/gallery_test.ogg" id="11_32noh"]
 [ext_resource type="PackedScene" uid="uid://uc8w4v327aj" path="res://Scenes/Objects/Level/checkpoint.tscn" id="12_3mity"]
+[ext_resource type="PackedScene" uid="uid://cor2s0svaqrii" path="res://Scenes/Objects/launch_pad.tscn" id="13_b67fq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7m7wu"]
 texture = ExtResource("2_ys7fm")
@@ -673,3 +674,10 @@ shape = SubResource("RectangleShape2D_wx62s")
 
 [node name="MusicPlayer" parent="Audio" index="0" node_paths=PackedStringArray("_starting_trigger")]
 _starting_trigger = NodePath("../../Triggers/TriggerMusic")
+
+[node name="LaunchPad" parent="." index="14" instance=ExtResource("13_b67fq")]
+position = Vector2(934, -160)
+
+[node name="LaunchPad2" parent="." index="15" instance=ExtResource("13_b67fq")]
+position = Vector2(1020, -160)
+_launch_force = 300.0

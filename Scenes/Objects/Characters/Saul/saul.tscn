@@ -376,6 +376,8 @@ stream_1/stream = ExtResource("24_82yp3")
 stream_1/weight = 1.0
 
 [node name="Saul" instance=ExtResource("1_regtg")]
+collision_layer = 5
+collision_mask = 5
 platform_on_leave = 2
 script = ExtResource("2_rhth6")
 
