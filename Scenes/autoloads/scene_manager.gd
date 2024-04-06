@@ -8,11 +8,6 @@ signal scene_changed
 const _tween_time : float = 0.9
 var _is_transitioning : bool
 
-func _ready():
-	# start mouse at center so mouse start point in records
-	# made with GameplayRecorder always start at same point
-	Input.warp_mouse(get_tree().root.size / 2.0)
-
 func change_scene(scene_path : String):
 	if _is_transitioning: return
 	_is_transitioning = true

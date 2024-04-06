@@ -9,3 +9,4 @@ Build/
 
 # Gameplay records
 addons/gameplay_recorder_interface/records
+addons/gameplay_recorder_interface/replay_file.txt

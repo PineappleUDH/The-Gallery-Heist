@@ -1,3 +1,4 @@
+@tool
 extends ScrollContainer
 
 signal pressed

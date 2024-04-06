@@ -1,98 +1,147 @@
-[gd_scene load_steps=6 format=3 uid="uid://c6jpaksobptn7"]
+[gd_scene load_steps=8 format=3 uid="uid://c6jpaksobptn7"]
 
 [ext_resource type="Script" path="res://Scenes/autoloads/gameplay_recorder.gd" id="1_0padu"]
+[ext_resource type="Script" path="res://Scenes/Objects/gameplay_recorder_notice.gd" id="2_drcw2"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c1ymj"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_52yhc"]
 bg_color = Color(0.811765, 0.796078, 0.737255, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nerof"]
-bg_color = Color(0.34902, 0.301961, 0.254902, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oaw0e"]
 bg_color = Color(0.34902, 0.301961, 0.254902, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_52yhc"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uyhuj"]
 bg_color = Color(0.811765, 0.796078, 0.737255, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nerof"]
+bg_color = Color(0.34902, 0.301961, 0.254902, 1)
+
+[sub_resource type="Theme" id="Theme_kwo73"]
+Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+Button/colors/font_hover_color = Color(0.34902, 0.301961, 0.254902, 1)
+Button/colors/font_pressed_color = Color(0.34902, 0.301961, 0.254902, 1)
+Button/styles/hover = SubResource("StyleBoxFlat_52yhc")
+Button/styles/normal = SubResource("StyleBoxFlat_oaw0e")
+Button/styles/pressed = SubResource("StyleBoxFlat_52yhc")
+Label/colors/font_color = Color(0.34902, 0.301961, 0.254902, 1)
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_uyhuj")
+RichTextLabel/styles/normal = SubResource("StyleBoxFlat_nerof")
 
 [node name="GameplayRecorder" type="Node"]
 process_mode = 3
 script = ExtResource("1_0padu")
 
-[node name="Notice" type="CanvasLayer" parent="."]
+[node name="MouseBlocker" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Panels" type="CanvasLayer" parent="."]
 layer = 99
 
-[node name="PanelContainer" type="PanelContainer" parent="Notice"]
-visible = false
+[node name="Control" type="Control" parent="Panels"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_kwo73")
+
+[node name="RecordNotice" type="PanelContainer" parent="Panels/Control"]
 custom_minimum_size = Vector2(550, 240)
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -275.0
+offset_top = -120.0
+offset_right = 275.0
+offset_bottom = 120.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_c1ymj")
+script = ExtResource("2_drcw2")
 
-[node name="MarginContainer" type="MarginContainer" parent="Notice/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Panels/Control/RecordNotice"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Notice/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panels/Control/RecordNotice/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Notice/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Panels/Control/RecordNotice/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.34902, 0.301961, 0.254902, 1)
 theme_override_font_sizes/font_size = 22
 text = "-- Notice --"
 horizontal_alignment = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Notice/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Panels/Control/RecordNotice/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/normal = SubResource("StyleBoxFlat_nerof")
 bbcode_enabled = true
-text = "[center]You are playing the game with the gameplay recorder turned on. The recorder will record your input as you play and save that to a file that you can share with the developers. The file will help us replay your input and simulate your experience giving us better insights on how you play the game.
+text = "[center]You are playing the game with the gameplay recorder turned on. The recorder will capture your input as you play and save that to a file that you can share with the developers. The file will help us replay your input and simulate your experience as if watching a recorded video giving us better insights on your experience.
 
-Note that your input will only be recorded while you play this game and not when minimized or when you open another window (this is no keylogger). In the end a file with your input will be generated. This file is a simple text file intentionally made easy to understand so you can peek inside and see what you'll be sharing for the sake of transparency.[/center]"
+Note that your input will only be recorded while you play this game and not when minimized or when you open another window (this is no keylogger). In the end a file with your input will be generated. This file is made intentionally simple to understand so you can peek inside and see what you'll be sharing for the sake of transparency. Do you agree?[/center]"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Notice/PanelContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
+[node name="HBoxContainer" type="HBoxContainer" parent="Panels/Control/RecordNotice/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Ok" type="Button" parent="Notice/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Yes" type="Button" parent="Panels/Control/RecordNotice/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 8
 focus_mode = 0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(0.34902, 0.301961, 0.254902, 1)
-theme_override_colors/font_hover_color = Color(0.34902, 0.301961, 0.254902, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_oaw0e")
-theme_override_styles/hover = SubResource("StyleBoxFlat_52yhc")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_52yhc")
-text = "Okay"
+text = "Yes"
 
-[node name="Stop" type="Button" parent="Notice/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="No" type="Button" parent="Panels/Control/RecordNotice/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 8
 focus_mode = 0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(0.34902, 0.301961, 0.254902, 1)
-theme_override_colors/font_hover_color = Color(0.34902, 0.301961, 0.254902, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_oaw0e")
-theme_override_styles/hover = SubResource("StyleBoxFlat_52yhc")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_52yhc")
-text = "Don't record"
+text = "No"
 
-[connection signal="pressed" from="Notice/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Ok" to="." method="_on_notice_ok_pressed"]
-[connection signal="pressed" from="Notice/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Stop" to="." method="_on_notice_stop_pressed"]
+[node name="Third" type="Button" parent="Panels/Control/RecordNotice/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_font_sizes/font_size = 14
+text = "I don't trust you"
+
+[node name="Status" type="MarginContainer" parent="Panels/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="Panels/Control/Status"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panels/Control/Status/PanelContainer"]
+layout_mode = 2
+text = "Status"
+horizontal_alignment = 1
+
+[connection signal="closed" from="Panels/Control/RecordNotice" to="." method="_on_record_notice_closed"]
+[connection signal="pressed" from="Panels/Control/RecordNotice/MarginContainer/VBoxContainer/HBoxContainer/Yes" to="Panels/Control/RecordNotice" method="_on_yes_pressed"]
+[connection signal="pressed" from="Panels/Control/RecordNotice/MarginContainer/VBoxContainer/HBoxContainer/No" to="Panels/Control/RecordNotice" method="_on_no_pressed"]
+[connection signal="pressed" from="Panels/Control/RecordNotice/MarginContainer/VBoxContainer/HBoxContainer/Third" to="Panels/Control/RecordNotice" method="_on_third_pressed"]
