@@ -50,6 +50,8 @@ var _player_score : float = 0 # TODO: move to lavel class
 
 var _state_machine : StateMachine = StateMachine.new()
 
+signal _interacting
+
 func _ready():
 	_max_health = 4
 	_damage_cooldown_time = 2.0
@@ -219,6 +221,9 @@ func _state_normal_ph_process(delta : float):
 	
 	if Input.is_action_just_pressed("attack_basic"):
 		_state_machine.change_state("attack")
+	
+	if Input.is_action_just_pressed("interact"):
+		_interacting.emit()
 
 func _state_wall_slide_switch_to(from : String):
 	_facing = Vector2.LEFT if _detect_left.is_colliding() else Vector2.RIGHT

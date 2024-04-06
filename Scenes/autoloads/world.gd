@@ -16,6 +16,8 @@ var high_score : float
 func _ready():
 	SceneManager.scene_changed.connect(_on_scene_changed)
 	_on_scene_changed() # call for starting scene
+	
+	
 
 func _on_scene_changed():
 	if get_tree().current_scene is Level:
