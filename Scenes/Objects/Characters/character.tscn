@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scenes/Objects/Characters/character.gd" id="1_xfsue"]
 [ext_resource type="PackedScene" uid="uid://caabhgsckx3p8" path="res://Scenes/Objects/Characters/hurtbox.tscn" id="2_6ny8n"]
-[ext_resource type="AudioStream" uid="uid://dftb7ej7uoibk" path="res://Resources/Audio/SFX/damaged.wav" id="3_iixss"]
+[ext_resource type="AudioStream" uid="uid://dftb7ej7uoibk" path="res://Resources/Audio/SFX/Player/damaged.wav" id="3_iixss"]
 
 [node name="Character" type="CharacterBody2D"]
 script = ExtResource("1_xfsue")

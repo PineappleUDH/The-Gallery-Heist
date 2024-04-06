@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://cnjlig1o6kw4f"
-path="res://.godot/imported/explosion 2.wav-13673223ed0aa969478431302257f278.sample"
+path="res://.godot/imported/explosion 2.wav-75a2fae100df75d3ebb5c1dc7deeef0b.sample"
 
 [deps]
 
-source_file="res://Resources/Audio/SFX/explosion 2.wav"
-dest_files=["res://.godot/imported/explosion 2.wav-13673223ed0aa969478431302257f278.sample"]
+source_file="res://Resources/Audio/SFX/Unused/explosion 2.wav"
+dest_files=["res://.godot/imported/explosion 2.wav-75a2fae100df75d3ebb5c1dc7deeef0b.sample"]
 
 [params]
 

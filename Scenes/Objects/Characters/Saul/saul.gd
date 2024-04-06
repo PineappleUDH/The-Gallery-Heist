@@ -141,7 +141,10 @@ func _state_normal_process(delta : float):
 	# animation
 	if is_on_floor():
 		if velocity.x == 0:
-			_play_animation("Idle")
+			if _direction.y == 0:
+				_play_animation("Idle")
+			else:
+				_play_animation("Looking Up" if _direction.y == -1 else "Looking Down")
 		elif abs(velocity.x) > _run_anim_threshold:
 			var x_input_dir : float = Input.get_axis("left", "right")
 			if sign(x_input_dir) == sign(velocity.x):
@@ -282,7 +285,7 @@ func _state_dash_switch_to(from : String):
 	_dash_trail2.set_active(true)
 	_sfx["dash"].play()
 	_dash_timer.start()
-	_sprite.play("Dashing")
+	_play_animation("Dashing")
 
 func _state_dash_switch_from(to: String):
 	_dash_cooldown.start()
@@ -325,7 +328,9 @@ func _state_dead_switch_to(from : String):
 	velocity = Vector2.ZERO
 	_collider.disabled = true
 	_is_invincible = true
-	# TODO: death animation, player can die both on ground and in mid-air
+	
+	_play_animation("Die")
+	await _sprite.animation_finished
 	died.emit()
 
 func _state_dead_switch_from(to : String):
