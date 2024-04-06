@@ -173,7 +173,7 @@ func _state_normal_ph_process(delta : float):
 	
 	if velocity.x == 0 && is_on_floor() && _direction.y != 0:
 		# TODO: some "looking up" and down animations would be nice
-		World.level.level_camera.player_look_offset(_direction.y)
+		World.level.level_camera.player_look_offset(int(_direction.y))
 	else:
 		World.level.level_camera.player_look_offset(0)
 	
@@ -202,15 +202,20 @@ func _state_normal_ph_process(delta : float):
 		if _jump_buffer_timer.is_stopped() == false:
 			velocity.y = -_jump_force
 	
-	# TODO: is_on_wall is true when climbing on other bodies, should ensure we're only clinging to tiles
-	if is_on_wall() == true \
-		and is_on_floor() == false\
-		and _slide_delay.is_stopped() \
-		and (_detect_left.is_colliding() \
-		or _detect_right.is_colliding()):
-		_sfx["hit_wall"].play()
-		_state_machine.change_state("wall_slide")
-		return
+	if is_on_wall() == true and is_on_floor() == false\
+		and _slide_delay.is_stopped():
+			var colliding : bool = false
+			if _detect_left.is_colliding() and _detect_left.get_collider() is TileMap:
+				colliding = true
+				_facing = Vector2.LEFT
+			elif _detect_right.is_colliding() and _detect_right.get_collider() is TileMap:
+				colliding = true
+				_facing = Vector2.RIGHT
+			
+			if colliding:
+				_sfx["hit_wall"].play()
+				_state_machine.change_state("wall_slide")
+				return
 	
 	if _can_dash == false && _dash_cooldown.is_stopped() && is_on_floor():
 		_can_dash = true
@@ -226,7 +231,6 @@ func _state_normal_ph_process(delta : float):
 		_interacting.emit()
 
 func _state_wall_slide_switch_to(from : String):
-	_facing = Vector2.LEFT if _detect_left.is_colliding() else Vector2.RIGHT
 	velocity = Vector2(0,0)
 	_cling_time.start()
 	_play_animation("Cling")

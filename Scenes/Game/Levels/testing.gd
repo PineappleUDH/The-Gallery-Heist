@@ -1,6 +1,5 @@
 extends "res://Scenes/Objects/Level/level.gd"
 
-@onready var camera_2d : Camera2D = $Camera2D
 @onready var label : Label = $Label
 var high_score : float
 
@@ -16,7 +15,3 @@ func _give_score(amount : int):
 func _process(delta : float):
 	high_score = World.high_score
 	label.text = str("High Score: ", high_score, "0")
-
-func _input(event : InputEvent):
-	if event is InputEventKey && event.pressed && event.keycode == KEY_TAB:
-		camera_2d.make_current()

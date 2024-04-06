@@ -382,8 +382,6 @@ stream_1/stream = ExtResource("24_82yp3")
 stream_1/weight = 1.0
 
 [node name="Saul" groups=["Player"] instance=ExtResource("1_regtg")]
-collision_layer = 5
-collision_mask = 5
 platform_on_leave = 2
 script = ExtResource("2_rhth6")
 
@@ -433,6 +431,7 @@ offset_left = 13.0
 offset_top = -14.0
 offset_right = 21.0
 offset_bottom = -6.0
+_is_absolute_position = true
 
 [node name="DustTrail" parent="." index="8" instance=ExtResource("18_2oby4")]
 visible = false

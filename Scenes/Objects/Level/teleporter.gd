@@ -2,23 +2,33 @@ extends Area2D
 class_name Teleporter
 
 @export var _target_teleporter : Teleporter
-@onready var output_location = $OutputLocation
-var _player_in_range : bool = false
-var _subject
 
-func _player_interacting():
-	_teleport_subject()
+@onready var output_location : Node2D = $OutputLocation
+@onready var _count_label : Label = $Count
+@onready var _count_timer : Timer = $CountTimer
 
-func _teleport_subject():
-	_subject.global_position = _target_teleporter._output_location.global_position
+const _max_count_number : int = 3
+var _count_number = _max_count_number
 
-func _on_body_entered(body):
+
+func _on_body_entered(body : Node2D):
 	if body.is_in_group("Player"):
-		_subject = body
-		_player_in_range = true
-		print(_subject)
+		_count_timer.start()
+		
+		_count_label.show()
+		_count_number = _max_count_number
+		_count_label.text = str(_count_number)
 
-func _on_body_exited(body):
+func _on_body_exited(body : Node2D):
 	if body.is_in_group("Player"):
-		_subject = null
-		_player_in_range = false
+		_count_timer.stop()
+		_count_label.hide()
+
+func _on_count_timer_timeout():
+	_count_number -= 1
+	_count_label.text = str(_count_number)
+	
+	if _count_number == 0:
+		_count_timer.stop()
+		_count_label.hide()
+		World.level.player.global_position = _target_teleporter.output_location.global_position

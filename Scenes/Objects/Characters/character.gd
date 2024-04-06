@@ -19,10 +19,6 @@ var _knockback_multiplier : float = 1.0
 
 
 func _process(delta : float):
-	# fell off the map
-	if global_position.y > Level.death_height_y:
-		take_damage(0, 0.0, Vector2.ZERO, true)
-	
 	if _damage_cooldown_timer.is_stopped() == false:
 		modulate.a = (sin(_damage_cooldown_timer.time_left * 10.0) + 1.0) / 2.0
 

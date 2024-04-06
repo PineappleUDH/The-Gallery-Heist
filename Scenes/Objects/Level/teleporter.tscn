@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cpxed2j3x1oe" path="res://Resources/Textures/teleporter-Sheet.png" id="1_dvx3h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_boflo"]
-size = Vector2(36, 16)
+size = Vector2(36, 11)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7uufm"]
 size = Vector2(36, 1)
@@ -13,22 +13,32 @@ size = Vector2(36, 1)
 script = ExtResource("1_5njoc")
 
 [node name="OutputLocation" type="Node2D" parent="."]
-position = Vector2(0, 6)
+position = Vector2(0, -18)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 15)
+position = Vector2(0, -6.5)
 shape = SubResource("RectangleShape2D_boflo")
 
 [node name="Platform" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
-position = Vector2(0, 23.5)
 shape = SubResource("RectangleShape2D_7uufm")
 one_way_collision = true
 
 [node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -24)
 texture = ExtResource("1_dvx3h")
 hframes = 2
 
+[node name="Count" type="Label" parent="."]
+offset_left = -6.0
+offset_top = -49.0
+offset_right = 7.0
+offset_bottom = -20.0
+theme_override_font_sizes/font_size = 30
+
+[node name="CountTimer" type="Timer" parent="."]
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="CountTimer" to="." method="_on_count_timer_timeout"]

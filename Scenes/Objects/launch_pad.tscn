@@ -94,8 +94,6 @@ animation = &"pressed"
 autoplay = "default"
 
 [node name="ActivationZone" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 4
 
 [node name="ActivationShape" type="CollisionShape2D" parent="ActivationZone"]
 position = Vector2(0, -1.5)

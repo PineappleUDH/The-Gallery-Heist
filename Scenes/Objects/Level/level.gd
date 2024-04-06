@@ -12,8 +12,6 @@ extends Node2D
 
 @onready var _screen_transition : TextureRect = $UI/ScreenTransition
 
-const death_height_y : float = 0.0
-
 var _player_starting_position : Vector2
 var _checkpoint : Checkpoint = null
 
