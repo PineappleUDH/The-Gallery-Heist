@@ -585,7 +585,6 @@ offset_left = 13.0
 offset_top = -14.0
 offset_right = 21.0
 offset_bottom = -6.0
-_is_absolute_position = true
 
 [node name="DustTrail" parent="." index="8" instance=ExtResource("18_2oby4")]
 visible = false
