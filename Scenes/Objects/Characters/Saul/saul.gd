@@ -9,16 +9,19 @@ signal respawned
 @onready var _slide_cancel_timer : Timer = $Timers/SlideCancelTimer
 @onready var _dash_cooldown : Timer = $Timers/DashCooldown
 @onready var _dash_timer : Timer = $Timers/DashTimer
-@onready var _dash_trail2 : Node2D = $DashTrail2
-#@onready var _dust_trail : GPUParticles2D = $DustTrail
+@onready var _footstep_timer : Timer = $Timers/FootstepTimer
 @onready var _slide_delay : Timer = $Timers/SlideDelay
+
+@onready var _dash_trail : Node2D = $DashTrail
+#@onready var _dust_trail : GPUParticles2D = $DustTrail
 @onready var _detect_right : RayCast2D = $Detection/Right
 @onready var _detect_left : RayCast2D = $Detection/Left
 @onready var _hurtbox : Area2D = $HurtBox
 @onready var _collider : CollisionShape2D = $CollisionShape2D
 @onready var _sfx : Dictionary = {
 	"jump":$Sounds/Jump, "dash":$Sounds/Dash, "hit_wall":$Sounds/HitWall,
-	"attack":$Sounds/Attack, "died":$Sounds/Died
+	"attack":$Sounds/Attack, "died":$Sounds/Died, "footstep":$Sounds/Footstep,
+	"slide":$Sounds/Slide
 }
 @onready var _sprite : AnimatedSprite2D = $Sprite
 @onready var _debug_vars_visualizer : PanelContainer = $DebugVarsVisualizer
@@ -35,11 +38,13 @@ const _jump_force : float = 260.0
 const _run_anim_threshold : float = 150.0
 const _attack_time : float = 0.2
 var _attack_timer : float = _attack_time
-const _slide_speed : float = 60
+const _slide_speed : float = 60.0
+const _walk_footstep_time : float = 0.6
+const _run_footstep_time : float = 0.3
 
 var _can_dash : bool = true
 const _dash_speed: float = 300
-const _dash_shake_duration : float = 0.2
+const _dash_shake_duration : float = 0.3
 
 const _wall_jump_force : float = 260.0
 const _wall_push_force_high : float = 230.0
@@ -57,7 +62,7 @@ func _ready():
 	_damage_cooldown_time = 2.0
 	_health = _max_health
 	
-	_state_machine.add_state("normal", Callable(), Callable(), _state_normal_process, _state_normal_ph_process)
+	_state_machine.add_state("normal", Callable(), _state_normal_switch_from, _state_normal_process, _state_normal_ph_process)
 	_state_machine.add_state("dash", _state_dash_switch_to, _state_dash_switch_from, Callable(), _state_dash_ph_process)
 	_state_machine.add_state("wall_slide", _state_wall_slide_switch_to, _state_wall_slide_switch_from, Callable(), _state_wall_slide_ph_process)
 	_state_machine.add_state("attack", _state_attack_switch_to, _state_attack_switch_from, Callable(), _state_attack_ph_process)
@@ -106,11 +111,18 @@ func take_damage(damage : int, knockback : float, from : Vector2, is_deadly : bo
 func reset_from_checkpoint(checkpoint_position : Vector2):
 	assert(_state_machine.get_current_state() == "dead")
 	
+	global_position = checkpoint_position
+	# wait for hurtbox Area2D to update its collision
+	# otherwise objects that apply continuous damage like spikes
+	# will damage player on respawn because they haven't yet
+	# detected that player has exited them
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	
 	_health = _max_health
 	_facing = Vector2.RIGHT
 	_direction = Vector2.RIGHT
 	_player_score = 0
-	global_position = checkpoint_position
 	_state_machine.change_state("normal")
 	
 	respawned.emit()
@@ -125,6 +137,11 @@ func _damage_taken(damage : int, die : bool):
 	else:
 		World.level.level_camera.shake(LevelCamera.ShakeLevel.low, _damage_shake_duration)
 		_damaged_sfx.play()
+		
+		if _state_machine.get_current_state() == "wall_slide":
+			# stop wall slide on damage
+			_state_machine.change_state("normal")
+			return
 
 # use instead of _sprite.play() to avoid replaying the same animation from the start when it's already playing
 func _play_animation(anim_name : String, ignore_if_playing : bool = false):
@@ -132,10 +149,18 @@ func _play_animation(anim_name : String, ignore_if_playing : bool = false):
 		return
 	_sprite.play(anim_name)
 
+func _get_ray_colliding_with_tilemap() -> RayCast2D:
+	if _detect_left.is_colliding() and _detect_left.get_collider() is TileMap:
+		return _detect_left
+	elif _detect_right.is_colliding() and _detect_right.get_collider() is TileMap:
+		return _detect_right
+	return null
+
 func _state_normal_switch_from(to : String):
-	World.level.level_camera.y_look_offset(0)
+	World.level.level_camera.player_look_offset(0)
 	_coyote_timer.stop()
 	_jump_buffer_timer.stop()
+	_footstep_timer.stop()
 
 func _state_normal_process(delta : float):
 	# animation
@@ -159,7 +184,7 @@ func _state_normal_process(delta : float):
 			_play_animation("Falling", true)
 		else:
 			_play_animation("Jump", true)
-	
+
 func _state_normal_ph_process(delta : float):
 	# Enable gravity.
 	if not is_on_floor():
@@ -174,11 +199,25 @@ func _state_normal_ph_process(delta : float):
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, _decel * delta)
 	
-	if velocity.x == 0 && is_on_floor() && _direction.y != 0:
-		# TODO: some "looking up" and down animations would be nice
+	# footsteps
+	if is_on_floor() and _footstep_timer.is_stopped() and velocity.x:
+		if _direction.x:
+			_sfx["footstep"].play()
+			if abs(velocity.x) > _run_anim_threshold:
+				_footstep_timer.wait_time = _run_footstep_time
+			else:
+				_footstep_timer.wait_time = _walk_footstep_time
+			
+		else:
+			#_footstep_timer.wait_time = ?
+			#_sfx["slide"].play()
+			pass
+		
+		_footstep_timer.start()
+		
+	
+	if velocity.x == 0 && is_on_floor():
 		World.level.level_camera.player_look_offset(int(_direction.y))
-	else:
-		World.level.level_camera.player_look_offset(0)
 	
 	# Allow player to jump
 	var just_jumped : bool = false
@@ -204,21 +243,21 @@ func _state_normal_ph_process(delta : float):
 		_play_animation("Landing")
 		if _jump_buffer_timer.is_stopped() == false:
 			velocity.y = -_jump_force
+			just_jumped = true
+			_sfx["jump"].play()
 	
 	if is_on_wall() == true and is_on_floor() == false\
-		and _slide_delay.is_stopped():
-			var colliding : bool = false
-			if _detect_left.is_colliding() and _detect_left.get_collider() is TileMap:
-				colliding = true
+	and _slide_delay.is_stopped():
+		var ray : RayCast2D = _get_ray_colliding_with_tilemap()
+		if ray:
+			if ray == _detect_left:
 				_facing = Vector2.LEFT
-			elif _detect_right.is_colliding() and _detect_right.get_collider() is TileMap:
-				colliding = true
+			elif ray == _detect_right:
 				_facing = Vector2.RIGHT
 			
-			if colliding:
-				_sfx["hit_wall"].play()
-				_state_machine.change_state("wall_slide")
-				return
+			_sfx["hit_wall"].play()
+			_state_machine.change_state("wall_slide")
+			return
 	
 	if _can_dash == false && _dash_cooldown.is_stopped() && is_on_floor():
 		_can_dash = true
@@ -229,6 +268,7 @@ func _state_normal_ph_process(delta : float):
 	
 	if Input.is_action_just_pressed("attack_basic"):
 		_state_machine.change_state("attack")
+		return
 	
 	if Input.is_action_just_pressed("interact"):
 		_interacting.emit()
@@ -258,8 +298,9 @@ func _state_wall_slide_ph_process(delta: float):
 		return
 	
 	# wall out of reach
+	var ray : RayCast2D = _get_ray_colliding_with_tilemap()
 	if (is_on_floor() or
-	(_detect_left.is_colliding() == false and _detect_right.is_colliding() == false)):
+	((_facing == Vector2.LEFT and ray != _detect_left) or (_facing == Vector2.RIGHT and ray != _detect_right))):
 		_state_machine.change_state("normal")
 		return
 	
@@ -282,17 +323,16 @@ func _state_dash_switch_to(from : String):
 	World.level.level_camera.shake(LevelCamera.ShakeLevel.low, _dash_shake_duration)
 	_can_dash = false
 	velocity = Vector2.ZERO
-	_dash_trail2.set_active(true)
+	_dash_trail.set_active(true, _sprite.flip_h)
 	_sfx["dash"].play()
 	_dash_timer.start()
 	_play_animation("Dashing")
 
 func _state_dash_switch_from(to: String):
 	_dash_cooldown.start()
-	_dash_trail2.set_active(false)
+	_dash_trail.set_active(false)
 
 func _state_dash_ph_process(delta: float):
-	_direction = Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down"))
 	velocity = _dash_speed * _facing.normalized()
 	
 	move_and_slide()

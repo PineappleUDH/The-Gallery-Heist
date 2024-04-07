@@ -29,6 +29,7 @@ func _on_count_timer_timeout():
 	_count_label.text = str(_count_number)
 	
 	if _count_number == 0:
+		# teleport
 		_count_timer.stop()
 		_count_label.hide()
 		World.level.player.global_position = _target_teleporter.output_location.global_position

@@ -74,6 +74,8 @@ format = 2
 
 [node name="Interactables" type="Node2D" parent="."]
 
+[node name="Obstacles" type="Node2D" parent="."]
+
 [node name="Characters" type="Node2D" parent="."]
 
 [node name="Saul" parent="Characters" instance=ExtResource("2_wyn7p")]

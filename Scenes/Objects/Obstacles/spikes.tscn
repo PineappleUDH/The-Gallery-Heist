@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://bol4qsyq1qr5t"]
+
+[ext_resource type="Script" path="res://Scenes/Objects/Obstacles/spikes.gd" id="1_q3p0b"]
+[ext_resource type="PackedScene" uid="uid://caabhgsckx3p8" path="res://Scenes/Objects/Characters/hurtbox.tscn" id="2_k20mt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0kmum"]
+resource_local_to_scene = true
+size = Vector2(16, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wjxxc"]
+resource_local_to_scene = true
+size = Vector2(16, 8)
+
+[node name="Spikes" type="StaticBody2D"]
+position = Vector2(0, -8)
+script = ExtResource("1_q3p0b")
+_count = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_0kmum")
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="HurtBox" parent="." instance=ExtResource("2_k20mt")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(8, 4)
+shape = SubResource("RectangleShape2D_wjxxc")

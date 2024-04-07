@@ -7,17 +7,22 @@ extends Node2D
 	set(value):
 		_launch_force = value
 		queue_redraw()
+@export var _toggle_editor_preview : bool = true :
+	set(value):
+		_toggle_editor_preview = value
+		queue_redraw()
 
 # player uses same gravity value as project setting
 var _player_gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 
 func _draw():
-	if Engine.is_editor_hint() == false: return
+	if Engine.is_editor_hint() == false || _toggle_editor_preview == false:
+		return
 	
 	var simulated_velocity : float = _launch_force
 	var simulated_delta : float = get_process_delta_time()
-	var highest_point : float
+	var highest_point : float = 0.0
 	
 	while simulated_velocity > 0:
 		highest_point += simulated_velocity * simulated_delta

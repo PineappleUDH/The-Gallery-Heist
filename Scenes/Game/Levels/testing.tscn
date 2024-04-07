@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://mlvn8cvywr4c"]
+[gd_scene load_steps=26 format=3 uid="uid://mlvn8cvywr4c"]
 
 [ext_resource type="PackedScene" uid="uid://b84n1i2bwxbmr" path="res://Scenes/Objects/Level/level.tscn" id="1_gs8pa"]
 [ext_resource type="Script" path="res://Scenes/Game/Levels/testing.gd" id="2_qem0p"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bbfrw50tycm64" path="res://Scenes/Objects/Collectables/collectables_stack.tscn" id="7_pc1vt"]
 [ext_resource type="PackedScene" uid="uid://c31bicd5mqe8o" path="res://Scenes/Objects/Collectables/collectable_coin.tscn" id="8_loe2g"]
 [ext_resource type="PackedScene" uid="uid://hu5mofx88bpj" path="res://Scenes/Objects/Collectables/collectable_dash_refiller.tscn" id="9_pynbm"]
+[ext_resource type="PackedScene" uid="uid://bol4qsyq1qr5t" path="res://Scenes/Objects/Obstacles/spikes.tscn" id="10_jd6g8"]
 [ext_resource type="PackedScene" uid="uid://cor2s0svaqrii" path="res://Scenes/Objects/launch_pad.tscn" id="13_b67fq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_plk38"]
@@ -842,6 +843,11 @@ _target_teleporter = NodePath("../Teleporter6")
 position = Vector2(1626, -128)
 _target_teleporter = NodePath("../Teleporter5")
 
+[node name="Spikes" parent="Obstacles" index="0" instance=ExtResource("10_jd6g8")]
+position = Vector2(472, -339)
+rotation = -1.5708
+_count = 4
+
 [node name="Saul" parent="Characters" index="0"]
 position = Vector2(176, -144)
 
@@ -890,7 +896,7 @@ position = Vector2(268, -1856)
 [node name="CollectableDashRefiller2" parent="Collectables/DashRefils" index="2" instance=ExtResource("9_pynbm")]
 position = Vector2(268, -2112)
 
-[node name="LevelCamera" parent="." index="9" node_paths=PackedStringArray("_starting_trigger")]
+[node name="LevelCamera" parent="." index="10" node_paths=PackedStringArray("_starting_trigger")]
 position = Vector2(176, -268)
 _starting_trigger = NodePath("../Triggers/Camera_Triggers#TriggerCamera")
 

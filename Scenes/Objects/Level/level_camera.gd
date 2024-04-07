@@ -27,7 +27,8 @@ const _shake_data : Dictionary = {
 var _curr_shake_level : ShakeLevel
 
 var _player_y_look_direction : int = 0
-const _player_y_look_offset : float = 80.0
+const _player_y_look_offset_small : float = 27.0
+const _player_y_look_offset_big : float = 80.0
 
 
 func _ready():
@@ -57,8 +58,13 @@ func _process(delta : float):
 		target_position.x = player.global_position.x + sign(player.velocity.x) * (velocity_offset.x)
 		target_position.y = player.global_position.y + sign(player.velocity.y) * (velocity_offset.y)
 	
+	# player offset
 	if _player_y_look_direction:
-		target_position.y += _player_y_look_offset * _player_y_look_direction
+		var offset_ : float
+		if _curr_state == CameraState.idle: offset_ = _player_y_look_offset_small
+		elif _curr_state == CameraState.follow: offset_ = _player_y_look_offset_big
+		
+		target_position.y += offset_ * zoom.y * _player_y_look_direction
 	
 	# bounds, clamp camera edges rather than camera center
 	var camera_half_size : Vector2 = (get_viewport_rect().size * zoom) / 2.0

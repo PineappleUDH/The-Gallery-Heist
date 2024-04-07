@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://yxxgx3h82w35"]
+
+[ext_resource type="Script" path="res://Scenes/Objects/Characters/Saul/dash_trail_old.gd" id="1_pw2sk"]
+
+[node name="DashTrail" type="Line2D"]
+texture_mode = 2
+begin_cap_mode = 1
+end_cap_mode = 1
+script = ExtResource("1_pw2sk")
+_max_length = 20
+
+[node name="PointTimer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[connection signal="timeout" from="PointTimer" to="." method="_on_point_timer_timeout"]
