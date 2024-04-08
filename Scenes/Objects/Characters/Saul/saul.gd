@@ -32,6 +32,7 @@ signal respawned
 # Set Variables for overall control feel
 var _facing : Vector2 = Vector2.RIGHT
 const _max_move_speed : float = 250.0
+const _max_fall_speed : float = 800.0
 const _accel : float = 450.0
 const _decel : float = 600.0
 const _jump_force : float = 260.0
@@ -51,7 +52,7 @@ const _wall_push_force_high : float = 230.0
 const _wall_push_force_low : float = 100.0
 
 const _damage_shake_duration : float = 0.3
-var _player_score : float = 0 # TODO: move to lavel class
+var _player_score : float = 0 # TODO: move to level class
 
 var _state_machine : StateMachine = StateMachine.new()
 
@@ -188,7 +189,7 @@ func _state_normal_process(delta : float):
 func _state_normal_ph_process(delta : float):
 	# Enable gravity.
 	if not is_on_floor():
-		velocity.y += _gravity * delta
+		velocity.y = min(velocity.y + _gravity * delta, _max_fall_speed)
 	
 	# Movement Control
 	_direction = Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down"))
@@ -216,8 +217,10 @@ func _state_normal_ph_process(delta : float):
 		_footstep_timer.start()
 		
 	
-	if velocity.x == 0 && is_on_floor():
+	if velocity.x == 0 && is_on_floor() && _direction.y:
 		World.level.level_camera.player_look_offset(int(_direction.y))
+	else:
+		World.level.level_camera.player_look_offset(0)
 	
 	# Allow player to jump
 	var just_jumped : bool = false
@@ -277,6 +280,12 @@ func _state_wall_slide_switch_to(from : String):
 	velocity = Vector2(0,0)
 	_cling_time.start()
 	_play_animation("Cling")
+	
+	var opposite_dir_input : String = "left" if _facing.x == 1 else "right"
+	if Input.is_action_pressed(opposite_dir_input):
+		# player could be holding the other direction key before wall slide starts
+		# bypassing "is_action_just_pressed" in the physics process func
+		_slide_cancel_timer.start()
 
 func _state_wall_slide_switch_from(to : String):
 	_facing *= -1
@@ -311,7 +320,7 @@ func _state_wall_slide_ph_process(delta: float):
 		_slide_cancel_timer.stop()
 	
 	# cancel sliding
-	elif (Input.is_action_just_pressed("down") or
+	if (Input.is_action_just_pressed("down") or
 	(Input.is_action_pressed(opposite_dir_input) and _slide_cancel_timer.is_stopped())):
 		velocity.x = _wall_push_force_low * -_facing.x
 		_state_machine.change_state("normal")
@@ -355,7 +364,7 @@ func _state_attack_switch_from(from : String):
 func _state_attack_ph_process(delta: float):
 	# Enable gravity.
 	if not is_on_floor():
-		velocity.y += _gravity * delta
+		velocity.y = min(velocity.y + _gravity * delta, _max_fall_speed)
 	
 	move_and_slide()
 	

@@ -1265,7 +1265,7 @@ rotation = 1.5708
 _count = 7
 
 [node name="Saul" parent="Characters" index="0"]
-position = Vector2(177, -153)
+position = Vector2(175, -144)
 
 [node name="EnemyPatrolling" parent="Characters" index="1" instance=ExtResource("16_c4ebt")]
 position = Vector2(3650, 6218)
@@ -1577,7 +1577,7 @@ position = Vector2(1, -37.5)
 shape = SubResource("RectangleShape2D_xaoqp")
 
 [node name="Camera_TriggerCamera9" parent="Triggers" index="15" instance=ExtResource("5_7n87s")]
-position = Vector2(3740, 7583)
+position = Vector2(3761, 7583)
 _change_state = true
 _change_zoom = true
 _change_lock = true
