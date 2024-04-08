@@ -6,16 +6,16 @@ signal respawned
 @onready var _cling_time : Timer = $Timers/ClingTime
 @onready var _coyote_timer : Timer = $Timers/CoyoteTimer
 @onready var _jump_buffer_timer : Timer = $Timers/JumpBufferTimer
-@onready var _slide_cancel_timer : Timer = $Timers/SlideCancelTimer
 @onready var _dash_cooldown : Timer = $Timers/DashCooldown
 @onready var _dash_timer : Timer = $Timers/DashTimer
 @onready var _footstep_timer : Timer = $Timers/FootstepTimer
-@onready var _slide_delay : Timer = $Timers/SlideDelay
+@onready var _cancel_slide_delay : Timer = $Timers/CancelSlideDelay
+@onready var _wall_grab_cooldown : Timer = $Timers/WallGrabCooldown
 
 @onready var _dash_trail : Node2D = $DashTrail
 #@onready var _dust_trail : GPUParticles2D = $DustTrail
-@onready var _detect_right : RayCast2D = $Detection/Right
-@onready var _detect_left : RayCast2D = $Detection/Left
+@onready var _detect_right : RayCast2D = $WallDetection/Right
+@onready var _detect_left : RayCast2D = $WallDetection/Left
 @onready var _hurtbox : Area2D = $HurtBox
 @onready var _collider : CollisionShape2D = $CollisionShape2D
 @onready var _sfx : Dictionary = {
@@ -48,8 +48,7 @@ const _dash_speed: float = 300
 const _dash_shake_duration : float = 0.3
 
 const _wall_jump_force : float = 260.0
-const _wall_push_force_high : float = 230.0
-const _wall_push_force_low : float = 100.0
+const _wall_push_force : float = 230.0
 
 const _damage_shake_duration : float = 0.3
 var _player_score : float = 0 # TODO: move to level class
@@ -249,8 +248,8 @@ func _state_normal_ph_process(delta : float):
 			just_jumped = true
 			_sfx["jump"].play()
 	
-	if is_on_wall() == true and is_on_floor() == false\
-	and _slide_delay.is_stopped():
+	if (is_on_floor() == false and Input.is_action_pressed("wall_grab") and
+	_wall_grab_cooldown.is_stopped()):
 		var ray : RayCast2D = _get_ray_colliding_with_tilemap()
 		if ray:
 			if ray == _detect_left:
@@ -280,27 +279,29 @@ func _state_wall_slide_switch_to(from : String):
 	velocity = Vector2(0,0)
 	_cling_time.start()
 	_play_animation("Cling")
-	
-	var opposite_dir_input : String = "left" if _facing.x == 1 else "right"
-	if Input.is_action_pressed(opposite_dir_input):
-		# player could be holding the other direction key before wall slide starts
-		# bypassing "is_action_just_pressed" in the physics process func
-		_slide_cancel_timer.start()
 
 func _state_wall_slide_switch_from(to : String):
 	_facing *= -1
-	_slide_cancel_timer.stop()
-	_slide_delay.start()
+	_cancel_slide_delay.stop()
+	_wall_grab_cooldown.start()
 
 func _state_wall_slide_ph_process(delta: float):
 	if _cling_time.is_stopped():
 		_play_animation("Sliding")
 		velocity.y = _slide_speed
 	
+	# cancel sliding
+	if Input.is_action_just_released("wall_grab"):
+		_cancel_slide_delay.start()
+	
+	elif Input.is_action_pressed("wall_grab") == false and _cancel_slide_delay.is_stopped():
+		_state_machine.change_state("normal")
+		return
+	
 	# jump off
 	if Input.is_action_just_pressed("jump"):
 		_sfx["jump"].play()
-		velocity.x = _wall_push_force_high * -_facing.x
+		velocity.x = _wall_push_force * -_facing.x
 		velocity.y = -_wall_jump_force
 		_play_animation("Wall Jump", true)
 		_state_machine.change_state("normal")
@@ -310,19 +311,6 @@ func _state_wall_slide_ph_process(delta: float):
 	var ray : RayCast2D = _get_ray_colliding_with_tilemap()
 	if (is_on_floor() or
 	((_facing == Vector2.LEFT and ray != _detect_left) or (_facing == Vector2.RIGHT and ray != _detect_right))):
-		_state_machine.change_state("normal")
-		return
-	
-	var opposite_dir_input : String = "left" if _facing.x == 1 else "right"
-	if Input.is_action_just_pressed(opposite_dir_input):
-		_slide_cancel_timer.start()
-	elif Input.is_action_just_released(opposite_dir_input):
-		_slide_cancel_timer.stop()
-	
-	# cancel sliding
-	if (Input.is_action_just_pressed("down") or
-	(Input.is_action_pressed(opposite_dir_input) and _slide_cancel_timer.is_stopped())):
-		velocity.x = _wall_push_force_low * -_facing.x
 		_state_machine.change_state("normal")
 		return
 	

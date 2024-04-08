@@ -562,13 +562,15 @@ texture = ExtResource("3_hc6mq")
 
 [node name="DashTrail" parent="." index="2" instance=ExtResource("4_6x0l7")]
 
-[node name="Detection" type="Node2D" parent="." index="3"]
+[node name="WallDetection" type="Node2D" parent="." index="3"]
 
-[node name="Right" type="RayCast2D" parent="Detection" index="0"]
-target_position = Vector2(15, 0)
+[node name="Right" type="RayCast2D" parent="WallDetection" index="0"]
+position = Vector2(6, 0)
+target_position = Vector2(4, 0)
 
-[node name="Left" type="RayCast2D" parent="Detection" index="1"]
-target_position = Vector2(-15, 0)
+[node name="Left" type="RayCast2D" parent="WallDetection" index="1"]
+position = Vector2(-6, 0)
+target_position = Vector2(-4, 0)
 
 [node name="AudioListener2D" type="AudioListener2D" parent="." index="4"]
 current = true
@@ -606,19 +608,19 @@ one_shot = true
 wait_time = 0.3
 one_shot = true
 
-[node name="SlideDelay" type="Timer" parent="Timers" index="4"]
-wait_time = 0.2
-one_shot = true
-
-[node name="SlideCancelTimer" type="Timer" parent="Timers" index="5"]
-wait_time = 0.18
-one_shot = true
-
-[node name="ClingTime" type="Timer" parent="Timers" index="6"]
+[node name="ClingTime" type="Timer" parent="Timers" index="4"]
 wait_time = 0.5
 one_shot = true
 
-[node name="FootstepTimer" type="Timer" parent="Timers" index="8"]
+[node name="FootstepTimer" type="Timer" parent="Timers" index="6"]
+one_shot = true
+
+[node name="CancelSlideDelay" type="Timer" parent="Timers" index="7"]
+wait_time = 0.1
+one_shot = true
+
+[node name="WallGrabCooldown" type="Timer" parent="Timers" index="8"]
+wait_time = 0.06
 one_shot = true
 
 [node name="Jump" type="AudioStreamPlayer" parent="Sounds" index="1"]
