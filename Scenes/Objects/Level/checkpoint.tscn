@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://boy10rqbomu3b" path="res://Resources/Textures/checkpointv2-Sheet(Addin-Val Collab).png" id="2_mwktt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3hut0"]
-size = Vector2(32, 28)
+size = Vector2(32, 21)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fdqar"]
 atlas = ExtResource("2_mwktt")
@@ -83,7 +83,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_31ilg"]
-size = Vector2(32, 18)
+size = Vector2(32, 16)
 
 [sub_resource type="Curve" id="Curve_mcdbu"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.74269, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -107,7 +107,7 @@ monitorable = false
 script = ExtResource("1_0uyco")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -32)
+position = Vector2(0, -27.5)
 shape = SubResource("RectangleShape2D_3hut0")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]

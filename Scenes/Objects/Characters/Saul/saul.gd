@@ -368,6 +368,7 @@ func _state_dead_switch_to(from : String):
 	velocity = Vector2.ZERO
 	_collider.disabled = true
 	_is_invincible = true
+	_sprite.flip_h = false
 	
 	_play_animation("Die")
 	await _sprite.animation_finished
