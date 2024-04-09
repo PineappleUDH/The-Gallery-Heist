@@ -24,6 +24,7 @@ func _process(delta : float):
 
 # override
 func take_damage(damage : int, knockback : float, from : Vector2, is_deadly : bool = false):
+	# TODO: use a separate function for deadly damage, no point doing take_damage(0, 0, 0, true)
 	if _is_invincible: return
 	
 	var cooldown : bool = _damage_cooldown_timer.is_stopped() == false

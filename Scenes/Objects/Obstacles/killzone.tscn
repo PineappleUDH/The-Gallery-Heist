@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://pmgu85vr3lrk"]
+
+[ext_resource type="Script" path="res://Scenes/Objects/Obstacles/killzone.gd" id="1_3b6lk"]
+
+[node name="Killzone" type="Area2D"]
+monitorable = false
+script = ExtResource("1_3b6lk")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

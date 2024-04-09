@@ -9,8 +9,8 @@ func _on_resume_pressed():
 	_set_pause(false)
 
 func _on_quit_pressed():
-	# we can go to main menu or something later..
-	get_tree().quit()
+	# main menu
+	SceneManager.change_scene("res://Scenes/Game/main_menu.tscn")
 
 func _set_pause(pause : bool):
 	if pause:

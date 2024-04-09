@@ -539,7 +539,7 @@ stream_0/weight = 1.0
 stream_1/stream = ExtResource("31_c1cyj")
 stream_1/weight = 1.0
 
-[node name="Saul" groups=["Player"] instance=ExtResource("1_regtg")]
+[node name="Saul" instance=ExtResource("1_regtg")]
 platform_on_leave = 2
 script = ExtResource("2_rhth6")
 

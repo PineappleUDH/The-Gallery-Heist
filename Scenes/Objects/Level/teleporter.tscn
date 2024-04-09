@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1q41lh23aowi"]
+[gd_scene load_steps=7 format=3 uid="uid://d1q41lh23aowi"]
 
 [ext_resource type="Script" path="res://Scenes/Objects/Level/teleporter.gd" id="1_5njoc"]
 [ext_resource type="Texture2D" uid="uid://cpxed2j3x1oe" path="res://Resources/Textures/teleporter-Sheet.png" id="1_dvx3h"]
+[ext_resource type="PackedScene" uid="uid://yhv4t8nblpu0" path="res://Scenes/Objects/interactable.tscn" id="3_8jw11"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_boflo"]
 size = Vector2(36, 11)
@@ -9,7 +10,10 @@ size = Vector2(36, 11)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7uufm"]
 size = Vector2(36, 1)
 
-[node name="Teleporter" type="Area2D" groups=["Interactable"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fehu0"]
+size = Vector2(28, 20)
+
+[node name="Teleporter" type="Area2D"]
 script = ExtResource("1_5njoc")
 
 [node name="OutputLocation" type="Node2D" parent="."]
@@ -30,15 +34,15 @@ position = Vector2(0, -24)
 texture = ExtResource("1_dvx3h")
 hframes = 2
 
-[node name="Count" type="Label" parent="."]
-offset_left = -6.0
-offset_top = -49.0
-offset_right = 7.0
-offset_bottom = -20.0
-theme_override_font_sizes/font_size = 30
+[node name="Interactable" parent="." instance=ExtResource("3_8jw11")]
+position = Vector2(0, -10)
 
-[node name="CountTimer" type="Timer" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+shape = SubResource("RectangleShape2D_fehu0")
+
+[node name="Marker2D" type="Marker2D" parent="Interactable"]
+position = Vector2(0, -21)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
-[connection signal="timeout" from="CountTimer" to="." method="_on_count_timer_timeout"]
+[connection signal="player_interacted" from="Interactable" to="." method="_on_interactable_player_interacted"]

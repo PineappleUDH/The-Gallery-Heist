@@ -2,6 +2,7 @@ class_name Player
 extends "res://Scenes/Objects/Characters/character.gd"
 
 signal respawned
+signal interacted
 
 @onready var _cling_time : Timer = $Timers/ClingTime
 @onready var _coyote_timer : Timer = $Timers/CoyoteTimer
@@ -55,8 +56,6 @@ var _player_score : float = 0 # TODO: move to level class
 
 var _state_machine : StateMachine = StateMachine.new()
 
-signal _interacting
-
 func _ready():
 	_max_health = 4
 	_damage_cooldown_time = 2.0
@@ -82,6 +81,11 @@ func _process(delta : float):
 	if _facing.x < 0:
 		_sprite.flip_h = true
 	
+	if (Input.is_action_just_pressed("interact") and
+	_state_machine._curr_state != "dead"):
+		interacted.emit()
+	
+	# debug
 	_debug_vars_visualizer.edit_var("Score", _player_score)
 	_debug_vars_visualizer.edit_var("State", _state_machine.get_current_state())
 	_debug_vars_visualizer.edit_var("Can_Dash", _can_dash)
@@ -221,7 +225,7 @@ func _state_normal_ph_process(delta : float):
 	else:
 		World.level.level_camera.player_look_offset(0)
 	
-	# Allow player to jump
+	# jump
 	var just_jumped : bool = false
 	if Input.is_action_just_pressed("jump"):
 		if is_on_floor() or not _coyote_timer.is_stopped():
@@ -231,7 +235,6 @@ func _state_normal_ph_process(delta : float):
 		elif is_on_floor() == false:
 			_jump_buffer_timer.start()
 	
-	# Engage physics engine
 	var was_on_floor = is_on_floor()
 	move_and_slide()
 	
@@ -271,9 +274,6 @@ func _state_normal_ph_process(delta : float):
 	if Input.is_action_just_pressed("attack_basic"):
 		_state_machine.change_state("attack")
 		return
-	
-	if Input.is_action_just_pressed("interact"):
-		_interacting.emit()
 
 func _state_wall_slide_switch_to(from : String):
 	velocity = Vector2(0,0)
@@ -281,7 +281,6 @@ func _state_wall_slide_switch_to(from : String):
 	_play_animation("Cling")
 
 func _state_wall_slide_switch_from(to : String):
-	_facing *= -1
 	_cancel_slide_delay.stop()
 	_wall_grab_cooldown.start()
 
@@ -293,15 +292,20 @@ func _state_wall_slide_ph_process(delta: float):
 	# cancel sliding
 	if Input.is_action_just_released("wall_grab"):
 		_cancel_slide_delay.start()
-	
 	elif Input.is_action_pressed("wall_grab") == false and _cancel_slide_delay.is_stopped():
 		_state_machine.change_state("normal")
+		return
+	
+	if Input.is_action_just_pressed("dash") && _can_dash:
+		_facing = Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down"))
+		_state_machine.change_state("dash")
 		return
 	
 	# jump off
 	if Input.is_action_just_pressed("jump"):
 		_sfx["jump"].play()
-		velocity.x = _wall_push_force * -_facing.x
+		_facing *= -1
+		velocity.x = _wall_push_force * _facing.x
 		velocity.y = -_wall_jump_force
 		_play_animation("Wall Jump", true)
 		_state_machine.change_state("normal")
