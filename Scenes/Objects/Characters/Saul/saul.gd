@@ -287,7 +287,11 @@ func _state_wall_slide_switch_from(to : String):
 func _state_wall_slide_ph_process(delta: float):
 	if _cling_time.is_stopped():
 		_play_animation("Sliding")
-		velocity.y = _slide_speed
+		if Input.is_action_pressed("down"):
+			velocity.y = _slide_speed * 2
+		else:
+			velocity.y = _slide_speed
+		
 	
 	# cancel sliding
 	if Input.is_action_just_released("wall_grab"):
