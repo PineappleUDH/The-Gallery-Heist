@@ -14,4 +14,4 @@ func _give_score(amount : int):
 
 func _process(delta : float):
 	high_score = World.high_score
-	label.text a= str("High Score: ", high_score, "0")
+	label.text = str("High Score: ", high_score, "0")
