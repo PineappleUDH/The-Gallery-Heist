@@ -21,3 +21,4 @@ func _on_body_entered(body : Node2D):
 		World.level.set_checkpoint(self)
 		_particles.restart()
 		_sprite.play("activating")
+		_sprite.play("active")

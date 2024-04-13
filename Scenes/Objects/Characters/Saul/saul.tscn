@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=3 uid="uid://crjtftvmkahqx"]
+[gd_scene load_steps=97 format=3 uid="uid://crjtftvmkahqx"]
 
 [ext_resource type="PackedScene" uid="uid://bb8fvvxo2nhq1" path="res://Scenes/Objects/Characters/character.tscn" id="1_regtg"]
 [ext_resource type="Script" path="res://Scenes/Objects/Characters/Saul/saul.gd" id="2_rhth6"]
@@ -36,6 +36,9 @@
 size = Vector2(13, 30)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jtpw0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wf82i"]
+size = Vector2(17, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_euce1"]
 atlas = ExtResource("6_o7kle")
@@ -562,15 +565,21 @@ texture = ExtResource("3_hc6mq")
 
 [node name="DashTrail" parent="." index="2" instance=ExtResource("4_6x0l7")]
 
-[node name="WallDetection" type="Node2D" parent="." index="3"]
+[node name="Detection" type="Node2D" parent="." index="3"]
 
-[node name="Right" type="RayCast2D" parent="WallDetection" index="0"]
+[node name="Right" type="RayCast2D" parent="Detection" index="0"]
 position = Vector2(6, 0)
 target_position = Vector2(4, 0)
 
-[node name="Left" type="RayCast2D" parent="WallDetection" index="1"]
+[node name="Left" type="RayCast2D" parent="Detection" index="1"]
 position = Vector2(-6, 0)
 target_position = Vector2(-4, 0)
+
+[node name="TerrainDetector" type="Area2D" parent="Detection" index="2"]
+
+[node name="Shape" type="CollisionShape2D" parent="Detection/TerrainDetector" index="0"]
+position = Vector2(0.5, 7)
+shape = SubResource("RectangleShape2D_wf82i")
 
 [node name="AudioListener2D" type="AudioListener2D" parent="." index="4"]
 current = true
@@ -651,3 +660,5 @@ volume_db = -5.0
 
 [node name="Slide" type="AudioStreamPlayer" parent="Sounds" index="7"]
 volume_db = -8.0
+
+[connection signal="body_entered" from="Detection/TerrainDetector" to="." method="_on_terrain_detector_body_entered"]

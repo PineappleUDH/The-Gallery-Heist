@@ -15,8 +15,9 @@ signal interacted
 
 @onready var _dash_trail : Node2D = $DashTrail
 #@onready var _dust_trail : GPUParticles2D = $DustTrail
-@onready var _detect_right : RayCast2D = $WallDetection/Right
-@onready var _detect_left : RayCast2D = $WallDetection/Left
+@onready var _detect_right : RayCast2D = $Detection/Right
+@onready var _detect_left : RayCast2D = $Detection/Left
+@onready var _terrain_detector = $Detection/TerrainDetector
 @onready var _hurtbox : Area2D = $HurtBox
 @onready var _collider : CollisionShape2D = $CollisionShape2D
 @onready var _sfx : Dictionary = {
@@ -65,6 +66,7 @@ func _ready():
 	_state_machine.add_state("dash", _state_dash_switch_to, _state_dash_switch_from, Callable(), _state_dash_ph_process)
 	_state_machine.add_state("wall_slide", _state_wall_slide_switch_to, _state_wall_slide_switch_from, Callable(), _state_wall_slide_ph_process)
 	_state_machine.add_state("attack", _state_attack_switch_to, _state_attack_switch_from, Callable(), _state_attack_ph_process)
+	_state_machine.add_state("swim", _state_swim_switch_to, _state_swim_switch_from,Callable(),_state_swim_ph_process)
 	_state_machine.add_state("dead", _state_dead_switch_to, _state_dead_switch_from, Callable(), Callable())
 	_state_machine.change_state("normal")
 	
@@ -254,7 +256,7 @@ func _state_normal_ph_process(delta : float):
 	if (is_on_floor() == false and Input.is_action_pressed("wall_grab") and
 	_wall_grab_cooldown.is_stopped()):
 		var ray : RayCast2D = _get_ray_colliding_with_tilemap()
-		if ray:
+		if ray :
 			if ray == _detect_left:
 				_facing = Vector2.LEFT
 			elif ray == _detect_right:
@@ -369,6 +371,15 @@ func _state_attack_ph_process(delta: float):
 		_attack_timer = _attack_time
 		_state_machine.change_state("normal")
 
+func _state_swim_switch_to(from : String):
+	pass
+
+func _state_swim_switch_from(to : String):
+	pass
+
+func _state_swim_ph_process(delta):
+	pass
+
 func _state_dead_switch_to(from : String):
 	velocity = Vector2.ZERO
 	_collider.disabled = true
@@ -382,3 +393,6 @@ func _state_dead_switch_to(from : String):
 func _state_dead_switch_from(to : String):
 	_collider.disabled = false
 	_is_invincible = false
+
+func _on_terrain_detector_body_entered(body):
+	pass

@@ -49,16 +49,16 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 0.2,
 "texture": SubResource("AtlasTexture_pwgb0")
 }, {
-"duration": 0.5,
+"duration": 0.4,
 "texture": SubResource("AtlasTexture_hdxg4")
 }, {
 "duration": 0.5,
 "texture": SubResource("AtlasTexture_6tsar")
 }, {
-"duration": 0.5,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_685dj")
 }, {
 "duration": 1.0,
@@ -92,6 +92,8 @@ position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_atgpx")
 animation = &"pressed"
 autoplay = "default"
+frame = 6
+frame_progress = 1.0
 
 [node name="ActivationZone" type="Area2D" parent="."]
 

@@ -36,6 +36,7 @@ import/blender/enabled=false
 
 [gui]
 
+theme/custom="res://Resources/ui_main_theme.tres"
 theme/custom_font="res://Resources/Fonts/hf-free-complete/compass-pro-v1.1/CompassPro.ttf"
 
 [input]
