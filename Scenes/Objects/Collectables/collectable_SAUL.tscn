@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://tgxwefto77lr"]
+
+[ext_resource type="Script" path="res://Scenes/Objects/Collectables/collectable.gd" id="1_w06n7"]
+[ext_resource type="Texture2D" uid="uid://ccba6adr8r2fl" path="res://Resources/Textures/VOID HELP ORGANIZE/SAUL_letters_idle(Addin Sachen).png" id="2_wym7c"]
+
+[node name="Collectable" type="Area2D"]
+monitorable = false
+script = ExtResource("1_w06n7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_wym7c")
+hframes = 6
+vframes = 4
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
