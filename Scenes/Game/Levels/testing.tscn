@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://mlvn8cvywr4c"]
+[gd_scene load_steps=90 format=3 uid="uid://mlvn8cvywr4c"]
 
 [ext_resource type="PackedScene" uid="uid://b84n1i2bwxbmr" path="res://Scenes/Objects/Level/level.tscn" id="1_gs8pa"]
 [ext_resource type="Script" path="res://Scenes/Game/Levels/testing.gd" id="2_qem0p"]
@@ -20,6 +20,8 @@
 [ext_resource type="PackedScene" uid="uid://ce6rpr8fcsibk" path="res://Scenes/Objects/moving_platform.tscn" id="18_5472d"]
 [ext_resource type="PackedScene" uid="uid://c3ynadcc6a7cf" path="res://Scenes/Objects/moving_launchpad.tscn" id="19_r0t7p"]
 [ext_resource type="PackedScene" uid="uid://c2csilanfu3wv" path="res://Scenes/Objects/moving_spikes.tscn" id="20_jj33r"]
+[ext_resource type="PackedScene" uid="uid://tgxwefto77lr" path="res://Scenes/Objects/Collectables/collectable_SAUL.tscn" id="21_i7p6d"]
+[ext_resource type="PackedScene" uid="uid://dkn8trjyqlfdg" path="res://Scenes/Objects/Collectables/collectable_egg.tscn" id="22_tk00u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5s58g"]
 texture = ExtResource("6_ilpeg")
@@ -2471,3 +2473,22 @@ curve = SubResource("Curve2D_77gbo")
 _loop = false
 _speed = 1.0
 _speed_scale = 2.0
+
+[node name="Collectable" parent="." index="21" instance=ExtResource("21_i7p6d")]
+position = Vector2(87, -163)
+_letter = "S"
+
+[node name="Collectable2" parent="." index="22" instance=ExtResource("21_i7p6d")]
+position = Vector2(106, -163)
+_letter = "A"
+
+[node name="Collectable3" parent="." index="23" instance=ExtResource("21_i7p6d")]
+position = Vector2(125, -163)
+_letter = "U"
+
+[node name="Collectable4" parent="." index="24" instance=ExtResource("21_i7p6d")]
+position = Vector2(144, -163)
+_letter = "L"
+
+[node name="Collectable5" parent="." index="25" instance=ExtResource("22_tk00u")]
+position = Vector2(242, -137)
