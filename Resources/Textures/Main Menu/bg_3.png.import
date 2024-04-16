@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csoofw5a3pgyb"
-path="res://.godot/imported/HeartIdle(Addin Sachen).png-39bc748dc49079ca795422dded7d08d6.ctex"
+uid="uid://b3xb2ah6b2a63"
+path="res://.godot/imported/bg_3.png-f38ab1c321702d322feee5c78e1a1e89.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Textures/VOID HELP ORGANIZE/HeartIdle(Addin Sachen).png"
-dest_files=["res://.godot/imported/HeartIdle(Addin Sachen).png-39bc748dc49079ca795422dded7d08d6.ctex"]
+source_file="res://Resources/Textures/Main Menu/bg_3.png"
+dest_files=["res://.godot/imported/bg_3.png-f38ab1c321702d322feee5c78e1a1e89.ctex"]
 
 [params]
 

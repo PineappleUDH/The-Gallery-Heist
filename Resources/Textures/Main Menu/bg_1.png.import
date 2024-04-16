@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://kre67oyufcfk"
-path="res://.godot/imported/HeartDamage.png-df05037b18e505ff38d258ef71be6676.ctex"
+uid="uid://c67qpsqai1qwi"
+path="res://.godot/imported/bg_1.png-093ab41feb70d117923ab8eab632e71d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Textures/VOID HELP ORGANIZE/HeartDamage.png"
-dest_files=["res://.godot/imported/HeartDamage.png-df05037b18e505ff38d258ef71be6676.ctex"]
+source_file="res://Resources/Textures/Main Menu/bg_1.png"
+dest_files=["res://.godot/imported/bg_1.png-093ab41feb70d117923ab8eab632e71d.ctex"]
 
 [params]
 

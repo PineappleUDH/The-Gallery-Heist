@@ -13,6 +13,8 @@ signal interacted
 @onready var _cancel_slide_delay : Timer = $Timers/CancelSlideDelay
 @onready var _wall_grab_cooldown : Timer = $Timers/WallGrabCooldown
 
+@onready var _sprite : AnimatedSprite2D = $Sprite
+@onready var _interface : CanvasLayer = $UI
 @onready var _dash_trail : Node2D = $DashTrail
 #@onready var _dust_trail : GPUParticles2D = $DustTrail
 @onready var _detect_right : RayCast2D = $Detection/Right
@@ -25,7 +27,6 @@ signal interacted
 	"attack":$Sounds/Attack, "died":$Sounds/Died, "footstep":$Sounds/Footstep,
 	"slide":$Sounds/Slide
 }
-@onready var _sprite : AnimatedSprite2D = $Sprite
 @onready var _debug_vars_visualizer : PanelContainer = $DebugVarsVisualizer
 
 # TEMP
@@ -42,6 +43,7 @@ const _run_anim_threshold : float = 150.0
 const _attack_time : float = 0.2
 var _attack_timer : float = _attack_time
 const _slide_speed : float = 60.0
+const _slide_speed_fast : float = 120.0
 const _walk_footstep_time : float = 0.6
 const _run_footstep_time : float = 0.3
 
@@ -58,7 +60,7 @@ var _player_score : float = 0 # TODO: move to level class
 var _state_machine : StateMachine = StateMachine.new()
 
 func _ready():
-	_max_health = 4
+	_max_health = 4 # NOTE: if this value is changed make sure to manualy change hearts count in UI
 	_damage_cooldown_time = 2.0
 	_health = _max_health
 	
@@ -100,6 +102,7 @@ func add_score(amount : float):
 	_player_score += amount
 	if amount > 1 :
 		if _health < _max_health:
+			_interface.set_health(_health, _health + 1)
 			_health += 1
 	World.current_score = _player_score
 
@@ -112,7 +115,18 @@ func refill_dash():
 		_dash_cooldown.stop()
 
 func take_damage(damage : int, knockback : float, from : Vector2, is_deadly : bool = false):
+	var old_health : int = _health
 	super.take_damage(damage, knockback, from, is_deadly)
+	
+	_interface.set_health(old_health, _health)
+
+func water_area(entered : bool):
+	if _state_machine.get_current_state() == "dead": return
+	
+	if entered:
+		_state_machine.change_state("swim")
+	else:
+		_state_machine.change_state("normal")
 
 func reset_from_checkpoint(checkpoint_position : Vector2):
 	assert(_state_machine.get_current_state() == "dead")
@@ -125,6 +139,7 @@ func reset_from_checkpoint(checkpoint_position : Vector2):
 	await get_tree().physics_frame
 	await get_tree().physics_frame
 	
+	_interface.set_health(_health, _max_health)
 	_health = _max_health
 	_facing = Vector2.RIGHT
 	_direction = Vector2.RIGHT
@@ -290,7 +305,7 @@ func _state_wall_slide_ph_process(delta: float):
 	if _cling_time.is_stopped():
 		_play_animation("Sliding")
 		if Input.is_action_pressed("down"):
-			velocity.y = _slide_speed * 2
+			velocity.y = _slide_speed_fast
 		else:
 			velocity.y = _slide_speed
 		
@@ -393,6 +408,3 @@ func _state_dead_switch_to(from : String):
 func _state_dead_switch_from(to : String):
 	_collider.disabled = false
 	_is_invincible = false
-
-func _on_terrain_detector_body_entered(body):
-	pass

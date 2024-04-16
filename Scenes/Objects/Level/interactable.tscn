@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://yhv4t8nblpu0"]
 
-[ext_resource type="Script" path="res://Scenes/Objects/interactable.gd" id="1_3rjgo"]
+[ext_resource type="Script" path="res://Scenes/Objects/Level/interactable.gd" id="1_3rjgo"]
 [ext_resource type="Texture2D" uid="uid://chlov4m3wa82m" path="res://Resources/Textures/interact_prompt.png" id="2_0x3ae"]
 
 [node name="Interactable" type="Area2D"]

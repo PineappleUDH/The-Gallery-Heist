@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://cor2s0svaqrii"]
 
-[ext_resource type="Script" path="res://Scenes/Objects/launch_pad.gd" id="1_nhp1a"]
+[ext_resource type="Script" path="res://Scenes/Objects/Level/launch_pad.gd" id="1_nhp1a"]
 [ext_resource type="Texture2D" uid="uid://bgj38f36f3ngh" path="res://Resources/Textures/LaunchPad(AddinSachen.png" id="2_5l4hp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_51suv"]

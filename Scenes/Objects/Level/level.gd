@@ -5,16 +5,25 @@ extends Node2D
 #       UI and score
 #       dialogue player object
 
+enum SaulLetter {S, A, U, L}
+
 # level dependencies
 @onready var player : Player = $Characters/Saul
 @onready var level_camera : LevelCamera = $LevelCamera
 @onready var music_player : Node = $Audio/MusicPlayer
+const tile_size : int = 16
 
-@onready var _screen_transition : TextureRect = $UI/ScreenTransition
+@onready var _screen_transition : TextureRect = $Transition/ScreenTransition
+
+var _found_letters : Dictionary = {
+	SaulLetter.S:false,
+	SaulLetter.A:false,
+	SaulLetter.U:false,
+	SaulLetter.L:false,
+}
 
 var _player_starting_position : Vector2
 var _checkpoint : Checkpoint = null
-
 
 
 func _ready():
@@ -28,6 +37,10 @@ func set_checkpoint(checkpoint : Checkpoint):
 		_checkpoint.uncheck()
 	
 	_checkpoint = checkpoint
+
+func found_letter(letter : SaulLetter):
+	assert(_found_letters[letter] == false, "Letter already found, make sure the level only has 1 of each letter")
+	_found_letters[letter] = true
 
 func _on_player_died():
 	_screen_transition.transition()

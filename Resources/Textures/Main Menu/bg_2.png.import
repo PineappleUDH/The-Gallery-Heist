@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://du647qelju311"
-path="res://.godot/imported/HeartReplenish.png-e9c5cc8cab29a8291db2712d724c0d87.ctex"
+uid="uid://bf6xym6l44axx"
+path="res://.godot/imported/bg_2.png-f491631ed786b4615884a24232222ee2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Textures/VOID HELP ORGANIZE/HeartReplenish.png"
-dest_files=["res://.godot/imported/HeartReplenish.png-e9c5cc8cab29a8291db2712d724c0d87.ctex"]
+source_file="res://Resources/Textures/Main Menu/bg_2.png"
+dest_files=["res://.godot/imported/bg_2.png-f491631ed786b4615884a24232222ee2.ctex"]
 
 [params]
 

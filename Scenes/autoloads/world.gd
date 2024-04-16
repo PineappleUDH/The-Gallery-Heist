@@ -1,6 +1,7 @@
 extends Node
 
-# global data
+# global data for the game, if data is specific to a Level
+# store it in Level class instead
 
 var level : Level
 var artwork_recoverd : Dictionary
@@ -16,8 +17,6 @@ var high_score : float
 func _ready():
 	SceneManager.scene_changed.connect(_on_scene_changed)
 	_on_scene_changed() # call for starting scene
-	
-	
 
 func _on_scene_changed():
 	if get_tree().current_scene is Level:

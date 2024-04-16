@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://uc8w4v327aj"]
+[gd_scene load_steps=22 format=3 uid="uid://uc8w4v327aj"]
 
 [ext_resource type="Script" path="res://Scenes/Objects/Level/checkpoint.gd" id="1_0uyco"]
 [ext_resource type="Texture2D" uid="uid://bm3kpjljb2t02" path="res://Resources/Textures/Checkpoint_Activating.png" id="2_6khb0"]
 [ext_resource type="Texture2D" uid="uid://dsrak25si1d2r" path="res://Resources/Textures/Checkpoint_Activated.png" id="3_egpau"]
+[ext_resource type="Texture2D" uid="uid://d88velhv2jao" path="res://Resources/Textures/SaulSprites/Hologram.png" id="3_kek0u"]
 [ext_resource type="Texture2D" uid="uid://cfld3k6vsfwld" path="res://Resources/Textures/Checpoint_Inactive.png" id="4_noqhl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3hut0"]
@@ -121,24 +122,31 @@ monitorable = false
 script = ExtResource("1_0uyco")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -27.5)
+position = Vector2(0, -26.5)
 shape = SubResource("RectangleShape2D_3hut0")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -33)
+position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_oq15q")
 animation = &"activating"
 autoplay = "inactive"
 frame = 4
 frame_progress = 1.0
 
+[node name="Hologram" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.392157)
+position = Vector2(0, -35)
+texture = ExtResource("3_kek0u")
+
 [node name="SpawnMarker" type="Marker2D" parent="."]
-position = Vector2(0, -30)
+position = Vector2(0, -29)
 
 [node name="Platform" type="StaticBody2D" parent="."]
+position = Vector2(0, -1)
 
 [node name="Shape" type="CollisionShape2D" parent="Platform"]
-position = Vector2(0, -9)
+position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_31ilg")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]

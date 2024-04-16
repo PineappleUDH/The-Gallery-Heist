@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b57joaf4ixs1o"
-path="res://.godot/imported/image (1).png-f6777fcd4fd7e4b53415b6cbc84c0c43.ctex"
+path="res://.godot/imported/HeartUi(addin Sachen).png-cf4041ffcc58ecc60f65eda92478a728.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Textures/VOID HELP ORGANIZE/image (1).png"
-dest_files=["res://.godot/imported/image (1).png-f6777fcd4fd7e4b53415b6cbc84c0c43.ctex"]
+source_file="res://Resources/Textures/VOID HELP ORGANIZE/HeartUi(addin Sachen).png"
+dest_files=["res://.godot/imported/HeartUi(addin Sachen).png-cf4041ffcc58ecc60f65eda92478a728.ctex"]
 
 [params]
 

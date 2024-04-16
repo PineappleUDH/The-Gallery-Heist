@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://c2csilanfu3wv"]
 
-[ext_resource type="Script" path="res://Scenes/Objects/_moving_platform.gd" id="1_e0uyi"]
+[ext_resource type="Script" path="res://Scenes/Objects/Level/moving_platform.gd" id="1_e0uyi"]
 [ext_resource type="Texture2D" uid="uid://cbvtidw4453oq" path="res://Resources/Textures/Moving_platform.png" id="2_qwpgh"]
 [ext_resource type="PackedScene" uid="uid://bol4qsyq1qr5t" path="res://Scenes/Objects/Obstacles/spikes.tscn" id="3_6yan7"]
 
