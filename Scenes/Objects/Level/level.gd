@@ -10,6 +10,7 @@ enum SaulLetter {S, A, U, L}
 # level dependencies
 @onready var player : Player = $Characters/Saul
 @onready var level_camera : LevelCamera = $LevelCamera
+@onready var tilemap : TileMap = $TileMap
 @onready var music_player : Node = $Audio/MusicPlayer
 const tile_size : int = 16
 

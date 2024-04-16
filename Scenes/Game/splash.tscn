@@ -1,276 +1,35 @@
-[gd_scene load_steps=12 format=3 uid="uid://dglqiboyhmdl0"]
+[gd_scene load_steps=9 format=3 uid="uid://dglqiboyhmdl0"]
 
 [ext_resource type="Script" path="res://Scenes/Game/splash.gd" id="1_1hx6h"]
 [ext_resource type="Shader" path="res://Resources/Shaders/splash_text.gdshader" id="1_8iljm"]
 [ext_resource type="FontFile" uid="uid://bsvbubhqv01qw" path="res://Resources/Fonts/hf-free-complete/futile-pro-v1/FutilePro.ttf" id="2_dasv2"]
-[ext_resource type="AudioStream" uid="uid://mqfqlwqk4unt" path="res://Resources/Audio/Music/splash.ogg" id="4_av2si"]
+[ext_resource type="AudioStream" uid="uid://bdvnww32htdxd" path="res://Resources/Audio/Music/splash.ogg" id="4_84uc0"]
+
+[sub_resource type="Curve" id="Curve_se6oy"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0521327, 1), 0.0, 0.0, 0, 0, Vector2(0.886256, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -25.5057, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_ehrpd"]
+curve = SubResource("Curve_se6oy")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r1gs2"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(320, 1, 1)
+direction = Vector3(0, 1, 0)
+spread = 15.0
+initial_velocity_min = 40.0
+initial_velocity_max = 40.0
+gravity = Vector3(0, 0, 0)
+scale_min = 15.0
+scale_max = 20.0
+scale_curve = SubResource("CurveTexture_ehrpd")
+color = Color(0.470588, 0.470588, 0.470588, 1)
+turbulence_influence_min = 0.01
+turbulence_influence_max = 0.01
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jw8pt"]
 shader = ExtResource("1_8iljm")
-
-[sub_resource type="Animation" id="Animation_1dqt3"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AudioStreamPlayer:playing")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Background:color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.180392, 0.133333, 0.184314, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Label:text")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": ["Saultoons Surprise Squad"]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Label:theme_override_colors/font_color")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Label:scale")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Label:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(121, 166)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("GPUParticles2D:emitting")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_7alyx"]
-resource_name = "splash"
-length = 18.9
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AudioStreamPlayer:playing")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(8.7, 9.2, 9.8, 10.4, 10.9, 11.4, 12, 12.6, 13.1, 13.7, 14.2, 14.7, 15.2, 15.8, 16.3, 16.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"values": [{
-"args": [],
-"method": &"_color_flash"
-}, {
-"args": [],
-"method": &"_color_flash"
-}, {
-"args": [],
-"method": &"_color_flash"
-}, {
-"args": [],
-"method": &"_color_flash"
-}, {
-"args": [],
-"method": &"_color_flash"
-}, {
-"args": [],
-"method": &"_color_flash"
-}, {
-"args": [],
-"method": &"_color_flash"
-}, {
-"args": [],
-"method": &"_color_flash"
-}, {
-"args": [],
-"method": &"_color_flash"
-}, {
-"args": [],
-"method": &"_color_flash"
-}, {
-"args": [],
-"method": &"_color_flash"
-}, {
-"args": [],
-"method": &"_color_flash"
-}, {
-"args": [],
-"method": &"_color_flash"
-}, {
-"args": [],
-"method": &"_color_flash"
-}, {
-"args": [],
-"method": &"_color_flash"
-}, {
-"args": [],
-"method": &"_reset"
-}]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Background:color")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 4.3, 18.1, 18.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Label:text")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 4.3, 5.4, 6.5, 7.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": ["
-", "Saultoons", "Saultoons Surprise", "Saultoons Surprise Squad", "Saultoons Surprise Squad"]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Label:theme_override_colors/font_color")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 1)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Label:scale")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 8.6, 8.7, 18.1, 18.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(2.4, 2.4), Vector2(2.4, 2.4), Vector2(1, 1), Vector2(1, 1), Vector2(30, 30)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Label:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 4.3, 8.6, 8.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(457, 143), Vector2(457, 143), Vector2(-780, 143), Vector2(121, 166)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("GPUParticles2D:emitting")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0, 8.7),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_oshfi"]
-_data = {
-"RESET": SubResource("Animation_1dqt3"),
-"splash": SubResource("Animation_7alyx")
-}
-
-[sub_resource type="Curve" id="Curve_xiort"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.74026, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -7.4945, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_pqhks"]
-curve = SubResource("Curve_xiort")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nxd0l"]
-particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(320, 0, 1)
-angle_min = -180.0
-angle_max = 180.0
-direction = Vector3(0, 1, 0)
-spread = 0.0
-initial_velocity_min = 219.78
-initial_velocity_max = 428.57
-gravity = Vector3(0, 0, 0)
-scale_min = 18.0
-scale_max = 24.0
-scale_curve = SubResource("CurveTexture_pqhks")
-color = Color(0, 0, 0, 1)
 
 [node name="Splash" type="Control"]
 layout_mode = 3
@@ -288,7 +47,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.180392, 0.133333, 0.184314, 1)
+color = Color(0, 0, 0, 1)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(320, 0)
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_r1gs2")
+lifetime = 10.0
 
 [node name="Label" type="Label" parent="."]
 material = SubResource("ShaderMaterial_jw8pt")
@@ -298,32 +63,24 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 121.0
-offset_top = 166.0
-offset_right = 519.0
-offset_bottom = 194.0
+offset_left = -199.0
+offset_top = -14.0
+offset_right = 199.0
+offset_bottom = 14.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(199, 14)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.301961, 0.301961, 0.301961, 1)
+theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("2_dasv2")
-theme_override_font_sizes/font_size = 32
-text = "Saultoons Surprise Squad"
+theme_override_font_sizes/font_size = 60
+text = "Saultoons
+Surprise Squad"
+horizontal_alignment = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_oshfi")
-}
-autoplay = "splash"
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_84uc0")
+autoplay = true
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_av2si")
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-position = Vector2(320, 0)
-emitting = false
-amount = 50
-process_material = SubResource("ParticleProcessMaterial_nxd0l")
-lifetime = 1.5
-
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
+[connection signal="finished" from="Music" to="." method="_on_music_finished"]

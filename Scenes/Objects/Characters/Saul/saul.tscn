@@ -1,4 +1,4 @@
-[gd_scene load_steps=104 format=3 uid="uid://crjtftvmkahqx"]
+[gd_scene load_steps=111 format=3 uid="uid://crjtftvmkahqx"]
 
 [ext_resource type="PackedScene" uid="uid://bb8fvvxo2nhq1" path="res://Scenes/Objects/Characters/character.tscn" id="1_regtg"]
 [ext_resource type="Script" path="res://Scenes/Objects/Characters/Saul/saul.gd" id="2_rhth6"]
@@ -7,9 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://bkxse4jv0yavi" path="res://Scenes/Objects/Interface/player_ui_heart.tscn" id="4_6v13p"]
 [ext_resource type="PackedScene" uid="uid://ckw12igh1dbr4" path="res://Scenes/Objects/Characters/Saul/dash_trail.tscn" id="4_6x0l7"]
 [ext_resource type="Texture2D" uid="uid://b57joaf4ixs1o" path="res://Resources/Textures/VOID HELP ORGANIZE/HeartUi(addin Sachen).png" id="5_p2jq8"]
+[ext_resource type="PackedScene" uid="uid://chv1fxgahbhod" path="res://Scenes/Objects/Interface/player_ui_air.tscn" id="6_fddvr"]
 [ext_resource type="Texture2D" uid="uid://buql8wtc73qsp" path="res://Resources/Textures/SaulSprites/WallHang_Extra (AddinSachen).png" id="6_o7kle"]
 [ext_resource type="Texture2D" uid="uid://cfefmmpanysh2" path="res://Resources/Textures/SaulSprites/Dash (AddinSachen).png" id="7_1d3qm"]
 [ext_resource type="Texture2D" uid="uid://wfolyvshid67" path="res://Resources/Textures/SaulSprites/JumpMID (AddinSachen).png" id="7_7scej"]
+[ext_resource type="Texture2D" uid="uid://cnyje7qf7f44u" path="res://Resources/Textures/VOID HELP ORGANIZE/BubbleUi.png" id="7_fcwrm"]
 [ext_resource type="Texture2D" uid="uid://0r7bmjic63s5" path="res://Resources/Textures/SaulSprites/Idle (AddinSachen).png" id="8_njfhj"]
 [ext_resource type="Texture2D" uid="uid://5do3awtnco2e" path="res://Resources/Textures/SaulSprites/JumpAnticipation (AddinSachen).png" id="9_k3qw0"]
 [ext_resource type="Texture2D" uid="uid://bhjt1w537wqs8" path="res://Resources/Textures/SaulSprites/DeathAnimation (potent).png" id="9_ocevx"]
@@ -54,6 +56,31 @@ region = Rect2(16, 0, 16, 16)
 resource_local_to_scene = true
 atlas = ExtResource("5_p2jq8")
 region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1rt1"]
+resource_local_to_scene = true
+atlas = ExtResource("7_fcwrm")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mno42"]
+resource_local_to_scene = true
+atlas = ExtResource("7_fcwrm")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axtat"]
+resource_local_to_scene = true
+atlas = ExtResource("7_fcwrm")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhh0d"]
+resource_local_to_scene = true
+atlas = ExtResource("7_fcwrm")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_acffi"]
+resource_local_to_scene = true
+atlas = ExtResource("7_fcwrm")
+region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ypg7h"]
 size = Vector2(13, 30)
@@ -587,24 +614,51 @@ theme_override_constants/margin_bottom = 12
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Health" type="HBoxContainer" parent="UI/MarginContainer/HBoxContainer" index="0"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/HBoxContainer" index="0"]
 layout_mode = 2
 
-[node name="PlayerUiHeart" parent="UI/MarginContainer/HBoxContainer/Health" index="0" instance=ExtResource("4_6v13p")]
+[node name="Health" type="HBoxContainer" parent="UI/MarginContainer/HBoxContainer/VBoxContainer" index="0"]
+layout_mode = 2
+
+[node name="PlayerUiHeart" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Health" index="0" instance=ExtResource("4_6v13p")]
 layout_mode = 2
 texture = SubResource("AtlasTexture_tfuth")
 
-[node name="PlayerUiHeart2" parent="UI/MarginContainer/HBoxContainer/Health" index="1" instance=ExtResource("4_6v13p")]
+[node name="PlayerUiHeart2" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Health" index="1" instance=ExtResource("4_6v13p")]
 layout_mode = 2
 texture = SubResource("AtlasTexture_uktgr")
 
-[node name="PlayerUiHeart3" parent="UI/MarginContainer/HBoxContainer/Health" index="2" instance=ExtResource("4_6v13p")]
+[node name="PlayerUiHeart3" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Health" index="2" instance=ExtResource("4_6v13p")]
 layout_mode = 2
 texture = SubResource("AtlasTexture_3hia0")
 
-[node name="PlayerUiHeart4" parent="UI/MarginContainer/HBoxContainer/Health" index="3" instance=ExtResource("4_6v13p")]
+[node name="PlayerUiHeart4" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Health" index="3" instance=ExtResource("4_6v13p")]
 layout_mode = 2
 texture = SubResource("AtlasTexture_b7ank")
+
+[node name="Air" type="HBoxContainer" parent="UI/MarginContainer/HBoxContainer/VBoxContainer" index="1"]
+visible = false
+layout_mode = 2
+
+[node name="PlayerUiAir" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Air" index="0" instance=ExtResource("6_fddvr")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_f1rt1")
+
+[node name="PlayerUiAir2" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Air" index="1" instance=ExtResource("6_fddvr")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_mno42")
+
+[node name="PlayerUiAir3" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Air" index="2" instance=ExtResource("6_fddvr")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_axtat")
+
+[node name="PlayerUiAir4" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Air" index="3" instance=ExtResource("6_fddvr")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_lhh0d")
+
+[node name="PlayerUiAir5" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Air" index="4" instance=ExtResource("6_fddvr")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_acffi")
 
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2(0, 1)
@@ -692,6 +746,10 @@ one_shot = true
 wait_time = 0.06
 one_shot = true
 
+[node name="WaterTimer" type="Timer" parent="Timers" index="9"]
+wait_time = 2.2
+one_shot = true
+
 [node name="Jump" type="AudioStreamPlayer" parent="Sounds" index="1"]
 stream = SubResource("AudioStreamRandomizer_5o1wf")
 volume_db = -6.0
@@ -720,9 +778,5 @@ volume_db = -5.0
 
 [node name="Slide" type="AudioStreamPlayer" parent="Sounds" index="7"]
 volume_db = -8.0
-
-[node name="MarginContainer" type="MarginContainer" parent="." index="11"]
-offset_right = 40.0
-offset_bottom = 40.0
 
 [connection signal="body_entered" from="Detection/TerrainDetector" to="." method="_on_terrain_detector_body_entered"]

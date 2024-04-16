@@ -628,7 +628,7 @@ texture = ExtResource("3_mq2ti")
 physics_layer_0/collision_layer = 1
 physics_layer_1/collision_layer = 2
 physics_layer_1/collision_mask = 2
-custom_data_layer_0/name = "_water"
+custom_data_layer_0/name = "water"
 custom_data_layer_0/type = 1
 sources/1 = SubResource("TileSetAtlasSource_plk38")
 sources/0 = SubResource("TileSetAtlasSource_5s58g")
@@ -1671,7 +1671,7 @@ position = Vector2(3255, 5160)
 rotation = -1.5708
 
 [node name="Saul" parent="Characters" index="0"]
-position = Vector2(176, -159)
+position = Vector2(453, -734)
 
 [node name="EnemyPatrolling" parent="Characters" index="1" instance=ExtResource("16_c4ebt")]
 position = Vector2(3638, 6234)

@@ -12,6 +12,7 @@ signal interacted
 @onready var _footstep_timer : Timer = $Timers/FootstepTimer
 @onready var _cancel_slide_delay : Timer = $Timers/CancelSlideDelay
 @onready var _wall_grab_cooldown : Timer = $Timers/WallGrabCooldown
+@onready var _water_timer : Timer = $Timers/WaterTimer
 
 @onready var _sprite : AnimatedSprite2D = $Sprite
 @onready var _interface : CanvasLayer = $UI
@@ -47,6 +48,14 @@ const _slide_speed_fast : float = 120.0
 const _walk_footstep_time : float = 0.6
 const _run_footstep_time : float = 0.3
 
+const _water_gravity : float = 250.0
+const _max_swim_speed : float = 200.0
+const _water_accel : float = 380.0
+const _water_decel : float = 400.0
+const _max_air : int = 5
+var _air : int = _max_air
+var _was_on_water_surface : bool = false
+
 var _can_dash : bool = true
 const _dash_speed: float = 300
 const _dash_shake_duration : float = 0.3
@@ -60,9 +69,11 @@ var _player_score : float = 0 # TODO: move to level class
 var _state_machine : StateMachine = StateMachine.new()
 
 func _ready():
-	_max_health = 4 # NOTE: if this value is changed make sure to manualy change hearts count in UI
+	_max_health = 4
 	_damage_cooldown_time = 2.0
 	_health = _max_health
+	
+	_interface.setup(_max_health, _max_air)
 	
 	_state_machine.add_state("normal", Callable(), _state_normal_switch_from, _state_normal_process, _state_normal_ph_process)
 	_state_machine.add_state("dash", _state_dash_switch_to, _state_dash_switch_from, Callable(), _state_dash_ph_process)
@@ -120,14 +131,6 @@ func take_damage(damage : int, knockback : float, from : Vector2, is_deadly : bo
 	
 	_interface.set_health(old_health, _health)
 
-func water_area(entered : bool):
-	if _state_machine.get_current_state() == "dead": return
-	
-	if entered:
-		_state_machine.change_state("swim")
-	else:
-		_state_machine.change_state("normal")
-
 func reset_from_checkpoint(checkpoint_position : Vector2):
 	assert(_state_machine.get_current_state() == "dead")
 	
@@ -176,6 +179,20 @@ func _get_ray_colliding_with_tilemap() -> RayCast2D:
 	elif _detect_right.is_colliding() and _detect_right.get_collider() is TileMap:
 		return _detect_right
 	return null
+
+func _is_water_tile(global_pos : Vector2) -> bool:
+	var layers_count : int = World.level.tilemap.get_layers_count()
+	for i in layers_count:
+		# check all layers for a water tile. pros:doesn't require custom tilemap setup
+		#                                    const: additional processing
+		var data : TileData = World.level.tilemap.get_cell_tile_data(
+			i, World.level.tilemap.local_to_map(global_pos)
+		)
+		if data && data.get_custom_data("water") == true:
+			return true
+			break
+	
+	return false
 
 func _state_normal_switch_from(to : String):
 	World.level.level_camera.player_look_offset(0)
@@ -235,7 +252,6 @@ func _state_normal_ph_process(delta : float):
 			pass
 		
 		_footstep_timer.start()
-		
 	
 	if velocity.x == 0 && is_on_floor() && _direction.y:
 		World.level.level_camera.player_look_offset(int(_direction.y))
@@ -291,6 +307,10 @@ func _state_normal_ph_process(delta : float):
 	if Input.is_action_just_pressed("attack_basic"):
 		_state_machine.change_state("attack")
 		return
+	
+	# check water
+	if _is_water_tile(global_position):
+		_state_machine.change_state("swim")
 
 func _state_wall_slide_switch_to(from : String):
 	velocity = Vector2(0,0)
@@ -387,13 +407,70 @@ func _state_attack_ph_process(delta: float):
 		_state_machine.change_state("normal")
 
 func _state_swim_switch_to(from : String):
-	pass
+	# limit enter speed so if player is going super fast a damp effect is applied like real life
+	velocity.clamp(Vector2.ONE * -_max_swim_speed, Vector2.ONE * _max_swim_speed)
+	_was_on_water_surface = true
+	refill_dash()
+	
+	# TODO: muffle some sounds, would need to separate buses
 
 func _state_swim_switch_from(to : String):
-	pass
+	_water_timer.stop()
 
-func _state_swim_ph_process(delta):
-	pass
+func _state_swim_ph_process(delta : float):
+	# Movement Control
+	_direction = Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down"))
+	if _direction: _facing = _direction
+	
+	if _direction.x:
+		velocity.x = move_toward(velocity.x, _max_swim_speed * sign(_direction.x), _water_accel * delta)
+	else:
+		velocity.x = move_toward(velocity.x, 0.0, _water_decel * delta)
+	
+	if _direction.y:
+		velocity.y = move_toward(velocity.y, _max_swim_speed * sign(_direction.y), _water_accel * delta)
+	else:
+		velocity.y = move_toward(velocity.y, 0.0, _water_decel * delta)
+	
+	move_and_slide()
+	
+	# surface
+	var is_on_surface : bool =\
+		_is_water_tile(global_position - Vector2(0.0, World.level.tile_size * 2)) == false
+	
+	if is_on_surface:
+		if _was_on_water_surface == false:
+			# just reached surface
+			_interface.set_air(_air, _max_air)
+			_air = _max_air
+			_interface.set_air_active(false)
+			_water_timer.stop()
+		
+		if Input.is_action_just_pressed("jump"):
+			# TODO: repurpose jump buffer timer for this
+			# sfx
+			velocity.y = -_jump_force
+	else:
+		if _was_on_water_surface:
+			# just sank below surface
+			_interface.set_air_active(true)
+			_water_timer.start()
+		
+		if _water_timer.is_stopped():
+			_water_timer.start()
+			if _air > 0:
+				_interface.set_air(_air, _air-1)
+				_air -= 1
+			else:
+				# damage time :)
+				take_damage(1, 0, Vector2.DOWN)
+			
+	
+	_was_on_water_surface = is_on_surface
+	
+	# check out of water
+	if _is_water_tile(global_position) == false:
+		_state_machine.change_state("normal")
 
 func _state_dead_switch_to(from : String):
 	velocity = Vector2.ZERO
