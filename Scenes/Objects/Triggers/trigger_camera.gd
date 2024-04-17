@@ -38,6 +38,12 @@ extends "res://Scenes/Objects/Triggers/trigger.gd"
 @export var _zoom : Vector2 = Vector2.ONE
 
 
+# TODO: if player enters trigger A and then enters trigger B while
+#       also partly inside trigger A, B will apply but if the player
+#       immediately goes back to the direction of trigger A, A won't
+#       apply back because _player_entered will not be called since the player
+#       never left trigger A. with me so far? this can happen if the distance
+#       between A and B is smaller than player collider size.
 func apply_camera_state():
 	var camera : LevelCamera = World.level.level_camera
 	

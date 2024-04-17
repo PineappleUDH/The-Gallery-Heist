@@ -40,22 +40,6 @@ tracks/0/keys = {
 "values": [Rect2(0, 16, 16, 16), Rect2(16, 16, 16, 16), Rect2(32, 16, 16, 16), Rect2(48, 16, 16, 16), Rect2(64, 16, 16, 16), Rect2(80, 16, 16, 16)]
 }
 
-[sub_resource type="Animation" id="Animation_mebfx"]
-resource_name = "restore"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture:region")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [Rect2(0, 32, 16, 16), Rect2(16, 32, 16, 16), Rect2(32, 32, 16, 16), Rect2(48, 32, 16, 16), Rect2(64, 32, 16, 16)]
-}
-
 [sub_resource type="Animation" id="Animation_4s2e5"]
 resource_name = "pop"
 length = 0.7
@@ -70,6 +54,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Rect2(0, 48, 16, 16), Rect2(16, 48, 16, 16), Rect2(32, 48, 16, 16), Rect2(48, 48, 16, 16), Rect2(64, 48, 16, 16), Rect2(80, 48, 16, 16), Rect2(16, 0, 16, 16)]
+}
+
+[sub_resource type="Animation" id="Animation_mebfx"]
+resource_name = "restore"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 32, 16, 16), Rect2(16, 32, 16, 16), Rect2(32, 32, 16, 16), Rect2(48, 32, 16, 16), Rect2(64, 32, 16, 16)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u6hju"]

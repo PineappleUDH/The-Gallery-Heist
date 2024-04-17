@@ -17,10 +17,8 @@ signal interacted
 @onready var _sprite : AnimatedSprite2D = $Sprite
 @onready var _interface : CanvasLayer = $UI
 @onready var _dash_trail : Node2D = $DashTrail
-#@onready var _dust_trail : GPUParticles2D = $DustTrail
 @onready var _detect_right : RayCast2D = $Detection/Right
 @onready var _detect_left : RayCast2D = $Detection/Left
-@onready var _terrain_detector = $Detection/TerrainDetector
 @onready var _hurtbox : Area2D = $HurtBox
 @onready var _collider : CollisionShape2D = $CollisionShape2D
 @onready var _sfx : Dictionary = {
@@ -28,10 +26,16 @@ signal interacted
 	"attack":$Sounds/Attack, "died":$Sounds/Died, "footstep":$Sounds/Footstep,
 	"slide":$Sounds/Slide
 }
-@onready var _debug_vars_visualizer : PanelContainer = $DebugVarsVisualizer
+
+@onready var _walk_dust_particles : GPUParticles2D = $Particles/WalkDust
+@onready var _slide_dust_particles : GPUParticles2D = $Particles/SlideDust
+@onready var _jump_particles : GPUParticles2D = $Particles/Jump
+@onready var _damage_particles : GPUParticles2D = $Particles/Damge
+@onready var _bubbles_particles : GPUParticles2D = $Particles/Bubbles
 
 # TEMP
 @onready var _attack_sprite : Sprite2D = $HurtBox/AttackSprite
+@onready var _debug_vars_visualizer : PanelContainer = $DebugVarsVisualizer
 
 # Set Variables for overall control feel
 var _facing : Vector2 = Vector2.RIGHT
@@ -49,8 +53,8 @@ const _walk_footstep_time : float = 0.6
 const _run_footstep_time : float = 0.3
 
 const _water_gravity : float = 250.0
-const _max_swim_speed : float = 200.0
-const _water_accel : float = 380.0
+const _max_swim_speed : float = 190.0
+const _water_accel : float = 320.0
 const _water_decel : float = 400.0
 const _max_air : int = 5
 var _air : int = _max_air
@@ -125,11 +129,12 @@ func refill_dash():
 		_can_dash = true
 		_dash_cooldown.stop()
 
-func take_damage(damage : int, knockback : float, from : Vector2, is_deadly : bool = false):
+func take_damage(damage : int, knockback : float, from : Vector2, is_deadly : bool = false) -> bool:
 	var old_health : int = _health
-	super.take_damage(damage, knockback, from, is_deadly)
+	var applied : bool = super.take_damage(damage, knockback, from, is_deadly)
 	
 	_interface.set_health(old_health, _health)
+	return applied
 
 func reset_from_checkpoint(checkpoint_position : Vector2):
 	assert(_state_machine.get_current_state() == "dead")
@@ -143,6 +148,8 @@ func reset_from_checkpoint(checkpoint_position : Vector2):
 	await get_tree().physics_frame
 	
 	_interface.set_health(_health, _max_health)
+	_interface.set_air_active(false)
+	_interface.set_air(_air, _max_air)
 	_health = _max_health
 	_facing = Vector2.RIGHT
 	_direction = Vector2.RIGHT
@@ -160,6 +167,7 @@ func _damage_taken(damage : int, die : bool):
 		_state_machine.call_deferred("change_state", "dead")
 	else:
 		World.level.level_camera.shake(LevelCamera.ShakeLevel.low, _damage_shake_duration)
+		_damage_particles.restart()
 		_damaged_sfx.play()
 		
 		if _state_machine.get_current_state() == "wall_slide":
@@ -190,12 +198,12 @@ func _is_water_tile(global_pos : Vector2) -> bool:
 		)
 		if data && data.get_custom_data("water") == true:
 			return true
-			break
 	
 	return false
 
 func _state_normal_switch_from(to : String):
 	World.level.level_camera.player_look_offset(0)
+	_walk_dust_particles.emitting = false
 	_coyote_timer.stop()
 	_jump_buffer_timer.stop()
 	_footstep_timer.stop()
@@ -237,6 +245,8 @@ func _state_normal_ph_process(delta : float):
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, _decel * delta)
 	
+	_walk_dust_particles.emitting = is_on_floor() and velocity.x
+	
 	# footsteps
 	if is_on_floor() and _footstep_timer.is_stopped() and velocity.x:
 		if _direction.x:
@@ -264,6 +274,7 @@ func _state_normal_ph_process(delta : float):
 		if is_on_floor() or not _coyote_timer.is_stopped():
 			velocity.y = -_jump_force
 			just_jumped = true
+			_jump_particles.restart()
 			_sfx["jump"].play()
 		elif is_on_floor() == false:
 			_jump_buffer_timer.start()
@@ -282,6 +293,7 @@ func _state_normal_ph_process(delta : float):
 		if _jump_buffer_timer.is_stopped() == false:
 			velocity.y = -_jump_force
 			just_jumped = true
+			_jump_particles.restart()
 			_sfx["jump"].play()
 	
 	if (is_on_floor() == false and Input.is_action_pressed("wall_grab") and
@@ -318,17 +330,18 @@ func _state_wall_slide_switch_to(from : String):
 	_play_animation("Cling")
 
 func _state_wall_slide_switch_from(to : String):
+	_slide_dust_particles.emitting = false
 	_cancel_slide_delay.stop()
 	_wall_grab_cooldown.start()
 
 func _state_wall_slide_ph_process(delta: float):
 	if _cling_time.is_stopped():
+		_slide_dust_particles.emitting = true
 		_play_animation("Sliding")
 		if Input.is_action_pressed("down"):
 			velocity.y = _slide_speed_fast
 		else:
 			velocity.y = _slide_speed
-		
 	
 	# cancel sliding
 	if Input.is_action_just_released("wall_grab"):
@@ -408,13 +421,14 @@ func _state_attack_ph_process(delta: float):
 
 func _state_swim_switch_to(from : String):
 	# limit enter speed so if player is going super fast a damp effect is applied like real life
-	velocity.clamp(Vector2.ONE * -_max_swim_speed, Vector2.ONE * _max_swim_speed)
+	velocity = velocity.clamp(Vector2.ONE * -_max_swim_speed, Vector2.ONE * _max_swim_speed)
 	_was_on_water_surface = true
 	refill_dash()
 	
 	# TODO: muffle some sounds, would need to separate buses
 
 func _state_swim_switch_from(to : String):
+	_bubbles_particles.emitting = false
 	_water_timer.stop()
 
 func _state_swim_ph_process(delta : float):
@@ -436,7 +450,17 @@ func _state_swim_ph_process(delta : float):
 	
 	# surface
 	var is_on_surface : bool =\
-		_is_water_tile(global_position - Vector2(0.0, World.level.tile_size * 2)) == false
+		_is_water_tile(global_position - Vector2(0.0, World.level.tile_size)) == false
+	var is_close_to_surface : bool =\
+		# are you happy val? :(((((((
+		_is_water_tile(global_position - Vector2(0.0, World.level.tile_size * 3)) == false
+	
+	_bubbles_particles.emitting = (is_on_surface == false and is_close_to_surface == false)
+	
+	if is_close_to_surface && Input.is_action_just_pressed("jump"):
+		# TODO: repurpose jump buffer timer for this
+		# sfx
+		velocity.y = -_jump_force
 	
 	if is_on_surface:
 		if _was_on_water_surface == false:
@@ -445,11 +469,6 @@ func _state_swim_ph_process(delta : float):
 			_air = _max_air
 			_interface.set_air_active(false)
 			_water_timer.stop()
-		
-		if Input.is_action_just_pressed("jump"):
-			# TODO: repurpose jump buffer timer for this
-			# sfx
-			velocity.y = -_jump_force
 	else:
 		if _was_on_water_surface:
 			# just sank below surface

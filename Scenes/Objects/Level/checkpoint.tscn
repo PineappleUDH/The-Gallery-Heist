@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cfld3k6vsfwld" path="res://Resources/Textures/Checpoint_Inactive.png" id="4_noqhl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3hut0"]
-size = Vector2(32, 21)
+size = Vector2(26, 28)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b07lj"]
 atlas = ExtResource("2_6khb0")
@@ -122,21 +122,19 @@ monitorable = false
 script = ExtResource("1_0uyco")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -26.5)
+position = Vector2(0, -23)
 shape = SubResource("RectangleShape2D_3hut0")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_oq15q")
-animation = &"activating"
+animation = &"active"
 autoplay = "inactive"
-frame = 4
-frame_progress = 1.0
 
 [node name="Hologram" type="Sprite2D" parent="."]
 visible = false
 modulate = Color(1, 1, 1, 0.392157)
-position = Vector2(0, -35)
+position = Vector2(0, -31)
 texture = ExtResource("3_kek0u")
 
 [node name="SpawnMarker" type="Marker2D" parent="."]
@@ -146,7 +144,7 @@ position = Vector2(0, -29)
 position = Vector2(0, -1)
 
 [node name="Shape" type="CollisionShape2D" parent="Platform"]
-position = Vector2(0, -8)
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_31ilg")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]

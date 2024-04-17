@@ -20,12 +20,13 @@ var _knockback_multiplier : float = 1.0
 
 func _process(delta : float):
 	if _damage_cooldown_timer.is_stopped() == false:
+		# TODO: should only modulate sprite rather than everything
 		modulate.a = (sin(_damage_cooldown_timer.time_left * 10.0) + 1.0) / 2.0
 
 # override
-func take_damage(damage : int, knockback : float, from : Vector2, is_deadly : bool = false):
+func take_damage(damage : int, knockback : float, from : Vector2, is_deadly : bool = false) -> bool:
 	# TODO: use a separate function for deadly damage, no point doing take_damage(0, 0, 0, true)
-	if _is_invincible: return
+	if _is_invincible: return false
 	
 	var cooldown : bool = _damage_cooldown_timer.is_stopped() == false
 	
@@ -35,7 +36,7 @@ func take_damage(damage : int, knockback : float, from : Vector2, is_deadly : bo
 		_health -= damage
 	else:
 		# no damage applied due to cooldown, nothing more to do
-		return
+		return false
 	
 	if _health > 0:
 		velocity -= (from - global_position).normalized() * knockback * _knockback_multiplier
@@ -45,6 +46,8 @@ func take_damage(damage : int, knockback : float, from : Vector2, is_deadly : bo
 		
 	else:
 		_damage_taken(damage, true)
+	
+	return true
 
 # override
 func _damage_taken(damage : int, die : bool):
