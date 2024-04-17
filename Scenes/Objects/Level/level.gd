@@ -1,14 +1,13 @@
 class_name Level
 extends Node2D
 
-# TODO: level should handles:
-#       UI and score
-#       dialogue player object
+signal score_changed
 
 enum SaulLetter {S, A, U, L}
 
 # level dependencies
 @onready var player : Player = $Characters/Saul
+@onready var interface : CanvasLayer = $UI
 @onready var level_camera : LevelCamera = $LevelCamera
 @onready var tilemap : TileMap = $TileMap
 @onready var music_player : Node = $Audio/MusicPlayer
@@ -16,6 +15,7 @@ const tile_size : int = 16
 
 @onready var _screen_transition : TextureRect = $Transition/ScreenTransition
 
+var _score : int = 0
 var _found_letters : Dictionary = {
 	SaulLetter.S:false,
 	SaulLetter.A:false,
@@ -32,6 +32,14 @@ func _ready():
 	
 	# initial checkpoint is spawn point
 	_player_starting_position = player.global_position
+
+func add_score(amount : int = 1):
+	_score += amount
+	interface.set_score(_score)
+	score_changed.emit()
+
+func get_score() -> int:
+	return _score
 
 func set_checkpoint(checkpoint : Checkpoint):
 	if _checkpoint:

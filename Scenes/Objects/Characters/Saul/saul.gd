@@ -15,7 +15,6 @@ signal interacted
 @onready var _water_timer : Timer = $Timers/WaterTimer
 
 @onready var _sprite : AnimatedSprite2D = $Sprite
-@onready var _interface : CanvasLayer = $UI
 @onready var _dash_trail : Node2D = $DashTrail
 @onready var _detect_right : RayCast2D = $Detection/Right
 @onready var _detect_left : RayCast2D = $Detection/Left
@@ -68,7 +67,6 @@ const _wall_jump_force : float = 260.0
 const _wall_push_force : float = 230.0
 
 const _damage_shake_duration : float = 0.3
-var _player_score : float = 0 # TODO: move to level class
 
 var _state_machine : StateMachine = StateMachine.new()
 
@@ -76,8 +74,6 @@ func _ready():
 	_max_health = 4
 	_damage_cooldown_time = 2.0
 	_health = _max_health
-	
-	_interface.setup(_max_health, _max_air)
 	
 	_state_machine.add_state("normal", Callable(), _state_normal_switch_from, _state_normal_process, _state_normal_ph_process)
 	_state_machine.add_state("dash", _state_dash_switch_to, _state_dash_switch_from, Callable(), _state_dash_ph_process)
@@ -91,6 +87,9 @@ func _ready():
 	_debug_vars_visualizer.add_var("State")
 	_debug_vars_visualizer.add_var("Can_Dash")
 	_debug_vars_visualizer.add_var("Health")
+	
+	await get_tree().process_frame # wait for level to get ready
+	World.level.interface.setup(_max_health, _max_air)
 
 func _process(delta : float):
 	super._process(delta)
@@ -105,21 +104,12 @@ func _process(delta : float):
 		interacted.emit()
 	
 	# debug
-	_debug_vars_visualizer.edit_var("Score", _player_score)
 	_debug_vars_visualizer.edit_var("State", _state_machine.get_current_state())
 	_debug_vars_visualizer.edit_var("Can_Dash", _can_dash)
 	_debug_vars_visualizer.edit_var("Health", str(_health) + "/" + str(_max_health))
 
 func _physics_process(delta : float):
 	_state_machine.state_physics_process(delta)
-
-func add_score(amount : float):
-	_player_score += amount
-	if amount > 1 :
-		if _health < _max_health:
-			_interface.set_health(_health, _health + 1)
-			_health += 1
-	World.current_score = _player_score
 
 func can_dash():
 	return _can_dash
@@ -129,11 +119,18 @@ func refill_dash():
 		_can_dash = true
 		_dash_cooldown.stop()
 
+func heal(amount : int):
+	if _health == _max_health: return
+	
+	var old_health : int = _health
+	_health = min(_health + amount, _max_health)
+	World.level.interface.set_health(old_health, _health)
+
 func take_damage(damage : int, knockback : float, from : Vector2, is_deadly : bool = false) -> bool:
 	var old_health : int = _health
 	var applied : bool = super.take_damage(damage, knockback, from, is_deadly)
 	
-	_interface.set_health(old_health, _health)
+	World.level.interface.set_health(old_health, _health)
 	return applied
 
 func reset_from_checkpoint(checkpoint_position : Vector2):
@@ -147,13 +144,10 @@ func reset_from_checkpoint(checkpoint_position : Vector2):
 	await get_tree().physics_frame
 	await get_tree().physics_frame
 	
-	_interface.set_health(_health, _max_health)
-	_interface.set_air_active(false)
-	_interface.set_air(_air, _max_air)
+	World.level.interface.set_health(_health, _max_health)
 	_health = _max_health
 	_facing = Vector2.RIGHT
 	_direction = Vector2.RIGHT
-	_player_score = 0
 	_state_machine.change_state("normal")
 	
 	respawned.emit()
@@ -429,6 +423,9 @@ func _state_swim_switch_to(from : String):
 
 func _state_swim_switch_from(to : String):
 	_bubbles_particles.emitting = false
+	World.level.interface.set_air_active(false)
+	World.level.interface.set_air(_air, _max_air)
+	_air = _max_air
 	_water_timer.stop()
 
 func _state_swim_ph_process(delta : float):
@@ -465,20 +462,20 @@ func _state_swim_ph_process(delta : float):
 	if is_on_surface:
 		if _was_on_water_surface == false:
 			# just reached surface
-			_interface.set_air(_air, _max_air)
+			World.level.interface.set_air(_air, _max_air)
 			_air = _max_air
-			_interface.set_air_active(false)
+			World.level.interface.set_air_active(false)
 			_water_timer.stop()
 	else:
 		if _was_on_water_surface:
 			# just sank below surface
-			_interface.set_air_active(true)
+			World.level.interface.set_air_active(true)
 			_water_timer.start()
 		
 		if _water_timer.is_stopped():
 			_water_timer.start()
 			if _air > 0:
-				_interface.set_air(_air, _air-1)
+				World.level.interface.set_air(_air, _air-1)
 				_air -= 1
 			else:
 				# damage time :)

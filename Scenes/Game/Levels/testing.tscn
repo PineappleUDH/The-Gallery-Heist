@@ -1,4 +1,4 @@
-[gd_scene load_steps=93 format=3 uid="uid://mlvn8cvywr4c"]
+[gd_scene load_steps=104 format=3 uid="uid://mlvn8cvywr4c"]
 
 [ext_resource type="PackedScene" uid="uid://b84n1i2bwxbmr" path="res://Scenes/Objects/Level/level.tscn" id="1_gs8pa"]
 [ext_resource type="Script" path="res://Scenes/Game/Levels/testing.gd" id="2_qem0p"]
@@ -8,8 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://botpmwf2b2ybo" path="res://Scenes/Objects/Triggers/trigger_camera.tscn" id="5_7n87s"]
 [ext_resource type="PackedScene" uid="uid://d1q41lh23aowi" path="res://Scenes/Objects/Level/teleporter.tscn" id="5_dbose"]
 [ext_resource type="Texture2D" uid="uid://dhvw2y72gfnco" path="res://Resources/Textures/PLACEHOLDERS/paralax_placeholder3.png" id="5_ylcn2"]
+[ext_resource type="Texture2D" uid="uid://b57joaf4ixs1o" path="res://Resources/Textures/VOID HELP ORGANIZE/HeartUi(addin Sachen).png" id="6_8ra3k"]
 [ext_resource type="Texture2D" uid="uid://bo0cqgowy82tl" path="res://Resources/Textures/Aniamted_water (AddinSachen).png" id="6_ilpeg"]
 [ext_resource type="PackedScene" uid="uid://uc8w4v327aj" path="res://Scenes/Objects/Level/checkpoint.tscn" id="6_uddob"]
+[ext_resource type="Texture2D" uid="uid://cnyje7qf7f44u" path="res://Resources/Textures/VOID HELP ORGANIZE/BubbleUi.png" id="7_1kr0c"]
 [ext_resource type="PackedScene" uid="uid://bbfrw50tycm64" path="res://Scenes/Objects/Collectables/collectables_stack.tscn" id="7_pc1vt"]
 [ext_resource type="PackedScene" uid="uid://c31bicd5mqe8o" path="res://Scenes/Objects/Collectables/collectable_coin.tscn" id="8_loe2g"]
 [ext_resource type="PackedScene" uid="uid://hu5mofx88bpj" path="res://Scenes/Objects/Collectables/collectable_dash_refiller.tscn" id="9_pynbm"]
@@ -23,6 +25,51 @@
 [ext_resource type="PackedScene" uid="uid://c2csilanfu3wv" path="res://Scenes/Objects/Level/moving_spikes.tscn" id="20_jj33r"]
 [ext_resource type="PackedScene" uid="uid://tgxwefto77lr" path="res://Scenes/Objects/Collectables/collectable_SAUL.tscn" id="21_i7p6d"]
 [ext_resource type="PackedScene" uid="uid://dkn8trjyqlfdg" path="res://Scenes/Objects/Collectables/collectable_egg.tscn" id="22_tk00u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tu37i"]
+resource_local_to_scene = true
+atlas = ExtResource("6_8ra3k")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkrxm"]
+resource_local_to_scene = true
+atlas = ExtResource("6_8ra3k")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_14ins"]
+resource_local_to_scene = true
+atlas = ExtResource("6_8ra3k")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0mns"]
+resource_local_to_scene = true
+atlas = ExtResource("6_8ra3k")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gvfyq"]
+resource_local_to_scene = true
+atlas = ExtResource("7_1kr0c")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ujih0"]
+resource_local_to_scene = true
+atlas = ExtResource("7_1kr0c")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwdk5"]
+resource_local_to_scene = true
+atlas = ExtResource("7_1kr0c")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfs12"]
+resource_local_to_scene = true
+atlas = ExtResource("7_1kr0c")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atjay"]
+resource_local_to_scene = true
+atlas = ExtResource("7_1kr0c")
+region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5s58g"]
 texture = ExtResource("6_ilpeg")
@@ -900,6 +947,33 @@ motion_mirroring = Vector2(640, 0)
 texture = ExtResource("5_ylcn2")
 centered = false
 
+[node name="PlayerUiHeart" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Health" index="0"]
+texture = SubResource("AtlasTexture_tu37i")
+
+[node name="PlayerUiHeart2" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Health" index="1"]
+texture = SubResource("AtlasTexture_fkrxm")
+
+[node name="PlayerUiHeart3" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Health" index="2"]
+texture = SubResource("AtlasTexture_14ins")
+
+[node name="PlayerUiHeart4" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Health" index="3"]
+texture = SubResource("AtlasTexture_r0mns")
+
+[node name="PlayerUiAir" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Air" index="0"]
+texture = SubResource("AtlasTexture_gvfyq")
+
+[node name="PlayerUiAir2" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Air" index="1"]
+texture = SubResource("AtlasTexture_ujih0")
+
+[node name="PlayerUiAir3" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Air" index="2"]
+texture = SubResource("AtlasTexture_jwdk5")
+
+[node name="PlayerUiAir4" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Air" index="3"]
+texture = SubResource("AtlasTexture_dfs12")
+
+[node name="PlayerUiAir5" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Air" index="4"]
+texture = SubResource("AtlasTexture_atjay")
+
 [node name="TileMap" parent="." index="3"]
 tile_set = SubResource("TileSet_ntmvc")
 layer_0/name = "Super Secret Background fixes"
@@ -1419,17 +1493,6 @@ where 1 is very easy and 5 is very difficult
 "
 horizontal_alignment = 1
 
-[node name="Label" type="Label" parent="." index="5"]
-offset_left = 112.0
-offset_top = -228.0
-offset_right = 240.0
-offset_bottom = -205.0
-text = "High Score:"
-label_settings = SubResource("LabelSettings_anlf8")
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
 [node name="Checkpoint" parent="Checkpoints" index="0" instance=ExtResource("6_uddob")]
 position = Vector2(176, -120)
 
@@ -1828,7 +1891,7 @@ position = Vector2(3328, 5224)
 [node name="CollectableDashRefiller17" parent="Collectables/DashRefils" index="16" instance=ExtResource("9_pynbm")]
 position = Vector2(3232, 5120)
 
-[node name="LevelCamera" parent="." index="11" node_paths=PackedStringArray("_starting_trigger")]
+[node name="LevelCamera" parent="." index="10" node_paths=PackedStringArray("_starting_trigger")]
 position = Vector2(3313, 5478)
 zoom = Vector2(2.8, 2.8)
 _starting_trigger = NodePath("../Triggers/Camera_Triggers#TriggerCamera4")
@@ -2442,46 +2505,46 @@ position = Vector2(3303, 5458)
 _change_state = true
 _idle_position = Vector2(3312, 5478)
 
-[node name="MovingPlatform" parent="." index="13" instance=ExtResource("19_r0t7p")]
+[node name="MovingPlatform" parent="." index="12" instance=ExtResource("19_r0t7p")]
 position = Vector2(112, -1358)
 curve = SubResource("Curve2D_g7ghg")
 _loop = false
 
-[node name="MovingLaunchpad" parent="." index="14" instance=ExtResource("19_r0t7p")]
+[node name="MovingLaunchpad" parent="." index="13" instance=ExtResource("19_r0t7p")]
 position = Vector2(2955, 5960)
 curve = SubResource("Curve2D_sthtl")
 _loop = false
 
-[node name="MovingLaunchpad2" parent="." index="15" instance=ExtResource("19_r0t7p")]
+[node name="MovingLaunchpad2" parent="." index="14" instance=ExtResource("19_r0t7p")]
 position = Vector2(2953, 5759)
 curve = SubResource("Curve2D_wrxtc")
 _loop = false
 
-[node name="Spikes" parent="." index="16" instance=ExtResource("10_jd6g8")]
+[node name="Spikes" parent="." index="15" instance=ExtResource("10_jd6g8")]
 position = Vector2(2904, 5424)
 rotation = 1.5708
 _count = 42
 
-[node name="MovingSpikes" parent="." index="17" instance=ExtResource("20_jj33r")]
+[node name="MovingSpikes" parent="." index="16" instance=ExtResource("20_jj33r")]
 position = Vector2(2889, 5236)
 rotation = 3.14159
 curve = SubResource("Curve2D_282ax")
 _speed = 1.0
 _speed_scale = 2.0
 
-[node name="MovingSpikes2" parent="." index="18" instance=ExtResource("20_jj33r")]
+[node name="MovingSpikes2" parent="." index="17" instance=ExtResource("20_jj33r")]
 position = Vector2(2889, 5354)
 rotation = 3.14159
 curve = SubResource("Curve2D_0su5g")
 _speed = 1.0
 
-[node name="MovingSpikes3" parent="." index="19" instance=ExtResource("20_jj33r")]
+[node name="MovingSpikes3" parent="." index="18" instance=ExtResource("20_jj33r")]
 position = Vector2(2892, 5091)
 rotation = 3.14159
 curve = SubResource("Curve2D_77gbo")
 _loop = false
 
-[node name="MovingSpikes4" parent="." index="20" instance=ExtResource("20_jj33r")]
+[node name="MovingSpikes4" parent="." index="19" instance=ExtResource("20_jj33r")]
 position = Vector2(2892, 4966)
 rotation = 3.14159
 curve = SubResource("Curve2D_77gbo")
@@ -2489,20 +2552,20 @@ _loop = false
 _speed = 1.0
 _speed_scale = 2.0
 
-[node name="Collectable" parent="." index="21" instance=ExtResource("21_i7p6d")]
+[node name="Collectable" parent="." index="20" instance=ExtResource("21_i7p6d")]
 position = Vector2(87, -163)
 
-[node name="Collectable2" parent="." index="22" instance=ExtResource("21_i7p6d")]
+[node name="Collectable2" parent="." index="21" instance=ExtResource("21_i7p6d")]
 position = Vector2(106, -163)
 _letter = 1
 
-[node name="Collectable3" parent="." index="23" instance=ExtResource("21_i7p6d")]
+[node name="Collectable3" parent="." index="22" instance=ExtResource("21_i7p6d")]
 position = Vector2(125, -163)
 _letter = 2
 
-[node name="Collectable4" parent="." index="24" instance=ExtResource("21_i7p6d")]
+[node name="Collectable4" parent="." index="23" instance=ExtResource("21_i7p6d")]
 position = Vector2(144, -163)
 _letter = 3
 
-[node name="Collectable5" parent="." index="25" instance=ExtResource("22_tk00u")]
+[node name="Collectable5" parent="." index="24" instance=ExtResource("22_tk00u")]
 position = Vector2(242, -137)

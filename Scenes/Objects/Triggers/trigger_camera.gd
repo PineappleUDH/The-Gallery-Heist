@@ -5,6 +5,7 @@ extends "res://Scenes/Objects/Triggers/trigger.gd"
 @export var _change_state : bool = false :
 	set(value):
 		_change_state = value
+		queue_redraw()
 		notify_property_list_changed()
 @export var _change_zoom : bool = false :
 	set(value):
@@ -19,8 +20,12 @@ extends "res://Scenes/Objects/Triggers/trigger.gd"
 @export var _trigger_state : LevelCamera.CameraState :
 	set(value):
 		_trigger_state = value
+		queue_redraw()
 		notify_property_list_changed()
-@export var _idle_position : Vector2
+@export var _idle_position : Vector2 :
+	set(value):
+		_idle_position = value
+		queue_redraw()
 
 @export_group("Axis Lock")
 @export var _release_x_bound : bool = true :
@@ -35,8 +40,30 @@ extends "res://Scenes/Objects/Triggers/trigger.gd"
 @export var _y_bound : Vector2
 
 @export_group("Camera Properties")
-@export var _zoom : Vector2 = Vector2.ONE
+@export var _zoom : Vector2 = Vector2.ONE :
+	set(value):
+		_zoom = value
+		queue_redraw()
 
+const _preview_color : Color = Color("ffffff64")
+
+
+func _draw():
+	if Engine.is_editor_hint() == false: return
+	
+	if _change_state && _trigger_state == LevelCamera.CameraState.idle:
+		# draw idle position preview
+		var local_idle_pos : Vector2 = _idle_position - position
+		draw_line(Vector2.ZERO, local_idle_pos, _preview_color)
+		draw_circle(local_idle_pos, 2, _preview_color)
+		
+		var half_viewport_size : Vector2 =\
+			Vector2(ProjectSettings.get_setting("display/window/size/viewport_width"), ProjectSettings.get_setting("display/window/size/viewport_height"))\
+			/ 2.0 / _zoom
+		draw_rect(
+			Rect2(local_idle_pos - half_viewport_size, (local_idle_pos + half_viewport_size) - (local_idle_pos - half_viewport_size)),
+			_preview_color, false
+		)
 
 # TODO: if player enters trigger A and then enters trigger B while
 #       also partly inside trigger A, B will apply but if the player

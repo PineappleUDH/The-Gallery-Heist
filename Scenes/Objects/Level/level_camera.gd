@@ -37,6 +37,8 @@ func _ready():
 	
 	if _starting_trigger: # TODO also don't apply starting trigger if player spawns inside a trigger and that trigger already applied its changes
 		_starting_trigger.apply_camera_state()
+	
+	snap_to_position()
 
 func _process(delta : float):
 	var player : Player = World.level.player
@@ -106,6 +108,12 @@ func shake(shake_level : ShakeLevel, duration : float):
 	_shake_timer.wait_time = duration
 	_shake_timer.start()
 
+func snap_to_position():
+	if _curr_state == CameraState.follow:
+		global_position = World.level.player.global_position
+	elif _curr_state == CameraState.idle:
+		global_position = _target_position
+
 func player_look_offset(y_dir : int):
 	_player_y_look_direction = y_dir
 
@@ -130,10 +138,6 @@ func _on_shake_timer_timeout():
 	offset = Vector2.ZERO
 
 func _on_player_respawned():
-	global_position = World.level.player.global_position
-	# TODO: we reapply initial state but that's not always accurate
-	#       a trigger could change the camera state right before the checkpoint
-	#       not sure what to do about that.. same thing for other types of triggers
-	# a cheap solution would be to place an additional trigger collider on the checkpoint
-	# so player hits it on respawn
-	_starting_trigger.apply_camera_state()
+	if _starting_trigger:
+		_starting_trigger.apply_camera_state()
+		snap_to_position()

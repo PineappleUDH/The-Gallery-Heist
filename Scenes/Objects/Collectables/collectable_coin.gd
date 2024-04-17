@@ -8,7 +8,7 @@ func _ready():
 	_idle_movement = IdleMovement.sin_wave
 
 func _collected(player : Player):
-	player.add_score(1)
+	World.level.add_score()
 	_collected_sfx.play()
 	_presistent_node.detach()
 	queue_free()

@@ -1,20 +1,20 @@
 [gd_scene load_steps=6 format=3 uid="uid://ks2b8lp58x7d"]
 
 [ext_resource type="Script" path="res://Scenes/Objects/Obstacles/HangingSpikes.gd" id="1_j1map"]
-[ext_resource type="Texture2D" uid="uid://cqp8wwddxyo2h" path="res://Resources/Textures/hanging_spikespng.png" id="2_jp4ot"]
+[ext_resource type="Texture2D" uid="uid://cqp8wwddxyo2h" path="res://Resources/Textures/hanging_spikes (Petit Renard).png" id="2_sxgk4"]
 [ext_resource type="PackedScene" uid="uid://caabhgsckx3p8" path="res://Scenes/Objects/Characters/hurtbox.tscn" id="3_tjkxt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1njc6"]
-radius = 13.0
+radius = 16.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qcdru"]
-radius = 28.0713
+radius = 28.0
 
 [node name="HangingSpikes" type="StaticBody2D"]
 script = ExtResource("1_j1map")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_jp4ot")
+texture = ExtResource("2_sxgk4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_1njc6")

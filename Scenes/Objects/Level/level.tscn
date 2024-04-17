@@ -1,11 +1,62 @@
-[gd_scene load_steps=7 format=3 uid="uid://b84n1i2bwxbmr"]
+[gd_scene load_steps=22 format=3 uid="uid://b84n1i2bwxbmr"]
 
 [ext_resource type="Script" path="res://Scenes/Objects/Level/level.gd" id="1_qee75"]
 [ext_resource type="Script" path="res://Scenes/Objects/Level/level_pause_manager.gd" id="2_2cj76"]
 [ext_resource type="PackedScene" uid="uid://crjtftvmkahqx" path="res://Scenes/Objects/Characters/Saul/saul.tscn" id="2_wyn7p"]
+[ext_resource type="Script" path="res://Scenes/Objects/Characters/Saul/level_ui.gd" id="3_kfuv0"]
 [ext_resource type="Script" path="res://Scenes/Objects/Level/level_transition.gd" id="3_mds04"]
 [ext_resource type="PackedScene" uid="uid://dhssfh3cjjl5q" path="res://Scenes/Objects/Level/level_camera.tscn" id="4_h0vsv"]
 [ext_resource type="Script" path="res://Scenes/Objects/Level/level_music_player.gd" id="5_j8si2"]
+[ext_resource type="PackedScene" uid="uid://bkxse4jv0yavi" path="res://Scenes/Objects/Interface/player_ui_heart.tscn" id="5_qry46"]
+[ext_resource type="Texture2D" uid="uid://b57joaf4ixs1o" path="res://Resources/Textures/VOID HELP ORGANIZE/HeartUi(addin Sachen).png" id="6_vp5gm"]
+[ext_resource type="PackedScene" uid="uid://chv1fxgahbhod" path="res://Scenes/Objects/Interface/player_ui_air.tscn" id="7_0jw55"]
+[ext_resource type="Texture2D" uid="uid://cnyje7qf7f44u" path="res://Resources/Textures/VOID HELP ORGANIZE/BubbleUi.png" id="8_d8ooi"]
+[ext_resource type="Texture2D" uid="uid://d1m7v5rs23u0t" path="res://Resources/Textures/VOID HELP ORGANIZE/Coin.png" id="9_w8ljf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tu37i"]
+resource_local_to_scene = true
+atlas = ExtResource("6_vp5gm")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkrxm"]
+resource_local_to_scene = true
+atlas = ExtResource("6_vp5gm")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_14ins"]
+resource_local_to_scene = true
+atlas = ExtResource("6_vp5gm")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0mns"]
+resource_local_to_scene = true
+atlas = ExtResource("6_vp5gm")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gvfyq"]
+resource_local_to_scene = true
+atlas = ExtResource("8_d8ooi")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ujih0"]
+resource_local_to_scene = true
+atlas = ExtResource("8_d8ooi")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwdk5"]
+resource_local_to_scene = true
+atlas = ExtResource("8_d8ooi")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfs12"]
+resource_local_to_scene = true
+atlas = ExtResource("8_d8ooi")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atjay"]
+resource_local_to_scene = true
+atlas = ExtResource("8_d8ooi")
+region = Rect2(0, 0, 16, 16)
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_qee75")
@@ -30,6 +81,88 @@ stretch_mode = 5
 script = ExtResource("3_mds04")
 
 [node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("3_kfuv0")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Health" type="HBoxContainer" parent="UI/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PlayerUiHeart" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Health" instance=ExtResource("5_qry46")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_tu37i")
+
+[node name="PlayerUiHeart2" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Health" instance=ExtResource("5_qry46")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_fkrxm")
+
+[node name="PlayerUiHeart3" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Health" instance=ExtResource("5_qry46")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_14ins")
+
+[node name="PlayerUiHeart4" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Health" instance=ExtResource("5_qry46")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_r0mns")
+
+[node name="Air" type="HBoxContainer" parent="UI/MarginContainer/HBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="PlayerUiAir" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Air" instance=ExtResource("7_0jw55")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_gvfyq")
+
+[node name="PlayerUiAir2" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Air" instance=ExtResource("7_0jw55")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_ujih0")
+
+[node name="PlayerUiAir3" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Air" instance=ExtResource("7_0jw55")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_jwdk5")
+
+[node name="PlayerUiAir4" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Air" instance=ExtResource("7_0jw55")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_dfs12")
+
+[node name="PlayerUiAir5" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Air" instance=ExtResource("7_0jw55")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_atjay")
+
+[node name="Score" type="HBoxContainer" parent="UI/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="UI/MarginContainer/HBoxContainer/Score"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 40
+text = "0"
+
+[node name="TextureRect" type="TextureRect" parent="UI/MarginContainer/HBoxContainer/Score"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("9_w8ljf")
+stretch_mode = 5
 
 [node name="PauseManager" type="MarginContainer" parent="UI"]
 process_mode = 3

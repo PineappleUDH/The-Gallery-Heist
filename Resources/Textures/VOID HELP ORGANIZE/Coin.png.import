@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqp8wwddxyo2h"
-path="res://.godot/imported/hanging_spikespng.png-85f9c30b7da5b5ba158c82491be6d10a.ctex"
+uid="uid://d1m7v5rs23u0t"
+path="res://.godot/imported/Coin.png-6ba1139d9a91606a22389a26c3b05e82.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Textures/hanging_spikespng.png"
-dest_files=["res://.godot/imported/hanging_spikespng.png-85f9c30b7da5b5ba158c82491be6d10a.ctex"]
+source_file="res://Resources/Textures/VOID HELP ORGANIZE/Coin.png"
+dest_files=["res://.godot/imported/Coin.png-6ba1139d9a91606a22389a26c3b05e82.ctex"]
 
 [params]
 

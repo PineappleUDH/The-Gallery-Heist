@@ -43,6 +43,4 @@ shape = SubResource("RectangleShape2D_fehu0")
 [node name="Marker2D" type="Marker2D" parent="Interactable"]
 position = Vector2(0, -21)
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="body_exited" from="." to="." method="_on_body_exited"]
 [connection signal="player_interacted" from="Interactable" to="." method="_on_interactable_player_interacted"]

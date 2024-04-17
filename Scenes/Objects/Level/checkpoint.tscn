@@ -1,10 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://uc8w4v327aj"]
+[gd_scene load_steps=26 format=3 uid="uid://uc8w4v327aj"]
 
 [ext_resource type="Script" path="res://Scenes/Objects/Level/checkpoint.gd" id="1_0uyco"]
 [ext_resource type="Texture2D" uid="uid://bm3kpjljb2t02" path="res://Resources/Textures/Checkpoint_Activating.png" id="2_6khb0"]
 [ext_resource type="Texture2D" uid="uid://dsrak25si1d2r" path="res://Resources/Textures/Checkpoint_Activated.png" id="3_egpau"]
 [ext_resource type="Texture2D" uid="uid://d88velhv2jao" path="res://Resources/Textures/SaulSprites/Hologram.png" id="3_kek0u"]
 [ext_resource type="Texture2D" uid="uid://cfld3k6vsfwld" path="res://Resources/Textures/Checpoint_Inactive.png" id="4_noqhl"]
+[ext_resource type="Shader" path="res://Resources/Shaders/glitchy.gdshader" id="5_ah12y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3hut0"]
 size = Vector2(26, 28)
@@ -97,6 +98,19 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wa31b"]
+noise_type = 2
+frequency = 0.1027
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dnq1v"]
+seamless = true
+noise = SubResource("FastNoiseLite_wa31b")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_srssl"]
+shader = ExtResource("5_ah12y")
+shader_parameter/noise = SubResource("NoiseTexture2D_dnq1v")
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_31ilg"]
 size = Vector2(32, 16)
 
@@ -134,6 +148,7 @@ autoplay = "inactive"
 [node name="Hologram" type="Sprite2D" parent="."]
 visible = false
 modulate = Color(1, 1, 1, 0.392157)
+material = SubResource("ShaderMaterial_srssl")
 position = Vector2(0, -31)
 texture = ExtResource("3_kek0u")
 

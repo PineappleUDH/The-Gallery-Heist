@@ -2,7 +2,15 @@ extends CanvasLayer
 
 @onready var _health_container : HBoxContainer = $MarginContainer/HBoxContainer/VBoxContainer/Health
 @onready var _air_container : HBoxContainer = $MarginContainer/HBoxContainer/VBoxContainer/Air
+@onready var _score_tex : TextureRect = $MarginContainer/HBoxContainer/Score/TextureRect
+@onready var _score_label : Label = $MarginContainer/HBoxContainer/Score/Label
 
+var _score_tween : Tween
+const _score_tween_time : float = 0.42
+
+
+func _ready():
+	_score_tex.pivot_offset = _score_tex.size / 2.0
 
 func setup(max_health : int, max_air : int):
 	# TODO: implement so changing the values in player class doesn't require manualy changing
@@ -48,3 +56,16 @@ func set_air(from : int, to : int):
 
 func set_air_active(active : bool):
 	_air_container.visible = active
+
+func set_score(score : int):
+	_score_label.text = str(score)
+	
+	if _score_tween && _score_tween.is_valid():
+		_score_tween.kill()
+	
+	_score_tween = create_tween().set_parallel(true).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+	_score_tween.tween_property(_score_tex, "scale", Vector2.ONE, _score_tween_time)\
+		.from(Vector2.ONE * 2.0)
+	_score_tween.tween_property(
+		_score_label, "modulate", Color.WHITE, _score_tween_time
+	).from(Color.YELLOW)

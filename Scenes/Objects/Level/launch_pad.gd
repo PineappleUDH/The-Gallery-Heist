@@ -12,6 +12,8 @@ extends Node2D
 		_toggle_editor_preview = value
 		queue_redraw()
 
+const _preview_color : Color = Color("ffffff64")
+
 # player uses same gravity value as project setting
 var _player_gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -30,12 +32,13 @@ func _draw():
 	
 	# draw preview
 	draw_dashed_line(
-		Vector2.ZERO, Vector2(0, -highest_point), Color.WHITE, 3.0, 10.0
+		Vector2.ZERO, Vector2(0, -highest_point), _preview_color, 3.0, 10.0
 	)
 	var hologram_tex : Texture2D = preload("res://Resources/Textures/SaulSprites/Preview.png")
 	draw_texture(
 		hologram_tex,
-		Vector2(0, -highest_point) - hologram_tex.get_size() / 2.0
+		Vector2(0, -highest_point) - hologram_tex.get_size() / 2.0,
+		
 	)
 
 # TODO: player can jump white in air after being launched due to koyote time
@@ -44,7 +47,7 @@ func _draw():
 #       which the player reacts to by disabling koyote time..
 func _on_activation_zone_body_entered(body : Node2D):
 	if body is Character && _launch_delay.is_stopped():
-		body.velocity.y = -_launch_force
+		body.velocity += Vector2.UP.rotated(rotation) * _launch_force
 		_animation.play("pressed")
 		
 		if body is Player:
