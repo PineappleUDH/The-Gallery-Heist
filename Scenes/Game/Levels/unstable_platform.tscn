@@ -30,6 +30,7 @@ gravity = Vector3(0, 0, 0)
 scale_min = 2.5
 scale_max = 2.5
 scale_curve = SubResource("CurveTexture_q3wms")
+color = Color(0.407843, 0.392157, 0.541176, 1)
 
 [node name="UnstablePlatform" type="StaticBody2D"]
 script = ExtResource("1_vm8bm")

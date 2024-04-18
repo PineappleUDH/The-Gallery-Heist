@@ -1,48 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://ce6rpr8fcsibk"]
+[gd_scene load_steps=4 format=3 uid="uid://ce6rpr8fcsibk"]
 
 [ext_resource type="Script" path="res://Scenes/Objects/Level/moving_platform.gd" id="1_em6rl"]
 [ext_resource type="Texture2D" uid="uid://cbvtidw4453oq" path="res://Resources/Textures/Moving_platform.png" id="1_f1itv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ygl8"]
 size = Vector2(48, 0)
-
-[sub_resource type="Animation" id="Animation_l48cv"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PathFollow2D:progress_ratio")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="Animation" id="Animation_glnoa"]
-resource_name = "move"
-length = 2.0
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PathFollow2D:progress_ratio")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(-3.13833, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_gwyin"]
-_data = {
-"RESET": SubResource("Animation_l48cv"),
-"move": SubResource("Animation_glnoa")
-}
 
 [node name="MovingPlatform" type="Path2D"]
 script = ExtResource("1_em6rl")
@@ -63,8 +25,3 @@ texture = ExtResource("1_f1itv")
 remote_path = NodePath("../../AnimatableBody2D")
 update_rotation = false
 update_scale = false
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_gwyin")
-}

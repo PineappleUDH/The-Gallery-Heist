@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends AnimatableBody2D
 
 const _max_rot_speed : float = 500.0
 const _rot_accel : float = 300.0

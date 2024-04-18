@@ -101,7 +101,6 @@ frame_progress = 1.0
 [node name="ActivationShape" type="CollisionShape2D" parent="ActivationZone"]
 position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_i7ypf")
-one_way_collision = true
 
 [node name="LaunchDelay" type="Timer" parent="."]
 one_shot = true
