@@ -8,8 +8,10 @@ extends MarginContainer
 ]
 @onready var _main_menu_container : VBoxContainer = $Menu/MarginContainer/Main
 @onready var _settings_container : VBoxContainer = $Menu/MarginContainer/Settings
-
 @onready var _volume_slider : HSlider = $Menu/MarginContainer/Settings/VBoxContainer/Volume
+
+@onready var _hovered_sfx : AudioStreamPlayer = $Hovered
+@onready var _pressed_sfx : AudioStreamPlayer = $Pressed
 
 const _bg_parallax_factor : float = 0.01
 const _master_bus_idx : int = 0
@@ -27,10 +29,12 @@ func _input(event : InputEvent):
 				-mouse_dist_from_center * _bg_parallax_factor * (i+1)
 
 func _on_play_pressed():
+	_pressed_sfx.play()
 	# for now just move to testing scene
 	SceneManager.change_scene("res://Scenes/Game/Levels/testing.tscn")
 
 func _on_settings_pressed():
+	_pressed_sfx.play()
 	_main_menu_container.hide()
 	_settings_container.show()
 
@@ -44,5 +48,9 @@ func _on_volume_changed():
 	)
 
 func _on_settings_done_pressed():
+	_pressed_sfx.play()
 	_main_menu_container.show()
 	_settings_container.hide()
+
+func _on_button_hovered():
+	_hovered_sfx.play()

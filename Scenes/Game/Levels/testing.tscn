@@ -1,4 +1,4 @@
-[gd_scene load_steps=106 format=3 uid="uid://mlvn8cvywr4c"]
+[gd_scene load_steps=108 format=3 uid="uid://mlvn8cvywr4c"]
 
 [ext_resource type="PackedScene" uid="uid://b84n1i2bwxbmr" path="res://Scenes/Objects/Level/level.tscn" id="1_gs8pa"]
 [ext_resource type="Script" path="res://Scenes/Game/Levels/testing.gd" id="2_qem0p"]
@@ -18,8 +18,10 @@
 [ext_resource type="PackedScene" uid="uid://bol4qsyq1qr5t" path="res://Scenes/Objects/Obstacles/spikes.tscn" id="10_jd6g8"]
 [ext_resource type="PackedScene" uid="uid://ks2b8lp58x7d" path="res://Scenes/Objects/Obstacles/hanging_spikes.tscn" id="13_84u2b"]
 [ext_resource type="PackedScene" uid="uid://cor2s0svaqrii" path="res://Scenes/Objects/Level/launch_pad.tscn" id="13_b67fq"]
+[ext_resource type="PackedScene" uid="uid://o42v88vk2m88" path="res://Scenes/Game/Levels/unstable_platform.tscn" id="14_nssuu"]
 [ext_resource type="PackedScene" uid="uid://catjkp55gq8oi" path="res://Scenes/Objects/Collectables/collectable_pie.tscn" id="15_qcc68"]
 [ext_resource type="PackedScene" uid="uid://dvik7v57h3mcf" path="res://Scenes/Objects/Characters/Enemies/enemy_patrolling.tscn" id="16_c4ebt"]
+[ext_resource type="PackedScene" uid="uid://7l87lw8fg00p" path="res://Scenes/Objects/Obstacles/dash_disabler.tscn" id="17_ntf35"]
 [ext_resource type="PackedScene" uid="uid://ce6rpr8fcsibk" path="res://Scenes/Objects/Level/moving_platform.tscn" id="18_5472d"]
 [ext_resource type="PackedScene" uid="uid://c3ynadcc6a7cf" path="res://Scenes/Objects/Level/moving_launchpad.tscn" id="19_r0t7p"]
 [ext_resource type="PackedScene" uid="uid://c2csilanfu3wv" path="res://Scenes/Objects/Level/moving_spikes.tscn" id="20_jj33r"]
@@ -1604,6 +1606,29 @@ curve = SubResource("Curve2D_30kxe")
 _loop = false
 _speed = 1.0
 
+[node name="UnstablePlatform" parent="Interactables" index="4" instance=ExtResource("14_nssuu")]
+position = Vector2(802, -210)
+_count = 5
+
+[node name="UnstablePlatform2" parent="Interactables" index="5" instance=ExtResource("14_nssuu")]
+position = Vector2(987, -311)
+_count = 3
+
+[node name="UnstablePlatform3" parent="Interactables" index="6" instance=ExtResource("14_nssuu")]
+position = Vector2(1112, -347)
+
+[node name="UnstablePlatform4" parent="Interactables" index="7" instance=ExtResource("14_nssuu")]
+position = Vector2(1128, -347)
+
+[node name="UnstablePlatform5" parent="Interactables" index="8" instance=ExtResource("14_nssuu")]
+position = Vector2(1144, -347)
+
+[node name="UnstablePlatform6" parent="Interactables" index="9" instance=ExtResource("14_nssuu")]
+position = Vector2(1160, -347)
+
+[node name="UnstablePlatform7" parent="Interactables" index="10" instance=ExtResource("14_nssuu")]
+position = Vector2(1176, -347)
+
 [node name="Spikes" parent="Obstacles" index="0" instance=ExtResource("10_jd6g8")]
 position = Vector2(472, -339)
 rotation = -1.5708
@@ -1749,6 +1774,10 @@ rotation = -1.5708
 
 [node name="HangingSpikes" parent="Obstacles" index="31" instance=ExtResource("13_84u2b")]
 position = Vector2(2991, 7094)
+
+[node name="DashDisabler" parent="Obstacles" index="32" instance=ExtResource("17_ntf35")]
+position = Vector2(1077, -338)
+_radius = 120.0
 
 [node name="Saul" parent="Characters" index="0"]
 position = Vector2(175, -143)

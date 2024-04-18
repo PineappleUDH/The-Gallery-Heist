@@ -5,6 +5,10 @@ func _input(event : InputEvent):
 	if event.is_action_pressed("pause"):
 		_set_pause(!get_tree().paused)
 
+func _exit_tree():
+	# in case of quiting while paused
+	get_tree().paused = false
+
 func _on_resume_pressed():
 	_set_pause(false)
 

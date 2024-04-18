@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://7l87lw8fg00p"]
+
+[ext_resource type="Script" path="res://Scenes/Objects/Obstacles/dash_disabler.gd" id="1_jusnf"]
+[ext_resource type="Texture2D" uid="uid://di1tgsqwu6kxi" path="res://Resources/Textures/dash_disabler.png" id="1_vj3cc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vbhvu"]
+atlas = ExtResource("1_vj3cc")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jcfnt"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+spread = 180.0
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+scale_max = 1.6
+color = Color(1, 0.231373, 0.231373, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_etil0"]
+resource_local_to_scene = true
+radius = 0.0
+
+[node name="DashDisabler" type="Node2D"]
+script = ExtResource("1_jusnf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_vbhvu")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_jcfnt")
+lifetime = 0.35
+
+[node name="Area2D" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_etil0")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_body_exited"]

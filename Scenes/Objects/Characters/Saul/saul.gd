@@ -60,6 +60,7 @@ var _air : int = _max_air
 var _was_on_water_surface : bool = false
 
 var _can_dash : bool = true
+var _dash_disabled : bool = false
 const _dash_speed: float = 300
 const _dash_shake_duration : float = 0.3
 
@@ -83,10 +84,8 @@ func _ready():
 	_state_machine.add_state("dead", _state_dead_switch_to, _state_dead_switch_from, Callable(), Callable())
 	_state_machine.change_state("normal")
 	
-	_debug_vars_visualizer.add_var("Score")
 	_debug_vars_visualizer.add_var("State")
 	_debug_vars_visualizer.add_var("Can_Dash")
-	_debug_vars_visualizer.add_var("Health")
 	
 	await get_tree().process_frame # wait for level to get ready
 	World.level.interface.setup(_max_health, _max_air)
@@ -106,7 +105,6 @@ func _process(delta : float):
 	# debug
 	_debug_vars_visualizer.edit_var("State", _state_machine.get_current_state())
 	_debug_vars_visualizer.edit_var("Can_Dash", _can_dash)
-	_debug_vars_visualizer.edit_var("Health", str(_health) + "/" + str(_max_health))
 
 func _physics_process(delta : float):
 	_state_machine.state_physics_process(delta)
@@ -115,9 +113,13 @@ func can_dash():
 	return _can_dash
 
 func refill_dash():
-	if _can_dash == false:
+	if _can_dash == false && _dash_disabled == false:
 		_can_dash = true
 		_dash_cooldown.stop()
+
+func set_dash_disabled(disabled : bool):
+	_dash_disabled = disabled
+	if disabled: _can_dash = false
 
 func heal(amount : int):
 	if _health == _max_health: return
@@ -148,6 +150,7 @@ func reset_from_checkpoint(checkpoint_position : Vector2):
 	_health = _max_health
 	_facing = Vector2.RIGHT
 	_direction = Vector2.RIGHT
+	_dash_disabled = false
 	_state_machine.change_state("normal")
 	
 	respawned.emit()
@@ -175,12 +178,12 @@ func _play_animation(anim_name : String, ignore_if_playing : bool = false):
 		return
 	_sprite.play(anim_name)
 
-func _get_ray_colliding_with_tilemap() -> RayCast2D:
+func _get_ray_colliding_with_tilemap() -> Vector2:
 	if _detect_left.is_colliding() and _detect_left.get_collider() is TileMap:
-		return _detect_left
+		return Vector2.LEFT
 	elif _detect_right.is_colliding() and _detect_right.get_collider() is TileMap:
-		return _detect_right
-	return null
+		return Vector2.RIGHT
+	return Vector2.ZERO
 
 func _is_water_tile(global_pos : Vector2) -> bool:
 	var layers_count : int = World.level.tilemap.get_layers_count()
@@ -292,18 +295,16 @@ func _state_normal_ph_process(delta : float):
 	
 	if (is_on_floor() == false and Input.is_action_pressed("wall_grab") and
 	_wall_grab_cooldown.is_stopped()):
-		var ray : RayCast2D = _get_ray_colliding_with_tilemap()
-		if ray :
-			if ray == _detect_left:
-				_facing = Vector2.LEFT
-			elif ray == _detect_right:
-				_facing = Vector2.RIGHT
+		var ray_dir : Vector2 = _get_ray_colliding_with_tilemap()
+		if ray_dir != Vector2.ZERO:
+			_facing = ray_dir
 			
 			_sfx["hit_wall"].play()
 			_state_machine.change_state("wall_slide")
 			return
 	
-	if _can_dash == false && _dash_cooldown.is_stopped() && is_on_floor():
+	if (_can_dash == false && _dash_disabled == false &&
+	_dash_cooldown.is_stopped() && is_on_floor()):
 		_can_dash = true
 	
 	if Input.is_action_just_pressed("dash") && _can_dash:
@@ -360,9 +361,8 @@ func _state_wall_slide_ph_process(delta: float):
 		return
 	
 	# wall out of reach
-	var ray : RayCast2D = _get_ray_colliding_with_tilemap()
-	if (is_on_floor() or
-	((_facing == Vector2.LEFT and ray != _detect_left) or (_facing == Vector2.RIGHT and ray != _detect_right))):
+	var ray_dir : Vector2 = _get_ray_colliding_with_tilemap()
+	if is_on_floor() or (_facing != ray_dir):
 		_state_machine.change_state("normal")
 		return
 	
