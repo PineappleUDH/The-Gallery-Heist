@@ -1,4 +1,4 @@
-[gd_scene load_steps=104 format=3 uid="uid://mlvn8cvywr4c"]
+[gd_scene load_steps=106 format=3 uid="uid://mlvn8cvywr4c"]
 
 [ext_resource type="PackedScene" uid="uid://b84n1i2bwxbmr" path="res://Scenes/Objects/Level/level.tscn" id="1_gs8pa"]
 [ext_resource type="Script" path="res://Scenes/Game/Levels/testing.gd" id="2_qem0p"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://c2csilanfu3wv" path="res://Scenes/Objects/Level/moving_spikes.tscn" id="20_jj33r"]
 [ext_resource type="PackedScene" uid="uid://tgxwefto77lr" path="res://Scenes/Objects/Collectables/collectable_SAUL.tscn" id="21_i7p6d"]
 [ext_resource type="PackedScene" uid="uid://dkn8trjyqlfdg" path="res://Scenes/Objects/Collectables/collectable_egg.tscn" id="22_tk00u"]
+[ext_resource type="PackedScene" uid="uid://ctx1ycv0e7jjo" path="res://Scenes/Objects/Obstacles/swinging_trap.tscn" id="26_fcvc5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tu37i"]
 resource_local_to_scene = true
@@ -916,6 +917,12 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -1, 2, 0, 0, 0, 0, -91, -92)
 }
 point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_4xta8"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 131, 95, 0, 0, 0, 0, -15, 125, 0, 0, 0, 0, -203, 44)
+}
+point_count = 3
 
 [node name="Testing" instance=ExtResource("1_gs8pa")]
 script = ExtResource("2_qem0p")
@@ -2500,11 +2507,6 @@ _zoom = Vector2(3, 3)
 position = Vector2(95, -4.25)
 shape = SubResource("RectangleShape2D_h04xv")
 
-[node name="Camera_TriggerCamera36" parent="Triggers" index="42" instance=ExtResource("5_7n87s")]
-position = Vector2(3303, 5458)
-_change_state = true
-_idle_position = Vector2(3312, 5478)
-
 [node name="MovingPlatform" parent="." index="12" instance=ExtResource("19_r0t7p")]
 position = Vector2(112, -1358)
 curve = SubResource("Curve2D_g7ghg")
@@ -2569,3 +2571,8 @@ _letter = 3
 
 [node name="Collectable5" parent="." index="24" instance=ExtResource("22_tk00u")]
 position = Vector2(242, -137)
+
+[node name="SwingingTrap" parent="." index="26" instance=ExtResource("26_fcvc5")]
+position = Vector2(1102, -299)
+curve = SubResource("Curve2D_4xta8")
+_loop = false

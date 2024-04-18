@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=3 uid="uid://ctx1ycv0e7jjo"]
+
+[ext_resource type="Script" path="res://Scenes/Objects/Level/moving_platform.gd" id="1_ya1cu"]
+[ext_resource type="PackedScene" uid="uid://ks2b8lp58x7d" path="res://Scenes/Objects/Obstacles/hanging_spikes.tscn" id="2_4gyrp"]
+[ext_resource type="Script" path="res://Scenes/Objects/Level/Line2D.gd" id="2_josxq"]
+
+[sub_resource type="Animation" id="Animation_l48cv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_glnoa"]
+resource_name = "move"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(-3.13833, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gwyin"]
+_data = {
+"RESET": SubResource("Animation_l48cv"),
+"move": SubResource("Animation_glnoa")
+}
+
+[node name="SwingingTrap" type="Path2D"]
+script = ExtResource("1_ya1cu")
+
+[node name="Anchor" type="Node2D" parent="."]
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+
+[node name="HangingSpikes" parent="AnimatableBody2D" instance=ExtResource("2_4gyrp")]
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D"]
+remote_path = NodePath("../../AnimatableBody2D")
+update_rotation = false
+update_scale = false
+
+[node name="Line2D" type="Line2D" parent="PathFollow2D"]
+position = Vector2(1, 0)
+points = PackedVector2Array(0, 0, 0, 0)
+script = ExtResource("2_josxq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gwyin")
+}
