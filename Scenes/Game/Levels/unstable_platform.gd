@@ -83,6 +83,7 @@ func _on_timer_timeout():
 				# fully destroyed
 				_current_state = _State.empty
 				_collider.disabled = true
+				_detection_collider.disabled = true
 				_timer.wait_time = _empty_time
 			
 			_timer.start()
@@ -102,6 +103,7 @@ func _on_timer_timeout():
 				# fully restored
 				_current_state = _State.solid
 				_collider.disabled = false
+				_detection_collider.disabled = false
 			
 			else:
 				_timer.start()

@@ -624,11 +624,11 @@ texture = ExtResource("3_hc6mq")
 
 [node name="Right" type="RayCast2D" parent="Detection" index="0"]
 position = Vector2(6, 0)
-target_position = Vector2(4, 0)
+target_position = Vector2(2, 0)
 
 [node name="Left" type="RayCast2D" parent="Detection" index="1"]
 position = Vector2(-6, 0)
-target_position = Vector2(-4, 0)
+target_position = Vector2(-2, 0)
 
 [node name="AudioListener2D" type="AudioListener2D" parent="." index="4"]
 current = true

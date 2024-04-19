@@ -5,6 +5,8 @@ extends CharacterBody2D
 @onready var _debug_vars_visualizer = $DebugVarsVisualizer
 var _player_detected : bool = false
 var _state_machine : StateMachine = StateMachine.new()
+var _direction : Vector2
+var _player : Player
 
 
 func _ready():
@@ -16,12 +18,16 @@ func _ready():
 	_state_machine.change_state("idle")
 	
 	_debug_vars_visualizer.add_var("State")
+	await get_tree().process_frame
+	_player = World.level.player
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	_state_machine.state_process(delta)
 	_debug_vars_visualizer.edit_var("State", _state_machine.get_current_state())
+	
 
 func _physics_process(delta : float):
 	_state_machine.state_physics_process(delta)

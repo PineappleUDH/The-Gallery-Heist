@@ -2,7 +2,7 @@
 extends Node2D
 
 @onready var _launch_delay : Timer = $LaunchDelay
-@onready var _animation : AnimatedSprite2D = $Base/Animation
+@onready var _animation : AnimatedSprite2D = $Animation
 @export var _launch_force : float = 500.0 :
 	set(value):
 		_launch_force = value

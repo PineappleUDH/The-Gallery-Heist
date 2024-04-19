@@ -740,10 +740,10 @@ _data = {
 point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n4nu1"]
-size = Vector2(32, 28)
+size = Vector2(32, 27)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kqejm"]
-size = Vector2(32, 28)
+size = Vector2(31, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4iiu4"]
 size = Vector2(32.5, 28)
@@ -1622,19 +1622,19 @@ position = Vector2(987, -311)
 _count = 3
 
 [node name="UnstablePlatform3" parent="Interactables" index="6" instance=ExtResource("14_nssuu")]
-position = Vector2(1112, -347)
+position = Vector2(1120, -352)
 
 [node name="UnstablePlatform4" parent="Interactables" index="7" instance=ExtResource("14_nssuu")]
-position = Vector2(1128, -347)
+position = Vector2(1136, -352)
 
 [node name="UnstablePlatform5" parent="Interactables" index="8" instance=ExtResource("14_nssuu")]
-position = Vector2(1144, -347)
+position = Vector2(1152, -352)
 
 [node name="UnstablePlatform6" parent="Interactables" index="9" instance=ExtResource("14_nssuu")]
-position = Vector2(1160, -347)
+position = Vector2(1168, -352)
 
 [node name="UnstablePlatform7" parent="Interactables" index="10" instance=ExtResource("14_nssuu")]
-position = Vector2(1176, -347)
+position = Vector2(1184, -352)
 
 [node name="Spikes" parent="Obstacles" index="0" instance=ExtResource("10_jd6g8")]
 position = Vector2(472, -339)
@@ -1955,6 +1955,7 @@ shape = SubResource("RectangleShape2D_kqejm")
 position = Vector2(176, -142)
 _change_state = true
 _change_zoom = true
+_change_lock = true
 _idle_position = Vector2(176, -270)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Camera_Triggers#TriggerCamera4" index="0"]
@@ -1965,7 +1966,7 @@ position = Vector2(-191, -97)
 shape = SubResource("RectangleShape2D_kqejm")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Triggers/Camera_Triggers#TriggerCamera4" index="2"]
-position = Vector2(189, -97)
+position = Vector2(189.5, -95)
 shape = SubResource("RectangleShape2D_kqejm")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Triggers/Camera_Triggers#TriggerCamera4" index="3"]
@@ -2024,7 +2025,7 @@ _x_bound = Vector2(1871, 1871)
 _y_bound = Vector2(-270, -270)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Camera_Triggers#TriggerCamera6" index="0"]
-position = Vector2(21, 3)
+position = Vector2(21, 3.5)
 shape = SubResource("RectangleShape2D_n4nu1")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Triggers/Camera_Triggers#TriggerCamera6" index="1"]
