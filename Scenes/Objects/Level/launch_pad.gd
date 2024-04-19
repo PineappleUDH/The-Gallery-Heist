@@ -34,7 +34,7 @@ func _draw():
 	draw_dashed_line(
 		Vector2.ZERO, Vector2(0, -highest_point), _preview_color, 3.0, 10.0
 	)
-	var hologram_tex : Texture2D = preload("res://Resources/Textures/SaulSprites/Preview.png")
+	var hologram_tex : Texture2D = preload("res://Resources/Textures/Characters/SaulSprites/Preview.png")
 	draw_texture(
 		hologram_tex,
 		Vector2(0, -highest_point) - hologram_tex.get_size() / 2.0,

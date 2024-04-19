@@ -12,6 +12,7 @@ points = PackedVector2Array(0, 0, 0, 0)
 script = ExtResource("2_josxq")
 
 [node name="HangingSpikes" parent="." instance=ExtResource("2_4gyrp")]
+sync_to_physics = false
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
 
