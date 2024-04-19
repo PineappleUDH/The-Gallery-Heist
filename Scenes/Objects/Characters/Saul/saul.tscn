@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=3 uid="uid://crjtftvmkahqx"]
+[gd_scene load_steps=109 format=3 uid="uid://crjtftvmkahqx"]
 
 [ext_resource type="PackedScene" uid="uid://bb8fvvxo2nhq1" path="res://Scenes/Objects/Characters/character.tscn" id="1_regtg"]
 [ext_resource type="Script" path="res://Scenes/Objects/Characters/Saul/saul.gd" id="2_rhth6"]
@@ -20,6 +20,8 @@
 [ext_resource type="Texture2D" uid="uid://b0jtwo8k73klr" path="res://Resources/Textures/Characters/SaulSprites/LookingUp.png" id="15_277en"]
 [ext_resource type="Texture2D" uid="uid://djjnknhd3px7v" path="res://Resources/Textures/Characters/SaulSprites/Wall_Jump (AddinSachen)-Sheet.png" id="16_76hmv"]
 [ext_resource type="PackedScene" uid="uid://d4hvse6k4r8rh" path="res://Scenes/Objects/debug_vars_visualizer.tscn" id="17_q1cbf"]
+[ext_resource type="Texture2D" uid="uid://bvwrlyelrr3qw" path="res://Resources/Textures/SaulSprites/water_idle.png" id="20_26ivk"]
+[ext_resource type="Texture2D" uid="uid://40ofd147r3ud" path="res://Resources/Textures/SaulSprites/water_swim.png" id="21_0dvp4"]
 [ext_resource type="AudioStream" uid="uid://dpg46pasbhqyu" path="res://Resources/Audio/SFX/Player/jump1.wav" id="23_afgeb"]
 [ext_resource type="AudioStream" uid="uid://cqinx1if47psh" path="res://Resources/Audio/SFX/Player/jump2.wav" id="24_mecrg"]
 [ext_resource type="AudioStream" uid="uid://c8thp02ix675n" path="res://Resources/Audio/SFX/Player/jump3.wav" id="25_iwtg6"]
@@ -262,6 +264,26 @@ region = Rect2(32, 0, 32, 36)
 [sub_resource type="AtlasTexture" id="AtlasTexture_1qxbn"]
 atlas = ExtResource("16_76hmv")
 region = Rect2(64, 0, 32, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_px1lx"]
+atlas = ExtResource("21_0dvp4")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jydge"]
+atlas = ExtResource("21_0dvp4")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mrrlm"]
+atlas = ExtResource("21_0dvp4")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_snssu"]
+atlas = ExtResource("21_0dvp4")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aodvu"]
+atlas = ExtResource("21_0dvp4")
+region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vg3q4"]
 animations = [{
@@ -507,6 +529,34 @@ animations = [{
 "loop": false,
 "name": &"Wall Jump",
 "speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_26ivk")
+}],
+"loop": false,
+"name": &"Water Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_px1lx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jydge")
+}, {
+"duration": 1.3,
+"texture": SubResource("AtlasTexture_mrrlm")
+}, {
+"duration": 1.6,
+"texture": SubResource("AtlasTexture_snssu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aodvu")
+}],
+"loop": true,
+"name": &"Water Swim",
+"speed": 8.0
 }]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y8iht"]

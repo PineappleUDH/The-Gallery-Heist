@@ -4,7 +4,6 @@ signal applied_damage
 
 @export var _target_player_only : bool = false
 @export var damage : int = 1
-@export var knockback : float = 130.0 # TODO: make knockback a var of Character instead of this
 @export var is_deadly : bool = false
 
 # TODO: add 'custom_damange_direction' for nodes that don't apply damage
@@ -18,7 +17,7 @@ func _physics_process(delta : float):
 	if monitoring:
 		for body : Node2D in get_overlapping_bodies():
 			if _is_valid_damage_receiver(body):
-				var damage_taken : bool = body.take_damage(damage, knockback, global_position, is_deadly)
+				var damage_taken : bool = body.take_damage(damage, global_position, is_deadly)
 				if damage_taken:
 					applied_damage.emit()
 

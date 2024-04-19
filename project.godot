@@ -19,6 +19,7 @@ config/icon="res://saul_face_emoji (Potent).png"
 
 SceneManager="*res://Scenes/Autoloads/scene_manager.tscn"
 World="*res://Scenes/Autoloads/world.gd"
+Utilities="*res://Scenes/autoloads/utilities.gd"
 
 [debug]
 

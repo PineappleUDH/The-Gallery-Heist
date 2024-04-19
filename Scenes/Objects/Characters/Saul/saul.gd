@@ -19,7 +19,7 @@ signal interacted
 @onready var _detect_right : RayCast2D = $Detection/Right
 @onready var _detect_left : RayCast2D = $Detection/Left
 @onready var _hurtbox : Area2D = $HurtBox
-@onready var _collider : CollisionShape2D = $CollisionShape2D
+var _default_collider_size : Vector2
 @onready var _sfx : Dictionary = {
 	"jump":$Sounds/Jump, "dash":$Sounds/Dash, "hit_wall":$Sounds/HitWall,
 	"attack":$Sounds/Attack, "died":$Sounds/Died, "footstep":$Sounds/Footstep,
@@ -53,11 +53,13 @@ const _run_footstep_time : float = 0.3
 
 const _water_gravity : float = 250.0
 const _max_swim_speed : float = 190.0
+const _out_of_water_push : float = 80.0
 const _water_accel : float = 320.0
 const _water_decel : float = 400.0
 const _max_air : int = 5
 var _air : int = _max_air
 var _was_on_water_surface : bool = false
+const _water_collider_size : Vector2 = Vector2(28, 14)
 
 var _can_dash : bool = true
 var _dash_disabled : bool = false
@@ -75,6 +77,9 @@ func _ready():
 	_max_health = 4
 	_damage_cooldown_time = 2.0
 	_health = _max_health
+	_knockback = 130.0
+	
+	_default_collider_size = _collider.shape.size
 	
 	_state_machine.add_state("normal", Callable(), _state_normal_switch_from, _state_normal_process, _state_normal_ph_process)
 	_state_machine.add_state("dash", _state_dash_switch_to, _state_dash_switch_from, Callable(), _state_dash_ph_process)
@@ -98,9 +103,14 @@ func _process(delta : float):
 	if _facing.x < 0:
 		_sprite.flip_h = true
 	
-	if (Input.is_action_just_pressed("interact") and
-	_state_machine._curr_state != "dead"):
-		interacted.emit()
+	if _state_machine._curr_state != "dead":
+		# interaction
+		if Input.is_action_just_pressed("interact"):
+			interacted.emit()
+		
+		# check water
+		if _state_machine._curr_state != "swim" && _is_water_tile(global_position):
+			_state_machine.change_state("swim")
 	
 	# debug
 	_debug_vars_visualizer.edit_var("State", _state_machine.get_current_state())
@@ -128,9 +138,9 @@ func heal(amount : int):
 	_health = min(_health + amount, _max_health)
 	World.level.interface.set_health(old_health, _health)
 
-func take_damage(damage : int, knockback : float, from : Vector2, is_deadly : bool = false) -> bool:
+func take_damage(damage : int, from : Vector2, is_deadly : bool = false) -> bool:
 	var old_health : int = _health
-	var applied : bool = super.take_damage(damage, knockback, from, is_deadly)
+	var applied : bool = super.take_damage(damage, from, is_deadly)
 	
 	World.level.interface.set_health(old_health, _health)
 	return applied
@@ -231,16 +241,16 @@ func _state_normal_process(delta : float):
 func _state_normal_ph_process(delta : float):
 	# Enable gravity.
 	if not is_on_floor():
-		velocity.y = min(velocity.y + _gravity * delta, _max_fall_speed)
+		velocity.y = Utilities.soft_clamp(velocity.y, _gravity * delta, _max_fall_speed)
 	
 	# Movement Control
 	_direction = Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down"))
 	if _direction: _facing = _direction
 	
 	if _direction.x:
-		velocity.x = move_toward(velocity.x, _max_move_speed * sign(_direction.x), _accel * delta)
+		velocity.x = Utilities.soft_clamp(velocity.x, _accel * delta * sign(_direction.x), _max_move_speed)
 	else:
-		velocity.x = move_toward(velocity.x, 0.0, _decel * delta)
+		velocity.x = Utilities.soft_clamp(velocity.x, _decel * delta * -sign(velocity.x), 0.0)
 	
 	_walk_dust_particles.emitting = is_on_floor() and velocity.x
 	
@@ -269,7 +279,7 @@ func _state_normal_ph_process(delta : float):
 	var just_jumped : bool = false
 	if Input.is_action_just_pressed("jump"):
 		if is_on_floor() or not _coyote_timer.is_stopped():
-			velocity.y = -_jump_force
+			velocity.y = Utilities.soft_clamp(velocity.y, -_jump_force, _jump_force)
 			just_jumped = true
 			_jump_particles.restart()
 			_sfx["jump"].play()
@@ -288,7 +298,7 @@ func _state_normal_ph_process(delta : float):
 		# just landed
 		_play_animation("Landing")
 		if _jump_buffer_timer.is_stopped() == false:
-			velocity.y = -_jump_force
+			velocity.y = Utilities.soft_clamp(velocity.y, -_jump_force, _jump_force)
 			just_jumped = true
 			_jump_particles.restart()
 			_sfx["jump"].play()
@@ -314,10 +324,6 @@ func _state_normal_ph_process(delta : float):
 	if Input.is_action_just_pressed("attack_basic"):
 		_state_machine.change_state("attack")
 		return
-	
-	# check water
-	if _is_water_tile(global_position):
-		_state_machine.change_state("swim")
 
 func _state_wall_slide_switch_to(from : String):
 	velocity = Vector2(0,0)
@@ -354,8 +360,9 @@ func _state_wall_slide_ph_process(delta: float):
 	if Input.is_action_just_pressed("jump"):
 		_sfx["jump"].play()
 		_facing *= -1
-		velocity.x = _wall_push_force * _facing.x
-		velocity.y = -_wall_jump_force
+		var push_force : float = _wall_push_force * _facing.x
+		velocity.x = Utilities.soft_clamp(velocity.x, push_force, abs(push_force))
+		velocity.y = Utilities.soft_clamp(velocity.y, -_wall_jump_force, _wall_jump_force)
 		_play_animation("Wall Jump", true)
 		_state_machine.change_state("normal")
 		return
@@ -371,7 +378,7 @@ func _state_wall_slide_ph_process(delta: float):
 func _state_dash_switch_to(from : String):
 	World.level.level_camera.shake(LevelCamera.ShakeLevel.low, _dash_shake_duration)
 	_can_dash = false
-	velocity = Vector2.ZERO
+	velocity = _dash_speed * _facing.normalized()
 	_dash_trail.set_active(true, _sprite.flip_h)
 	_sfx["dash"].play()
 	_dash_timer.start()
@@ -382,8 +389,6 @@ func _state_dash_switch_from(to: String):
 	_dash_trail.set_active(false)
 
 func _state_dash_ph_process(delta: float):
-	velocity = _dash_speed * _facing.normalized()
-	
 	move_and_slide()
 	
 	if _dash_timer.is_stopped() or is_on_wall():
@@ -404,7 +409,7 @@ func _state_attack_switch_from(from : String):
 func _state_attack_ph_process(delta: float):
 	# Enable gravity.
 	if not is_on_floor():
-		velocity.y = min(velocity.y + _gravity * delta, _max_fall_speed)
+		velocity.y = Utilities.soft_clamp(velocity.y, _gravity * delta, _max_fall_speed)
 	
 	move_and_slide()
 	
@@ -416,12 +421,19 @@ func _state_attack_ph_process(delta: float):
 func _state_swim_switch_to(from : String):
 	# limit enter speed so if player is going super fast a damp effect is applied like real life
 	velocity = velocity.clamp(Vector2.ONE * -_max_swim_speed, Vector2.ONE * _max_swim_speed)
+	
+	_collider.shape.size = _water_collider_size
 	_was_on_water_surface = true
 	refill_dash()
 	
 	# TODO: muffle some sounds, would need to separate buses
 
 func _state_swim_switch_from(to : String):
+	# if player leaves water with a slow speed they'll fall right back leading to state continuously
+	# changing. this kicks the player up when they leave
+	velocity.y = Utilities.soft_clamp(velocity.y, -_out_of_water_push, _out_of_water_push)
+	
+	_collider.shape.size = _default_collider_size
 	_bubbles_particles.emitting = false
 	World.level.interface.set_air_active(false)
 	World.level.interface.set_air(_air, _max_air)
@@ -434,14 +446,19 @@ func _state_swim_ph_process(delta : float):
 	if _direction: _facing = _direction
 	
 	if _direction.x:
-		velocity.x = move_toward(velocity.x, _max_swim_speed * sign(_direction.x), _water_accel * delta)
+		velocity.x = Utilities.soft_clamp(velocity.x, _water_accel * sign(_direction.x) * delta, _max_swim_speed)
 	else:
-		velocity.x = move_toward(velocity.x, 0.0, _water_decel * delta)
+		velocity.x = Utilities.soft_clamp(velocity.x, _water_decel * delta * -sign(velocity.x), 0.0)
 	
 	if _direction.y:
-		velocity.y = move_toward(velocity.y, _max_swim_speed * sign(_direction.y), _water_accel * delta)
+		velocity.y = Utilities.soft_clamp(velocity.y, _max_swim_speed * sign(_direction.y) * delta, _max_swim_speed)
 	else:
-		velocity.y = move_toward(velocity.y, 0.0, _water_decel * delta)
+		velocity.y = Utilities.soft_clamp(velocity.y, _water_decel * delta * -sign(velocity.y), 0.0)
+	
+	if velocity != Vector2.ZERO:
+		_play_animation("Water Swim")
+	else:
+		_play_animation("Water Idle")
 	
 	move_and_slide()
 	
@@ -457,7 +474,7 @@ func _state_swim_ph_process(delta : float):
 	if is_close_to_surface && Input.is_action_just_pressed("jump"):
 		# TODO: repurpose jump buffer timer for this
 		# sfx
-		velocity.y = -_jump_force
+		velocity.y = Utilities.soft_clamp(velocity.y, -_jump_force, _jump_force)
 	
 	if is_on_surface:
 		if _was_on_water_surface == false:
@@ -479,8 +496,7 @@ func _state_swim_ph_process(delta : float):
 				_air -= 1
 			else:
 				# damage time :)
-				take_damage(1, 0, Vector2.DOWN)
-			
+				take_damage(1, Vector2.DOWN)
 	
 	_was_on_water_surface = is_on_surface
 	
@@ -489,7 +505,7 @@ func _state_swim_ph_process(delta : float):
 		_state_machine.change_state("normal")
 
 func _state_dead_switch_to(from : String):
-	velocity = Vector2.ZERO
+	velocity = Vector2.ZERO # TODO: zoom in
 	_collider.disabled = true
 	_is_invincible = true
 	_sprite.flip_h = false

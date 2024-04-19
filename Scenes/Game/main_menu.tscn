@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b3ksngrr6nf1f"]
+[gd_scene load_steps=11 format=3 uid="uid://b3ksngrr6nf1f"]
 
 [ext_resource type="Script" path="res://Scenes/Game/main_menu.gd" id="1_vqpgv"]
 [ext_resource type="Texture2D" uid="uid://c67qpsqai1qwi" path="res://Resources/Textures/Main Menu/bg_1.png" id="2_8p8gt"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b3xb2ah6b2a63" path="res://Resources/Textures/Main Menu/bg_3.png" id="4_f6clv"]
 [ext_resource type="AudioStream" uid="uid://dsbmogobaeyng" path="res://Resources/Audio/SFX/UI/button_hover.wav" id="5_0du16"]
 [ext_resource type="AudioStream" uid="uid://5gj12883hk0" path="res://Resources/Audio/SFX/UI/button_press.wav" id="6_7j4va"]
+[ext_resource type="AudioStream" uid="uid://bcbul1x4fi8og" path="res://Resources/Audio/Music/main_menu.ogg" id="8_ugxx7"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_uf8ee"]
 particles_animation = true
@@ -140,6 +141,10 @@ stream = ExtResource("5_0du16")
 
 [node name="Pressed" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_7j4va")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_ugxx7")
+autoplay = true
 
 [connection signal="mouse_entered" from="Menu/MarginContainer/Main/VBoxContainer/Play" to="." method="_on_button_hovered"]
 [connection signal="pressed" from="Menu/MarginContainer/Main/VBoxContainer/Play" to="." method="_on_play_pressed"]

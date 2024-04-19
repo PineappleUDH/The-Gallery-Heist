@@ -5,6 +5,7 @@ signal died
 
 @onready var _damaged_sfx : AudioStreamPlayer2D = $Sounds/Damaged
 @onready var _damage_cooldown_timer : Timer = $Timers/DamageCooldownTimer
+@onready var _collider : CollisionShape2D = $CollisionShape2D
 
 @warning_ignore("unused_private_class_variable")
 var _gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -15,7 +16,7 @@ var _max_health : int
 var _health : int
 var _damage_cooldown_time : float
 var _is_invincible : bool
-var _knockback_multiplier : float = 1.0
+var _knockback : float = 0.0
 
 
 func _process(delta : float):
@@ -24,7 +25,7 @@ func _process(delta : float):
 		modulate.a = (sin(_damage_cooldown_timer.time_left * 10.0) + 1.0) / 2.0
 
 # override
-func take_damage(damage : int, knockback : float, from : Vector2, is_deadly : bool = false) -> bool:
+func take_damage(damage : int, from : Vector2, is_deadly : bool = false) -> bool:
 	# TODO: use a separate function for deadly damage, no point doing take_damage(0, 0, 0, true)
 	if _is_invincible: return false
 	
@@ -39,7 +40,7 @@ func take_damage(damage : int, knockback : float, from : Vector2, is_deadly : bo
 		return false
 	
 	if _health > 0:
-		velocity -= (from - global_position).normalized() * knockback * _knockback_multiplier
+		velocity -= (from - global_position).normalized() * _knockback
 		_damage_cooldown_timer.wait_time = _damage_cooldown_time
 		_damage_cooldown_timer.start()
 		_damage_taken(damage, false)

@@ -64,6 +64,8 @@ func _draw():
 			Rect2(local_idle_pos - half_viewport_size, (local_idle_pos + half_viewport_size) - (local_idle_pos - half_viewport_size)),
 			_preview_color, false
 		)
+	
+	# TODO: visialize axis lock, and take it into accout when visualizing idle state rect
 
 # TODO: if player enters trigger A and then enters trigger B while
 #       also partly inside trigger A, B will apply but if the player

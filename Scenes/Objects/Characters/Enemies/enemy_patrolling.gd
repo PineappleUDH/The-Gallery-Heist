@@ -3,7 +3,6 @@ extends "res://Scenes/Objects/Characters/Enemies/enemy.gd"
 @onready var _sprite : Sprite2D = $Sprite
 @onready var _gap_detect_left : RayCast2D = $Detectors/GapDetectLeft
 @onready var _gap_detect_right : RayCast2D = $Detectors/GapDetectRight
-@onready var _hurtbox : Area2D = $HurtBox
 @onready var _debug_vars_visualizer : PanelContainer = $DebugVarsVisualizer
 
 var _state_machine : StateMachine = StateMachine.new()
@@ -13,6 +12,7 @@ func _ready():
 	_max_health = 2
 	_damage_cooldown_time = 1.0
 	_health = _max_health
+	_knockback = 130.0
 	
 	_gap_detect_left.add_exception(self)
 	_gap_detect_right.add_exception(self)
@@ -30,16 +30,14 @@ func _process(delta : float):
 	
 	if _direction.x == 1:
 		_sprite.flip_h = false
-		_hurtbox.scale.x = 1
 	elif _direction.x == -1:
 		_sprite.flip_h = true
-		_hurtbox.scale.x = -1
 
 func _physics_process(delta : float):
 	_state_machine.state_physics_process(delta)
 
-func take_damage(damage : int, knockback : float, from : Vector2, is_deadly : bool = false) -> bool:
-	return super.take_damage(damage, knockback, from, is_deadly)
+func take_damage(damage : int, from : Vector2, is_deadly : bool = false) -> bool:
+	return super.take_damage(damage, from, is_deadly)
 
 func _state_wander_ph_process(delta: float):
 	if not is_on_floor():
