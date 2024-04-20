@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=3 uid="uid://crjtftvmkahqx"]
+[gd_scene load_steps=113 format=3 uid="uid://crjtftvmkahqx"]
 
 [ext_resource type="PackedScene" uid="uid://bb8fvvxo2nhq1" path="res://Scenes/Objects/Characters/character.tscn" id="1_regtg"]
 [ext_resource type="Script" path="res://Scenes/Objects/Characters/Saul/saul.gd" id="2_rhth6"]
@@ -264,6 +264,22 @@ region = Rect2(32, 0, 32, 36)
 [sub_resource type="AtlasTexture" id="AtlasTexture_1qxbn"]
 atlas = ExtResource("16_76hmv")
 region = Rect2(64, 0, 32, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p0gdt"]
+atlas = ExtResource("20_26ivk")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2msw8"]
+atlas = ExtResource("20_26ivk")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vpdgi"]
+atlas = ExtResource("20_26ivk")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v3fek"]
+atlas = ExtResource("20_26ivk")
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_px1lx"]
 atlas = ExtResource("21_0dvp4")
@@ -532,9 +548,18 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("20_26ivk")
+"texture": SubResource("AtlasTexture_p0gdt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2msw8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vpdgi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v3fek")
 }],
-"loop": false,
+"loop": true,
 "name": &"Water Idle",
 "speed": 5.0
 }, {
@@ -687,6 +712,7 @@ current = true
 sprite_frames = SubResource("SpriteFrames_vg3q4")
 animation = &"Idle"
 autoplay = "Idle"
+frame_progress = 0.295767
 
 [node name="Particles" type="Node2D" parent="." index="6"]
 

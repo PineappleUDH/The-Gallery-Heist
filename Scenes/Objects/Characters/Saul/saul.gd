@@ -342,7 +342,7 @@ func _state_wall_slide_ph_process(delta: float):
 		if Input.is_action_pressed("down"):
 			velocity.y = _slide_speed_fast
 		else:
-			velocity.y = _slide_speed
+			velocity.y =  _slide_speed
 	
 	# cancel sliding
 	if Input.is_action_just_released("wall_grab"):
@@ -360,9 +360,8 @@ func _state_wall_slide_ph_process(delta: float):
 	if Input.is_action_just_pressed("jump"):
 		_sfx["jump"].play()
 		_facing *= -1
-		var push_force : float = _wall_push_force * _facing.x
-		velocity.x = Utilities.soft_clamp(velocity.x, push_force, abs(push_force))
-		velocity.y = Utilities.soft_clamp(velocity.y, -_wall_jump_force, _wall_jump_force)
+		velocity.x = _wall_push_force * _facing.x
+		velocity.y = -_wall_jump_force
 		_play_animation("Wall Jump", true)
 		_state_machine.change_state("normal")
 		return

@@ -5,6 +5,7 @@ signal died
 
 @onready var _damaged_sfx : AudioStreamPlayer2D = $Sounds/Damaged
 @onready var _damage_cooldown_timer : Timer = $Timers/DamageCooldownTimer
+@warning_ignore("unused_private_class_variable")
 @onready var _collider : CollisionShape2D = $CollisionShape2D
 
 @warning_ignore("unused_private_class_variable")

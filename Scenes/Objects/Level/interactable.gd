@@ -10,6 +10,7 @@ var _prompt_marker : Marker2D
 func _ready():
 	if Engine.is_editor_hint(): return
 	
+	_prompt.hide()
 	for child in get_children():
 		if child is Marker2D:
 			_prompt_marker = child

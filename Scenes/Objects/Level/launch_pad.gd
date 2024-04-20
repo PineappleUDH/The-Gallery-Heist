@@ -1,5 +1,5 @@
 @tool
-extends Node2D
+extends Area2D
 
 @onready var _launch_delay : Timer = $LaunchDelay
 @onready var _animation : AnimatedSprite2D = $Animation
@@ -40,9 +40,9 @@ func _draw():
 		Vector2(0, -highest_point) - hologram_tex.get_size() / 2.0,
 	)
 
-func _on_activation_zone_body_entered(body : Node2D):
+func _on_body_entered(body : Node2D):
 	if body is Character && _launch_delay.is_stopped():
-		body.velocity.y = Utilities.soft_clamp(body.velocity.y, -_launch_force, _launch_force) 
+		body.velocity.y = -_launch_force
 		_animation.play("pressed")
 		
 		if body is Player:

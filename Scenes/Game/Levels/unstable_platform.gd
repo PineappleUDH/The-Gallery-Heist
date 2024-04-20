@@ -94,6 +94,7 @@ func _on_timer_timeout():
 			_timer.wait_time = _restoration_time
 			_timer.start()
 		
+		# TODO: make sprite darker while it builds so it's clear that you can't stand on it
 		_State.restore:
 			for sprite in _sprites_container.get_children():
 				sprite.texture.region.position.y -= 16

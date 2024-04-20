@@ -29,8 +29,11 @@ func _on_body_entered(body : Node2D):
 			_particles.restart()
 			World.level.set_checkpoint(self)
 			_sprite.play("activating")
-			_sprite.play("active")
 		
 		# heal player to full health, players might kill themselves near a checkpoint to heal
 		# might as well make the process less annoying
 		World.level.player.heal(999)
+
+func _on_sprite_animation_finished():
+	if _sprite.animation == "activating":
+		_sprite.play("active")

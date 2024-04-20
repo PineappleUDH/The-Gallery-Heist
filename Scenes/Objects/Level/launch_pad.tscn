@@ -73,9 +73,9 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i7ypf"]
-size = Vector2(30, 3)
+size = Vector2(30, 10)
 
-[node name="LaunchPad" type="Node2D"]
+[node name="LaunchPad" type="Area2D"]
 script = ExtResource("1_nhp1a")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
@@ -86,14 +86,12 @@ autoplay = "default"
 frame = 6
 frame_progress = 1.0
 
-[node name="ActivationZone" type="Area2D" parent="."]
-
-[node name="ActivationShape" type="CollisionShape2D" parent="ActivationZone"]
-position = Vector2(0, -1.5)
-shape = SubResource("RectangleShape2D_i7ypf")
-
 [node name="LaunchDelay" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="body_entered" from="ActivationZone" to="." method="_on_activation_zone_body_entered"]
+[node name="ActivationShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_i7ypf")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="LaunchDelay" to="." method="_on_launch_delay_timeout"]

@@ -33,7 +33,7 @@ extends StaticBody2D
 		)
 		_collider.position = Vector2(
 			_collider.shape.size.x / 2.0,
-			spike_texture.get_size().y / 2.0
+			spike_texture.get_size().y / 2.0 + 0.5
 		)
 
 @onready var _collider : CollisionShape2D = $CollisionShape2D
