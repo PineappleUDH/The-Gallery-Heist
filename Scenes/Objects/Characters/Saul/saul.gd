@@ -34,7 +34,6 @@ var _default_collider_size : Vector2
 
 # TEMP
 @onready var _attack_sprite : Sprite2D = $HurtBox/AttackSprite
-@onready var _debug_vars_visualizer : PanelContainer = $DebugVarsVisualizer
 
 # Set Variables for overall control feel
 var _facing : Vector2 = Vector2.RIGHT
@@ -89,9 +88,6 @@ func _ready():
 	_state_machine.add_state("dead", _state_dead_switch_to, _state_dead_switch_from, Callable(), Callable())
 	_state_machine.change_state("normal")
 	
-	_debug_vars_visualizer.add_var("State")
-	_debug_vars_visualizer.add_var("Can_Dash")
-	
 	await get_tree().process_frame # wait for level to get ready
 	World.level.interface.setup(_max_health, _max_air)
 
@@ -111,10 +107,6 @@ func _process(delta : float):
 		# check water
 		if _state_machine._curr_state != "swim" && _is_water_tile(global_position):
 			_state_machine.change_state("swim")
-	
-	# debug
-	_debug_vars_visualizer.edit_var("State", _state_machine.get_current_state())
-	_debug_vars_visualizer.edit_var("Can_Dash", _can_dash)
 
 func _physics_process(delta : float):
 	_state_machine.state_physics_process(delta)

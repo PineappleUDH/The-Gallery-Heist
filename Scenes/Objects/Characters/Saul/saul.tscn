@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=3 uid="uid://crjtftvmkahqx"]
+[gd_scene load_steps=112 format=3 uid="uid://crjtftvmkahqx"]
 
 [ext_resource type="PackedScene" uid="uid://bb8fvvxo2nhq1" path="res://Scenes/Objects/Characters/character.tscn" id="1_regtg"]
 [ext_resource type="Script" path="res://Scenes/Objects/Characters/Saul/saul.gd" id="2_rhth6"]
@@ -19,7 +19,6 @@
 [ext_resource type="Texture2D" uid="uid://me1hjfcqsjid" path="res://Resources/Textures/Characters/SaulSprites/Walking (AddinSachen).png" id="15_7esle"]
 [ext_resource type="Texture2D" uid="uid://b0jtwo8k73klr" path="res://Resources/Textures/Characters/SaulSprites/LookingUp.png" id="15_277en"]
 [ext_resource type="Texture2D" uid="uid://djjnknhd3px7v" path="res://Resources/Textures/Characters/SaulSprites/Wall_Jump (AddinSachen)-Sheet.png" id="16_76hmv"]
-[ext_resource type="PackedScene" uid="uid://d4hvse6k4r8rh" path="res://Scenes/Objects/debug_vars_visualizer.tscn" id="17_q1cbf"]
 [ext_resource type="Texture2D" uid="uid://bvwrlyelrr3qw" path="res://Resources/Textures/SaulSprites/water_idle.png" id="20_26ivk"]
 [ext_resource type="Texture2D" uid="uid://40ofd147r3ud" path="res://Resources/Textures/SaulSprites/water_swim.png" id="21_0dvp4"]
 [ext_resource type="AudioStream" uid="uid://dpg46pasbhqyu" path="res://Resources/Audio/SFX/Player/jump1.wav" id="23_afgeb"]
@@ -751,12 +750,6 @@ emitting = false
 process_material = SubResource("ParticleProcessMaterial_ak3j7")
 texture = ExtResource("25_srwpl")
 lifetime = 2.0
-
-[node name="DebugVarsVisualizer" parent="." index="7" instance=ExtResource("17_q1cbf")]
-offset_left = 13.0
-offset_top = -14.0
-offset_right = 21.0
-offset_bottom = -6.0
 
 [node name="CoyoteTimer" type="Timer" parent="Timers" index="0"]
 wait_time = 0.24

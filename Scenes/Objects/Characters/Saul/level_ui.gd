@@ -3,21 +3,40 @@ extends CanvasLayer
 @onready var _health_container : HBoxContainer = $Hud/HBoxContainer/VBoxContainer/Health
 @onready var _air_container : HBoxContainer = $Hud/HBoxContainer/VBoxContainer/Air
 @onready var _dash_ui : TextureRect = $Hud/PlayerUiDash
+@onready var _score_container : HBoxContainer = $Hud/HBoxContainer/Score
 @onready var _score_tex : TextureRect = $Hud/HBoxContainer/Score/TextureRect
 @onready var _score_label : Label = $Hud/HBoxContainer/Score/Label
+@onready var _hide_coins_timer : Timer = $Hud/HideCoinsTimer
+
+const _heart_ui_scene : PackedScene = preload("res://Scenes/Objects/Interface/player_ui_heart.tscn")
+const _air_ui_scene : PackedScene = preload("res://Scenes/Objects/Interface/player_ui_air.tscn")
 
 var _dash_locked : bool
+const _hide_score_transparency : float = 0.5
 var _score_tween : Tween
 const _score_tween_time : float = 0.42
 
 
 func _ready():
+	_air_container.hide()
 	_score_tex.pivot_offset = _score_tex.size / 2.0
+	_score_container.modulate.a = _hide_score_transparency
 
 func setup(max_health : int, max_air : int):
-	# TODO: implement so changing the values in player class doesn't require manualy changing
+	# setup so changing the values in player class doesn't require manualy changing
 	#       ui elements here, long live automation!
-	pass
+	
+	# remove preview ui
+	for child in _health_container.get_children(): child.queue_free()
+	for child in _air_container.get_children(): child.queue_free()
+	
+	for i in max_health:
+		var instance := _heart_ui_scene.instantiate()
+		_health_container.add_child(instance)
+	
+	for i in max_air:
+		var instance := _air_ui_scene.instantiate()
+		_air_container.add_child(instance)
 
 func set_health(from : int, to : int):
 	if from == to: return
@@ -76,16 +95,18 @@ func set_dash_locked(locked : bool):
 	else:
 		animator.play("used_one_frame")
 
-# TODO: lower transparency on coin UI when after not being incremented for some time
 func set_score(score : int):
 	_score_label.text = str(score)
+	
+	_score_container.modulate.a = 1.0
+	_hide_coins_timer.start()
 	
 	if _score_tween && _score_tween.is_valid():
 		_score_tween.kill()
 	
-	_score_tween = create_tween().set_parallel(true).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+	_score_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 	_score_tween.tween_property(_score_tex, "scale", Vector2.ONE, _score_tween_time)\
 		.from(Vector2.ONE * 2.0)
-	_score_tween.tween_property(
-		_score_label, "modulate", Color.WHITE, _score_tween_time
-	).from(Color.YELLOW)
+
+func _on_hide_coins_timeout():
+	_score_container.modulate.a = _hide_score_transparency

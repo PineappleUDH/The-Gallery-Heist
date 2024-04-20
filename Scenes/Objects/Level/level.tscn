@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b84n1i2bwxbmr"]
+[gd_scene load_steps=23 format=3 uid="uid://b84n1i2bwxbmr"]
 
 [ext_resource type="Script" path="res://Scenes/Objects/Level/level.gd" id="1_qee75"]
 [ext_resource type="Script" path="res://Scenes/Objects/Level/level_pause_manager.gd" id="2_2cj76"]
@@ -32,11 +32,6 @@ resource_local_to_scene = true
 atlas = ExtResource("6_vp5gm")
 region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_r0mns"]
-resource_local_to_scene = true
-atlas = ExtResource("6_vp5gm")
-region = Rect2(16, 0, 16, 16)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_gvfyq"]
 resource_local_to_scene = true
 atlas = ExtResource("8_d8ooi")
@@ -48,16 +43,6 @@ atlas = ExtResource("8_d8ooi")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jwdk5"]
-resource_local_to_scene = true
-atlas = ExtResource("8_d8ooi")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dfs12"]
-resource_local_to_scene = true
-atlas = ExtResource("8_d8ooi")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_atjay"]
 resource_local_to_scene = true
 atlas = ExtResource("8_d8ooi")
 region = Rect2(0, 0, 16, 16)
@@ -126,12 +111,7 @@ texture = SubResource("AtlasTexture_fkrxm")
 layout_mode = 2
 texture = SubResource("AtlasTexture_14ins")
 
-[node name="PlayerUiHeart4" parent="UI/Hud/HBoxContainer/VBoxContainer/Health" instance=ExtResource("5_qry46")]
-layout_mode = 2
-texture = SubResource("AtlasTexture_r0mns")
-
 [node name="Air" type="HBoxContainer" parent="UI/Hud/HBoxContainer/VBoxContainer"]
-visible = false
 layout_mode = 2
 
 [node name="PlayerUiAir" parent="UI/Hud/HBoxContainer/VBoxContainer/Air" instance=ExtResource("7_0jw55")]
@@ -146,14 +126,6 @@ texture = SubResource("AtlasTexture_ujih0")
 layout_mode = 2
 texture = SubResource("AtlasTexture_jwdk5")
 
-[node name="PlayerUiAir4" parent="UI/Hud/HBoxContainer/VBoxContainer/Air" instance=ExtResource("7_0jw55")]
-layout_mode = 2
-texture = SubResource("AtlasTexture_dfs12")
-
-[node name="PlayerUiAir5" parent="UI/Hud/HBoxContainer/VBoxContainer/Air" instance=ExtResource("7_0jw55")]
-layout_mode = 2
-texture = SubResource("AtlasTexture_atjay")
-
 [node name="Score" type="HBoxContainer" parent="UI/Hud/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
@@ -161,9 +133,7 @@ size_flags_vertical = 0
 
 [node name="Label" type="Label" parent="UI/Hud/HBoxContainer/Score"]
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 35
 text = "0"
 
 [node name="TextureRect" type="TextureRect" parent="UI/Hud/HBoxContainer/Score"]
@@ -173,6 +143,10 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("9_w8ljf")
 stretch_mode = 5
+
+[node name="HideCoinsTimer" type="Timer" parent="UI/Hud"]
+wait_time = 2.0
+one_shot = true
 
 [node name="PauseManager" type="MarginContainer" parent="UI"]
 process_mode = 3
@@ -257,6 +231,7 @@ script = ExtResource("5_j8si2")
 [node name="ScheduleTimer" type="Timer" parent="Audio/MusicPlayer"]
 one_shot = true
 
+[connection signal="timeout" from="UI/Hud/HideCoinsTimer" to="UI" method="_on_hide_coins_timeout"]
 [connection signal="mouse_entered" from="UI/PauseManager/VBoxContainer/Resume" to="UI/PauseManager" method="_on_mouse_entered"]
 [connection signal="mouse_entered" from="UI/PauseManager/VBoxContainer/Restart" to="UI/PauseManager" method="_on_mouse_entered"]
 [connection signal="pressed" from="UI/PauseManager/VBoxContainer/Restart" to="UI/PauseManager" method="_on_restart_pressed"]
