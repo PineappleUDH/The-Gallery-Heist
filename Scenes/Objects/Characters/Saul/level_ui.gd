@@ -1,10 +1,12 @@
 extends CanvasLayer
 
-@onready var _health_container : HBoxContainer = $MarginContainer/HBoxContainer/VBoxContainer/Health
-@onready var _air_container : HBoxContainer = $MarginContainer/HBoxContainer/VBoxContainer/Air
-@onready var _score_tex : TextureRect = $MarginContainer/HBoxContainer/Score/TextureRect
-@onready var _score_label : Label = $MarginContainer/HBoxContainer/Score/Label
+@onready var _health_container : HBoxContainer = $Hud/HBoxContainer/VBoxContainer/Health
+@onready var _air_container : HBoxContainer = $Hud/HBoxContainer/VBoxContainer/Air
+@onready var _dash_ui : TextureRect = $Hud/PlayerUiDash
+@onready var _score_tex : TextureRect = $Hud/HBoxContainer/Score/TextureRect
+@onready var _score_label : Label = $Hud/HBoxContainer/Score/Label
 
+var _dash_locked : bool
 var _score_tween : Tween
 const _score_tween_time : float = 0.42
 
@@ -57,6 +59,24 @@ func set_air(from : int, to : int):
 func set_air_active(active : bool):
 	_air_container.visible = active
 
+func set_dash(enabled : bool):
+	if _dash_locked: return
+	
+	var animator : AnimationPlayer = _dash_ui.get_node("AnimationPlayer")
+	if enabled:
+		animator.play("fill")
+	else:
+		animator.play("used")
+
+func set_dash_locked(locked : bool):
+	_dash_locked = locked
+	var animator : AnimationPlayer = _dash_ui.get_node("AnimationPlayer")
+	if locked:
+		animator.play("locked")
+	else:
+		animator.play("used_one_frame")
+
+# TODO: lower transparency on coin UI when after not being incremented for some time
 func set_score(score : int):
 	_score_label.text = str(score)
 	

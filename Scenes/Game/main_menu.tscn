@@ -1,13 +1,26 @@
-[gd_scene load_steps=11 format=3 uid="uid://b3ksngrr6nf1f"]
+[gd_scene load_steps=24 format=3 uid="uid://b3ksngrr6nf1f"]
 
 [ext_resource type="Script" path="res://Scenes/Game/main_menu.gd" id="1_vqpgv"]
 [ext_resource type="Texture2D" uid="uid://c67qpsqai1qwi" path="res://Resources/Textures/Main Menu/bg_1.png" id="2_8p8gt"]
 [ext_resource type="Texture2D" uid="uid://c6qk5xmlxnma3" path="res://Resources/Textures/Main Menu/main_menu_particles.png" id="3_72efh"]
-[ext_resource type="Texture2D" uid="uid://bf6xym6l44axx" path="res://Resources/Textures/Main Menu/bg_2.png" id="3_cn5oq"]
-[ext_resource type="Texture2D" uid="uid://b3xb2ah6b2a63" path="res://Resources/Textures/Main Menu/bg_3.png" id="4_f6clv"]
+[ext_resource type="Texture2D" uid="uid://biubltlgdf44e" path="res://Resources/Textures/Main Menu/1_1.png" id="4_s5rd1"]
 [ext_resource type="AudioStream" uid="uid://dsbmogobaeyng" path="res://Resources/Audio/SFX/UI/button_hover.wav" id="5_0du16"]
+[ext_resource type="Texture2D" uid="uid://b7utkwho2ongh" path="res://Resources/Textures/Main Menu/1_2.png" id="5_oq3r4"]
 [ext_resource type="AudioStream" uid="uid://5gj12883hk0" path="res://Resources/Audio/SFX/UI/button_press.wav" id="6_7j4va"]
+[ext_resource type="Texture2D" uid="uid://bw8cj1ajmwgl8" path="res://Resources/Textures/Main Menu/1_3.png" id="6_qtnkq"]
+[ext_resource type="Texture2D" uid="uid://dy0kotwvmht4g" path="res://Resources/Textures/Main Menu/2_1.png" id="7_2edy2"]
+[ext_resource type="Texture2D" uid="uid://cep70cotrxojx" path="res://Resources/Textures/Main Menu/2_2.png" id="8_ncijm"]
 [ext_resource type="AudioStream" uid="uid://bcbul1x4fi8og" path="res://Resources/Audio/Music/main_menu.ogg" id="8_ugxx7"]
+[ext_resource type="Texture2D" uid="uid://buj77s3mx12rl" path="res://Resources/Textures/Main Menu/2_3.png" id="9_owfla"]
+[ext_resource type="Texture2D" uid="uid://bp4x4o3bihs7e" path="res://Resources/Textures/Main Menu/2_4.png" id="10_ijes1"]
+[ext_resource type="Texture2D" uid="uid://btvpi187ulwsq" path="res://Resources/Textures/Main Menu/2_5.png" id="11_q4rna"]
+[ext_resource type="Texture2D" uid="uid://bre287ynwdk1k" path="res://Resources/Textures/Main Menu/2_6.png" id="12_r1m6j"]
+[ext_resource type="Texture2D" uid="uid://dgmbvm5kcm5kk" path="res://Resources/Textures/Main Menu/2_7.png" id="13_e7cfk"]
+[ext_resource type="Texture2D" uid="uid://bru0geg71kcde" path="res://Resources/Textures/Main Menu/3_1.png" id="14_rikq5"]
+[ext_resource type="Texture2D" uid="uid://brhn3lk5w8l3j" path="res://Resources/Textures/Main Menu/3_2.png" id="15_y6p5s"]
+[ext_resource type="Texture2D" uid="uid://dsofj5wrlvfp5" path="res://Resources/Textures/Main Menu/3_3.png" id="16_c6631"]
+[ext_resource type="Texture2D" uid="uid://cr0abja5ipxlj" path="res://Resources/Textures/Main Menu/3_4.png" id="17_h2e0a"]
+[ext_resource type="FontFile" uid="uid://bsvbubhqv01qw" path="res://Resources/Fonts/hf-free-complete/futile-pro-v1/FutilePro.ttf" id="18_pwmmi"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_uf8ee"]
 particles_animation = true
@@ -36,15 +49,25 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vqpgv")
 
-[node name="Background" type="MarginContainer" parent="."]
+[node name="Background" type="Control" parent="."]
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="Background"]
-layout_mode = 2
+[node name="BgColor" type="ColorRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.388235, 1, 0.756863, 1)
 
-[node name="TextureRect" type="TextureRect" parent="Background"]
-layout_mode = 2
+[node name="Background" type="TextureRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_8p8gt")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Background"]
@@ -56,16 +79,172 @@ texture = ExtResource("3_72efh")
 lifetime = 10.0
 preprocess = 10.0
 
-[node name="TextureRect2" type="TextureRect" parent="Background"]
+[node name="11" type="TextureRect" parent="Background"]
 layout_mode = 2
-texture = ExtResource("3_cn5oq")
+offset_left = 67.0
+offset_top = 23.0
+offset_right = 115.0
+offset_bottom = 71.0
+scale = Vector2(2, 2)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("4_s5rd1")
 
-[node name="TextureRect3" type="TextureRect" parent="Background"]
+[node name="12" type="TextureRect" parent="Background"]
 layout_mode = 2
-texture = ExtResource("4_f6clv")
+offset_left = 20.0
+offset_top = 256.0
+offset_right = 84.0
+offset_bottom = 304.0
+scale = Vector2(2, 2)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("5_oq3r4")
+stretch_mode = 2
+
+[node name="13" type="TextureRect" parent="Background"]
+layout_mode = 2
+offset_left = 457.0
+offset_top = 160.0
+offset_right = 505.0
+offset_bottom = 208.0
+scale = Vector2(2, 2)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("6_qtnkq")
+stretch_mode = 2
+
+[node name="21" type="TextureRect" parent="Background"]
+layout_mode = 2
+offset_left = 421.0
+offset_top = 139.0
+offset_right = 443.0
+offset_bottom = 167.0
+scale = Vector2(2, 2)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("7_2edy2")
+stretch_mode = 2
+
+[node name="22" type="TextureRect" parent="Background"]
+layout_mode = 2
+offset_left = 104.0
+offset_top = 253.0
+offset_right = 152.0
+offset_bottom = 269.0
+scale = Vector2(2, 2)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("8_ncijm")
+stretch_mode = 2
+
+[node name="23" type="TextureRect" parent="Background"]
+layout_mode = 2
+offset_left = 548.0
+offset_top = 59.0
+offset_right = 580.0
+offset_bottom = 91.0
+scale = Vector2(2, 2)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("9_owfla")
+stretch_mode = 2
+
+[node name="24" type="TextureRect" parent="Background"]
+layout_mode = 2
+offset_left = 443.0
+offset_top = 52.0
+offset_right = 459.0
+offset_bottom = 68.0
+scale = Vector2(2, 2)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("10_ijes1")
+stretch_mode = 2
+
+[node name="25" type="TextureRect" parent="Background"]
+layout_mode = 2
+offset_left = 152.0
+offset_top = 191.0
+offset_right = 168.0
+offset_bottom = 207.0
+scale = Vector2(2, 2)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("11_q4rna")
+stretch_mode = 2
+
+[node name="26" type="TextureRect" parent="Background"]
+layout_mode = 2
+offset_left = 238.0
+offset_top = 288.0
+offset_right = 286.0
+offset_bottom = 320.0
+scale = Vector2(2, 2)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("12_r1m6j")
+stretch_mode = 2
+
+[node name="27" type="TextureRect" parent="Background"]
+layout_mode = 1
+offset_left = 273.0
+offset_right = 321.0
+offset_bottom = 32.0
+scale = Vector2(2, 2)
+texture = ExtResource("13_e7cfk")
+stretch_mode = 2
+
+[node name="31" type="TextureRect" parent="Background"]
+layout_mode = 2
+offset_left = 69.0
+offset_top = 151.0
+offset_right = 85.0
+offset_bottom = 167.0
+scale = Vector2(2, 2)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("14_rikq5")
+stretch_mode = 2
+
+[node name="32" type="TextureRect" parent="Background"]
+layout_mode = 2
+offset_left = 496.0
+offset_top = 318.0
+offset_right = 512.0
+offset_bottom = 334.0
+scale = Vector2(2, 2)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("15_y6p5s")
+stretch_mode = 2
+
+[node name="33" type="TextureRect" parent="Background"]
+layout_mode = 2
+offset_left = 450.0
+offset_top = 288.0
+offset_right = 466.0
+offset_bottom = 304.0
+scale = Vector2(2, 2)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("16_c6631")
+stretch_mode = 2
+
+[node name="34" type="TextureRect" parent="Background"]
+layout_mode = 2
+offset_left = 558.0
+offset_top = 286.0
+offset_right = 574.0
+offset_bottom = 302.0
+scale = Vector2(2, 2)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("17_h2e0a")
+stretch_mode = 2
 
 [node name="Menu" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(200, 200)
+custom_minimum_size = Vector2(200, 180)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -82,6 +261,9 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="Menu/MarginContainer/Main"]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("18_pwmmi")
 text = "Project Gallery"
 horizontal_alignment = 1
 
@@ -111,6 +293,9 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="Menu/MarginContainer/Settings"]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("18_pwmmi")
 text = "Settings"
 horizontal_alignment = 1
 

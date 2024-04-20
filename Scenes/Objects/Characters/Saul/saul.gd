@@ -124,12 +124,16 @@ func can_dash():
 
 func refill_dash():
 	if _can_dash == false && _dash_disabled == false:
-		_can_dash = true
+		_set_can_dash(true)
 		_dash_cooldown.stop()
 
 func set_dash_disabled(disabled : bool):
+	if disabled == _dash_disabled: return
+	
 	_dash_disabled = disabled
-	if disabled: _can_dash = false
+	World.level.interface.set_dash_locked(disabled)
+	if _dash_disabled:
+		_set_can_dash(false)
 
 func heal(amount : int):
 	if _health == _max_health: return
@@ -207,6 +211,10 @@ func _is_water_tile(global_pos : Vector2) -> bool:
 			return true
 	
 	return false
+
+func _set_can_dash(can_dash : bool):
+	_can_dash = can_dash
+	World.level.interface.set_dash(can_dash)
 
 func _state_normal_switch_from(to : String):
 	World.level.level_camera.player_look_offset(0)
@@ -315,7 +323,7 @@ func _state_normal_ph_process(delta : float):
 	
 	if (_can_dash == false && _dash_disabled == false &&
 	_dash_cooldown.is_stopped() && is_on_floor()):
-		_can_dash = true
+		_set_can_dash(true)
 	
 	if Input.is_action_just_pressed("dash") && _can_dash:
 		_state_machine.change_state("dash")
@@ -376,7 +384,7 @@ func _state_wall_slide_ph_process(delta: float):
 
 func _state_dash_switch_to(from : String):
 	World.level.level_camera.shake(LevelCamera.ShakeLevel.low, _dash_shake_duration)
-	_can_dash = false
+	_set_can_dash(false)
 	velocity = _dash_speed * _facing.normalized()
 	_dash_trail.set_active(true, _sprite.flip_h)
 	_sfx["dash"].play()

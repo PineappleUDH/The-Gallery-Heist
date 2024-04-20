@@ -1,4 +1,4 @@
-[gd_scene load_steps=114 format=3 uid="uid://mlvn8cvywr4c"]
+[gd_scene load_steps=115 format=3 uid="uid://mlvn8cvywr4c"]
 
 [ext_resource type="PackedScene" uid="uid://b84n1i2bwxbmr" path="res://Scenes/Objects/Level/level.tscn" id="1_gs8pa"]
 [ext_resource type="Script" path="res://Scenes/Game/Levels/testing.gd" id="2_qem0p"]
@@ -19,13 +19,14 @@
 [ext_resource type="PackedScene" uid="uid://ks2b8lp58x7d" path="res://Scenes/Objects/Obstacles/hanging_spikes.tscn" id="13_84u2b"]
 [ext_resource type="PackedScene" uid="uid://cor2s0svaqrii" path="res://Scenes/Objects/Level/launch_pad.tscn" id="13_b67fq"]
 [ext_resource type="PackedScene" uid="uid://o42v88vk2m88" path="res://Scenes/Game/Levels/unstable_platform.tscn" id="14_nssuu"]
-[ext_resource type="PackedScene" uid="uid://catjkp55gq8oi" path="res://Scenes/Objects/Collectables/collectable_pie.tscn" id="15_qcc68"]
+[ext_resource type="PackedScene" uid="uid://tx6swqaimuyw" path="res://Scenes/Objects/Collectables/collectable.tscn" id="15_qcc68"]
 [ext_resource type="PackedScene" uid="uid://dvik7v57h3mcf" path="res://Scenes/Objects/Characters/Enemies/enemy_patrolling.tscn" id="16_c4ebt"]
 [ext_resource type="PackedScene" uid="uid://7l87lw8fg00p" path="res://Scenes/Objects/Obstacles/dash_disabler.tscn" id="17_ntf35"]
 [ext_resource type="PackedScene" uid="uid://ce6rpr8fcsibk" path="res://Scenes/Objects/Level/moving_platform.tscn" id="18_5472d"]
 [ext_resource type="PackedScene" uid="uid://c3ynadcc6a7cf" path="res://Scenes/Objects/Level/moving_launchpad.tscn" id="19_r0t7p"]
 [ext_resource type="PackedScene" uid="uid://c2csilanfu3wv" path="res://Scenes/Objects/Level/moving_spikes.tscn" id="20_jj33r"]
 [ext_resource type="PackedScene" uid="uid://tgxwefto77lr" path="res://Scenes/Objects/Collectables/collectable_SAUL.tscn" id="21_i7p6d"]
+[ext_resource type="PackedScene" uid="uid://duloprfswr82i" path="res://Scenes/Objects/Characters/Enemies/enemy_platform_hugger.tscn" id="22_ea78m"]
 [ext_resource type="PackedScene" uid="uid://dkn8trjyqlfdg" path="res://Scenes/Objects/Collectables/collectable_egg.tscn" id="22_tk00u"]
 [ext_resource type="PackedScene" uid="uid://bj67wqgcm4ilf" path="res://Scenes/Game/Bosses/passion.tscn" id="28_711wc"]
 
@@ -973,31 +974,31 @@ motion_mirroring = Vector2(640, 0)
 texture = ExtResource("5_ylcn2")
 centered = false
 
-[node name="PlayerUiHeart" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Health" index="0"]
+[node name="PlayerUiHeart" parent="UI/Hud/HBoxContainer/VBoxContainer/Health" index="0"]
 texture = SubResource("AtlasTexture_tu37i")
 
-[node name="PlayerUiHeart2" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Health" index="1"]
+[node name="PlayerUiHeart2" parent="UI/Hud/HBoxContainer/VBoxContainer/Health" index="1"]
 texture = SubResource("AtlasTexture_fkrxm")
 
-[node name="PlayerUiHeart3" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Health" index="2"]
+[node name="PlayerUiHeart3" parent="UI/Hud/HBoxContainer/VBoxContainer/Health" index="2"]
 texture = SubResource("AtlasTexture_14ins")
 
-[node name="PlayerUiHeart4" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Health" index="3"]
+[node name="PlayerUiHeart4" parent="UI/Hud/HBoxContainer/VBoxContainer/Health" index="3"]
 texture = SubResource("AtlasTexture_r0mns")
 
-[node name="PlayerUiAir" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Air" index="0"]
+[node name="PlayerUiAir" parent="UI/Hud/HBoxContainer/VBoxContainer/Air" index="0"]
 texture = SubResource("AtlasTexture_gvfyq")
 
-[node name="PlayerUiAir2" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Air" index="1"]
+[node name="PlayerUiAir2" parent="UI/Hud/HBoxContainer/VBoxContainer/Air" index="1"]
 texture = SubResource("AtlasTexture_ujih0")
 
-[node name="PlayerUiAir3" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Air" index="2"]
+[node name="PlayerUiAir3" parent="UI/Hud/HBoxContainer/VBoxContainer/Air" index="2"]
 texture = SubResource("AtlasTexture_jwdk5")
 
-[node name="PlayerUiAir4" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Air" index="3"]
+[node name="PlayerUiAir4" parent="UI/Hud/HBoxContainer/VBoxContainer/Air" index="3"]
 texture = SubResource("AtlasTexture_dfs12")
 
-[node name="PlayerUiAir5" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Air" index="4"]
+[node name="PlayerUiAir5" parent="UI/Hud/HBoxContainer/VBoxContainer/Air" index="4"]
 texture = SubResource("AtlasTexture_atjay")
 
 [node name="TileMap" parent="." index="3"]
@@ -1876,6 +1877,9 @@ _charge_speed = 100.0
 [node name="Passion" parent="Characters" index="4" instance=ExtResource("28_711wc")]
 position = Vector2(-1420, -229)
 
+[node name="EnemyPlatformHugger" parent="Characters" index="5" instance=ExtResource("22_ea78m")]
+position = Vector2(331, -401)
+
 [node name="Coins" type="Node2D" parent="Collectables" index="0"]
 
 [node name="CollectablesStack" parent="Collectables/Coins" index="0" instance=ExtResource("7_pc1vt")]
@@ -1933,18 +1937,6 @@ _horizontal_count = 2
 _spacing = 32
 
 [node name="Pies" type="Node2D" parent="Collectables" index="1"]
-
-[node name="CollectablePie" parent="Collectables/Pies" index="0" instance=ExtResource("15_qcc68")]
-position = Vector2(2919, 6376)
-
-[node name="CollectablePie2" parent="Collectables/Pies" index="1" instance=ExtResource("15_qcc68")]
-position = Vector2(4160, 5702)
-
-[node name="CollectablePie3" parent="Collectables/Pies" index="2" instance=ExtResource("15_qcc68")]
-position = Vector2(3821, 5701)
-
-[node name="CollectablePie4" parent="Collectables/Pies" index="3" instance=ExtResource("15_qcc68")]
-position = Vector2(3343, 5788)
 
 [node name="DashRefils" type="Node2D" parent="Collectables" index="2"]
 
