@@ -4,7 +4,7 @@ extends Area2D
 
 signal player_interacted
 
-@onready var _prompt : Sprite2D = $Prompt
+@onready var _prompt : AnimatedSprite2D = $Prompt
 var _prompt_marker : Marker2D
 
 func _ready():

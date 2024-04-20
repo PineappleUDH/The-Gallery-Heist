@@ -1,8 +1,6 @@
 class_name Collectable
 extends Area2D
 
-# TODO: delete Sprite2D, some collectables use an animation sprite or labels etc..
-
 enum IdleMovement {none, sin_wave} # TODO: shake, etc..
 
 @onready var _start_y : float = global_position.y

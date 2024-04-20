@@ -62,18 +62,15 @@ radius = 8.0
 [node name="CollectableCoin" instance=ExtResource("1_2unn2")]
 script = ExtResource("2_dm6xu")
 
-[node name="Sprite2D" parent="." index="0"]
-hframes = 6
-region_rect = Rect2(0, 0, 16, 16)
-
-[node name="Sprite" type="AnimatedSprite2D" parent="." index="1"]
+[node name="Sprite" type="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_6fay2")
+autoplay = "default"
 frame_progress = 0.777919
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 shape = SubResource("CircleShape2D_f0yg2")
 
-[node name="PersistentNodesContainer" parent="." index="3" node_paths=PackedStringArray("_kill_audio") instance=ExtResource("4_k343i")]
+[node name="PersistentNodesContainer" parent="." index="2" node_paths=PackedStringArray("_kill_audio") instance=ExtResource("4_k343i")]
 _kill_type = 2
 _kill_audio = NodePath("Collected")
 

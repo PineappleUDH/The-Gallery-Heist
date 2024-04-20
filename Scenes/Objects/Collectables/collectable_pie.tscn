@@ -12,7 +12,7 @@ radius = 5.09902
 [node name="CollectablePie" instance=ExtResource("1_xpsje")]
 script = ExtResource("2_0trnc")
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_eluy1")
 hframes = 8
 frame = 3

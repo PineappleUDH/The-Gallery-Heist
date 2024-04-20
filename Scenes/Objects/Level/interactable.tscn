@@ -1,15 +1,88 @@
-[gd_scene load_steps=3 format=3 uid="uid://yhv4t8nblpu0"]
+[gd_scene load_steps=13 format=3 uid="uid://yhv4t8nblpu0"]
 
 [ext_resource type="Script" path="res://Scenes/Objects/Level/interactable.gd" id="1_3rjgo"]
-[ext_resource type="Texture2D" uid="uid://chlov4m3wa82m" path="res://Resources/Textures/interact_prompt.png" id="2_0x3ae"]
+[ext_resource type="Texture2D" uid="uid://8tebicyin2qt" path="res://Resources/Textures/interact_prompt(SleepingYellowCreature).png" id="2_85lbn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7e6m"]
+atlas = ExtResource("2_85lbn")
+region = Rect2(0, 0, 20, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqehe"]
+atlas = ExtResource("2_85lbn")
+region = Rect2(20, 0, 20, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnqnd"]
+atlas = ExtResource("2_85lbn")
+region = Rect2(40, 0, 20, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_irx6r"]
+atlas = ExtResource("2_85lbn")
+region = Rect2(60, 0, 20, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apbpm"]
+atlas = ExtResource("2_85lbn")
+region = Rect2(80, 0, 20, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dxji2"]
+atlas = ExtResource("2_85lbn")
+region = Rect2(100, 0, 20, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vyo3f"]
+atlas = ExtResource("2_85lbn")
+region = Rect2(120, 0, 20, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ea6d"]
+atlas = ExtResource("2_85lbn")
+region = Rect2(140, 0, 20, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dcwti"]
+atlas = ExtResource("2_85lbn")
+region = Rect2(160, 0, 20, 28)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ywvna"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c7e6m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqehe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dnqnd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_irx6r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_apbpm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dxji2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vyo3f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ea6d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dcwti")
+}],
+"loop": true,
+"name": &"default",
+"speed": 16.0
+}]
 
 [node name="Interactable" type="Area2D"]
 monitorable = false
 script = ExtResource("1_3rjgo")
 
-[node name="Prompt" type="Sprite2D" parent="."]
+[node name="Prompt" type="AnimatedSprite2D" parent="."]
 visible = false
-texture = ExtResource("2_0x3ae")
+sprite_frames = SubResource("SpriteFrames_ywvna")
+autoplay = "default"
+frame_progress = 0.311084
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

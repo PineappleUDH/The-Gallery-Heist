@@ -9,7 +9,7 @@
 [node name="CollectableDashRefiller" instance=ExtResource("1_d5430")]
 script = ExtResource("2_dsrdd")
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
 texture = ExtResource("3_qxx88")
 hframes = 2
 

@@ -1,5 +1,6 @@
-[gd_scene load_steps=29 format=3 uid="uid://tgxwefto77lr"]
+[gd_scene load_steps=30 format=3 uid="uid://tgxwefto77lr"]
 
+[ext_resource type="PackedScene" uid="uid://tx6swqaimuyw" path="res://Scenes/Objects/Collectables/collectable.tscn" id="1_am7an"]
 [ext_resource type="Script" path="res://Scenes/Objects/Collectables/collectable_SAUL.gd" id="1_u0t2j"]
 [ext_resource type="Texture2D" uid="uid://ccba6adr8r2fl" path="res://Resources/Textures/VOID HELP ORGANIZE/SAUL_letters_idle(Addin Sachen).png" id="2_wym7c"]
 
@@ -99,7 +100,7 @@ region = Rect2(64, 32, 16, 16)
 atlas = ExtResource("2_wym7c")
 region = Rect2(80, 32, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_ckhtk"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_eb6vg"]
 animations = [{
 "frames": [{
 "duration": 0.8,
@@ -194,18 +195,16 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ghfr1"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2bmgk"]
 size = Vector2(16, 16)
 
-[node name="Collectable" type="Area2D"]
-monitorable = false
+[node name="Collectable" instance=ExtResource("1_am7an")]
 script = ExtResource("1_u0t2j")
+_letter = 0
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_ckhtk")
+[node name="Sprite" type="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_eb6vg")
 animation = &"A"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_ghfr1")
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_2bmgk")
