@@ -57,7 +57,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6iuas"]
 size = Vector2(16, 16)
 
-[node name="Collectable" instance=ExtResource("1_ne2yl")]
+[node name="Collectable_Egg" instance=ExtResource("1_ne2yl")]
 script = ExtResource("1_gean3")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." index="0"]

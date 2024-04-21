@@ -146,7 +146,7 @@ autoplay = "inactive"
 visible = false
 modulate = Color(1, 1, 1, 0.392157)
 material = SubResource("ShaderMaterial_srssl")
-position = Vector2(0, -31)
+position = Vector2(0, -26)
 texture = ExtResource("3_kek0u")
 
 [node name="SpawnMarker" type="Marker2D" parent="."]

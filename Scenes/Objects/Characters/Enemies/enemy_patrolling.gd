@@ -15,7 +15,7 @@ var _player : Player
 var _player_detected : bool = false
 var _state_machine : StateMachine = StateMachine.new()
 const _wander_speed : float = 50.0
-@export var _charge_speed : float = 200.0
+@export var _charge_speed : float = 100.0
 
 func _ready():
 	_max_health = 2
@@ -43,10 +43,12 @@ func _process(delta : float):
 	
 	_debug_vars_visualizer.edit_var("State", _state_machine.get_current_state())
 	
-	if _direction.x == 1:
+	if _direction.x > 0:
 		_sprite.flip_h = false
-	elif _direction.x == -1:
+
+	elif _direction.x < 0:
 		_sprite.flip_h = true
+
 
 func _physics_process(delta : float):
 	_state_machine.state_physics_process(delta)
@@ -56,7 +58,12 @@ func take_damage(damage : int, from : Vector2, is_deadly : bool = false) -> bool
 
 func _state_wander_switch_to(from: String):
 	velocity = Vector2(0,0) 
-	_direction = Vector2.RIGHT
+	_direction = Vector2(0,0)
+	var _random_direction = randi()% 2
+	match _random_direction:
+		0: _direction.x = 1
+		1: _direction.x = -1
+
 
 func _state_wander_ph_process(delta: float):
 	if not is_on_floor():
@@ -83,9 +90,10 @@ func _state_charge_switch_to(from : String) :
 	move_and_slide()
 
 func _state_charge_ph_process(delta : float) :
-	#BUG He is suppose to charge toward player but only ever charges to the right
 	_direction.x = _player.position.x - position.x
-	velocity.x = _charge_speed
+	velocity = _charge_speed * _direction.normalized()
+	if not is_on_floor():
+		velocity.y += _gravity * delta
 	move_and_slide()
 	if _player_detected == false:
 		_state_machine.change_state("wander")
