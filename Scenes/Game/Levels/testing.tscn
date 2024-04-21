@@ -670,7 +670,8 @@ texture = ExtResource("3_mq2ti")
 6:5/0/physics_layer_1/angular_velocity = 0.0
 
 [sub_resource type="TileSet" id="TileSet_ntmvc"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 3
+physics_layer_0/collision_mask = 3
 physics_layer_1/collision_layer = 2
 physics_layer_1/collision_mask = 2
 custom_data_layer_0/name = "water"
