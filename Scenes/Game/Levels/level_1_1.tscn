@@ -1,13 +1,13 @@
 [gd_scene load_steps=11 format=3 uid="uid://du51n87yesd30"]
 
 [ext_resource type="PackedScene" uid="uid://b84n1i2bwxbmr" path="res://Scenes/Objects/Level/level.tscn" id="1_884p5"]
-[ext_resource type="Texture2D" uid="uid://d2quxmbdmd2h3" path="res://Resources/Textures/ParkLvlAssets/ParktilesCurrentSet (valsprites).png" id="2_2ohjl"]
-[ext_resource type="Texture2D" uid="uid://cstvbl7tuuk5w" path="res://Resources/Textures/ParkLvlAssets/Background/ParkBGParalax6.png" id="3_np2bd"]
-[ext_resource type="Texture2D" uid="uid://dxu2tprf7w3ya" path="res://Resources/Textures/ParkLvlAssets/Background/ParkBGParalax5.png" id="4_ced8t"]
-[ext_resource type="Texture2D" uid="uid://cp5cqkjhhem27" path="res://Resources/Textures/ParkLvlAssets/Background/ParkBGParalax4.png" id="5_mh25a"]
-[ext_resource type="Texture2D" uid="uid://ddcfv78po5grm" path="res://Resources/Textures/ParkLvlAssets/Background/ParkBGParalax3.png" id="6_53nvh"]
-[ext_resource type="Texture2D" uid="uid://bguo6g3g027s4" path="res://Resources/Textures/ParkLvlAssets/Background/ParkBGParalax2.png" id="7_8ljxs"]
-[ext_resource type="Texture2D" uid="uid://c4y4xtxjxhoyk" path="res://Resources/Textures/ParkLvlAssets/Background/ParkBGParalax1.png" id="8_epq4v"]
+[ext_resource type="Texture2D" uid="uid://d2quxmbdmd2h3" path="res://Resources/Textures/Levels/ParkLvlAssets/ParktilesCurrentSet (valsprites).png" id="2_2ohjl"]
+[ext_resource type="Texture2D" uid="uid://cstvbl7tuuk5w" path="res://Resources/Textures/Levels/ParkLvlAssets/Background/ParkBGParalax6.png" id="3_np2bd"]
+[ext_resource type="Texture2D" uid="uid://dxu2tprf7w3ya" path="res://Resources/Textures/Levels/ParkLvlAssets/Background/ParkBGParalax5.png" id="4_ced8t"]
+[ext_resource type="Texture2D" uid="uid://cp5cqkjhhem27" path="res://Resources/Textures/Levels/ParkLvlAssets/Background/ParkBGParalax4.png" id="5_mh25a"]
+[ext_resource type="Texture2D" uid="uid://ddcfv78po5grm" path="res://Resources/Textures/Levels/ParkLvlAssets/Background/ParkBGParalax3.png" id="6_53nvh"]
+[ext_resource type="Texture2D" uid="uid://bguo6g3g027s4" path="res://Resources/Textures/Levels/ParkLvlAssets/Background/ParkBGParalax2.png" id="7_8ljxs"]
+[ext_resource type="Texture2D" uid="uid://c4y4xtxjxhoyk" path="res://Resources/Textures/Levels/ParkLvlAssets/Background/ParkBGParalax1.png" id="8_epq4v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_53npw"]
 texture = ExtResource("2_2ohjl")

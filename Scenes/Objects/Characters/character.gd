@@ -61,3 +61,4 @@ func _damage_taken(damage : int, die : bool):
 
 func _on_damage_cooldown_timer_timeout():
 	modulate.a = 1.0
+

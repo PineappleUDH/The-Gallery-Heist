@@ -2,7 +2,7 @@ extends "res://Scenes/Objects/Collectables/collectable.gd"
 
 
 func _ready():
-	_idle_movement = IdleMovement.sin_wave
+	pass
 
 func _collected(player : Player):
 	World.level.add_score(5)

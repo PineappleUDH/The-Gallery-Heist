@@ -60,6 +60,7 @@ animations = [{
 radius = 8.0
 
 [node name="CollectableCoin" instance=ExtResource("1_2unn2")]
+scale = Vector2(0.8, 0.8)
 script = ExtResource("2_dm6xu")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." index="0"]

@@ -5,8 +5,8 @@ enum IdleMovement {none, sin_wave} # TODO: shake, etc..
 
 @onready var _start_y : float = global_position.y
 
-const _bob_height : float = 5.0
-const _bob_speed : float = 4.0
+var _bob_height : float = 5.0
+var _bob_speed : float = 4.0
 var _bob_delta : float = 0.0
 var _idle_movement : IdleMovement = IdleMovement.none
 

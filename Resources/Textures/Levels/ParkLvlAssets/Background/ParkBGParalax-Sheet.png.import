@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bguo6g3g027s4"
-path="res://.godot/imported/ParkBGParalax2.png-d4d54af49590b400749168650de068b0.ctex"
+uid="uid://cyy7owbpelf77"
+path="res://.godot/imported/ParkBGParalax-Sheet.png-f79b5001eaf0b9b2b2561801d8006fa5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Textures/ParkLvlAssets/Background/ParkBGParalax2.png"
-dest_files=["res://.godot/imported/ParkBGParalax2.png-d4d54af49590b400749168650de068b0.ctex"]
+source_file="res://Resources/Textures/Levels/ParkLvlAssets/Background/ParkBGParalax-Sheet.png"
+dest_files=["res://.godot/imported/ParkBGParalax-Sheet.png-f79b5001eaf0b9b2b2561801d8006fa5.ctex"]
 
 [params]
 

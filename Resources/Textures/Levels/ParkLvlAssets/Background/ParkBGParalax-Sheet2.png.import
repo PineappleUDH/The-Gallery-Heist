@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://40ofd147r3ud"
-path="res://.godot/imported/water_swim.png-d1529a4e52efa7b006204f3173d794bb.ctex"
+uid="uid://cmplvfs5q7xbn"
+path="res://.godot/imported/ParkBGParalax-Sheet2.png-dc0c2cc6cd2ae14fec873a1b984cd5ae.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Textures/SaulSprites/water_swim.png"
-dest_files=["res://.godot/imported/water_swim.png-d1529a4e52efa7b006204f3173d794bb.ctex"]
+source_file="res://Resources/Textures/Levels/ParkLvlAssets/Background/ParkBGParalax-Sheet2.png"
+dest_files=["res://.godot/imported/ParkBGParalax-Sheet2.png-dc0c2cc6cd2ae14fec873a1b984cd5ae.ctex"]
 
 [params]
 

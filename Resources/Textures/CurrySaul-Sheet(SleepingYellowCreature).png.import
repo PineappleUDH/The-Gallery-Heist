@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://caahdl8osht8t"
-path="res://.godot/imported/ParkBGParalax-Sheet3.png-0b3084f0293348cdfd5140f0d33e65fb.ctex"
+uid="uid://bhe5j255scth"
+path="res://.godot/imported/CurrySaul-Sheet(SleepingYellowCreature).png-67e314e9a00608c16c689978c9234372.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Textures/ParkLvlAssets/Background/ParkBGParalax-Sheet3.png"
-dest_files=["res://.godot/imported/ParkBGParalax-Sheet3.png-0b3084f0293348cdfd5140f0d33e65fb.ctex"]
+source_file="res://Resources/Textures/CurrySaul-Sheet(SleepingYellowCreature).png"
+dest_files=["res://.godot/imported/CurrySaul-Sheet(SleepingYellowCreature).png-67e314e9a00608c16c689978c9234372.ctex"]
 
 [params]
 

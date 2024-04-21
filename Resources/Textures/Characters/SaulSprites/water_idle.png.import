@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cp5cqkjhhem27"
-path="res://.godot/imported/ParkBGParalax4.png-69cacd7f68a054a0d410164bc9077201.ctex"
+uid="uid://bvwrlyelrr3qw"
+path="res://.godot/imported/water_idle.png-f440bbb2fa2068292fc59a9bb85569d5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Textures/ParkLvlAssets/Background/ParkBGParalax4.png"
-dest_files=["res://.godot/imported/ParkBGParalax4.png-69cacd7f68a054a0d410164bc9077201.ctex"]
+source_file="res://Resources/Textures/Characters/SaulSprites/water_idle.png"
+dest_files=["res://.godot/imported/water_idle.png-f440bbb2fa2068292fc59a9bb85569d5.ctex"]
 
 [params]
 
