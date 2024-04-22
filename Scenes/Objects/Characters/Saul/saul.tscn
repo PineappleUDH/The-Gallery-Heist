@@ -1,4 +1,4 @@
-[gd_scene load_steps=112 format=3 uid="uid://crjtftvmkahqx"]
+[gd_scene load_steps=114 format=3 uid="uid://crjtftvmkahqx"]
 
 [ext_resource type="PackedScene" uid="uid://bb8fvvxo2nhq1" path="res://Scenes/Objects/Characters/character.tscn" id="1_regtg"]
 [ext_resource type="Script" path="res://Scenes/Objects/Characters/Saul/saul.gd" id="2_rhth6"]
@@ -25,9 +25,11 @@
 [ext_resource type="AudioStream" uid="uid://cqinx1if47psh" path="res://Resources/Audio/SFX/Player/jump2.wav" id="24_mecrg"]
 [ext_resource type="AudioStream" uid="uid://c8thp02ix675n" path="res://Resources/Audio/SFX/Player/jump3.wav" id="25_iwtg6"]
 [ext_resource type="Texture2D" uid="uid://dx0ea2i1opwsi" path="res://Resources/Textures/VOID HELP ORGANIZE/bubbles sprite (Addin Sachen).png" id="25_srwpl"]
-[ext_resource type="AudioStream" uid="uid://bxe2502g4y2iv" path="res://Resources/Audio/SFX/Player/dash.wav" id="26_ara2l"]
+[ext_resource type="AudioStream" uid="uid://ot03qd46eqrh" path="res://Resources/Audio/SFX/Player/dash.wav" id="26_ara2l"]
+[ext_resource type="AudioStream" uid="uid://dng4sw7ti8ft5" path="res://Resources/Audio/SFX/Player/dash2.wav" id="26_ugh8l"]
 [ext_resource type="AudioStream" uid="uid://mkt04tcqr0em" path="res://Resources/Audio/SFX/Player/hit_wall.wav" id="27_fmtxo"]
 [ext_resource type="AudioStream" uid="uid://bo3dmd83ceyvo" path="res://Resources/Audio/SFX/Player/attack1.wav" id="28_2nqeh"]
+[ext_resource type="AudioStream" uid="uid://dxx86ee87i8vi" path="res://Resources/Audio/SFX/Player/dash3.wav" id="28_kknyl"]
 [ext_resource type="AudioStream" uid="uid://ck8td3x687ool" path="res://Resources/Audio/SFX/Player/attack2.wav" id="29_d4pix"]
 [ext_resource type="AudioStream" uid="uid://dxrwue8mi1y8q" path="res://Resources/Audio/SFX/Player/footstep1.wav" id="30_a151y"]
 [ext_resource type="AudioStream" uid="uid://dftb7ej7uoibk" path="res://Resources/Audio/SFX/Player/damaged.wav" id="30_kmcv7"]
@@ -652,9 +654,13 @@ stream_2/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_52uk5"]
 random_pitch = 1.2
-streams_count = 1
-stream_0/stream = ExtResource("26_ara2l")
+streams_count = 3
+stream_0/stream = ExtResource("26_ugh8l")
 stream_0/weight = 1.0
+stream_1/stream = ExtResource("26_ara2l")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("28_kknyl")
+stream_2/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wdyio"]
 streams_count = 2
@@ -792,7 +798,7 @@ volume_db = -6.0
 
 [node name="Dash" type="AudioStreamPlayer" parent="Sounds" index="2"]
 stream = SubResource("AudioStreamRandomizer_52uk5")
-volume_db = -6.0
+volume_db = -12.0
 
 [node name="HitWall" type="AudioStreamPlayer" parent="Sounds" index="3"]
 stream = ExtResource("27_fmtxo")

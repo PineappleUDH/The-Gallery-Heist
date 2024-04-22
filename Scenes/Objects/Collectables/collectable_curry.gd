@@ -2,7 +2,8 @@ extends "res://Scenes/Objects/Collectables/collectable.gd"
 
 const _amount_healed : int = 1
 
-#TODO: SoundFX
+#@onready var _collected_sfx = $PersistentNodesContainer/Collected
+#@onready var _persistent_node = $PersistentNodesContainer
 
 func _ready():
 	_bob_height = 3
@@ -11,4 +12,6 @@ func _ready():
 
 func _collected(player : Player):
 	player.heal(_amount_healed)
+	#_collected_sfx.play()
+	#_persistent_node.detach()
 	queue_free()

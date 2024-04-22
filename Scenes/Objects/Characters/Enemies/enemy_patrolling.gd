@@ -14,7 +14,8 @@ extends "res://Scenes/Objects/Characters/Enemies/enemy.gd"
 var _player : Player
 var _player_detected : bool = false
 var _state_machine : StateMachine = StateMachine.new()
-const _wander_speed : float = 50.0
+@export var _is_charger : bool = false
+@export var _wander_speed : float = 50.0
 @export var _charge_speed : float = 100.0
 
 func _ready():
@@ -78,7 +79,7 @@ func _state_wander_ph_process(delta: float):
 		(velocity_sign == -1 && _obstacle_detect_left.is_colliding() == true)):
 			_direction.x = -_direction.x
 	
-	if _player_detected == true:
+	if _player_detected == true and _is_charger == true:
 		_state_machine.change_state("charge")
 	
 	move_and_slide()

@@ -252,7 +252,7 @@ func _state_normal_ph_process(delta : float):
 	else:
 		velocity.x = Utilities.soft_clamp(velocity.x, _decel * delta * -sign(velocity.x), 0.0)
 	
-	_walk_dust_particles.emitting = is_on_floor() and velocity.x
+	_walk_dust_particles.emitting = is_on_floor() and velocity.x > 230 or is_on_floor() and velocity.x < -230
 	
 	# footsteps
 	if is_on_floor() and _footstep_timer.is_stopped() and velocity.x:

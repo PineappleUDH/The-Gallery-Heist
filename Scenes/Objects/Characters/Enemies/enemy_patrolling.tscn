@@ -18,6 +18,8 @@ size = Vector2(800, 32)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("2_0h1ht")
+_is_charger = false
+_wander_speed = 50.0
 _charge_speed = 100.0
 
 [node name="CollisionShape2D" parent="." index="0"]
@@ -36,20 +38,25 @@ texture = ExtResource("3_6kuqm")
 [node name="GapDetectLeft" type="RayCast2D" parent="Detectors" index="0"]
 position = Vector2(-17, 0)
 target_position = Vector2(0, 18)
+collision_mask = 2
 
 [node name="GapDetectRight" type="RayCast2D" parent="Detectors" index="1"]
 position = Vector2(17, 0)
 target_position = Vector2(0, 18)
+collision_mask = 2
 
 [node name="ObstacleDetectLeft" type="RayCast2D" parent="Detectors" index="2"]
-target_position = Vector2(-14, 0)
+target_position = Vector2(-16, 0)
+collision_mask = 2
 
 [node name="ObstacleDetectRight" type="RayCast2D" parent="Detectors" index="3"]
-target_position = Vector2(14, 0)
+target_position = Vector2(16, 0)
+collision_mask = 2
 
 [node name="PlayerDetection" type="Area2D" parent="Detectors" index="4"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detectors/PlayerDetection" index="0"]
+visible = false
 shape = SubResource("RectangleShape2D_bkwai")
 
 [node name="DebugVarsVisualizer" parent="." index="5" instance=ExtResource("4_qxwfe")]

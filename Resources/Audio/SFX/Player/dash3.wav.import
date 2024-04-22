@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://ot03qd46eqrh"
-path="res://.godot/imported/dash.wav-24405c1bd58128419cca5dba064cc392.sample"
+uid="uid://dxx86ee87i8vi"
+path="res://.godot/imported/dash3.wav-82158ac336e8a49a15db22b28a023688.sample"
 
 [deps]
 
-source_file="res://Resources/Audio/SFX/Player/dash.wav"
-dest_files=["res://.godot/imported/dash.wav-24405c1bd58128419cca5dba064cc392.sample"]
+source_file="res://Resources/Audio/SFX/Player/dash3.wav"
+dest_files=["res://.godot/imported/dash3.wav-82158ac336e8a49a15db22b28a023688.sample"]
 
 [params]
 
