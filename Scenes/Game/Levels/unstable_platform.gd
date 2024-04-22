@@ -56,9 +56,10 @@ enum _State {restore, solid, destoy, empty}
 @onready var _timer : Timer = $Timer
 
 var _current_state = _State.solid
+const _destroyed_transparency : float = 0.4
 const _destruction_time : float = 0.8
 const _empty_time : float = 1.4
-const _restoration_time : float = 0.3
+const _restoration_time : float = 0.4
 const _particles_per_sprite : int = 10
 const _max_particles : int = 100
 
@@ -96,6 +97,7 @@ func _on_timer_timeout():
 		
 		# TODO: make sprite darker while it builds so it's clear that you can't stand on it
 		_State.restore:
+			modulate.a = _destroyed_transparency
 			for sprite in _sprites_container.get_children():
 				sprite.texture.region.position.y -= 16
 			
@@ -105,6 +107,7 @@ func _on_timer_timeout():
 				_current_state = _State.solid
 				_collider.disabled = false
 				_detection_collider.disabled = false
+				modulate.a = 1.0
 			
 			else:
 				_timer.start()

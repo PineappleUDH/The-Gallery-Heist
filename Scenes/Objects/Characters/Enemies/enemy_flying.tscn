@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://dgj06rv8jjkh7"]
+
+[ext_resource type="PackedScene" uid="uid://j6dd7mgd0p3w" path="res://Scenes/Objects/Characters/Enemies/enemy.tscn" id="1_pod7t"]
+[ext_resource type="Script" path="res://Scenes/Objects/Characters/Enemies/enemy_flying.gd" id="2_xnlyq"]
+[ext_resource type="Texture2D" uid="uid://dutytu7jhr5nc" path="res://Resources/Textures/PLACEHOLDERS/Scorpion (AxelMode)-cutoutt.png" id="3_pqau1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q05na"]
+radius = 2.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rbf4w"]
+size = Vector2(30, 30)
+
+[node name="EnemyFlying" instance=ExtResource("1_pod7t")]
+script = ExtResource("2_xnlyq")
+_speed = 80.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+modulate = Color(0, 1, 0.25098, 1)
+texture = ExtResource("3_pqau1")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_q05na")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" index="0"]
+shape = SubResource("RectangleShape2D_rbf4w")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="." index="5"]
+rotates = false

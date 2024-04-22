@@ -117,7 +117,9 @@ func can_dash():
 func refill_dash():
 	if _can_dash == false && _dash_disabled == false:
 		_set_can_dash(true)
-		_dash_cooldown.stop()
+		
+		if _dash_cooldown.is_stopped() == false:
+			_dash_cooldown.stop()
 
 func set_dash_disabled(disabled : bool):
 	if disabled == _dash_disabled: return
@@ -192,6 +194,14 @@ func _get_ray_colliding_with_tilemap() -> Vector2:
 	return Vector2.ZERO
 
 func _is_water_tile(global_pos : Vector2) -> bool:
+	var tileset : TileSet = World.level.tilemap.tile_set
+	var has_water_data : bool = false
+	for i in tileset.get_custom_data_layers_count():
+		if tileset.get_custom_data_layer_name(i) == "water":
+			has_water_data = true
+			break
+	if has_water_data == false: return false
+	
 	var layers_count : int = World.level.tilemap.get_layers_count()
 	for i in layers_count:
 		# check all layers for a water tile. pros:doesn't require custom tilemap setup
@@ -205,6 +215,8 @@ func _is_water_tile(global_pos : Vector2) -> bool:
 	return false
 
 func _set_can_dash(can_dash : bool):
+	# Note: use this instead of setting _can_dash directly
+	# so it also updates the interface
 	_can_dash = can_dash
 	World.level.interface.set_dash(can_dash)
 
@@ -425,7 +437,7 @@ func _state_swim_switch_to(from : String):
 	
 	_collider.shape.size = _water_collider_size
 	_was_on_water_surface = true
-	refill_dash()
+	_set_can_dash(false)
 	
 	# TODO: muffle some sounds, would need to separate buses
 
@@ -434,6 +446,7 @@ func _state_swim_switch_from(to : String):
 	# changing. this kicks the player up when they leave
 	velocity.y = Utilities.soft_clamp(velocity.y, -_out_of_water_push, _out_of_water_push)
 	
+	_set_can_dash(true)
 	_collider.shape.size = _default_collider_size
 	_bubbles_particles.emitting = false
 	World.level.interface.set_air_active(false)
@@ -465,6 +478,8 @@ func _state_swim_ph_process(delta : float):
 	
 	# surface
 	var is_on_surface : bool =\
+		# TODO: this only checks if the tile above is water or not. the tile could be solid
+		#       in which case we're no "on surface"
 		_is_water_tile(global_position - Vector2(0.0, World.level.tile_size)) == false
 	var is_close_to_surface : bool =\
 		# are you happy val? :(((((((

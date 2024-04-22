@@ -1,10 +1,53 @@
-[gd_scene load_steps=13 format=3 uid="uid://xr88hkbetrn"]
+[gd_scene load_steps=19 format=3 uid="uid://xr88hkbetrn"]
 
 [ext_resource type="PackedScene" uid="uid://tx6swqaimuyw" path="res://Scenes/Objects/Collectables/collectable.tscn" id="1_bqrp8"]
 [ext_resource type="Texture2D" uid="uid://bhe5j255scth" path="res://Resources/Textures/CurrySaul-Sheet(SleepingYellowCreature).png" id="2_2lfdj"]
 [ext_resource type="Script" path="res://Scenes/Objects/Collectables/collectable_curry.gd" id="2_107ct"]
 [ext_resource type="Texture2D" uid="uid://cyapk7su1yxj4" path="res://Resources/Textures/CurrySaul-Sheetsteam(SleepingYellowCreature).png" id="3_sppru"]
 [ext_resource type="PackedScene" uid="uid://wv1eoc7qi2wo" path="res://Scenes/Objects/persistent_nodes_container.tscn" id="5_jghot"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31umk"]
+atlas = ExtResource("2_2lfdj")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jbmrl"]
+atlas = ExtResource("2_2lfdj")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_njod4"]
+atlas = ExtResource("2_2lfdj")
+region = Rect2(40, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijeli"]
+atlas = ExtResource("2_2lfdj")
+region = Rect2(60, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l1vki"]
+atlas = ExtResource("2_2lfdj")
+region = Rect2(80, 0, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pqkxe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31umk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jbmrl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_njod4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ijeli")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l1vki")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w4ijp"]
 atlas = ExtResource("3_sppru")
@@ -52,21 +95,21 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_4rlcg"]
 radius = 8.0
 
-[node name="collectable_curry" instance=ExtResource("1_bqrp8")]
+[node name="CollectableCurry" instance=ExtResource("1_bqrp8")]
 script = ExtResource("2_107ct")
 
-[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
-texture = ExtResource("2_2lfdj")
-hframes = 5
+[node name="Curry" type="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_pqkxe")
+autoplay = "default"
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
+[node name="Smoke" type="AnimatedSprite2D" parent="." index="1"]
 position = Vector2(0, -5)
 sprite_frames = SubResource("SpriteFrames_m8qii")
 autoplay = "default"
-frame_progress = 0.481632
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
 position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_4rlcg")
 
 [node name="PersistentNodesContainer" parent="." index="3" instance=ExtResource("5_jghot")]
+_kill_type = 0

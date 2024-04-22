@@ -6,8 +6,8 @@ const _amount_healed : int = 1
 #@onready var _persistent_node = $PersistentNodesContainer
 
 func _ready():
-	_bob_height = 3
-	_bob_speed = 2
+	_sin_height = 3
+	_sin_speed = 2
 	_idle_movement = IdleMovement.sin_wave
 
 func _collected(player : Player):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=3 uid="uid://mlvn8cvywr4c"]
+[gd_scene load_steps=115 format=3 uid="uid://mlvn8cvywr4c"]
 
 [ext_resource type="PackedScene" uid="uid://b84n1i2bwxbmr" path="res://Scenes/Objects/Level/level.tscn" id="1_gs8pa"]
 [ext_resource type="Script" path="res://Scenes/Game/Levels/testing.gd" id="2_qem0p"]
@@ -28,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://tgxwefto77lr" path="res://Scenes/Objects/Collectables/collectable_SAUL.tscn" id="21_i7p6d"]
 [ext_resource type="PackedScene" uid="uid://duloprfswr82i" path="res://Scenes/Objects/Characters/Enemies/enemy_platform_hugger.tscn" id="22_ea78m"]
 [ext_resource type="PackedScene" uid="uid://dkn8trjyqlfdg" path="res://Scenes/Objects/Collectables/collectable_egg.tscn" id="22_tk00u"]
+[ext_resource type="PackedScene" uid="uid://dgj06rv8jjkh7" path="res://Scenes/Objects/Characters/Enemies/enemy_flying.tscn" id="23_jb4lp"]
 [ext_resource type="PackedScene" uid="uid://bj67wqgcm4ilf" path="res://Scenes/Game/Bosses/passion.tscn" id="28_711wc"]
 [ext_resource type="PackedScene" uid="uid://xr88hkbetrn" path="res://Scenes/Objects/Collectables/collectable_curry.tscn" id="30_fdf7o"]
 [ext_resource type="PackedScene" uid="uid://caabhgsckx3p8" path="res://Scenes/Objects/Characters/hurtbox.tscn" id="31_y5cco"]
@@ -671,8 +672,7 @@ texture = ExtResource("3_mq2ti")
 6:5/0/physics_layer_1/angular_velocity = 0.0
 
 [sub_resource type="TileSet" id="TileSet_ntmvc"]
-physics_layer_0/collision_layer = 3
-physics_layer_0/collision_mask = 3
+physics_layer_0/collision_layer = 1
 physics_layer_1/collision_layer = 2
 physics_layer_1/collision_mask = 2
 custom_data_layer_0/name = "water"
@@ -761,6 +761,12 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -97, 3, 0, 0, 0, 0, -321, 2)
 }
 point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_o2ns7"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 35, -5, 0, 0, 0, 0, 203, -7, 0, 0, 0, 0, 286, 55, 0, 0, 0, 0, 294, 195, 0, 0, 0, 0, -272, 196, 0, 0, 0, 0, -272, 52, 0, 0, 0, 0, -173, -8, 0, 0, 0, 0, 35, -5)
+}
+point_count = 8
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n4nu1"]
 size = Vector2(32, 27)
@@ -1826,7 +1832,7 @@ position = Vector2(1168, -352)
 position = Vector2(1184, -352)
 
 [node name="Saul" parent="Characters" index="0"]
-position = Vector2(175, -143)
+position = Vector2(-58, -787)
 
 [node name="EnemyPatrolling" parent="Characters" index="1" instance=ExtResource("16_c4ebt")]
 position = Vector2(3638, 6234)
@@ -1849,6 +1855,13 @@ _start_moving_right = false
 
 [node name="EnemyPlatformHugger2" parent="Characters" index="6" instance=ExtResource("22_ea78m")]
 position = Vector2(-1256, -720)
+
+[node name="EnemyFlying" parent="Characters" index="7" instance=ExtResource("23_jb4lp")]
+position = Vector2(-1427, -818)
+_speed = 100.0
+
+[node name="Path2D" type="Path2D" parent="Characters/EnemyFlying" index="6"]
+curve = SubResource("Curve2D_o2ns7")
 
 [node name="Coins" type="Node2D" parent="Collectables" index="0"]
 

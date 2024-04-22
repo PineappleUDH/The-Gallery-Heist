@@ -283,6 +283,10 @@ text = "Play"
 layout_mode = 2
 text = "Settings"
 
+[node name="Controls" type="Button" parent="Menu/MarginContainer/Main/VBoxContainer"]
+layout_mode = 2
+text = "Controls"
+
 [node name="Quit" type="Button" parent="Menu/MarginContainer/Main/VBoxContainer"]
 layout_mode = 2
 text = "Quit"
@@ -306,6 +310,15 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 6
 
+[node name="Label2" type="Label" parent="Menu/MarginContainer/Settings/VBoxContainer"]
+layout_mode = 2
+text = "Fullscreen"
+horizontal_alignment = 1
+
+[node name="Fullscreen" type="CheckBox" parent="Menu/MarginContainer/Settings/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
 [node name="Label" type="Label" parent="Menu/MarginContainer/Settings/VBoxContainer"]
 layout_mode = 2
 text = "Volume"
@@ -317,6 +330,33 @@ min_value = -72.0
 max_value = 6.0
 
 [node name="Done" type="Button" parent="Menu/MarginContainer/Settings"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Done"
+
+[node name="Controls" type="VBoxContainer" parent="Menu/MarginContainer"]
+visible = false
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Menu/MarginContainer/Controls"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("18_pwmmi")
+text = "Controls"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Menu/MarginContainer/Controls"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Menu/MarginContainer/Controls"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+text = "Coming Soon :)"
+
+[node name="Done" type="Button" parent="Menu/MarginContainer/Controls"]
 layout_mode = 2
 size_flags_vertical = 8
 text = "Done"
@@ -335,8 +375,13 @@ autoplay = true
 [connection signal="pressed" from="Menu/MarginContainer/Main/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="mouse_entered" from="Menu/MarginContainer/Main/VBoxContainer/Settings" to="." method="_on_button_hovered"]
 [connection signal="pressed" from="Menu/MarginContainer/Main/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="mouse_entered" from="Menu/MarginContainer/Main/VBoxContainer/Controls" to="." method="_on_button_hovered"]
+[connection signal="pressed" from="Menu/MarginContainer/Main/VBoxContainer/Controls" to="." method="_on_controls_pressed"]
 [connection signal="mouse_entered" from="Menu/MarginContainer/Main/VBoxContainer/Quit" to="." method="_on_button_hovered"]
 [connection signal="pressed" from="Menu/MarginContainer/Main/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="toggled" from="Menu/MarginContainer/Settings/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_toggled"]
 [connection signal="changed" from="Menu/MarginContainer/Settings/VBoxContainer/Volume" to="." method="_on_volume_changed"]
 [connection signal="mouse_entered" from="Menu/MarginContainer/Settings/Done" to="." method="_on_button_hovered"]
 [connection signal="pressed" from="Menu/MarginContainer/Settings/Done" to="." method="_on_settings_done_pressed"]
+[connection signal="mouse_entered" from="Menu/MarginContainer/Controls/Done" to="." method="_on_button_hovered"]
+[connection signal="pressed" from="Menu/MarginContainer/Controls/Done" to="." method="_on_controls_done_pressed"]

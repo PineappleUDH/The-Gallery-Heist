@@ -10,7 +10,6 @@ extends "res://Scenes/Objects/Characters/Enemies/enemy.gd"
 @onready var _obstacle_detect_right : RayCast2D = $Detectors/ObstacleDetectRight
 @onready var _player_detection = $Detectors/PlayerDetection
 
-
 var _player : Player
 var _player_detected : bool = false
 var _state_machine : StateMachine = StateMachine.new()
@@ -50,7 +49,6 @@ func _process(delta : float):
 	elif _direction.x < 0:
 		_sprite.flip_h = true
 
-
 func _physics_process(delta : float):
 	_state_machine.state_physics_process(delta)
 
@@ -64,7 +62,6 @@ func _state_wander_switch_to(from: String):
 	match _random_direction:
 		0: _direction.x = 1
 		1: _direction.x = -1
-
 
 func _state_wander_ph_process(delta: float):
 	if not is_on_floor():

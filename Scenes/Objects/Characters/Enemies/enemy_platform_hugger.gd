@@ -63,3 +63,10 @@ func _physics_process(delta : float):
 				_rotation_target = fmod(rotation + next_rot, TAU)
 	
 	move_and_slide()
+	
+	for i in get_slide_collision_count():
+		var col : KinematicCollision2D = get_slide_collision(i)
+		if col.get_collider() is CharacterBody2D:
+			var collider : Node2D = col.get_collider()
+			# out of my way son
+			collider.global_position += (collider.global_position - global_position).normalized()
