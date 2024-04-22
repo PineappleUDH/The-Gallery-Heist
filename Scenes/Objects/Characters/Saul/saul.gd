@@ -377,6 +377,8 @@ func _state_wall_slide_ph_process(delta: float):
 func _state_dash_switch_to(from : String):
 	World.level.level_camera.shake(LevelCamera.ShakeLevel.low, _dash_shake_duration)
 	_set_can_dash(false)
+	#BUG: IF DASH IS PRESSED AFTER PRESSING DOWN INPUT AND NO OTHER INPUT IS USED
+	# THE PLAYER WILL DASH INTO THE GROUND
 	velocity = _dash_speed * _facing.normalized()
 	_dash_trail.set_active(true, _sprite.flip_h)
 	_sfx["dash"].play()

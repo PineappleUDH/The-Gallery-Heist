@@ -758,7 +758,7 @@ point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_30kxe"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 95, 2, 0, 0, 0, 0, -321, 2)
+"points": PackedVector2Array(0, 0, 0, 0, -97, 3, 0, 0, 0, 0, -321, 2)
 }
 point_count = 2
 
@@ -1795,12 +1795,12 @@ curve = SubResource("Curve2D_77gbo")
 [node name="MovingPlatform2" parent="Obstacles" index="40" instance=ExtResource("18_5472d")]
 position = Vector2(2816, -793)
 curve = SubResource("Curve2D_spqdl")
-_speed_per_sec = 10.0
+_speed_per_sec = 40.0
 
 [node name="MovingPlatform3" parent="Obstacles" index="41" instance=ExtResource("18_5472d")]
 position = Vector2(3585, -794)
 curve = SubResource("Curve2D_30kxe")
-_speed_per_sec = 10.0
+_speed_per_sec = 40.0
 
 [node name="UnstablePlatform" parent="Obstacles" index="42" instance=ExtResource("14_nssuu")]
 position = Vector2(802, -210)
@@ -1973,7 +1973,7 @@ position = Vector2(3232, 5120)
 [node name="Eggs" type="Node2D" parent="Collectables" index="3"]
 
 [node name="Collectable_Egg" parent="Collectables/Eggs" index="0" instance=ExtResource("22_tk00u")]
-position = Vector2(2664, -808)
+position = Vector2(3488, -808)
 
 [node name="Collectable_Egg2" parent="Collectables/Eggs" index="1" instance=ExtResource("22_tk00u")]
 position = Vector2(159, -3496)
@@ -2124,8 +2124,8 @@ position = Vector2(2757, -903)
 _change_state = true
 _change_zoom = true
 _change_lock = true
-_idle_position = Vector2(3230, -800)
-_zoom = Vector2(0.6, 0.6)
+_idle_position = Vector2(3150, -800)
+_zoom = Vector2(0.8, 0.8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/TriggerCamera" index="0"]
 position = Vector2(-63, -1)
@@ -2638,3 +2638,11 @@ shape = SubResource("RectangleShape2D_wy6yc")
 [node name="EnemyPatrolling2" parent="." index="18" instance=ExtResource("16_c4ebt")]
 position = Vector2(-1336, -566)
 _is_charger = true
+
+[node name="DashDisabler" parent="." index="19" instance=ExtResource("17_ntf35")]
+position = Vector2(3019, -801)
+_radius = 300.0
+
+[node name="DashDisabler2" parent="." index="20" instance=ExtResource("17_ntf35")]
+position = Vector2(3443, -805)
+_radius = 300.0
