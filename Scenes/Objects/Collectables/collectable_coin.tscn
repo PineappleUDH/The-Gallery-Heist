@@ -69,6 +69,7 @@ autoplay = "default"
 frame_progress = 0.777919
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+visible = false
 shape = SubResource("CircleShape2D_f0yg2")
 
 [node name="PersistentNodesContainer" parent="." index="2" node_paths=PackedStringArray("_kill_audio") instance=ExtResource("4_k343i")]

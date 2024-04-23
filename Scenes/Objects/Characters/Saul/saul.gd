@@ -129,6 +129,7 @@ func set_dash_disabled(disabled : bool):
 	if _dash_disabled:
 		_set_can_dash(false)
 
+
 func heal(amount : int):
 	if _health == _max_health: return
 	
