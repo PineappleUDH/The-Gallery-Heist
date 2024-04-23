@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://blsc4n2kimiwc"]
+
+[ext_resource type="Theme" uid="uid://wrmkwmpmiew" path="res://Resources/Godot/keybind_theme.tres" id="1_f5sim"]
+[ext_resource type="Script" path="res://Scenes/Objects/single_keybind.gd" id="2_5b85j"]
+
+[node name="SingleKeybind" type="PanelContainer"]
+offset_right = 335.0
+offset_bottom = 21.0
+theme = ExtResource("1_f5sim")
+script = ExtResource("2_5b85j")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Bind Name"
+text_overrun_behavior = 3
+
+[node name="Primary" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 10)
+layout_mode = 2
+text = "Primary"
+
+[node name="Secondary" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 10)
+layout_mode = 2
+text = "Secondary"
+
+[connection signal="focus_entered" from="MarginContainer/VBoxContainer/Primary" to="." method="_on_focus_entered" binds= [true]]
+[connection signal="focus_entered" from="MarginContainer/VBoxContainer/Secondary" to="." method="_on_focus_entered" binds= [false]]

@@ -347,19 +347,33 @@ theme_override_fonts/font = ExtResource("18_pwmmi")
 text = "Controls"
 horizontal_alignment = 1
 
+[node name="Description" type="Label" parent="Menu/MarginContainer/Controls"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "click a keybind to change it, press Delete to remove it."
+
 [node name="HSeparator" type="HSeparator" parent="Menu/MarginContainer/Controls"]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="Menu/MarginContainer/Controls"]
+[node name="KeybindsContainer" type="VBoxContainer" parent="Menu/MarginContainer/Controls"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-text = "Coming Soon :)"
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 1
 
-[node name="Done" type="Button" parent="Menu/MarginContainer/Controls"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/MarginContainer/Controls"]
 layout_mode = 2
+
+[node name="Done" type="Button" parent="Menu/MarginContainer/Controls/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 8
 text = "Done"
+
+[node name="Cancel" type="Button" parent="Menu/MarginContainer/Controls/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cancel"
 
 [node name="Hovered" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_0du16")
@@ -383,5 +397,7 @@ autoplay = true
 [connection signal="changed" from="Menu/MarginContainer/Settings/VBoxContainer/Volume" to="." method="_on_volume_changed"]
 [connection signal="mouse_entered" from="Menu/MarginContainer/Settings/Done" to="." method="_on_button_hovered"]
 [connection signal="pressed" from="Menu/MarginContainer/Settings/Done" to="." method="_on_settings_done_pressed"]
-[connection signal="mouse_entered" from="Menu/MarginContainer/Controls/Done" to="." method="_on_button_hovered"]
-[connection signal="pressed" from="Menu/MarginContainer/Controls/Done" to="." method="_on_controls_done_pressed"]
+[connection signal="mouse_entered" from="Menu/MarginContainer/Controls/HBoxContainer/Done" to="." method="_on_button_hovered"]
+[connection signal="pressed" from="Menu/MarginContainer/Controls/HBoxContainer/Done" to="." method="_on_controls_done_pressed"]
+[connection signal="mouse_entered" from="Menu/MarginContainer/Controls/HBoxContainer/Cancel" to="." method="_on_button_hovered"]
+[connection signal="pressed" from="Menu/MarginContainer/Controls/HBoxContainer/Cancel" to="." method="_on_controls_cancel_pressed"]

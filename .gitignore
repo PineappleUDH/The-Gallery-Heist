@@ -9,3 +9,6 @@ Build/
 
 # LibreOffice
 *.~lock*
+
+# Custom keybinds file
+keybinds.txt

@@ -11,9 +11,13 @@ extends MarginContainer
 @onready var _settings_container : VBoxContainer = $Menu/MarginContainer/Settings
 @onready var _controls_container : VBoxContainer = $Menu/MarginContainer/Controls
 @onready var _volume_slider : HSlider = $Menu/MarginContainer/Settings/VBoxContainer/Volume
+@onready var _keybinds_container : VBoxContainer = $Menu/MarginContainer/Controls/KeybindsContainer
 
 @onready var _hovered_sfx : AudioStreamPlayer = $Hovered
 @onready var _pressed_sfx : AudioStreamPlayer = $Pressed
+
+const _single_keybind_ui_scene : PackedScene = preload("res://Scenes/Objects/single_keybind.tscn")
+var _keybinds_file_path = "keybinds.txt" # file format: "#action_name" for first line followed by input events until the next action name is reached
 
 var _parallax_starting_pos : Array[Array]
 const _popup_tween_time : float = 0.5
@@ -24,14 +28,37 @@ const _master_bus_idx : int = 0
 
 
 func _ready():
-	# save original positions
+	if OS.has_feature("editor"):
+		_keybinds_file_path = "res://" + _keybinds_file_path
+	else:
+		_keybinds_file_path = OS.get_executable_path().get_base_dir() + "/" + _keybinds_file_path
+	
+	if FileAccess.file_exists(_keybinds_file_path):
+		for action in InputMap.get_actions():
+			InputMap.erase_action(action)
+		
+		# TODO: load saved keybinds
+		#var file : FileAccess = FileAccess.open(_keybinds_file_path, FileAccess.READ)
+		#var current_action_name : String
+		#var line : String = file.get_line()
+		#if line.begins_with("#"):
+			## new input action reached
+			#current_action_name = line.substr(1)
+			#InputMap.add_action(current_action_name)
+		#else:
+			## input event
+			#InputMap.action_add_event(current_action_name, bytes_to_var(line.to_utf8_buffer()))
+		#
+		#file.close()
+	
+	# save original parallax positions
 	await sort_children
 	for i in _parallax_order.size():
 		_parallax_starting_pos.append([])
 		for j in _parallax_order[i].size():
 			_parallax_starting_pos[i].append(_parallax_order[i][j].global_position)
 	
-	# show order
+	# popup order
 	var tween : Tween = create_tween()
 	for i in _parallax_order.size():
 		for j in _parallax_order[i].size():
@@ -65,10 +92,30 @@ func _on_settings_pressed():
 	_main_options_container.hide()
 	_settings_container.show()
 
+# TODO: prevent using the same key for more than 1 action
 func _on_controls_pressed():
 	_pressed_sfx.play()
 	_main_options_container.hide()
 	_controls_container.show()
+	
+	# setup keybinds
+	for keybind in _keybinds_container.get_children(): keybind.queue_free()
+	
+	for action : StringName in InputMap.get_actions():
+		if action.begins_with("ui_"): continue # ignore built-in actions
+		var keybind : Control = _single_keybind_ui_scene.instantiate()
+		var bind_name : String = action
+		var bind1 : InputEventWithModifiers
+		var bind2 : InputEventWithModifiers
+		
+		for event : InputEvent in InputMap.action_get_events(action):
+			if event is InputEventKey || event is InputEventMouse:
+				if bind1 == null: bind1 = event
+				elif bind2 == null: bind2 = event
+				else: assert(false, "Keybinds only support 2 keys, one of the Inputs in the InputMap used more than 2 keys (mouse buttons also count)")
+		
+		_keybinds_container.add_child(keybind)
+		keybind.setup(bind_name, bind1, bind2)
 
 func _on_quit_pressed():
 	get_tree().quit()
@@ -83,7 +130,36 @@ func _on_controls_done_pressed():
 	_main_options_container.show()
 	_controls_container.hide()
 	
-	# apply controls and save to file
+	# apply keybinds
+	for keybind in _keybinds_container.get_children():
+		var data : Dictionary = keybind.get_data()
+		var action_name : String = data["name"]
+		
+		# clear key and mouse button events
+		for event : InputEvent in InputMap.action_get_events(action_name):
+			if event is InputEventKey || event is InputEventMouseButton:
+				InputMap.action_erase_event(action_name, event)
+		
+		if data["bind1"] != null:
+			InputMap.action_add_event(action_name, data["bind1"])
+		if data["bind2"] != null:
+			InputMap.action_add_event(action_name, data["bind2"])
+	
+	# save keybinds to file
+	var file : FileAccess = FileAccess.open(_keybinds_file_path, FileAccess.WRITE)
+	for action : StringName in InputMap.get_actions():
+		if action.begins_with("ui_"): continue # ignore built-in actions
+		file.store_line('#' + action)
+		for event : InputEvent in InputMap.action_get_events(action):
+			file.store_var(var_to_bytes_with_objects(event), true)
+			file.store_string('\n')
+	
+	file.close()
+
+func _on_controls_cancel_pressed():
+	_pressed_sfx.play()
+	_main_options_container.show()
+	_controls_container.hide()
 
 func _on_volume_changed():
 	AudioServer.set_bus_volume_db(

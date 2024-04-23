@@ -671,7 +671,7 @@ texture = ExtResource("3_mq2ti")
 6:5/0/physics_layer_1/linear_velocity = Vector2(0, 0)
 6:5/0/physics_layer_1/angular_velocity = 0.0
 
-[sub_resource type="TileSet" id="TileSet_ntmvc"]
+[sub_resource type="TileSet" id="TileSet_2mkbs"]
 physics_layer_0/collision_layer = 1
 physics_layer_1/collision_layer = 2
 physics_layer_1/collision_mask = 2
@@ -990,7 +990,7 @@ texture = SubResource("AtlasTexture_ujih0")
 texture = SubResource("AtlasTexture_jwdk5")
 
 [node name="TileMap" parent="." index="4"]
-tile_set = SubResource("TileSet_ntmvc")
+tile_set = SubResource("TileSet_2mkbs")
 layer_0/name = "Super Secret Background fixes"
 layer_0/tile_data = PackedInt32Array(25624799, 1, 5, 25559264, 1, 5, 25231578, 1, 5, 24838365, 1, 5, 24838366, 1, 5, 24838367, 1, 5, 24969445, 1, 5, 24969446, 1, 5, 24969447, 1, 5, 24510691, 1, 5, 24510692, 1, 5, 24510693, 1, 5, 22675679, 1, 5, 22675685, 1, 5, 23462083, 1, 5, 24969405, 1, 5, 24969402, 1, 5, 24314071, 1, 5, 25428174, 1, 5, 32440498, 1, 5)
 layer_1/name = "Background Platforms"
