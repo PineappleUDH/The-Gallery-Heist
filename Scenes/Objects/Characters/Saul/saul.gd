@@ -64,6 +64,7 @@ var _can_dash : bool = true
 var _dash_disabled : bool = false
 const _dash_speed: float = 300
 const _dash_shake_duration : float = 0.3
+var _dash_locks : int = 0
 
 const _wall_jump_force : float = 260.0
 const _wall_push_force : float = 230.0
@@ -122,11 +123,20 @@ func refill_dash():
 			_dash_cooldown.stop()
 
 func set_dash_disabled(disabled : bool):
-	if disabled == _dash_disabled: return
+	match disabled:
+		true : _dash_locks += 1
+		false : _dash_locks -= 1
 	
-	_dash_disabled = disabled
-	World.level.interface.set_dash_locked(disabled)
-	if _dash_disabled:
+	if _dash_locks <= 0:
+		_dash_locks = 0
+		_dash_disabled = false
+		World.level.interface.set_dash_locked(false)
+	
+	if _dash_locks > 0:
+		_dash_disabled = true
+		World.level.interface.set_dash_locked(true)
+	
+	if _dash_disabled == true:
 		_set_can_dash(false)
 
 
@@ -446,8 +456,8 @@ func _state_swim_switch_from(to : String):
 	# if player leaves water with a slow speed they'll fall right back leading to state continuously
 	# changing. this kicks the player up when they leave
 	velocity.y = Utilities.soft_clamp(velocity.y, -_out_of_water_push, _out_of_water_push)
-	
-	_set_can_dash(true)
+	if _dash_disabled == false:
+		_set_can_dash(true)
 	_collider.shape.size = _default_collider_size
 	_bubbles_particles.emitting = false
 	World.level.interface.set_air_active(false)
