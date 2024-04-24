@@ -50,11 +50,10 @@ const _slide_speed_fast : float = 120.0
 const _walk_footstep_time : float = 0.6
 const _run_footstep_time : float = 0.3
 
-const _water_gravity : float = 250.0
-const _max_swim_speed : float = 190.0
-const _out_of_water_push : float = 80.0
+const _max_swim_speed : float = 180.0
+const _out_of_water_push : float = 200.0
 const _water_accel : float = 320.0
-const _water_decel : float = 400.0
+const _water_decel : float = 150.0
 const _max_air : int = 5
 var _air : int = _max_air
 var _was_on_water_surface : bool = false
