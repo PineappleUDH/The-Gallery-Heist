@@ -17,7 +17,7 @@ extends MarginContainer
 @onready var _pressed_sfx : AudioStreamPlayer = $Pressed
 
 const _single_keybind_ui_scene : PackedScene = preload("res://Scenes/Objects/single_keybind.tscn")
-var _keybinds_file_path = "keybinds.txt" # file format: "#action_name" for first line followed by input events until the next action name is reached
+var _keybinds_file_path = "user://keybinds.txt" # file format: "#action_name" for first line followed by input events until the next action name is reached
 
 var _parallax_starting_pos : Array[Array]
 const _popup_tween_time : float = 0.5
@@ -28,14 +28,11 @@ const _master_bus_idx : int = 0
 
 
 func _ready():
-	if OS.has_feature("editor"):
-		_keybinds_file_path = "res://" + _keybinds_file_path
-	else:
-		_keybinds_file_path = OS.get_executable_path().get_base_dir() + "/" + _keybinds_file_path
-	
 	if FileAccess.file_exists(_keybinds_file_path):
-		for action in InputMap.get_actions():
-			InputMap.erase_action(action)
+		pass
+		#for action in InputMap.get_actions():
+		#	if action.begins_with("ui_"): continue
+		#	InputMap.erase_action(action)
 		
 		# TODO: load saved keybinds
 		#var file : FileAccess = FileAccess.open(_keybinds_file_path, FileAccess.READ)
@@ -98,7 +95,7 @@ func _on_controls_pressed():
 	_main_options_container.hide()
 	_controls_container.show()
 	
-	# setup keybinds
+	# load keybinds
 	for keybind in _keybinds_container.get_children(): keybind.queue_free()
 	
 	for action : StringName in InputMap.get_actions():
