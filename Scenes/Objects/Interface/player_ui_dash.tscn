@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://4khqlsg3i7yc"]
+[gd_scene load_steps=10 format=3 uid="uid://4khqlsg3i7yc"]
 
 [ext_resource type="Texture2D" uid="uid://g7o5nifpx6j7" path="res://Resources/Textures/VOID HELP ORGANIZE/dash_ui.png" id="1_4exml"]
 
@@ -36,6 +36,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Rect2(0, 96, 32, 32), Rect2(32, 96, 32, 32), Rect2(64, 96, 32, 32), Rect2(96, 96, 32, 32), Rect2(128, 96, 32, 32), Rect2(160, 96, 32, 32), Rect2(32, 0, 32, 32)]
+}
+
+[sub_resource type="Animation" id="Animation_snhvf"]
+resource_name = "idle"
+length = 1.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 128, 32, 32), Rect2(32, 128, 32, 32), Rect2(64, 128, 32, 32), Rect2(96, 128, 32, 32), Rect2(128, 128, 32, 32)]
 }
 
 [sub_resource type="Animation" id="Animation_v2mu7"]
@@ -91,6 +108,7 @@ tracks/0/keys = {
 _data = {
 "RESET": SubResource("Animation_0qf7r"),
 "fill": SubResource("Animation_rlho8"),
+"idle": SubResource("Animation_snhvf"),
 "locked": SubResource("Animation_v2mu7"),
 "used": SubResource("Animation_c3qp8"),
 "used_one_frame": SubResource("Animation_08np8")
@@ -107,3 +125,4 @@ stretch_mode = 4
 libraries = {
 "": SubResource("AnimationLibrary_tvr23")
 }
+autoplay = "idle"

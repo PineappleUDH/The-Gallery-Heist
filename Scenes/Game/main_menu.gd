@@ -17,7 +17,7 @@ extends MarginContainer
 @onready var _pressed_sfx : AudioStreamPlayer = $Pressed
 
 const _single_keybind_ui_scene : PackedScene = preload("res://Scenes/Objects/single_keybind.tscn")
-var _keybinds_file_path = "user://keybinds.txt" # file format: "#action_name" for first line followed by input events until the next action name is reached
+var _keybinds_file_path = "user://keybinds.json"
 
 var _parallax_starting_pos : Array[Array]
 const _popup_tween_time : float = 0.5
@@ -28,25 +28,28 @@ const _master_bus_idx : int = 0
 
 
 func _ready():
+	# load saved keybinds
 	if FileAccess.file_exists(_keybinds_file_path):
-		pass
-		#for action in InputMap.get_actions():
-		#	if action.begins_with("ui_"): continue
-		#	InputMap.erase_action(action)
+		for action in _get_user_actions():
+			InputMap.erase_action(action)
 		
-		# TODO: load saved keybinds
-		#var file : FileAccess = FileAccess.open(_keybinds_file_path, FileAccess.READ)
-		#var current_action_name : String
-		#var line : String = file.get_line()
-		#if line.begins_with("#"):
-			## new input action reached
-			#current_action_name = line.substr(1)
-			#InputMap.add_action(current_action_name)
-		#else:
-			## input event
-			#InputMap.action_add_event(current_action_name, bytes_to_var(line.to_utf8_buffer()))
-		#
-		#file.close()
+		var file : FileAccess = FileAccess.open(_keybinds_file_path, FileAccess.READ)
+		var json_data : Array = JSON.parse_string(file.get_as_text())
+		file.close()
+		
+		if json_data == null:
+			push_error("keybinds file is corrupted and will be ignored")
+		else:
+			for data : Dictionary in json_data:
+				InputMap.add_action(data["action"])
+				for event : String in data["events"]:
+					# convert string "[1, 2, 3..]" to PackedByteArray
+					var chars_array : PackedStringArray =\
+						event.substr(1, event.length()-2).split(",", false)
+					var byte_array : PackedByteArray
+					for char_ in chars_array: byte_array.append(int(char_))
+					
+					InputMap.action_add_event(data["action"], bytes_to_var_with_objects(byte_array))
 	
 	# save original parallax positions
 	await sort_children
@@ -90,16 +93,16 @@ func _on_settings_pressed():
 	_settings_container.show()
 
 # TODO: prevent using the same key for more than 1 action
+#       also allow reseting to default input map by saving map before applying changes
 func _on_controls_pressed():
 	_pressed_sfx.play()
 	_main_options_container.hide()
 	_controls_container.show()
 	
-	# load keybinds
+	# load keybinds from InputMap
 	for keybind in _keybinds_container.get_children(): keybind.queue_free()
 	
-	for action : StringName in InputMap.get_actions():
-		if action.begins_with("ui_"): continue # ignore built-in actions
+	for action : StringName in _get_user_actions():
 		var keybind : Control = _single_keybind_ui_scene.instantiate()
 		var bind_name : String = action
 		var bind1 : InputEventWithModifiers
@@ -144,13 +147,13 @@ func _on_controls_done_pressed():
 	
 	# save keybinds to file
 	var file : FileAccess = FileAccess.open(_keybinds_file_path, FileAccess.WRITE)
-	for action : StringName in InputMap.get_actions():
-		if action.begins_with("ui_"): continue # ignore built-in actions
-		file.store_line('#' + action)
+	var json_data : Array[Dictionary]
+	for action : StringName in _get_user_actions():
+		json_data.append({"action":action, "events":[]})
 		for event : InputEvent in InputMap.action_get_events(action):
-			file.store_var(var_to_bytes_with_objects(event), true)
-			file.store_string('\n')
+			json_data[-1]["events"].append(var_to_bytes_with_objects(event))
 	
+	file.store_string(JSON.stringify(json_data, "\t"))
 	file.close()
 
 func _on_controls_cancel_pressed():
@@ -169,6 +172,15 @@ func _on_fullscreen_toggled(toggled_on : bool):
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+
+func _get_user_actions() -> Array[StringName]:
+	var actions : Array[StringName]
+	for action in InputMap.get_actions():
+		# ignore built-in actions which always start with "ui_"
+		if action.begins_with("ui_") == false:
+			actions.append(action)
+	
+	return actions
 
 func _on_button_hovered():
 	_hovered_sfx.play()
