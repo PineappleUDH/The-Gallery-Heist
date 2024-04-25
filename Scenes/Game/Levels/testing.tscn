@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=3 uid="uid://mlvn8cvywr4c"]
+[gd_scene load_steps=112 format=3 uid="uid://mlvn8cvywr4c"]
 
 [ext_resource type="PackedScene" uid="uid://b84n1i2bwxbmr" path="res://Scenes/Objects/Level/level.tscn" id="1_gs8pa"]
 [ext_resource type="Script" path="res://Scenes/Game/Levels/testing.gd" id="2_qem0p"]
@@ -29,7 +29,6 @@
 [ext_resource type="PackedScene" uid="uid://bj67wqgcm4ilf" path="res://Scenes/Game/Bosses/passion.tscn" id="28_711wc"]
 [ext_resource type="PackedScene" uid="uid://c2hwbjr8y1al3" path="res://Scenes/Objects/Level/platform_path_object.tscn" id="29_5phno"]
 [ext_resource type="PackedScene" uid="uid://xr88hkbetrn" path="res://Scenes/Objects/Collectables/collectable_curry.tscn" id="30_fdf7o"]
-[ext_resource type="PackedScene" uid="uid://bnew5qdy6ki2r" path="res://Scenes/Objects/Obstacles/yoyo_trap_path_object.tscn" id="30_ifq8s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tu37i"]
 resource_local_to_scene = true
@@ -898,13 +897,13 @@ size = Vector2(18, 302)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0a7xj"]
 size = Vector2(60, 304)
 
-[sub_resource type="Curve2D" id="Curve2D_kv8mu"]
+[sub_resource type="Curve2D" id="Curve2D_w3niy"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 328, 0)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_xfptu"]
+[sub_resource type="Curve2D" id="Curve2D_u407l"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 4, 0, 0, 0, 0, 0, -276, 0)
 }
@@ -2663,12 +2662,12 @@ shape = SubResource("RectangleShape2D_0a7xj")
 
 [node name="PathObject" parent="." index="14" instance=ExtResource("29_5phno")]
 position = Vector2(2808, -792)
-curve = SubResource("Curve2D_kv8mu")
+curve = SubResource("Curve2D_w3niy")
 _speed_per_sec = 40.0
 
 [node name="PathObject2" parent="." index="15" instance=ExtResource("29_5phno")]
 position = Vector2(3476, -792)
-curve = SubResource("Curve2D_xfptu")
+curve = SubResource("Curve2D_u407l")
 _speed_per_sec = 40.0
 
 [node name="TriggerCamera" parent="." index="16" instance=ExtResource("5_7n87s")]
@@ -2692,7 +2691,3 @@ _idle_position = Vector2(4544, 7776)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerCamera2" index="0"]
 position = Vector2(-287, -60)
 shape = SubResource("RectangleShape2D_m4d7n")
-
-[node name="Yo-YoTrap" parent="." index="18" instance=ExtResource("30_ifq8s")]
-position = Vector2(-1987, -1298)
-scale = Vector2(0.5, 0.5)
