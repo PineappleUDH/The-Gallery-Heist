@@ -1,4 +1,5 @@
 extends Path2D
+class_name PathObject
 
 @export var _loop : bool = true
 @export var _speed_per_sec : float = 80.0

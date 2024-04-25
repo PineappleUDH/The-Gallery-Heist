@@ -76,8 +76,11 @@ script = ExtResource("3_kfuv0")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 640.0
+offset_bottom = 360.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.5, 0.5)
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
@@ -128,8 +131,8 @@ texture = SubResource("AtlasTexture_jwdk5")
 
 [node name="Score" type="HBoxContainer" parent="UI/Hud/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 4
 
 [node name="Label" type="Label" parent="UI/Hud/HBoxContainer/Score"]
 layout_mode = 2

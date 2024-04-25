@@ -50,7 +50,7 @@ const _slide_speed_fast : float = 120.0
 const _walk_footstep_time : float = 0.6
 const _run_footstep_time : float = 0.3
 
-const _max_swim_speed : float = 120.0
+const _max_swim_speed : float = 140.0
 const _out_of_water_push : float = 200.0
 const _water_accel : float = 320.0
 const _water_decel : float = 150.0
@@ -227,8 +227,9 @@ func _is_water_tile(global_pos : Vector2) -> bool:
 func _set_can_dash(can_dash : bool):
 	# Note: use this instead of setting _can_dash directly
 	# so it also updates the interface
-	_can_dash = can_dash
-	World.level.interface.set_dash(can_dash)
+	if _dash_disabled == false:
+		_can_dash = can_dash
+		World.level.interface.set_dash(can_dash)
 
 func _state_normal_switch_from(to : String):
 	World.level.level_camera.player_look_offset(0)
@@ -455,8 +456,7 @@ func _state_swim_switch_from(to : String):
 	# if player leaves water with a slow speed they'll fall right back leading to state continuously
 	# changing. this kicks the player up when they leave
 	velocity.y = Utilities.soft_clamp(velocity.y, -_out_of_water_push, _out_of_water_push)
-	if _dash_disabled == false:
-		_set_can_dash(true)
+	_set_can_dash(true)
 	_collider.shape.size = _default_collider_size
 	_bubbles_particles.emitting = false
 	World.level.interface.set_air_active(false)
