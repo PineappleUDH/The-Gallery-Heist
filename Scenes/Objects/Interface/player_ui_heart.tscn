@@ -101,7 +101,6 @@ _data = {
 }
 
 [node name="PlayerUiHeart" type="TextureRect"]
-custom_minimum_size = Vector2(32, 32)
 offset_right = 16.0
 offset_bottom = 16.0
 texture = SubResource("AtlasTexture_chh7n")

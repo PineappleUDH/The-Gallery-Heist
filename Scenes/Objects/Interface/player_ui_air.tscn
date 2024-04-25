@@ -81,7 +81,6 @@ _data = {
 }
 
 [node name="PlayerUiAir" type="TextureRect"]
-custom_minimum_size = Vector2(32, 32)
 texture = SubResource("AtlasTexture_ajoog")
 stretch_mode = 5
 
