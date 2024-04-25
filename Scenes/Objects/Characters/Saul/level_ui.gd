@@ -90,6 +90,8 @@ func set_dash(enabled : bool):
 		animator.play("used")
 
 func set_dash_locked(locked : bool):
+	if _dash_locked == locked: return
+	
 	_dash_locked = locked
 	var animator : AnimationPlayer = _dash_ui.get_node("AnimationPlayer")
 	animator.clear_queue()

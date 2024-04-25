@@ -17,21 +17,28 @@ extends MarginContainer
 @onready var _pressed_sfx : AudioStreamPlayer = $Pressed
 
 const _single_keybind_ui_scene : PackedScene = preload("res://Scenes/Objects/single_keybind.tscn")
-var _keybinds_file_path = "user://keybinds.json"
+var _keybinds_file_path = "user://keybinds.json" # format: [{"action":action name, "events":[input event, ..]}, ..]
 
 var _parallax_starting_pos : Array[Array]
 const _popup_tween_time : float = 0.5
 const _popup_tween_menu_time : float = 1.5
 
+static var _default_input_map : Array[Dictionary]
 const _bg_parallax_factor : float = 0.015
 const _master_bus_idx : int = 0
 
 
 func _ready():
+	# save original InputMap before loading from file to allow resetting
+	if _default_input_map.is_empty():
+		for action in _get_user_actions():
+			_default_input_map.append({"action":action, "events":[]})
+			for event : InputEvent in InputMap.action_get_events(action):
+				_default_input_map[-1]["events"].append(event)
+	
 	# load saved keybinds
 	if FileAccess.file_exists(_keybinds_file_path):
-		for action in _get_user_actions():
-			InputMap.erase_action(action)
+		_clear_user_actions()
 		
 		var file : FileAccess = FileAccess.open(_keybinds_file_path, FileAccess.READ)
 		var json_data : Array = JSON.parse_string(file.get_as_text())
@@ -93,29 +100,12 @@ func _on_settings_pressed():
 	_settings_container.show()
 
 # TODO: prevent using the same key for more than 1 action
-#       also allow reseting to default input map by saving map before applying changes
 func _on_controls_pressed():
 	_pressed_sfx.play()
 	_main_options_container.hide()
 	_controls_container.show()
 	
-	# load keybinds from InputMap
-	for keybind in _keybinds_container.get_children(): keybind.queue_free()
-	
-	for action : StringName in _get_user_actions():
-		var keybind : Control = _single_keybind_ui_scene.instantiate()
-		var bind_name : String = action
-		var bind1 : InputEventWithModifiers
-		var bind2 : InputEventWithModifiers
-		
-		for event : InputEvent in InputMap.action_get_events(action):
-			if event is InputEventKey || event is InputEventMouse:
-				if bind1 == null: bind1 = event
-				elif bind2 == null: bind2 = event
-				else: assert(false, "Keybinds only support 2 keys, one of the Inputs in the InputMap used more than 2 keys (mouse buttons also count)")
-		
-		_keybinds_container.add_child(keybind)
-		keybind.setup(bind_name, bind1, bind2)
+	_generate_user_binds_ui()
 
 func _on_quit_pressed():
 	get_tree().quit()
@@ -124,6 +114,18 @@ func _on_settings_done_pressed():
 	_pressed_sfx.play()
 	_main_options_container.show()
 	_settings_container.hide()
+
+func _on_controls_reset_pressed():
+	# remove keybind objects and user defined input in input map
+	# and repopulate from _default_input_map
+	_clear_user_actions()
+	
+	for entry : Dictionary in _default_input_map:
+		InputMap.add_action(entry["action"])
+		for event : InputEvent in entry["events"]:
+			InputMap.action_add_event(entry["action"], event)
+	
+	_generate_user_binds_ui()
 
 func _on_controls_done_pressed():
 	_pressed_sfx.play()
@@ -156,15 +158,10 @@ func _on_controls_done_pressed():
 	file.store_string(JSON.stringify(json_data, "\t"))
 	file.close()
 
-func _on_controls_cancel_pressed():
-	_pressed_sfx.play()
-	_main_options_container.show()
-	_controls_container.hide()
-
-func _on_volume_changed():
+func _on_volume_changed(value : float):
 	AudioServer.set_bus_volume_db(
 		_master_bus_idx,
-		_volume_slider.value
+		value
 	)
 
 func _on_fullscreen_toggled(toggled_on : bool):
@@ -181,6 +178,29 @@ func _get_user_actions() -> Array[StringName]:
 			actions.append(action)
 	
 	return actions
+
+func _clear_user_actions():
+	for action in _get_user_actions():
+		InputMap.erase_action(action)
+
+func _generate_user_binds_ui():
+	# load keybinds from InputMap and populate keybinds container
+	for keybind in _keybinds_container.get_children(): keybind.queue_free()
+	
+	for action : StringName in _get_user_actions():
+		var keybind : Control = _single_keybind_ui_scene.instantiate()
+		var bind_name : String = action
+		var bind1 : InputEventWithModifiers
+		var bind2 : InputEventWithModifiers
+		
+		for event : InputEvent in InputMap.action_get_events(action):
+			if event is InputEventKey || event is InputEventMouse:
+				if bind1 == null: bind1 = event
+				elif bind2 == null: bind2 = event
+				else: assert(false, "Keybinds only support 2 keys, one of the Inputs in the InputMap used more than 2 keys (mouse buttons also count)")
+		
+		_keybinds_container.add_child(keybind)
+		keybind.setup(bind_name, bind1, bind2)
 
 func _on_button_hovered():
 	_hovered_sfx.play()

@@ -12,7 +12,8 @@ size = Vector2(30, 30)
 
 [node name="EnemyFlying" instance=ExtResource("1_pod7t")]
 script = ExtResource("2_xnlyq")
-_speed = 80.0
+_max_speed = null
+_acceleration = null
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="0"]
 modulate = Color(0, 1, 0.25098, 1)
@@ -23,6 +24,3 @@ shape = SubResource("CircleShape2D_q05na")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource("RectangleShape2D_rbf4w")
-
-[node name="PathFollow2D" type="PathFollow2D" parent="." index="5"]
-rotates = false

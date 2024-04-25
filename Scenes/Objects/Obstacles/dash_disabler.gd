@@ -42,7 +42,7 @@ func _on_body_entered(body : Node2D):
 		_sprite.texture.region.position.x = _sprite_on_x
 		_player_inside = true
 		_particles.emitting = true
-		body.set_dash_disabled(true)
+		body.set_dash_lock(true)
 		queue_redraw()
 		set_process(true)
 
@@ -51,6 +51,6 @@ func _on_body_exited(body : Node2D):
 		_sprite.texture.region.position.x = _sprite_off_x
 		_player_inside = false
 		_particles.emitting = false
-		body.set_dash_disabled(false)
+		body.set_dash_lock(false)
 		queue_redraw()
 		set_process(false)

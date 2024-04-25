@@ -8,7 +8,7 @@ extends "res://Scenes/Objects/Characters/Enemies/enemy.gd"
 @onready var _debug_vars_visualizer : PanelContainer = $DebugVarsVisualizer
 @onready var _obstacle_detect_left : RayCast2D = $Detectors/ObstacleDetectLeft
 @onready var _obstacle_detect_right : RayCast2D = $Detectors/ObstacleDetectRight
-@onready var _player_detection = $Detectors/PlayerDetection
+#@onready var _player_detection = $Detectors/PlayerDetection
 
 var _player : Player
 var _player_detected : bool = false

@@ -719,9 +719,9 @@ shadow_color = Color(0.180392, 0.133333, 0.184314, 1)
 
 [sub_resource type="Curve2D" id="Curve2D_o2ns7"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 35, -5, 0, 0, 0, 0, 203, -7, 0, 0, 0, 0, 286, 55, 0, 0, 0, 0, 294, 195, 0, 0, 0, 0, -272, 196, 0, 0, 0, 0, -272, 52, 0, 0, 0, 0, -173, -8, 0, 0, 0, 0, 35, -5)
+"points": PackedVector2Array(0, 0, 0, 0, 35, -5, 0, 0, 0, 0, 203, -7, 0, 0, 0, 0, 286, 55, 0, 0, 0, 0, 294, 195, 0, 0, 0, 0, 10, 196, 0, 0, 0, 0, -272, 196, 0, 0, 0, 0, -272, 52, 0, 0, 0, 0, -173, -8, 0, 0, 0, 0, 35, -5)
 }
-point_count = 8
+point_count = 9
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n4nu1"]
 size = Vector2(32, 27)
@@ -1806,7 +1806,7 @@ position = Vector2(3443, -805)
 _radius = 300.0
 
 [node name="Saul" parent="Characters" index="0"]
-position = Vector2(177, -144)
+position = Vector2(-1430, -766)
 
 [node name="EnemyPatrolling" parent="Characters" index="1" instance=ExtResource("16_c4ebt")]
 position = Vector2(3638, 6234)
@@ -1832,9 +1832,10 @@ position = Vector2(-1256, -720)
 
 [node name="EnemyFlying" parent="Characters" index="7" instance=ExtResource("23_jb4lp")]
 position = Vector2(-1427, -818)
-_speed = 100.0
+_max_speed = 100.0
+_acceleration = 60.0
 
-[node name="Path2D" type="Path2D" parent="Characters/EnemyFlying" index="6"]
+[node name="Path2D" type="Path2D" parent="Characters/EnemyFlying" index="5"]
 curve = SubResource("Curve2D_o2ns7")
 
 [node name="EnemyPatrolling4" parent="Characters" index="8" instance=ExtResource("16_c4ebt")]

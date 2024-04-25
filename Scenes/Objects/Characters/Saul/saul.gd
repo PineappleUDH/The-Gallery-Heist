@@ -59,14 +59,14 @@ var _air : int = _max_air
 var _was_on_water_surface : bool = false
 const _water_collider_size : Vector2 = Vector2(28, 14)
 
+# NOTE: both _dash_locks and _can_dash affects ability to dash. except the former is set by other scripts, and the latter is set by self
+var _dash_locks : int = 0
 var _can_dash : bool = true
-var _dash_disabled : bool = false
 const _dash_speed: float = 300
 const _dash_shake_duration : float = 0.3
-var _dash_locks : int = 0
 
 const _wall_jump_force : float = 260.0
-const _wall_push_force : float = 230.0
+const _wall_push_force : float = 230.0 # push is in the x axis, jump is in the y
 
 const _damage_shake_duration : float = 0.3
 
@@ -112,32 +112,29 @@ func _physics_process(delta : float):
 	_state_machine.state_physics_process(delta)
 
 func can_dash():
-	return _can_dash
+	return _can_dash && _dash_locks == 0
 
 func refill_dash():
-	if _can_dash == false && _dash_disabled == false:
+	if _can_dash == false && _dash_locks == 0:
 		_set_can_dash(true)
 		
 		if _dash_cooldown.is_stopped() == false:
 			_dash_cooldown.stop()
 
-func set_dash_disabled(disabled : bool):
-	match disabled:
+func set_dash_lock(lock : bool):
+	match lock:
 		true : _dash_locks += 1
 		false : _dash_locks -= 1
 	
-	if _dash_locks <= 0:
-		_dash_locks = 0
-		_dash_disabled = false
+	assert(_dash_locks >= 0, "Bug detected, a lock is being removed without being added first.")
+	
+	if _dash_locks == 0:
 		World.level.interface.set_dash_locked(false)
 	
-	if _dash_locks > 0:
-		_dash_disabled = true
+	elif _dash_locks > 0:
 		World.level.interface.set_dash_locked(true)
-	
-	if _dash_disabled == true:
 		_set_can_dash(false)
-
+	
 
 func heal(amount : int):
 	if _health == _max_health: return
@@ -168,7 +165,7 @@ func reset_from_checkpoint(checkpoint_position : Vector2):
 	_health = _max_health
 	_facing = Vector2.RIGHT
 	_direction = Vector2.RIGHT
-	_dash_disabled = false
+	_dash_locks = 0
 	_state_machine.change_state("normal")
 	
 	respawned.emit()
@@ -224,12 +221,12 @@ func _is_water_tile(global_pos : Vector2) -> bool:
 	
 	return false
 
-func _set_can_dash(can_dash : bool):
+func _set_can_dash(dash : bool):
 	# Note: use this instead of setting _can_dash directly
 	# so it also updates the interface
-	if _dash_disabled == false:
-		_can_dash = can_dash
-		World.level.interface.set_dash(can_dash)
+	_can_dash = dash
+	if _dash_locks == 0:
+		World.level.interface.set_dash(dash)
 
 func _state_normal_switch_from(to : String):
 	World.level.level_camera.player_look_offset(0)
@@ -336,11 +333,11 @@ func _state_normal_ph_process(delta : float):
 			_state_machine.change_state("wall_slide")
 			return
 	
-	if (_can_dash == false && _dash_disabled == false &&
+	if (_can_dash == false && _dash_locks == 0 &&
 	_dash_cooldown.is_stopped() && is_on_floor()):
 		_set_can_dash(true)
 	
-	if Input.is_action_just_pressed("dash") && _can_dash:
+	if Input.is_action_just_pressed("dash") && _can_dash && _dash_locks == 0:
 		_state_machine.change_state("dash")
 		return
 	
@@ -374,7 +371,7 @@ func _state_wall_slide_ph_process(delta: float):
 		_state_machine.change_state("normal")
 		return
 	
-	if Input.is_action_just_pressed("dash") && _can_dash:
+	if Input.is_action_just_pressed("dash") && _can_dash && _dash_locks == 0:
 		_facing = Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down"))
 		_state_machine.change_state("dash")
 		return
@@ -450,7 +447,7 @@ func _state_swim_switch_to(from : String):
 	_was_on_water_surface = true
 	_set_can_dash(false)
 	
-	# TODO: muffle some sounds, would need to separate buses
+	# TODO: muffle some sounds, would need to separate audio buses
 
 func _state_swim_switch_from(to : String):
 	# if player leaves water with a slow speed they'll fall right back leading to state continuously
@@ -489,7 +486,7 @@ func _state_swim_ph_process(delta : float):
 	# surface
 	var is_on_surface : bool =\
 		# TODO: this only checks if the tile above is water or not. the tile could be solid
-		#       in which case we're no "on surface"
+		#       in which case we're NOT on surface
 		_is_water_tile(global_position - Vector2(0.0, World.level.tile_size)) == false
 	var is_close_to_surface : bool =\
 		# are you happy val? :(((((((
@@ -499,7 +496,7 @@ func _state_swim_ph_process(delta : float):
 	
 	if is_close_to_surface && Input.is_action_just_pressed("jump"):
 		# TODO: repurpose jump buffer timer for this
-		# sfx
+		# sfx..
 		velocity.y = Utilities.soft_clamp(velocity.y, -_jump_force, _jump_force)
 	
 	if is_on_surface:
@@ -531,7 +528,7 @@ func _state_swim_ph_process(delta : float):
 		_state_machine.change_state("normal")
 
 func _state_dead_switch_to(from : String):
-	velocity = Vector2.ZERO # TODO: zoom in
+	velocity = Vector2.ZERO # TODO: zoom camera in
 	_collider.disabled = true
 	_is_invincible = true
 	_sprite.flip_h = false
