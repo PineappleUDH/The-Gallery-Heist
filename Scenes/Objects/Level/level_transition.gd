@@ -17,7 +17,6 @@ var _transition_tween : Tween
 const _tween_time : float = 0.8
 const _transition_tex_scale : Vector2 = Vector2.ONE * 4.0
 
-
 func transition():
 	# setup
 	if _transition_tween && _transition_tween.is_valid():

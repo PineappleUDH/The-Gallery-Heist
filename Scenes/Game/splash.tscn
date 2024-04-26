@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dglqiboyhmdl0"]
 
 [ext_resource type="Script" path="res://Scenes/Game/splash.gd" id="1_1hx6h"]
-[ext_resource type="Shader" path="res://Resources/Shaders/splash_text.gdshader" id="1_8iljm"]
+[ext_resource type="Shader" path="res://Resources/Shaders/wiggly_verticies.gdshader" id="1_8iljm"]
 [ext_resource type="FontFile" uid="uid://bsvbubhqv01qw" path="res://Resources/Fonts/hf-free-complete/futile-pro-v1/FutilePro.ttf" id="2_dasv2"]
 [ext_resource type="AudioStream" uid="uid://bdvnww32htdxd" path="res://Resources/Audio/Music/splash.ogg" id="4_84uc0"]
 
@@ -30,6 +30,8 @@ turbulence_influence_max = 0.01
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jw8pt"]
 shader = ExtResource("1_8iljm")
+shader_parameter/speed = 4.0
+shader_parameter/scale = 2.0
 
 [node name="Splash" type="Control"]
 layout_mode = 3

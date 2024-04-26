@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b84n1i2bwxbmr"]
+[gd_scene load_steps=28 format=3 uid="uid://b84n1i2bwxbmr"]
 
 [ext_resource type="Script" path="res://Scenes/Objects/Level/level.gd" id="1_qee75"]
 [ext_resource type="Script" path="res://Scenes/Objects/Level/level_pause_manager.gd" id="2_2cj76"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scenes/Objects/Characters/Saul/level_ui.gd" id="3_kfuv0"]
 [ext_resource type="Script" path="res://Scenes/Objects/Level/level_transition.gd" id="3_mds04"]
 [ext_resource type="PackedScene" uid="uid://dhssfh3cjjl5q" path="res://Scenes/Objects/Level/level_camera.tscn" id="4_h0vsv"]
+[ext_resource type="Texture2D" uid="uid://ccba6adr8r2fl" path="res://Resources/Textures/VOID HELP ORGANIZE/SAUL_letters_idle(Addin Sachen).png" id="4_ljrpx"]
 [ext_resource type="Script" path="res://Scenes/Objects/Level/level_music_player.gd" id="5_j8si2"]
 [ext_resource type="PackedScene" uid="uid://bkxse4jv0yavi" path="res://Scenes/Objects/Interface/player_ui_heart.tscn" id="5_qry46"]
 [ext_resource type="Texture2D" uid="uid://b57joaf4ixs1o" path="res://Resources/Textures/VOID HELP ORGANIZE/HeartUi(addin Sachen).png" id="6_vp5gm"]
@@ -16,6 +17,22 @@
 [ext_resource type="FontFile" uid="uid://bsvbubhqv01qw" path="res://Resources/Fonts/hf-free-complete/futile-pro-v1/FutilePro.ttf" id="11_i74xb"]
 [ext_resource type="AudioStream" uid="uid://dsbmogobaeyng" path="res://Resources/Audio/SFX/UI/button_hover.wav" id="12_2gl1w"]
 [ext_resource type="AudioStream" uid="uid://5gj12883hk0" path="res://Resources/Audio/SFX/UI/button_press.wav" id="13_1ur6e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dl2vj"]
+atlas = ExtResource("4_ljrpx")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7addn"]
+atlas = ExtResource("4_ljrpx")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oiib4"]
+atlas = ExtResource("4_ljrpx")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2s25m"]
+atlas = ExtResource("4_ljrpx")
+region = Rect2(16, 48, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tu37i"]
 resource_local_to_scene = true
@@ -50,25 +67,6 @@ region = Rect2(0, 0, 16, 16)
 [node name="Level" type="Node2D"]
 script = ExtResource("1_qee75")
 
-[node name="Transition" type="CanvasLayer" parent="."]
-layer = 2
-
-[node name="ScreenTransition" type="TextureRect" parent="Transition"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -320.0
-offset_top = -460.0
-offset_right = -640.0
-offset_bottom = -500.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(4, 4)
-pivot_offset = Vector2(160, 160)
-mouse_filter = 2
-stretch_mode = 5
-script = ExtResource("3_mds04")
-
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("3_kfuv0")
 
@@ -83,43 +81,58 @@ theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
+[node name="Letters" type="HBoxContainer" parent="UI/Hud"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="S" type="TextureRect" parent="UI/Hud/Letters"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 0
+texture = SubResource("AtlasTexture_dl2vj")
+stretch_mode = 5
+
+[node name="A" type="TextureRect" parent="UI/Hud/Letters"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 0
+texture = SubResource("AtlasTexture_7addn")
+stretch_mode = 5
+
+[node name="U" type="TextureRect" parent="UI/Hud/Letters"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 0
+texture = SubResource("AtlasTexture_oiib4")
+stretch_mode = 5
+
+[node name="L" type="TextureRect" parent="UI/Hud/Letters"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 0
+texture = SubResource("AtlasTexture_2s25m")
+stretch_mode = 5
+
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/Hud"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Hud/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="Health" type="HBoxContainer" parent="UI/Hud/HBoxContainer/VBoxContainer"]
+[node name="Health" type="HBoxContainer" parent="UI/Hud/HBoxContainer"]
 layout_mode = 2
 
-[node name="PlayerUiHeart" parent="UI/Hud/HBoxContainer/VBoxContainer/Health" instance=ExtResource("5_qry46")]
+[node name="PlayerUiHeart" parent="UI/Hud/HBoxContainer/Health" instance=ExtResource("5_qry46")]
 layout_mode = 2
 texture = SubResource("AtlasTexture_tu37i")
 
-[node name="PlayerUiHeart2" parent="UI/Hud/HBoxContainer/VBoxContainer/Health" instance=ExtResource("5_qry46")]
+[node name="PlayerUiHeart2" parent="UI/Hud/HBoxContainer/Health" instance=ExtResource("5_qry46")]
 layout_mode = 2
 texture = SubResource("AtlasTexture_fkrxm")
 
-[node name="PlayerUiHeart3" parent="UI/Hud/HBoxContainer/VBoxContainer/Health" instance=ExtResource("5_qry46")]
+[node name="PlayerUiHeart3" parent="UI/Hud/HBoxContainer/Health" instance=ExtResource("5_qry46")]
 layout_mode = 2
 texture = SubResource("AtlasTexture_14ins")
-
-[node name="Air" type="HBoxContainer" parent="UI/Hud/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="PlayerUiAir" parent="UI/Hud/HBoxContainer/VBoxContainer/Air" instance=ExtResource("7_0jw55")]
-layout_mode = 2
-texture = SubResource("AtlasTexture_gvfyq")
-
-[node name="PlayerUiAir2" parent="UI/Hud/HBoxContainer/VBoxContainer/Air" instance=ExtResource("7_0jw55")]
-layout_mode = 2
-texture = SubResource("AtlasTexture_ujih0")
-
-[node name="PlayerUiAir3" parent="UI/Hud/HBoxContainer/VBoxContainer/Air" instance=ExtResource("7_0jw55")]
-layout_mode = 2
-texture = SubResource("AtlasTexture_jwdk5")
 
 [node name="Score" type="HBoxContainer" parent="UI/Hud/HBoxContainer"]
 layout_mode = 2
@@ -137,14 +150,47 @@ size_flags_vertical = 4
 texture = ExtResource("9_w8ljf")
 stretch_mode = 5
 
+[node name="MarginContainer" type="MarginContainer" parent="UI/Hud"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 65
+
+[node name="Air" type="HBoxContainer" parent="UI/Hud/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="PlayerUiAir" parent="UI/Hud/MarginContainer/Air" instance=ExtResource("7_0jw55")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_gvfyq")
+
+[node name="PlayerUiAir2" parent="UI/Hud/MarginContainer/Air" instance=ExtResource("7_0jw55")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_ujih0")
+
+[node name="PlayerUiAir3" parent="UI/Hud/MarginContainer/Air" instance=ExtResource("7_0jw55")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_jwdk5")
+
 [node name="PlayerUiDash" parent="UI/Hud" instance=ExtResource("9_hgrx5")]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="HideCoinsTimer" type="Timer" parent="UI/Hud"]
-wait_time = 2.0
-one_shot = true
+[node name="ScreenTransition" type="TextureRect" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 160.0
+offset_top = 20.0
+offset_right = -160.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 4)
+pivot_offset = Vector2(160, 160)
+mouse_filter = 2
+stretch_mode = 5
+script = ExtResource("3_mds04")
 
 [node name="PauseManager" type="MarginContainer" parent="UI"]
 process_mode = 3
@@ -253,8 +299,8 @@ script = ExtResource("5_j8si2")
 [node name="ScheduleTimer" type="Timer" parent="Audio/MusicPlayer"]
 one_shot = true
 
-[connection signal="timeout" from="UI/Hud/HideCoinsTimer" to="UI" method="_on_hide_coins_timeout"]
 [connection signal="mouse_entered" from="UI/PauseManager/VBoxContainer/Resume" to="UI/PauseManager" method="_on_mouse_entered"]
+[connection signal="pressed" from="UI/PauseManager/VBoxContainer/Resume" to="UI/PauseManager" method="_on_resume_pressed"]
 [connection signal="mouse_entered" from="UI/PauseManager/VBoxContainer/Restart" to="UI/PauseManager" method="_on_mouse_entered"]
 [connection signal="pressed" from="UI/PauseManager/VBoxContainer/Restart" to="UI/PauseManager" method="_on_restart_pressed"]
 [connection signal="mouse_entered" from="UI/PauseManager/VBoxContainer/Quit" to="UI/PauseManager" method="_on_mouse_entered"]

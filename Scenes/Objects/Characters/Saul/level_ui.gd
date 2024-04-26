@@ -1,26 +1,27 @@
 extends CanvasLayer
 
-@onready var _health_container : HBoxContainer = $Hud/HBoxContainer/VBoxContainer/Health
-@onready var _air_container : HBoxContainer = $Hud/HBoxContainer/VBoxContainer/Air
+@onready var _health_container : HBoxContainer = $Hud/HBoxContainer/Health
+@onready var _air_container : HBoxContainer = $Hud/MarginContainer/Air
 @onready var _dash_ui : TextureRect = $Hud/PlayerUiDash
-@onready var _score_container : HBoxContainer = $Hud/HBoxContainer/Score
 @onready var _score_tex : TextureRect = $Hud/HBoxContainer/Score/TextureRect
 @onready var _score_label : Label = $Hud/HBoxContainer/Score/Label
-@onready var _hide_coins_timer : Timer = $Hud/HideCoinsTimer
+
+@onready var _letters_container : HBoxContainer = $Hud/Letters
 
 const _heart_ui_scene : PackedScene = preload("res://Scenes/Objects/Interface/player_ui_heart.tscn")
 const _air_ui_scene : PackedScene = preload("res://Scenes/Objects/Interface/player_ui_air.tscn")
 
 var _dash_locked : bool
-const _hide_score_transparency : float = 0.5
 var _score_tween : Tween
 const _score_tween_time : float = 0.42
+
+var _show_letter_tween : Tween
+const _show_letter_tween_time : float = 0.6
 
 
 func _ready():
 	_air_container.hide()
 	_score_tex.pivot_offset = _score_tex.size / 2.0
-	_score_container.modulate.a = _hide_score_transparency
 
 func setup(max_health : int, max_air : int):
 	# setup so changing the values in player class doesn't require manualy changing
@@ -37,6 +38,34 @@ func setup(max_health : int, max_air : int):
 	for i in max_air:
 		var instance := _air_ui_scene.instantiate()
 		_air_container.add_child(instance)
+
+func get_letters_ui_position() -> Vector2:
+	return _letters_container.global_position + _letters_container.size / 2.0
+
+func show_letters_found(found_letters : Dictionary):
+	# TODO: better animation and special animation for finding all letters
+	if _show_letter_tween && _show_letter_tween.is_valid():
+		_show_letter_tween.kill()
+	
+	var found_letters_nodes : Array[TextureRect] = []
+	for i in _letters_container.get_child_count():
+		if found_letters[i]:
+			found_letters_nodes.append(_letters_container.get_child(i))
+			_letters_container.get_child(i).texture.region.position.x = 16
+		else:
+			_letters_container.get_child(i).texture.region.position.x = 64
+	
+	_letters_container.show()
+	_show_letter_tween = create_tween().set_parallel(true)
+	for letter_tex : TextureRect in found_letters_nodes:
+		_show_letter_tween.tween_property(letter_tex, "modulate", Color.WHITE, _show_letter_tween_time)\
+			.from(Color.ORANGE)
+	
+	_show_letter_tween.set_parallel(false)
+	_show_letter_tween.tween_interval(_show_letter_tween_time)
+	
+	await _show_letter_tween.finished
+	_letters_container.hide()
 
 func set_health(from : int, to : int):
 	if from == to: return
@@ -103,15 +132,9 @@ func set_dash_locked(locked : bool):
 func set_score(score : int):
 	_score_label.text = str(score)
 	
-	_score_container.modulate.a = 1.0
-	_hide_coins_timer.start()
-	
 	if _score_tween && _score_tween.is_valid():
 		_score_tween.kill()
 	
 	_score_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 	_score_tween.tween_property(_score_tex, "scale", Vector2.ONE, _score_tween_time)\
 		.from(Vector2.ONE * 2.0)
-
-func _on_hide_coins_timeout():
-	_score_container.modulate.a = _hide_score_transparency

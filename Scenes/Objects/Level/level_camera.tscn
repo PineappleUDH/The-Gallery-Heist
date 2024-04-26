@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Scenes/Objects/Level/level_camera.gd" id="1_6u04b"]
 
 [node name="LevelCamera" type="Camera2D"]
+process_mode = 3
 script = ExtResource("1_6u04b")
 
 [node name="ShakeTimer" type="Timer" parent="."]

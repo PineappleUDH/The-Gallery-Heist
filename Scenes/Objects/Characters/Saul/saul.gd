@@ -146,8 +146,13 @@ func heal(amount : int):
 func take_damage(damage : int, from : Vector2, is_deadly : bool = false) -> bool:
 	var old_health : int = _health
 	var applied : bool = super.take_damage(damage, from, is_deadly)
+	if applied:
+		World.level.interface.set_health(old_health, _health)
+		World.level.pause_manager.pause()
+		get_tree().create_timer(0.2).timeout.connect(
+			func(): World.level.pause_manager.unpause()
+		)
 	
-	World.level.interface.set_health(old_health, _health)
 	return applied
 
 func reset_from_checkpoint(checkpoint_position : Vector2):

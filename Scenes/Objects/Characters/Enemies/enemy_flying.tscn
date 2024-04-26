@@ -12,8 +12,7 @@ size = Vector2(30, 30)
 
 [node name="EnemyFlying" instance=ExtResource("1_pod7t")]
 script = ExtResource("2_xnlyq")
-_max_speed = null
-_acceleration = null
+_max_speed = 180.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="0"]
 modulate = Color(0, 1, 0.25098, 1)
