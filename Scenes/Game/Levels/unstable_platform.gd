@@ -65,8 +65,6 @@ const _max_particles : int = 100
 
 
 func _on_detection_body_entered(body : Node2D):
-	# TODO: if player was inside area while platform is building somehow
-	#       this won't trigger aftere platform is built. Area2D moment
 	if body is Player && _current_state == _State.solid:
 		_current_state = _State.destoy
 		_timer.wait_time = _destruction_time
@@ -95,7 +93,6 @@ func _on_timer_timeout():
 			_timer.wait_time = _restoration_time
 			_timer.start()
 		
-		# TODO: make sprite darker while it builds so it's clear that you can't stand on it
 		_State.restore:
 			modulate.a = _destroyed_transparency
 			for sprite in _sprites_container.get_children():

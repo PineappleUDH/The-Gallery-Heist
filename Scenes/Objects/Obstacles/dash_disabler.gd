@@ -33,6 +33,7 @@ func _process(delta : float):
 	var direction : Vector2 = World.level.player.global_position - global_position
 	var distance : float = global_position.distance_to(World.level.player.global_position)
 	
+	# TODO: particles line size not acurate
 	_particles.process_material.emission_box_extents.y = distance
 	_particles.position = direction.normalized() * distance / 2.0
 	_particles.rotation = direction.angle() + PI/2.0

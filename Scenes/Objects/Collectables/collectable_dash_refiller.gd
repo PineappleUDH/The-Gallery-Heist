@@ -7,7 +7,7 @@ extends "res://Scenes/Objects/Collectables/collectable.gd"
 #@onready var _persistent_node = $PersistentNodesContainer
 
 func _ready():
-	_idle_movement = IdleMovement.sin_wave
+	_idle_movement = IdleMovement.shake
 
 func _collected(player : Player):
 	if player.can_dash() == false:

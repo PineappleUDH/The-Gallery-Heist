@@ -144,6 +144,8 @@ func heal(amount : int):
 	World.level.interface.set_health(old_health, _health)
 
 func take_damage(damage : int, from : Vector2, is_deadly : bool = false) -> bool:
+	if _state_machine.get_current_state() == "dead": return false
+	
 	var old_health : int = _health
 	var applied : bool = super.take_damage(damage, from, is_deadly)
 	if applied:
@@ -217,7 +219,7 @@ func _is_water_tile(global_pos : Vector2) -> bool:
 	var layers_count : int = World.level.tilemap.get_layers_count()
 	for i in layers_count:
 		# check all layers for a water tile. pros:doesn't require custom tilemap setup
-		#                                    const: additional processing
+		#                                    cons: additional processing
 		var data : TileData = World.level.tilemap.get_cell_tile_data(
 			i, World.level.tilemap.local_to_map(global_pos)
 		)
@@ -275,6 +277,11 @@ func _state_normal_ph_process(delta : float):
 	if _direction.x:
 		velocity.x = Utilities.soft_clamp(velocity.x, _accel * delta * sign(_direction.x), _max_move_speed)
 	else:
+		# TODO: decel exploit. we only apply horizontal decel if no vertical input is held which leads
+		#       to decel working differently when releasing movement key vs holding key of other direction
+		#       this leads to weird precision and an exploit with wall jumping while moving towards the wall.
+		#       the solution is to apply deceleration at all times like in real life. it will also requires
+		#       increasing speed values to acount for the constant deceleration
 		velocity.x = Utilities.soft_clamp(velocity.x, _decel * delta * -sign(velocity.x), 0.0)
 	
 	_walk_dust_particles.emitting = is_on_floor() and velocity.x > 230 or is_on_floor() and velocity.x < -230
@@ -295,6 +302,8 @@ func _state_normal_ph_process(delta : float):
 		
 		_footstep_timer.start()
 	
+	# TODO: holding up or down shouldn't trigger a camera look offset imediately
+	#       add some delay time
 	if velocity.x == 0 && is_on_floor() && _direction.y:
 		World.level.level_camera.player_look_offset(int(_direction.y))
 	else:
@@ -533,9 +542,8 @@ func _state_swim_ph_process(delta : float):
 		_state_machine.change_state("normal")
 
 func _state_dead_switch_to(from : String):
-	velocity = Vector2.ZERO # TODO: zoom camera in
+	velocity = Vector2.ZERO
 	_collider.disabled = true
-	_is_invincible = true
 	_sprite.flip_h = false
 	
 	_play_animation("Die")
@@ -544,4 +552,3 @@ func _state_dead_switch_to(from : String):
 
 func _state_dead_switch_from(to : String):
 	_collider.disabled = false
-	_is_invincible = false

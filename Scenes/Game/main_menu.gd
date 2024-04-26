@@ -24,7 +24,7 @@ const _popup_tween_time : float = 0.5
 const _popup_tween_menu_time : float = 1.5
 
 static var _default_input_map : Array[Dictionary]
-const _bg_parallax_factor : float = 0.015
+const _bg_parallax_factor : float = 0.000004 # this is a factor of the screen size
 const _master_bus_idx : int = 0
 
 
@@ -79,15 +79,16 @@ func _ready():
 
 func _input(event : InputEvent):
 	if event is InputEventMouseMotion && _parallax_starting_pos:
-		var screen_center : Vector2 = get_tree().root.size / 2.0
+		var screen_size : Vector2 = get_tree().root.size
 		var mouse_dist_from_center : Vector2 =\
-			event.global_position - screen_center
+			event.global_position - screen_size / 2.0
+		var parallax_offset : Vector2 = screen_size * _bg_parallax_factor
 		
 		for i in _parallax_order.size():
 			for j in _parallax_order[i].size():
 				var control : Control = _parallax_order[i][j]
 				control.global_position = _parallax_starting_pos[i][j] +\
-					-mouse_dist_from_center * _bg_parallax_factor * (i+1)
+					-mouse_dist_from_center * parallax_offset * (i+1)
 
 func _on_play_pressed():
 	_pressed_sfx.play()

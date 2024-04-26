@@ -69,7 +69,7 @@ func _process(delta : float):
 		target_position.y += offset_ / zoom.y * _player_y_look_direction
 	
 	# bounds, clamp camera edges rather than camera center
-	var camera_half_size : Vector2 = (get_viewport_rect().size * zoom) / 2.0
+	var camera_half_size : Vector2 = (get_viewport_rect().size / zoom) / 2.0
 	if _axis_bounds.has("x"):
 		target_position.x = clamp(
 			target_position.x,

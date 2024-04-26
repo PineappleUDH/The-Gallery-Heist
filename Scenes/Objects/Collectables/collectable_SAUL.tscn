@@ -201,7 +201,6 @@ animations = [{
 size = Vector2(16, 16)
 
 [node name="Collectable" instance=ExtResource("1_am7an")]
-process_mode = 3
 script = ExtResource("1_u0t2j")
 _letter = 0
 

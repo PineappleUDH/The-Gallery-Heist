@@ -1806,7 +1806,7 @@ position = Vector2(3443, -805)
 _radius = 300.0
 
 [node name="Saul" parent="Characters" index="0"]
-position = Vector2(173, -152)
+position = Vector2(176, -144)
 
 [node name="EnemyPatrolling" parent="Characters" index="1" instance=ExtResource("16_c4ebt")]
 position = Vector2(3638, 6234)
@@ -1935,37 +1935,34 @@ position = Vector2(264, -2424)
 [node name="CollectableDashRefiller6" parent="Collectables/DashRefils" index="5" instance=ExtResource("9_pynbm")]
 position = Vector2(264, -2572)
 
-[node name="CollectableDashRefiller7" parent="Collectables/DashRefils" index="6" instance=ExtResource("9_pynbm")]
-position = Vector2(264, -2572)
-
-[node name="CollectableDashRefiller8" parent="Collectables/DashRefils" index="7" instance=ExtResource("9_pynbm")]
+[node name="CollectableDashRefiller8" parent="Collectables/DashRefils" index="6" instance=ExtResource("9_pynbm")]
 position = Vector2(4096, 7460)
 
-[node name="CollectableDashRefiller9" parent="Collectables/DashRefils" index="8" instance=ExtResource("9_pynbm")]
+[node name="CollectableDashRefiller9" parent="Collectables/DashRefils" index="7" instance=ExtResource("9_pynbm")]
 position = Vector2(3904, 6863)
 
-[node name="CollectableDashRefiller14" parent="Collectables/DashRefils" index="9" instance=ExtResource("9_pynbm")]
+[node name="CollectableDashRefiller14" parent="Collectables/DashRefils" index="8" instance=ExtResource("9_pynbm")]
 position = Vector2(3648, 6912)
 
-[node name="CollectableDashRefiller10" parent="Collectables/DashRefils" index="10" instance=ExtResource("9_pynbm")]
+[node name="CollectableDashRefiller10" parent="Collectables/DashRefils" index="9" instance=ExtResource("9_pynbm")]
 position = Vector2(2944, 6935)
 
-[node name="CollectableDashRefiller11" parent="Collectables/DashRefils" index="11" instance=ExtResource("9_pynbm")]
+[node name="CollectableDashRefiller11" parent="Collectables/DashRefils" index="10" instance=ExtResource("9_pynbm")]
 position = Vector2(2920, 6696)
 
-[node name="CollectableDashRefiller12" parent="Collectables/DashRefils" index="12" instance=ExtResource("9_pynbm")]
+[node name="CollectableDashRefiller12" parent="Collectables/DashRefils" index="11" instance=ExtResource("9_pynbm")]
 position = Vector2(2920, 6576)
 
-[node name="CollectableDashRefiller13" parent="Collectables/DashRefils" index="13" instance=ExtResource("9_pynbm")]
+[node name="CollectableDashRefiller13" parent="Collectables/DashRefils" index="12" instance=ExtResource("9_pynbm")]
 position = Vector2(2920, 6464)
 
-[node name="CollectableDashRefiller15" parent="Collectables/DashRefils" index="14" instance=ExtResource("9_pynbm")]
+[node name="CollectableDashRefiller15" parent="Collectables/DashRefils" index="13" instance=ExtResource("9_pynbm")]
 position = Vector2(3616, 5585)
 
-[node name="CollectableDashRefiller16" parent="Collectables/DashRefils" index="15" instance=ExtResource("9_pynbm")]
+[node name="CollectableDashRefiller16" parent="Collectables/DashRefils" index="14" instance=ExtResource("9_pynbm")]
 position = Vector2(3328, 5224)
 
-[node name="CollectableDashRefiller17" parent="Collectables/DashRefils" index="16" instance=ExtResource("9_pynbm")]
+[node name="CollectableDashRefiller17" parent="Collectables/DashRefils" index="15" instance=ExtResource("9_pynbm")]
 position = Vector2(3232, 5120)
 
 [node name="Eggs" type="Node2D" parent="Collectables" index="3"]

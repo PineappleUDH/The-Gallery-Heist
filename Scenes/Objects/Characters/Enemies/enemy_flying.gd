@@ -5,7 +5,8 @@ extends "res://Scenes/Objects/Characters/Enemies/enemy.gd"
 
 @onready var _sprite : Sprite2D = $Sprite2D
 
-const _acceleration : float = 300.0
+const _acceleration : float = 350.0
+const _deceleration : float = 160.0
 var _path : Path2D
 var _path_points : PackedVector2Array
 var _path_target_point : int = 0
@@ -17,7 +18,7 @@ func _ready():
 	_max_health = 2
 	_damage_cooldown_time = 2.0
 	_health = _max_health
-	_knockback = 130.0
+	_knockback = 20.0
 	
 	for child in get_children():
 		if child is Path2D:
@@ -36,11 +37,15 @@ func _ready():
 func _physics_process(delta : float):
 	if Engine.is_editor_hint(): return
 	
-	# accelerate towards target point
 	var dir : Vector2 =\
 		(_path_points[_path_target_point] - global_position).normalized()
+	# accelerate
 	velocity.x = Utilities.soft_clamp(velocity.x, dir.x * _acceleration * delta, _max_speed)
 	velocity.y = Utilities.soft_clamp(velocity.y, dir.y * _acceleration * delta, _max_speed)
+	
+	# decelerate
+	velocity.x = Utilities.soft_clamp(velocity.x, -sign(velocity.x) * _deceleration * delta, 0.0)
+	velocity.y = Utilities.soft_clamp(velocity.y, -sign(velocity.y) * _deceleration * delta, 0.0)
 	
 	if velocity.x > 0.0:
 		_sprite.flip_h = false
