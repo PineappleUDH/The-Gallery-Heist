@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://0865lawptlau"]
+
+[ext_resource type="Script" path="res://Scenes/Objects/labyrinth_door.gd" id="1_064bn"]
+[ext_resource type="Texture2D" uid="uid://5okrg4q3tbqq" path="res://Resources/Textures/Labyrinth Door.png" id="1_q70uu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x6kxu"]
+size = Vector2(32, 43)
+
+[node name="LabyrinthDoor" type="Area2D"]
+script = ExtResource("1_064bn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_q70uu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_x6kxu")

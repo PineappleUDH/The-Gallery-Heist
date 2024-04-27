@@ -1,8 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://bb8fvvxo2nhq1"]
+[gd_scene load_steps=8 format=3 uid="uid://bb8fvvxo2nhq1"]
 
 [ext_resource type="Script" path="res://Scenes/Objects/Characters/character.gd" id="1_xfsue"]
 [ext_resource type="PackedScene" uid="uid://caabhgsckx3p8" path="res://Scenes/Objects/Characters/hurtbox.tscn" id="2_6ny8n"]
 [ext_resource type="AudioStream" uid="uid://dftb7ej7uoibk" path="res://Resources/Audio/SFX/Player/damaged.wav" id="3_iixss"]
+[ext_resource type="AudioStream" uid="uid://hapit8gq4mdo" path="res://Resources/Audio/SFX/Player/splash.wav" id="4_ehaii"]
+[ext_resource type="AudioStream" uid="uid://coidgcixijus7" path="res://Resources/Audio/SFX/Player/splash2.wav" id="5_fh7ga"]
+[ext_resource type="AudioStream" uid="uid://bkkdnyjegrry1" path="res://Resources/Audio/SFX/Player/splash3.wav" id="6_5t5pw"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yaim6"]
+playback_mode = 1
+streams_count = 3
+stream_0/stream = ExtResource("4_ehaii")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("5_fh7ga")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("6_5t5pw")
+stream_2/weight = 1.0
 
 [node name="Character" type="CharacterBody2D"]
 script = ExtResource("1_xfsue")
@@ -20,5 +33,9 @@ one_shot = true
 
 [node name="Damaged" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("3_iixss")
+
+[node name="Splash" type="AudioStreamPlayer" parent="Sounds"]
+stream = SubResource("AudioStreamRandomizer_yaim6")
+volume_db = -12.0
 
 [connection signal="timeout" from="Timers/DamageCooldownTimer" to="." method="_on_damage_cooldown_timer_timeout"]
