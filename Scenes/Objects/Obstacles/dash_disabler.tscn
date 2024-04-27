@@ -1,12 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://7l87lw8fg00p"]
+[gd_scene load_steps=13 format=3 uid="uid://7l87lw8fg00p"]
 
 [ext_resource type="Script" path="res://Scenes/Objects/Obstacles/dash_disabler.gd" id="1_jusnf"]
 [ext_resource type="Texture2D" uid="uid://di1tgsqwu6kxi" path="res://Resources/Textures/dash_disabler.png" id="1_vj3cc"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vbhvu"]
-resource_local_to_scene = true
-atlas = ExtResource("1_vj3cc")
-region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jcfnt"]
 particle_flag_disable_z = true
@@ -19,6 +14,106 @@ gravity = Vector3(0, 0, 0)
 scale_max = 1.6
 color = Color(1, 0.231373, 0.231373, 1)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ubc1"]
+resource_local_to_scene = true
+atlas = ExtResource("1_vj3cc")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="Animation" id="Animation_yjax7"]
+resource_name = "open"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Eye:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Rect2(0, 32, 32, 32)]
+}
+
+[sub_resource type="Animation" id="Animation_w5y16"]
+resource_name = "closed"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Eye:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Rect2(32, 32, 32, 32)]
+}
+
+[sub_resource type="Animation" id="Animation_0a50l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Eye:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(32, 32, 32, 32)]
+}
+
+[sub_resource type="Animation" id="Animation_0rktg"]
+resource_name = "opening"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Eye:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 64, 32, 32), Rect2(32, 64, 32, 32), Rect2(64, 64, 32, 32), Rect2(96, 64, 32, 32)]
+}
+
+[sub_resource type="Animation" id="Animation_sdadc"]
+resource_name = "closing"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Eye:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 96, 32, 32), Rect2(32, 96, 32, 32), Rect2(64, 96, 32, 32), Rect2(96, 96, 32, 32)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_simoy"]
+_data = {
+"RESET": SubResource("Animation_0a50l"),
+"closed": SubResource("Animation_w5y16"),
+"closing": SubResource("Animation_sdadc"),
+"open": SubResource("Animation_yjax7"),
+"opening": SubResource("Animation_0rktg")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_itrm4"]
+resource_local_to_scene = true
+atlas = ExtResource("1_vj3cc")
+region = Rect2(32, 0, 32, 32)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_etil0"]
 resource_local_to_scene = true
 radius = 0.0
@@ -26,14 +121,26 @@ radius = 0.0
 [node name="DashDisabler" type="Node2D"]
 script = ExtResource("1_jusnf")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("AtlasTexture_vbhvu")
-
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 emitting = false
-amount = 20
+amount = 250
 process_material = SubResource("ParticleProcessMaterial_jcfnt")
 lifetime = 0.35
+
+[node name="Eye" type="Sprite2D" parent="."]
+clip_children = 2
+texture = SubResource("AtlasTexture_7ubc1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Eye"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_simoy")
+}
+autoplay = "closed"
+
+[node name="Pupil" type="Sprite2D" parent="Eye"]
+visible = false
+texture = SubResource("AtlasTexture_itrm4")
 
 [node name="Area2D" type="Area2D" parent="."]
 monitorable = false
@@ -41,5 +148,6 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_etil0")
 
+[connection signal="animation_started" from="Eye/AnimationPlayer" to="." method="_on_animation_started"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_body_exited"]

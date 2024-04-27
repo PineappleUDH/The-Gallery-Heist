@@ -53,6 +53,7 @@ var _air : int = _max_air
 var _was_on_water_surface : bool = false
 const _water_collider_size : Vector2 = Vector2(28, 14)
 const _water_splash = preload("res://Scenes/Objects/water_splash.tscn")
+const _splash_sprite_spawn_offset : Vector2 = Vector2(0, 12)
 
 # NOTE: both _dash_locks and _can_dash affects ability to dash. except the former is set by other scripts, and the latter is set by self
 var _dash_locks : int = 0
@@ -64,6 +65,7 @@ const _wall_jump_force : float = 260.0
 const _wall_push_force : float = 230.0 # push is in the x axis, jump is in the y
 
 const _damage_shake_duration : float = 0.3
+const _damage_pause_time : float = 0.14
 
 var _state_machine : StateMachine = StateMachine.new()
 
@@ -145,7 +147,7 @@ func take_damage(damage : int, from : Vector2, is_deadly : bool = false) -> bool
 	if applied:
 		World.level.interface.set_health(old_health, _health)
 		World.level.pause_manager.pause()
-		get_tree().create_timer(0.2).timeout.connect(
+		get_tree().create_timer(_damage_pause_time).timeout.connect(
 			func(): World.level.pause_manager.unpause()
 		)
 	
@@ -422,11 +424,12 @@ func _state_dash_ph_process(delta: float):
 		return
 
 func _state_swim_switch_to(from : String):
+	var _splash := _water_splash.instantiate()
+	get_tree().current_scene.add_child(_splash)
+	_splash.global_position = self.global_position - _splash_sprite_spawn_offset
+	
 	# limit enter speed so if player is going super fast a damp effect is applied like real life
 	velocity = velocity.clamp(Vector2.ONE * -_max_swim_speed, Vector2.ONE * _max_swim_speed)
-	var _splash = _water_splash.instantiate()
-	get_tree().current_scene.add_child(_splash)
-	_splash.position = self.global_position - Vector2(0,12)
 	_sfx["splash"].play()
 	_collider.shape.size = _water_collider_size
 	_was_on_water_surface = true

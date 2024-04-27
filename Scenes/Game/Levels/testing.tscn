@@ -2017,7 +2017,7 @@ curve = SubResource("Curve2D_u407l")
 _speed_per_sec = 40.0
 
 [node name="Saul" parent="Characters" index="0"]
-position = Vector2(175, -145)
+position = Vector2(176, -144)
 
 [node name="EnemyPatrolling" parent="Characters" index="1" instance=ExtResource("16_c4ebt")]
 position = Vector2(3638, 6234)
@@ -2901,3 +2901,7 @@ position = Vector2(4536, 7915)
 scale = Vector2(1, 0.994444)
 curve = SubResource("Curve2D_e4adi")
 _speed_per_sec = 40.0
+
+[node name="DashDisabler" parent="." index="15" instance=ExtResource("17_ntf35")]
+position = Vector2(1048, -247)
+_radius = 200.0
