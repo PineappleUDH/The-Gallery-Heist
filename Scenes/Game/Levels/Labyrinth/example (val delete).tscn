@@ -1,0 +1,74 @@
+[gd_scene load_steps=13 format=3 uid="uid://c61js70woq2dv"]
+
+[ext_resource type="PackedScene" uid="uid://dqpmcakbk34h7" path="res://Scenes/Game/Levels/Labyrinth/labyrinth_base.tscn" id="1_5d4qv"]
+[ext_resource type="Texture2D" uid="uid://b57joaf4ixs1o" path="res://Resources/Textures/VOID HELP ORGANIZE/HeartUi(addin Sachen).png" id="2_muy7n"]
+[ext_resource type="Texture2D" uid="uid://cnyje7qf7f44u" path="res://Resources/Textures/VOID HELP ORGANIZE/BubbleUi.png" id="3_uwpeq"]
+[ext_resource type="Texture2D" uid="uid://d2quxmbdmd2h3" path="res://Resources/Textures/Levels/ParkLvlAssets/ParktilesCurrentSet (valsprites).png" id="4_lrv5b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0pej4"]
+resource_local_to_scene = true
+atlas = ExtResource("2_muy7n")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hfqsc"]
+resource_local_to_scene = true
+atlas = ExtResource("2_muy7n")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r08q1"]
+resource_local_to_scene = true
+atlas = ExtResource("2_muy7n")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4mhyl"]
+resource_local_to_scene = true
+atlas = ExtResource("3_uwpeq")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vr5wa"]
+resource_local_to_scene = true
+atlas = ExtResource("3_uwpeq")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o57tu"]
+resource_local_to_scene = true
+atlas = ExtResource("3_uwpeq")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnuc0"]
+texture = ExtResource("4_lrv5b")
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_yt16h"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_lnuc0")
+
+[node name="LabyrinthBase" instance=ExtResource("1_5d4qv")]
+
+[node name="PlayerUiHeart" parent="UI/Hud/HBoxContainer/Health" index="0"]
+texture = SubResource("AtlasTexture_0pej4")
+
+[node name="PlayerUiHeart2" parent="UI/Hud/HBoxContainer/Health" index="1"]
+texture = SubResource("AtlasTexture_hfqsc")
+
+[node name="PlayerUiHeart3" parent="UI/Hud/HBoxContainer/Health" index="2"]
+texture = SubResource("AtlasTexture_r08q1")
+
+[node name="PlayerUiAir" parent="UI/Hud/MarginContainer/Air" index="0"]
+texture = SubResource("AtlasTexture_4mhyl")
+
+[node name="PlayerUiAir2" parent="UI/Hud/MarginContainer/Air" index="1"]
+texture = SubResource("AtlasTexture_vr5wa")
+
+[node name="PlayerUiAir3" parent="UI/Hud/MarginContainer/Air" index="2"]
+texture = SubResource("AtlasTexture_o57tu")
+
+[node name="TileMap" parent="." index="1"]
+tile_set = SubResource("TileSet_yt16h")
+layer_0/tile_data = PackedInt32Array(131071, 65536, 1, 65536, 65536, 1, 65537, 65536, 1, 65538, 65536, 1, 65539, 65536, 1, 65540, 65536, 1, 65541, 65536, 1, 65542, 65536, 1, 65543, 65536, 1, 65544, 65536, 1, 65545, 65536, 1, 65546, 65536, 1, 65547, 65536, 1, -524283, 65536, 1, -524278, 65536, 1, -458740, 65536, 1, -393204, 65536, 1, -393205, 65536, 1, -327669, 65536, 1, -327670, 65536, 1, -327671, 65536, 1, -327672, 65536, 1, -327673, 65536, 1, -327674, 65536, 1, -327675, 65536, 1, -327676, 65536, 1, -327677, 65536, 1, -393214, 65536, 1, -458750, 65536, 1, -524286, 65536, 1, -65519, 65536, 1, -65520, 65536, 1, -65521, 65536, 1, -65522, 65536, 1, -131058, 65536, 1, -196593, 65536, 1, -65523, 65536, 1, 14, 65536, 1, 65551, 65536, 1)
+
+[node name="CollectableLabyrinthKey" parent="." index="9"]
+position = Vector2(163, -8)

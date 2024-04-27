@@ -10,7 +10,6 @@ extends MarginContainer
 @onready var _main_options_container : VBoxContainer = $Menu/MarginContainer/Main
 @onready var _settings_container : VBoxContainer = $Menu/MarginContainer/Settings
 @onready var _controls_container : VBoxContainer = $Menu/MarginContainer/Controls
-@onready var _volume_slider : HSlider = $Menu/MarginContainer/Settings/VBoxContainer/Volume
 @onready var _keybinds_container : VBoxContainer = $Menu/MarginContainer/Controls/KeybindsContainer
 
 @onready var _hovered_sfx : AudioStreamPlayer = $Hovered
@@ -53,7 +52,7 @@ func _ready():
 					# convert string "[1, 2, 3..]" to PackedByteArray
 					var chars_array : PackedStringArray =\
 						event.substr(1, event.length()-2).split(",", false)
-					var byte_array : PackedByteArray
+					var byte_array : PackedByteArray = PackedByteArray()
 					for char_ in chars_array: byte_array.append(int(char_))
 					
 					InputMap.action_add_event(data["action"], bytes_to_var_with_objects(byte_array))
@@ -150,7 +149,7 @@ func _on_controls_done_pressed():
 	
 	# save keybinds to file
 	var file : FileAccess = FileAccess.open(_keybinds_file_path, FileAccess.WRITE)
-	var json_data : Array[Dictionary]
+	var json_data : Array[Dictionary] = []
 	for action : StringName in _get_user_actions():
 		json_data.append({"action":action, "events":[]})
 		for event : InputEvent in InputMap.action_get_events(action):
@@ -172,7 +171,7 @@ func _on_fullscreen_toggled(toggled_on : bool):
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
 func _get_user_actions() -> Array[StringName]:
-	var actions : Array[StringName]
+	var actions : Array[StringName] = []
 	for action in InputMap.get_actions():
 		# ignore built-in actions which always start with "ui_"
 		if action.begins_with("ui_") == false:

@@ -18,11 +18,10 @@ signal interacted
 @onready var _dash_trail : Node2D = $DashTrail
 @onready var _detect_right : RayCast2D = $Detection/Right
 @onready var _detect_left : RayCast2D = $Detection/Left
-@onready var _hurtbox : Area2D = $HurtBox
 var _default_collider_size : Vector2
 @onready var _sfx : Dictionary = {
 	"jump":$Sounds/Jump, "dash":$Sounds/Dash, "hit_wall":$Sounds/HitWall,
-	"attack":$Sounds/Attack, "died":$Sounds/Died, "footstep":$Sounds/Footstep,
+	"died":$Sounds/Died, "footstep":$Sounds/Footstep,
 	"slide":$Sounds/Slide, "splash":$Sounds/Splash
 }
 
@@ -32,9 +31,6 @@ var _default_collider_size : Vector2
 @onready var _damage_particles : GPUParticles2D = $Particles/Damge
 @onready var _bubbles_particles : GPUParticles2D = $Particles/Bubbles
 
-# TEMP
-@onready var _attack_sprite : Sprite2D = $HurtBox/AttackSprite
-
 # Set Variables for overall control feel
 var _facing : Vector2 = Vector2.RIGHT
 const _max_move_speed : float = 250.0
@@ -43,8 +39,6 @@ const _accel : float = 450.0
 const _decel : float = 1000.0
 const _jump_force : float = 260.0
 const _run_anim_threshold : float = 150.0
-const _attack_time : float = 0.2
-var _attack_timer : float = _attack_time
 const _slide_speed : float = 60.0
 const _slide_speed_fast : float = 120.0
 const _walk_footstep_time : float = 0.6
@@ -84,7 +78,6 @@ func _ready():
 	_state_machine.add_state("normal", Callable(), _state_normal_switch_from, _state_normal_process, _state_normal_ph_process)
 	_state_machine.add_state("dash", _state_dash_switch_to, _state_dash_switch_from, Callable(), _state_dash_ph_process)
 	_state_machine.add_state("wall_slide", _state_wall_slide_switch_to, _state_wall_slide_switch_from, Callable(), _state_wall_slide_ph_process)
-	_state_machine.add_state("attack", _state_attack_switch_to, _state_attack_switch_from, Callable(), _state_attack_ph_process)
 	_state_machine.add_state("swim", _state_swim_switch_to, _state_swim_switch_from,Callable(),_state_swim_ph_process)
 	_state_machine.add_state("dead", _state_dead_switch_to, _state_dead_switch_from, Callable(), Callable())
 	_state_machine.change_state("normal")
@@ -355,10 +348,6 @@ func _state_normal_ph_process(delta : float):
 	if Input.is_action_just_pressed("dash") && _can_dash && _dash_locks == 0:
 		_state_machine.change_state("dash")
 		return
-	
-	if Input.is_action_just_pressed("attack_basic"):
-		_state_machine.change_state("attack")
-		return
 
 func _state_wall_slide_switch_to(from : String):
 	velocity = Vector2(0,0)
@@ -431,28 +420,6 @@ func _state_dash_ph_process(delta: float):
 		_dash_timer.stop()
 		_state_machine.change_state("normal")
 		return
-
-func _state_attack_switch_to(from : String):
-	_attack_sprite.visible = true
-	_hurtbox.scale.x = 1 if !_sprite.flip_h else -1
-	_hurtbox.monitoring = true
-	_sfx["attack"].play()
-
-func _state_attack_switch_from(from : String):
-	_attack_sprite.visible = false
-	_hurtbox.monitoring = false
-
-func _state_attack_ph_process(delta: float):
-	# Enable gravity.
-	if not is_on_floor():
-		velocity.y = Utilities.soft_clamp(velocity.y, _gravity * delta, _max_fall_speed)
-	
-	move_and_slide()
-	
-	_attack_timer -= delta
-	if _attack_timer <= 0.0:
-		_attack_timer = _attack_time
-		_state_machine.change_state("normal")
 
 func _state_swim_switch_to(from : String):
 	# limit enter speed so if player is going super fast a damp effect is applied like real life
@@ -547,6 +514,7 @@ func _state_swim_ph_process(delta : float):
 
 func _state_dead_switch_to(from : String):
 	velocity = Vector2.ZERO
+	_facing.x = 1 # ensure sprite is not flipped or the text will be backward
 	_collider.disabled = true
 	_sprite.flip_h = false
 	

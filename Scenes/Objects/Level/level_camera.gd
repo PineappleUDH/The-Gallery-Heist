@@ -138,6 +138,4 @@ func _on_shake_timer_timeout():
 	offset = Vector2.ZERO
 
 func _on_player_respawned():
-	if _starting_trigger:
-		_starting_trigger.apply_camera_state()
-		snap_to_position()
+	snap_to_position()

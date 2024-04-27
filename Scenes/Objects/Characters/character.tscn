@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://bb8fvvxo2nhq1"]
+[gd_scene load_steps=7 format=3 uid="uid://bb8fvvxo2nhq1"]
 
 [ext_resource type="Script" path="res://Scenes/Objects/Characters/character.gd" id="1_xfsue"]
-[ext_resource type="PackedScene" uid="uid://caabhgsckx3p8" path="res://Scenes/Objects/Characters/hurtbox.tscn" id="2_6ny8n"]
 [ext_resource type="AudioStream" uid="uid://dftb7ej7uoibk" path="res://Resources/Audio/SFX/Player/damaged.wav" id="3_iixss"]
 [ext_resource type="AudioStream" uid="uid://hapit8gq4mdo" path="res://Resources/Audio/SFX/Player/splash.wav" id="4_ehaii"]
 [ext_resource type="AudioStream" uid="uid://coidgcixijus7" path="res://Resources/Audio/SFX/Player/splash2.wav" id="5_fh7ga"]
@@ -21,8 +20,6 @@ stream_2/weight = 1.0
 script = ExtResource("1_xfsue")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-
-[node name="HurtBox" parent="." instance=ExtResource("2_6ny8n")]
 
 [node name="Timers" type="Node" parent="."]
 

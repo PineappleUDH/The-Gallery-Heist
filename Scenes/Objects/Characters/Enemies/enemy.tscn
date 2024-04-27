@@ -1,10 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://j6dd7mgd0p3w"]
+[gd_scene load_steps=4 format=3 uid="uid://j6dd7mgd0p3w"]
 
 [ext_resource type="PackedScene" uid="uid://bb8fvvxo2nhq1" path="res://Scenes/Objects/Characters/character.tscn" id="1_j8sk8"]
 [ext_resource type="Script" path="res://Scenes/Objects/Characters/Enemies/enemy.gd" id="2_8m8ud"]
+[ext_resource type="PackedScene" uid="uid://caabhgsckx3p8" path="res://Scenes/Objects/Characters/hurtbox.tscn" id="3_8p6ye"]
 
 [node name="Enemy" instance=ExtResource("1_j8sk8")]
 script = ExtResource("2_8m8ud")
 
-[node name="HurtBox" parent="." index="1"]
+[node name="HurtBox" parent="." index="1" instance=ExtResource("3_8p6ye")]
 _target_player_only = true

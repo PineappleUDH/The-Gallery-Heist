@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddf27wkadtwfg"]
+
+[ext_resource type="PackedScene" uid="uid://tx6swqaimuyw" path="res://Scenes/Objects/Collectables/collectable.tscn" id="1_232yf"]
+[ext_resource type="Script" path="res://Scenes/Objects/Testing/collectable_labyrinth_key.gd" id="2_nvyrl"]
+[ext_resource type="Texture2D" uid="uid://ccjnsoxmxl8w8" path="res://Resources/Textures/labyrinth_key.png" id="3_mxhpp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ba71m"]
+radius = 7.0
+
+[node name="CollectableLabyrinthKey" instance=ExtResource("1_232yf")]
+script = ExtResource("2_nvyrl")
+
+[node name="LabyrinthKey" type="Sprite2D" parent="." index="0"]
+texture = ExtResource("3_mxhpp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_ba71m")
