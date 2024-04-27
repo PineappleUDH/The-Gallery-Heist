@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://uc8w4v327aj"]
+[gd_scene load_steps=27 format=3 uid="uid://uc8w4v327aj"]
 
 [ext_resource type="Script" path="res://Scenes/Objects/Level/checkpoint.gd" id="1_0uyco"]
 [ext_resource type="Texture2D" uid="uid://bm3kpjljb2t02" path="res://Resources/Textures/Checkpoint_Activating.png" id="2_6khb0"]
@@ -124,9 +124,15 @@ direction = Vector3(0, 0, 0)
 initial_velocity_min = 40.0
 initial_velocity_max = 60.0
 gravity = Vector3(0, 0, 0)
-scale_min = 3.0
-scale_max = 6.0
+scale_max = 3.0
 scale_curve = SubResource("CurveTexture_030ff")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hbwhq"]
+load_path = "res://.godot/imported/particles-Sheet.png-ff03683ea4b368a2c4600cc449697963.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5na0"]
+atlas = SubResource("CompressedTexture2D_hbwhq")
+region = Rect2(0, 0, 10, 10)
 
 [node name="Checkpoint" type="Area2D"]
 monitorable = false
@@ -157,6 +163,7 @@ position = Vector2(0, -30)
 emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_phm30")
+texture = SubResource("AtlasTexture_w5na0")
 one_shot = true
 explosiveness = 1.0
 

@@ -31,7 +31,7 @@ one_shot = true
 [node name="Damaged" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("3_iixss")
 
-[node name="Splash" type="AudioStreamPlayer" parent="Sounds"]
+[node name="Splash" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = SubResource("AudioStreamRandomizer_yaim6")
 volume_db = -12.0
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=3 uid="uid://crjtftvmkahqx"]
+[gd_scene load_steps=113 format=3 uid="uid://crjtftvmkahqx"]
 
 [ext_resource type="PackedScene" uid="uid://bb8fvvxo2nhq1" path="res://Scenes/Objects/Characters/character.tscn" id="1_regtg"]
 [ext_resource type="Script" path="res://Scenes/Objects/Characters/Saul/saul.gd" id="2_rhth6"]
@@ -589,8 +589,14 @@ spread = 0.0
 initial_velocity_min = 5.0
 initial_velocity_max = 5.0
 gravity = Vector3(0, 0, 0)
-scale_min = 3.0
-scale_max = 5.0
+scale_min = 0.5
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_e1gwq"]
+load_path = "res://.godot/imported/particles-Sheet.png-ff03683ea4b368a2c4600cc449697963.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mwvod"]
+atlas = SubResource("CompressedTexture2D_e1gwq")
+region = Rect2(50, 0, 10, 10)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f7upe"]
 particle_flag_disable_z = true
@@ -609,8 +615,10 @@ initial_velocity_max = 80.0
 gravity = Vector3(0, 0, 0)
 damping_min = 50.0
 damping_max = 50.0
-scale_min = 4.0
-scale_max = 4.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_grqm6"]
+atlas = SubResource("CompressedTexture2D_e1gwq")
+region = Rect2(20, 0, 10, 10)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kf0yp"]
 particle_flag_disable_z = true
@@ -621,8 +629,12 @@ spread = 0.0
 initial_velocity_min = 20.0
 initial_velocity_max = 20.0
 gravity = Vector3(0, 150, 0)
-scale_min = 2.2
-scale_max = 4.0
+scale_min = 0.3
+scale_max = 0.6
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_blgdw"]
+atlas = SubResource("CompressedTexture2D_e1gwq")
+region = Rect2(10, 0, 10, 10)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_velti"]
 particles_animation = true
@@ -735,6 +747,7 @@ frame_progress = 0.295767
 position = Vector2(0, 16)
 emitting = false
 process_material = SubResource("ParticleProcessMaterial_y8iht")
+texture = SubResource("AtlasTexture_mwvod")
 lifetime = 0.5
 
 [node name="SlideDust" type="GPUParticles2D" parent="Particles" index="1"]
@@ -748,6 +761,7 @@ lifetime = 0.9
 emitting = false
 amount = 100
 process_material = SubResource("ParticleProcessMaterial_eh6px")
+texture = SubResource("AtlasTexture_grqm6")
 one_shot = true
 explosiveness = 1.0
 
@@ -756,6 +770,7 @@ position = Vector2(0, 13)
 emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_kf0yp")
+texture = SubResource("AtlasTexture_blgdw")
 one_shot = true
 explosiveness = 1.0
 
