@@ -1175,7 +1175,7 @@ theme_override_font_sizes/font_size = 40
 text = "Labyrinth Status"
 
 [node name="SpawnPoint" type="Marker2D" parent="Labyrinth" index="3"]
-position = Vector2(3912, 7870)
+position = Vector2(3910, 7869)
 
 [node name="Spikes" parent="Obstacles" index="0" instance=ExtResource("10_jd6g8")]
 position = Vector2(472, -339)

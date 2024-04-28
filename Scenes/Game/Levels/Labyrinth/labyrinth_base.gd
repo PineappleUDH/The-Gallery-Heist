@@ -11,6 +11,8 @@ var _door_name : String
 func setup(args : Dictionary):
 	_completed_doors = args["completed_doors"]
 	_door_name = args["door_name"]
+	
+	player.global_position = Vector2.ZERO
 
 func _ready():
 	super._ready()

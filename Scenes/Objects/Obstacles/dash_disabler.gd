@@ -9,7 +9,6 @@ extends Node2D
 		
 		_area_collider.shape.radius = _radius
 
-@onready var _eye_sprite : Sprite2D = $Eye
 @onready var _eye_animator : AnimationPlayer = $Eye/AnimationPlayer
 @onready var _pupil_sprite : Sprite2D = $Eye/Pupil
 @onready var _area : Area2D = $Area2D

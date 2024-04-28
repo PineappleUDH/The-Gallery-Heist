@@ -9,7 +9,7 @@ extends "res://Scenes/Objects/Level/level.gd"
 
 const _projectile_scene : PackedScene = preload("res://Scenes/Objects/Projectiles/projectile_fire.tscn")
 
-const _labyrinth_states_time : float = 3.5
+const _labyrinth_status_time : float = 3.5
 var _completed_labyrinth_doors : Dictionary # {door_name:is_open, ...}
 
 func setup(args : Dictionary):
@@ -22,9 +22,6 @@ func setup(args : Dictionary):
 		if _completed_labyrinth_doors[door_name]:
 			_labyrinth_doors_container.get_node(door_name).set_finished(true)
 			unlocked_doors += 1
-	
-	player.global_position = _labyrinth_spawn_point.global_position
-	_player_starting_position = _labyrinth_spawn_point.global_position
 	
 	# display text
 	_labyrinth_status_label.show()
@@ -40,12 +37,20 @@ func setup(args : Dictionary):
 	else:
 		_labyrinth_lock_label.text = "%d doors left" % [all_doors - unlocked_doors]
 	
-	await get_tree().create_timer(_labyrinth_states_time).timeout
+	_player_starting_position = _labyrinth_spawn_point.global_position
+	# TODO: teleporting player over a long distance causes lag spike, no clue why. probably
+	#       some object tracking the player or something. for now the solution is to use small distances
+	player.global_position = _labyrinth_spawn_point.global_position / 4.0
+	await get_tree().process_frame
+	player.global_position = _labyrinth_spawn_point.global_position / 2.0
+	await get_tree().process_frame
+	player.global_position = _labyrinth_spawn_point.global_position
+	
+	await get_tree().create_timer(_labyrinth_status_time).timeout
 	_labyrinth_status_label.hide()
 
 func _ready():
 	super._ready()
-	
 	for door in _labyrinth_doors_container.get_children():
 		_completed_labyrinth_doors[door.name] = false
 		door.level_entered.connect(_on_door_level_entered.bind(door.name))

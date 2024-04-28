@@ -17,7 +17,6 @@ func _update_artwork():
 	if is_inside_tree() == false:
 		await ready
 	
-	print("UPDATE")
 	if art_data:
 		sprite.texture = art_data.texture
 		shape.shape.size = art_data.size

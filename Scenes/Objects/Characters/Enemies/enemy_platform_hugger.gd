@@ -25,8 +25,6 @@ func _ready():
 		_wall_ray.position.x *= -1
 		_wall_ray.target_position.x *= -1
 		_sprite.flip_h = true
-	
-	_hole_ray.force_raycast_update()
 
 func _physics_process(delta : float):
 	if _is_rotating:
