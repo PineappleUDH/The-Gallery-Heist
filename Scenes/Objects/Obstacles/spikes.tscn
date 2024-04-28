@@ -13,6 +13,8 @@ size = Vector2(16, 8)
 
 [node name="Spikes" type="StaticBody2D"]
 position = Vector2(0, -8)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_q3p0b")
 _count = 1
 
