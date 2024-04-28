@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dtg51ouca7e2u"]
+[gd_scene load_steps=14 format=3 uid="uid://dtg51ouca7e2u"]
 
 [ext_resource type="PackedScene" uid="uid://dqpmcakbk34h7" path="res://Scenes/Game/Levels/Labyrinth/labyrinth_base.tscn" id="1_xc1dq"]
 [ext_resource type="Texture2D" uid="uid://b57joaf4ixs1o" path="res://Resources/Textures/VOID HELP ORGANIZE/HeartUi(addin Sachen).png" id="2_a5w0b"]
 [ext_resource type="Texture2D" uid="uid://cnyje7qf7f44u" path="res://Resources/Textures/VOID HELP ORGANIZE/BubbleUi.png" id="3_f12os"]
+[ext_resource type="PackedScene" uid="uid://bnew5qdy6ki2r" path="res://Scenes/Objects/Obstacles/trap_path_object.tscn" id="4_s27xh"]
+[ext_resource type="PackedScene" uid="uid://c2hwbjr8y1al3" path="res://Scenes/Objects/Level/platform_path_object.tscn" id="5_d7gt5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rh8lx"]
 resource_local_to_scene = true
@@ -34,6 +36,18 @@ resource_local_to_scene = true
 atlas = ExtResource("3_f12os")
 region = Rect2(0, 0, 16, 16)
 
+[sub_resource type="Curve2D" id="Curve2D_vt0pa"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, -1, 0, 0, 0, 0, -118, 80, 0, 0, 0, 0, -196, 50, 0, 0, 0, 0, -241, -17, 0, 0, 0, 0, -199, -86, 0, 0, 0, 0, -131, -110, 0, 0, 0, 0, -50, -84, 0, 0, 0, 0, -23, -53, 0, 0, 0, 0, 0, -1)
+}
+point_count = 9
+
+[sub_resource type="Curve2D" id="Curve2D_iwj48"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 168, 1, 0, 0, 0, 0, -1, -1)
+}
+point_count = 2
+
 [node name="LabyrinthBase" instance=ExtResource("1_xc1dq")]
 
 [node name="PlayerUiHeart" parent="UI/Hud/HBoxContainer/Health" index="0"]
@@ -56,3 +70,12 @@ texture = SubResource("AtlasTexture_4l6xm")
 
 [node name="TileMap" parent="." index="1"]
 layer_1/tile_data = PackedInt32Array(131071, 1, 0, 196607, 1, 1, 262143, 1, 2, 65536, 65537, 0, 131072, 65537, 1, 196608, 65537, 2, 65537, 131073, 0, 131073, 131073, 1, 196609, 131073, 2)
+
+[node name="TrapPath" parent="." index="11" instance=ExtResource("4_s27xh")]
+position = Vector2(-194, 52)
+curve = SubResource("Curve2D_vt0pa")
+_loop = false
+
+[node name="PathObject" parent="." index="12" instance=ExtResource("5_d7gt5")]
+position = Vector2(-196, -52)
+curve = SubResource("Curve2D_iwj48")
