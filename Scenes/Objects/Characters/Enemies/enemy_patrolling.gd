@@ -2,7 +2,7 @@ extends "res://Scenes/Objects/Characters/Enemies/enemy.gd"
 
 
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
-@onready var _sprite : Sprite2D = $Sprite
+@onready var _sprite : AnimatedSprite2D = $Sprite
 @onready var _gap_detect_left : RayCast2D = $Detectors/GapDetectLeft
 @onready var _gap_detect_right : RayCast2D = $Detectors/GapDetectRight
 @onready var _debug_vars_visualizer : PanelContainer = $DebugVarsVisualizer

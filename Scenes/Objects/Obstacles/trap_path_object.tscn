@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://bnew5qdy6ki2r"]
 
-[ext_resource type="PackedScene" uid="uid://ce6rpr8fcsibk" path="res://Scenes/Objects/Level/path_object.tscn" id="1_uqa5n"]
-[ext_resource type="Script" path="res://Scenes/Objects/Obstacles/yoyo_trap_path_object.gd" id="2_rrkjl"]
-[ext_resource type="PackedScene" uid="uid://ks2b8lp58x7d" path="res://Scenes/Objects/Obstacles/hanging_spikes.tscn" id="3_1by2f"]
+[ext_resource type="PackedScene" uid="uid://ce6rpr8fcsibk" path="res://Scenes/Objects/Level/path_object.tscn" id="1_pqb3b"]
+[ext_resource type="Script" path="res://Scenes/Objects/Obstacles/trap_path_object.gd" id="2_m7vx7"]
+[ext_resource type="PackedScene" uid="uid://ks2b8lp58x7d" path="res://Scenes/Objects/Obstacles/hanging_spikes.tscn" id="3_lu4ug"]
 
 [sub_resource type="Gradient" id="Gradient_p7ntg"]
 offsets = PackedFloat32Array(0.00763359, 1)
@@ -18,10 +18,11 @@ fractal_gain = 0.645
 color_ramp = SubResource("Gradient_p7ntg")
 noise = SubResource("FastNoiseLite_lk1aq")
 
-[node name="Yo-YoTrap" instance=ExtResource("1_uqa5n")]
-script = ExtResource("2_rrkjl")
+[node name="TrapPath" instance=ExtResource("1_pqb3b")]
+script = ExtResource("2_m7vx7")
 
 [node name="rope" type="Line2D" parent="." index="0"]
+visible = false
 width = 4.0
 texture = SubResource("NoiseTexture2D_ogemd")
 texture_mode = 2
@@ -29,5 +30,5 @@ joint_mode = 1
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="HangingSpikes" parent="AnimatableBody2D" index="1" instance=ExtResource("3_1by2f")]
+[node name="HangingSpikes" parent="AnimatableBody2D" index="1" instance=ExtResource("3_lu4ug")]
 sync_to_physics = false

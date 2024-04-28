@@ -76,3 +76,4 @@ _kill_audio = NodePath("Collected")
 [node name="Collected" type="AudioStreamPlayer" parent="PersistentNodesContainer" index="0"]
 stream = ExtResource("5_00vi3")
 volume_db = 5.0
+pitch_scale = 2.0

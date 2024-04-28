@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ArtData" load_steps=4 format=3 uid="uid://c6aoxdxqg2fst"]
+
+[ext_resource type="Script" path="res://Scenes/Objects/Artwork/art_data.gd" id="1_5dl0y"]
+[ext_resource type="Texture2D" uid="uid://tkdnv47llpnj" path="res://Resources/Textures/GalleryPixelArts/artwork_atlas-Sheet.png" id="2_cjcj2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wuq7b"]
+atlas = ExtResource("2_cjcj2")
+region = Rect2(192, 48, 64, 48)
+
+[resource]
+script = ExtResource("1_5dl0y")
+title = "Pond Parasite"
+artist = "DissonantVoid"
+texture = SubResource("AtlasTexture_wuq7b")
+size = Vector2(48, 48)

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scenes/Objects/Artwork/art_data.gd" id="1_h3evv"]
 [ext_resource type="Texture2D" uid="uid://tkdnv47llpnj" path="res://Resources/Textures/GalleryPixelArts/artwork_atlas-Sheet.png" id="2_iyuud"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wmo5q"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_krvda"]
 atlas = ExtResource("2_iyuud")
 region = Rect2(128, 0, 64, 48)
 
@@ -11,5 +11,5 @@ region = Rect2(128, 0, 64, 48)
 script = ExtResource("1_h3evv")
 title = "Dude"
 artist = "LavraSource"
-texture = SubResource("AtlasTexture_wmo5q")
+texture = SubResource("AtlasTexture_krvda")
 size = Vector2(17, 17)

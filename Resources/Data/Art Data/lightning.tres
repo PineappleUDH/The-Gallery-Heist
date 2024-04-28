@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ArtData" load_steps=4 format=3 uid="uid://c56fhkuf47t8t"]
+
+[ext_resource type="Script" path="res://Scenes/Objects/Artwork/art_data.gd" id="1_lqaxd"]
+[ext_resource type="Texture2D" uid="uid://tkdnv47llpnj" path="res://Resources/Textures/GalleryPixelArts/artwork_atlas-Sheet.png" id="2_n231h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e1ajs"]
+atlas = ExtResource("2_n231h")
+region = Rect2(0, 48, 64, 48)
+
+[resource]
+script = ExtResource("1_lqaxd")
+title = "Lightning"
+artist = "PinappleUDH"
+texture = SubResource("AtlasTexture_e1ajs")
+size = Vector2(0, 0)

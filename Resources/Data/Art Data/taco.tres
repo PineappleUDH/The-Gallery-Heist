@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ArtData" load_steps=4 format=3 uid="uid://bc8mbdwhlacmn"]
+
+[ext_resource type="Script" path="res://Scenes/Objects/Artwork/art_data.gd" id="1_03byl"]
+[ext_resource type="Texture2D" uid="uid://tkdnv47llpnj" path="res://Resources/Textures/GalleryPixelArts/artwork_atlas-Sheet.png" id="2_aq60u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qmvy6"]
+atlas = ExtResource("2_aq60u")
+region = Rect2(192, 96, 64, 48)
+
+[resource]
+script = ExtResource("1_03byl")
+title = "Taco"
+artist = "Kipparok"
+texture = SubResource("AtlasTexture_qmvy6")
+size = Vector2(0, 0)

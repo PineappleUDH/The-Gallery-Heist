@@ -1,8 +1,44 @@
-[gd_scene load_steps=6 format=3 uid="uid://duloprfswr82i"]
+[gd_scene load_steps=11 format=3 uid="uid://duloprfswr82i"]
 
 [ext_resource type="PackedScene" uid="uid://j6dd7mgd0p3w" path="res://Scenes/Objects/Characters/Enemies/enemy.tscn" id="1_j4c13"]
-[ext_resource type="Texture2D" uid="uid://dutytu7jhr5nc" path="res://Resources/Textures/PLACEHOLDERS/Scorpion (AxelMode)-cutoutt.png" id="2_qvg78"]
 [ext_resource type="Script" path="res://Scenes/Objects/Characters/Enemies/enemy_platform_hugger.gd" id="2_rdj4c"]
+[ext_resource type="Texture2D" uid="uid://cnjoqd3xmo1p4" path="res://Resources/Textures/Frog_Idle.png" id="3_36fej"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3yjp2"]
+atlas = ExtResource("3_36fej")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pt78k"]
+atlas = ExtResource("3_36fej")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fahpc"]
+atlas = ExtResource("3_36fej")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mjx6q"]
+atlas = ExtResource("3_36fej")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t15xf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3yjp2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pt78k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fahpc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mjx6q")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_orh6g"]
 size = Vector2(26, 18)
@@ -14,10 +50,14 @@ size = Vector2(28, 30)
 script = ExtResource("2_rdj4c")
 _start_moving_right = true
 
-[node name="Sprite" type="Sprite2D" parent="." index="0"]
-modulate = Color(0, 0.184314, 1, 1)
+[node name="Sprite" type="AnimatedSprite2D" parent="." index="0"]
+modulate = Color(0.301961, 0.607843, 0.901961, 1)
 position = Vector2(0, -15)
-texture = ExtResource("2_qvg78")
+sprite_frames = SubResource("SpriteFrames_t15xf")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.424737
+flip_h = true
 
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2(0, -9)

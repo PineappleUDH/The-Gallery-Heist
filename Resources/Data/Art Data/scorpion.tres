@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ArtData" load_steps=4 format=3 uid="uid://cq78tme8kxhdc"]
+
+[ext_resource type="Script" path="res://Scenes/Objects/Artwork/art_data.gd" id="1_puqhr"]
+[ext_resource type="Texture2D" uid="uid://tkdnv47llpnj" path="res://Resources/Textures/GalleryPixelArts/artwork_atlas-Sheet.png" id="2_joi7t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3r83"]
+atlas = ExtResource("2_joi7t")
+region = Rect2(0, 96, 64, 48)
+
+[resource]
+script = ExtResource("1_puqhr")
+title = "Scorpion"
+artist = "AxelMode"
+texture = SubResource("AtlasTexture_g3r83")
+size = Vector2(0, 0)

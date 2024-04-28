@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ArtData" load_steps=4 format=3 uid="uid://dmhok8yykuugi"]
+
+[ext_resource type="Script" path="res://Scenes/Objects/Artwork/art_data.gd" id="1_qiang"]
+[ext_resource type="Texture2D" uid="uid://tkdnv47llpnj" path="res://Resources/Textures/GalleryPixelArts/artwork_atlas-Sheet.png" id="2_rmo5i"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kwnti"]
+atlas = ExtResource("2_rmo5i")
+region = Rect2(0, 144, 64, 48)
+
+[resource]
+script = ExtResource("1_qiang")
+title = "The Moon Berry"
+artist = "Starizo"
+texture = SubResource("AtlasTexture_kwnti")
+size = Vector2(0, 0)

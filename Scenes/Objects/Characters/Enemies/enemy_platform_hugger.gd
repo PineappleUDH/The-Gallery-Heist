@@ -2,7 +2,7 @@ extends "res://Scenes/Objects/Characters/Enemies/enemy.gd"
 
 @export var _start_moving_right : bool = true # TODO: editor hint of starting direction
 
-@onready var _sprite : Sprite2D = $Sprite
+@onready var _sprite : AnimatedSprite2D = $Sprite
 @onready var _hole_ray : RayCast2D = $HoleRay
 @onready var _wall_ray : RayCast2D = $WallRay
 

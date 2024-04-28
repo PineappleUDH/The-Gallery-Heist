@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=3 uid="uid://br0y1lwpecson"]
+
+[ext_resource type="PackedScene" uid="uid://dqpmcakbk34h7" path="res://Scenes/Game/Levels/Labyrinth/labyrinth_base.tscn" id="1_h83de"]
+[ext_resource type="Texture2D" uid="uid://b57joaf4ixs1o" path="res://Resources/Textures/VOID HELP ORGANIZE/HeartUi(addin Sachen).png" id="2_40edv"]
+[ext_resource type="Texture2D" uid="uid://cnyje7qf7f44u" path="res://Resources/Textures/VOID HELP ORGANIZE/BubbleUi.png" id="3_vgo2s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rnixp"]
+resource_local_to_scene = true
+atlas = ExtResource("2_40edv")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ofqj"]
+resource_local_to_scene = true
+atlas = ExtResource("2_40edv")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_180da"]
+resource_local_to_scene = true
+atlas = ExtResource("2_40edv")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yvoyx"]
+resource_local_to_scene = true
+atlas = ExtResource("3_vgo2s")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eqgai"]
+resource_local_to_scene = true
+atlas = ExtResource("3_vgo2s")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21d2m"]
+resource_local_to_scene = true
+atlas = ExtResource("3_vgo2s")
+region = Rect2(0, 0, 16, 16)
+
+[node name="LabyrinthBase" instance=ExtResource("1_h83de")]
+
+[node name="PlayerUiHeart" parent="UI/Hud/HBoxContainer/Health" index="0"]
+texture = SubResource("AtlasTexture_rnixp")
+
+[node name="PlayerUiHeart2" parent="UI/Hud/HBoxContainer/Health" index="1"]
+texture = SubResource("AtlasTexture_2ofqj")
+
+[node name="PlayerUiHeart3" parent="UI/Hud/HBoxContainer/Health" index="2"]
+texture = SubResource("AtlasTexture_180da")
+
+[node name="PlayerUiAir" parent="UI/Hud/MarginContainer/Air" index="0"]
+texture = SubResource("AtlasTexture_yvoyx")
+
+[node name="PlayerUiAir2" parent="UI/Hud/MarginContainer/Air" index="1"]
+texture = SubResource("AtlasTexture_eqgai")
+
+[node name="PlayerUiAir3" parent="UI/Hud/MarginContainer/Air" index="2"]
+texture = SubResource("AtlasTexture_21d2m")
+
+[node name="TileMap" parent="." index="1"]
+layer_1/tile_data = PackedInt32Array(131071, 1, 0, 196607, 1, 1, 262143, 1, 2, 65536, 65537, 0, 131072, 65537, 1, 196608, 65537, 2, 65537, 131073, 0, 131073, 131073, 1, 196609, 131073, 2)

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ArtData" load_steps=4 format=3 uid="uid://djabrkeppv386"]
+
+[ext_resource type="Script" path="res://Scenes/Objects/Artwork/art_data.gd" id="1_3fuhq"]
+[ext_resource type="Texture2D" uid="uid://tkdnv47llpnj" path="res://Resources/Textures/GalleryPixelArts/artwork_atlas-Sheet.png" id="2_s0oe6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lp3j6"]
+atlas = ExtResource("2_s0oe6")
+region = Rect2(192, 0, 64, 48)
+
+[resource]
+script = ExtResource("1_3fuhq")
+title = "GameBoyScene"
+artist = "(Kipparok)"
+texture = SubResource("AtlasTexture_lp3j6")
+size = Vector2(0, 0)
