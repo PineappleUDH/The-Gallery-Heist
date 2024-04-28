@@ -156,16 +156,19 @@ rotation = 1.58825
 texture_filter = 1
 position = Vector2(1676, -482)
 curve = SubResource("Curve2D_ismes")
+_loop = false
 _speed_per_sec = 50.0
 
 [node name="TrapPath3" parent="Obstacles" index="14" instance=ExtResource("6_eueva")]
 texture_filter = 1
 position = Vector2(2094, -623)
 curve = SubResource("Curve2D_wktaf")
+_loop = false
 
 [node name="TrapPath" parent="Obstacles" index="15" instance=ExtResource("6_eueva")]
 position = Vector2(1295, -595)
 curve = SubResource("Curve2D_60r28")
+_loop = false
 
 [node name="Triggers" parent="." index="8"]
 position = Vector2(-2, 1)
