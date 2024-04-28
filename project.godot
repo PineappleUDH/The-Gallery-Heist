@@ -18,9 +18,9 @@ config/icon="res://saul_face_emoji (Potent).png"
 
 [autoload]
 
-Utilities="*res://Scenes/autoloads/utilities.gd"
-SceneManager="*res://Scenes/autoloads/scene_manager.tscn"
-World="*res://Scenes/autoloads/world.gd"
+Utilities="*res://Scenes/Autoloads/utilities.gd"
+SceneManager="*res://Scenes/Autoloads/scene_manager.tscn"
+World="*res://Scenes/Autoloads/world.gd"
 
 [debug]
 
@@ -125,7 +125,6 @@ skip={
 
 [physics]
 
-2d/run_on_separate_thread=true
 2d/default_gravity=600.0
 
 [rendering]

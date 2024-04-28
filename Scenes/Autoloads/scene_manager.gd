@@ -27,6 +27,8 @@ func change_scene(scene_path : String, args : Dictionary = {}):
 	ResourceLoader.load_threaded_request(scene_path, "PackedScene", true)
 	
 	# wait for the background thread to load scene
+	# TODO: detect if window is about to close (if user closes the game while bg thread is running)
+	#       and stop it first to avoid crash
 	var scene_resource : PackedScene
 	while true:
 		var status : ResourceLoader.ThreadLoadStatus = ResourceLoader.load_threaded_get_status(scene_path)

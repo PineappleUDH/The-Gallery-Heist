@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b1kjxca7t8px"]
 
-[ext_resource type="Script" path="res://Scenes/autoloads/scene_manager.gd" id="1_sq6w8"]
+[ext_resource type="Script" path="res://Scenes/Autoloads/scene_manager.gd" id="1_sq6w8"]
 
 [node name="SceneManager" type="CanvasLayer"]
 process_mode = 3
