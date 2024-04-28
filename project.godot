@@ -8,11 +8,6 @@
 
 config_version=5
 
-[addons]
-
-instance_dock/scene_data_file="res://InstanceDockSceneData.txt"
-instance_dock/preview_resolution=Vector2i(64, 64)
-
 [application]
 
 config/name="Project Gallery"
@@ -37,10 +32,6 @@ window/size/viewport_width=640
 window/size/viewport_height=360
 window/size/mode=2
 window/stretch/mode="canvas_items"
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/InstanceDock/plugin.cfg")
 
 [filesystem]
 
