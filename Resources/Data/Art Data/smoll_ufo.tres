@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ArtData" load_steps=4 format=3 uid="uid://p1wk1y1kauyk"]
+[gd_resource type="Resource" script_class="ArtData" load_steps=4 format=3 uid="uid://iam05e2m71e4"]
 
 [ext_resource type="Script" path="res://Scenes/Objects/Artwork/art_data.gd" id="1_atvkj"]
 [ext_resource type="Texture2D" uid="uid://tkdnv47llpnj" path="res://Resources/Textures/GalleryPixelArts/artwork_atlas-Sheet.png" id="2_210do"]

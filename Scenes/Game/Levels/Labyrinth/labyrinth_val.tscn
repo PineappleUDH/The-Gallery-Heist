@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://dqpmcakbk34h7" path="res://Scenes/Game/Levels/Labyrinth/labyrinth_base.tscn" id="1_xc1dq"]
 [ext_resource type="Texture2D" uid="uid://b57joaf4ixs1o" path="res://Resources/Textures/VOID HELP ORGANIZE/HeartUi(addin Sachen).png" id="2_a5w0b"]
 [ext_resource type="Texture2D" uid="uid://cnyje7qf7f44u" path="res://Resources/Textures/VOID HELP ORGANIZE/BubbleUi.png" id="3_f12os"]
-[ext_resource type="PackedScene" uid="uid://bnew5qdy6ki2r" path="res://Scenes/Objects/Obstacles/trap_path_object.tscn" id="4_s27xh"]
-[ext_resource type="PackedScene" uid="uid://c2hwbjr8y1al3" path="res://Scenes/Objects/Level/platform_path_object.tscn" id="5_d7gt5"]
+[ext_resource type="PackedScene" path="res://Scenes/Objects/Obstacles/trap_path_object.tscn" id="4_s27xh"]
+[ext_resource type="PackedScene" path="res://Scenes/Objects/Level/platform_path_object.tscn" id="5_d7gt5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rh8lx"]
 resource_local_to_scene = true
