@@ -30,8 +30,7 @@ func _ready():
 func _draw():
 	if Engine.is_editor_hint(): return
 	
-	if _player_inside:
-		draw_circle(_area.position, _area_collider.shape.radius, _area_circle_color)
+
 
 func _process(delta : float):
 	var direction : Vector2 = World.level.player.global_position - global_position

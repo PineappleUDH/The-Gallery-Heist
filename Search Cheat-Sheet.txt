@@ -1,0 +1,89 @@
+Search Cheat-Sheet:
+
+Finding your scene:
+labyrinth_*yourname*
+
+Affordances:
+checkpoint
+launch_pad
+platform_path_object
+launch_pad_path_object
+trap_path_object
+spikes
+spikes_path_object
+dash_disabler
+hanging_spikes
+unstable_platform
+teleporter
+
+Collectables:
+collectable_stack
+collectable_coin
+collectable_curry
+collectable_dash_refiller
+collectable_egg
+
+Enemies:
+enemy_patrolling
+enemy_flying
+enemy_platform_hugger
+
+Other Tools:
+trigger_camera
+trigger_music
+
+
+
+
+Now, Explainations
+
+Affordances:
+
+checkpoint === place these to give Saul a place to re-start from, I feel like most people know what this is.
+
+launch_pad === The Launch pad launches the player up to where the dotted line ends, use the inspector to adjust the Launch Force and toggle the preview.
+
+platform_path_object === a moving platform, you drag one into your scene and you have to create a path2d for it after otherwise it will not move by default. Use the inspector and look under Path2d - Curve where it says empty you have to create a new curve. When you do you can switch the tools at the top of the editor to add, subtract, and move points to change how it moves, as well as check and uncheck the loop and changing the speed to affect it's behavior.
+
+launch_pad_path_object === same as the platform except its a launch pad!
+
+trap_path_object === Same as the platform except it is a trap instead of a platform.
+
+spikes === Spikes hurt! just drag and drop them into your scene. They're 1 tile big and you can extend them by increasing the "Count" option in the inspector.
+
+spikes_path_object === Spikes but with twist: they move on a path and you can even stand on the other side!
+
+dash_disabler === Put this creepy eye in your scene and give it a radius, inside that circle Saul will not be able to use his dash!
+
+hanging_spikes === painful spikes spinning around!
+
+unstable_platform === platforms that crumble when Saul stands on them, use Count in the inspector to make longer platforms!
+
+teleporter === drag and drop another teleporter into the target slot and when the player interacts with this object Saul will teleport! just don't move him more than 1000 pixels away at a time (glitches occur)
+
+Collectables:
+collectable_stack === Use this to make it easier to lay out collectables you might use a lot of such as coins. just place this in your scene and then drag the collectable you want to use into the collectable slot in the inspector. underneath that is the pattern selection (grid or the amazing arc) and each has their own options, play with it to see what they do!
+
+collectable_coin === a basic staple of the platformer, use these to help guide the player around. (tap into their gamer instincts)
+
+collectable_curry === Heals saul +1 for now, may or may not have more features later.
+
+collectable_dash_refiller === Recharges your dash instantly, use this to make jumps where you string mutliple dashes together.
+
+collectable_egg === A fun easter egg by Addin! Hide this if you want to have a special secret to find in your level.
+
+Enemies:
+
+enemy_patrolling === this enemy will move back and forth on a platform and hurt Saul if it touches him, you can adjust its speed in the inspector under Wander Speed
+
+enemy_flying === This enemy will need a path2d in order to move and after you create one as it will follow the points you place like the moving platforms.
+
+enemy_platform_hugger === This enemy will stick to whatever platform you place it on and cling to it as it moves ever forward.
+
+
+
+Other Tools:
+
+trigger_camera === Place a trigger camera to change the camera state. You may want a fixed or a moving camera, or change between each for your designs. You will need to add a collision shape as a child to the trigger for it to work, There are a lot of settings for the camera state and we might make it a little easier in the future, for now ask Void or Val in the discord for help getting it right.
+
+trigger_music === Same as the camera just for music, more music to be added soon. (if you have a contribution that is not some copywrite or other work that will cause us issues feel free to help out)

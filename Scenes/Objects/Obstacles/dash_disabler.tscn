@@ -19,9 +19,8 @@ resource_local_to_scene = true
 atlas = ExtResource("1_vj3cc")
 region = Rect2(32, 32, 32, 32)
 
-[sub_resource type="Animation" id="Animation_yjax7"]
-resource_name = "open"
-length = 0.1
+[sub_resource type="Animation" id="Animation_0a50l"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -31,8 +30,8 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Rect2(0, 32, 32, 32)]
+"update": 0,
+"values": [Rect2(32, 32, 32, 32)]
 }
 
 [sub_resource type="Animation" id="Animation_w5y16"]
@@ -51,8 +50,26 @@ tracks/0/keys = {
 "values": [Rect2(32, 32, 32, 32)]
 }
 
-[sub_resource type="Animation" id="Animation_0a50l"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_sdadc"]
+resource_name = "closing"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Eye:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 96, 32, 32), Rect2(32, 96, 32, 32), Rect2(64, 96, 32, 32), Rect2(96, 96, 32, 32)]
+}
+
+[sub_resource type="Animation" id="Animation_yjax7"]
+resource_name = "open"
+length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -62,8 +79,8 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Rect2(32, 32, 32, 32)]
+"update": 1,
+"values": [Rect2(0, 32, 32, 32)]
 }
 
 [sub_resource type="Animation" id="Animation_0rktg"]
@@ -81,23 +98,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [Rect2(0, 64, 32, 32), Rect2(32, 64, 32, 32), Rect2(64, 64, 32, 32), Rect2(96, 64, 32, 32)]
-}
-
-[sub_resource type="Animation" id="Animation_sdadc"]
-resource_name = "closing"
-length = 0.6
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Eye:texture:region")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Rect2(0, 96, 32, 32), Rect2(32, 96, 32, 32), Rect2(64, 96, 32, 32), Rect2(96, 96, 32, 32)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_simoy"]

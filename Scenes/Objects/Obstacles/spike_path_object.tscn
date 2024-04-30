@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://duwc3tqdbpkbc"]
+
+[ext_resource type="PackedScene" uid="uid://ce6rpr8fcsibk" path="res://Scenes/Objects/Level/path_object.tscn" id="1_bsbhu"]
+[ext_resource type="PackedScene" uid="uid://bol4qsyq1qr5t" path="res://Scenes/Objects/Obstacles/spikes.tscn" id="2_nhue8"]
+[ext_resource type="Texture2D" uid="uid://dif74d41tuyyf" path="res://Resources/Textures/Moving_platformR.png" id="3_ea1r0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1q7eh"]
+size = Vector2(48, 16)
+
+[node name="SpikePathObject" instance=ExtResource("1_bsbhu")]
+
+[node name="AnimatableBody2D" parent="." index="0"]
+sync_to_physics = false
+
+[node name="Spikes" parent="AnimatableBody2D" index="0" instance=ExtResource("2_nhue8")]
+position = Vector2(-24, -17)
+_count = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D" index="1"]
+texture = ExtResource("3_ea1r0")
+
+[node name="CollisionShape2D" parent="AnimatableBody2D" index="2"]
+position = Vector2(-2.70205e-07, -9.53674e-07)
+rotation = -3.14159
+shape = SubResource("RectangleShape2D_1q7eh")
