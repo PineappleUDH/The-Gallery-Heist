@@ -1,1 +1,56 @@
-[]
+[{
+"name": "Affordances",
+"scenes": [{
+"scene": "res://Scenes/Objects/Level/launch_pad.tscn"
+}, {
+"scene": "res://Scenes/Objects/Level/launch_pad_path_object.tscn"
+}, {
+"scene": "res://Scenes/Objects/Level/checkpoint.tscn"
+}, {
+"scene": "res://Scenes/Objects/Level/platform_path_object.tscn"
+}, {
+"scene": "res://Scenes/Objects/Obstacles/trap_path_object.tscn"
+}, {
+"scene": "res://Scenes/Objects/Obstacles/spikes.tscn"
+}, {
+"scene": "res://Scenes/Objects/Obstacles/spike_path_object.tscn"
+}, {
+"scene": "res://Scenes/Objects/Obstacles/hanging_spikes.tscn"
+}, {
+"scene": "res://Scenes/Objects/Obstacles/dash_disabler.tscn"
+}, {
+"scene": "res://Scenes/Game/Levels/unstable_platform.tscn"
+}, {
+"scene": "res://Scenes/Objects/Level/teleporter.tscn"
+}, {
+"scene": "res://Scenes/Objects/Characters/hurtbox.tscn"
+}, {
+"scene": "res://Scenes/Objects/Obstacles/killzone.tscn"
+}]
+}, {
+"name": "Collectables",
+"scenes": [{
+"scene": "res://Scenes/Objects/Collectables/collectables_stack.tscn"
+}, {
+"scene": "res://Scenes/Objects/Collectables/collectable_coin.tscn"
+}, {
+"scene": "res://Scenes/Objects/Collectables/collectable_curry.tscn"
+}, {
+"scene": "res://Scenes/Objects/Collectables/collectable_dash_refiller.tscn"
+}, {
+"scene": "res://Scenes/Objects/Collectables/collectable_egg.tscn"
+}, {
+"scene": "res://Scenes/Objects/Collectables/collectable_SAUL.tscn"
+}, {
+"scene": "res://Scenes/Objects/Collectables/collectable_dark_link.tscn"
+}]
+}, {
+"name": "Enemies",
+"scenes": [{
+"scene": "res://Scenes/Objects/Characters/Enemies/enemy_flying.tscn"
+}, {
+"scene": "res://Scenes/Objects/Characters/Enemies/enemy_patrolling.tscn"
+}, {
+"scene": "res://Scenes/Objects/Characters/Enemies/enemy_platform_hugger.tscn"
+}]
+}]

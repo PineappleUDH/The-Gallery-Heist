@@ -38,6 +38,10 @@ window/size/viewport_height=360
 window/size/mode=2
 window/stretch/mode="canvas_items"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/InstanceDock/plugin.cfg")
+
 [filesystem]
 
 import/blender/enabled=false
