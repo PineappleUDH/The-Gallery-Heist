@@ -1362,7 +1362,7 @@ curve = SubResource("Curve2D_u407l")
 _speed_per_sec = 40.0
 
 [node name="Saul" parent="Characters" index="0"]
-position = Vector2(176, -144)
+position = Vector2(2914, 7832)
 
 [node name="EnemyPatrolling" parent="Characters" index="1" instance=ExtResource("16_c4ebt")]
 position = Vector2(3638, 6236)
@@ -1547,6 +1547,7 @@ position = Vector2(1136, -153)
 _letter = 3
 
 [node name="LevelCamera" parent="." index="11" node_paths=PackedStringArray("_starting_trigger")]
+position = Vector2(3111, 7914)
 _starting_trigger = NodePath("../Triggers/Camera_Triggers#TriggerCamera4")
 
 [node name="Camera_Triggers#TriggerCamera" parent="Triggers" index="0" instance=ExtResource("5_7n87s")]
