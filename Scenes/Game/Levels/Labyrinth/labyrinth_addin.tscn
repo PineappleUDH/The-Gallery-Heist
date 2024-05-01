@@ -63,11 +63,11 @@ _data = {
 }
 point_count = 5
 
-[sub_resource type="Curve2D" id="Curve2D_pthbs"]
+[sub_resource type="Curve2D" id="Curve2D_m5802"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -1, -1, 0, 0, 0, 0, 75, -2, 0, 0, 0, 0, 75, 58, 0, 0, 0, 0, 75, -1, 0, 0, 0, 0, -2, -2)
+"points": PackedVector2Array(0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 69, 0, 0, 0, 0, 0, 70, -95)
 }
-point_count = 5
+point_count = 3
 
 [sub_resource type="Curve2D" id="Curve2D_vburm"]
 _data = {
@@ -79,16 +79,16 @@ point_count = 7
 size = Vector2(643, 356)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rtn8p"]
-size = Vector2(20, 403)
+size = Vector2(56, 403)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_angau"]
-size = Vector2(677, 20)
+size = Vector2(677, 61)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5ukjf"]
-size = Vector2(679, 21)
+size = Vector2(712, 59)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n4enr"]
-size = Vector2(16, 406)
+size = Vector2(52, 476)
 
 [node name="LabyrinthBase" instance=ExtResource("1_h83de")]
 
@@ -256,8 +256,8 @@ position = Vector2(1416, -9)
 _count = 15
 
 [node name="TrapPath4" parent="Obstacles" index="25" instance=ExtResource("8_sf0cs")]
-position = Vector2(1025, -45)
-curve = SubResource("Curve2D_pthbs")
+position = Vector2(1039, -21)
+curve = SubResource("Curve2D_m5802")
 _speed_per_sec = 40.0
 
 [node name="DashDisabler5" parent="Obstacles" index="26" instance=ExtResource("4_2w2hr")]
@@ -337,19 +337,19 @@ _change_state = true
 _trigger_state = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/TriggerCamera2" index="0"]
-position = Vector2(0, -33.5)
+position = Vector2(16, -33.5)
 shape = SubResource("RectangleShape2D_rtn8p")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Triggers/TriggerCamera2" index="1"]
-position = Vector2(-328.5, 160)
+position = Vector2(-328.5, 176.5)
 shape = SubResource("RectangleShape2D_angau")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Triggers/TriggerCamera2" index="2"]
-position = Vector2(-329.5, -224.5)
+position = Vector2(-313, -238.5)
 shape = SubResource("RectangleShape2D_5ukjf")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Triggers/TriggerCamera2" index="3"]
-position = Vector2(-661, -36)
+position = Vector2(-679, -30)
 shape = SubResource("RectangleShape2D_n4enr")
 
 [node name="CollectableLabyrinthKey" parent="." index="9"]
