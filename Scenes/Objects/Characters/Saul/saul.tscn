@@ -1,7 +1,8 @@
-[gd_scene load_steps=118 format=3 uid="uid://crjtftvmkahqx"]
+[gd_scene load_steps=119 format=3 uid="uid://crjtftvmkahqx"]
 
 [ext_resource type="PackedScene" uid="uid://bb8fvvxo2nhq1" path="res://Scenes/Objects/Characters/character.tscn" id="1_regtg"]
 [ext_resource type="Script" path="res://Scenes/Objects/Characters/Saul/saul.gd" id="2_rhth6"]
+[ext_resource type="PackedScene" uid="uid://c7thbq75e3db6" path="res://Scenes/Objects/water_splash.tscn" id="3_ewshg"]
 [ext_resource type="PackedScene" uid="uid://ckw12igh1dbr4" path="res://Scenes/Objects/Characters/Saul/dash_trail.tscn" id="4_6x0l7"]
 [ext_resource type="Texture2D" uid="uid://c020oxw1rfgj2" path="res://Resources/Textures/Characters/SaulSprites/Damaged.png" id="5_ddiwy"]
 [ext_resource type="Texture2D" uid="uid://buql8wtc73qsp" path="res://Resources/Textures/Characters/SaulSprites/WallHang_Extra (AddinSachen).png" id="6_o7kle"]
@@ -770,9 +771,11 @@ one_shot = true
 wait_time = 0.4
 one_shot = true
 
-[node name="DashTrail" parent="." index="2" instance=ExtResource("4_6x0l7")]
+[node name="Splash" parent="." index="2" instance=ExtResource("3_ewshg")]
 
-[node name="Detection" type="Node2D" parent="." index="3"]
+[node name="DashTrail" parent="." index="3" instance=ExtResource("4_6x0l7")]
+
+[node name="Detection" type="Node2D" parent="." index="4"]
 
 [node name="Right" type="RayCast2D" parent="Detection" index="0"]
 position = Vector2(6, 0)
@@ -782,15 +785,15 @@ target_position = Vector2(2, 0)
 position = Vector2(-6, 0)
 target_position = Vector2(-2, 0)
 
-[node name="AudioListener2D" type="AudioListener2D" parent="." index="4"]
+[node name="AudioListener2D" type="AudioListener2D" parent="." index="5"]
 current = true
 
-[node name="Sprite" type="AnimatedSprite2D" parent="." index="5"]
+[node name="Sprite" type="AnimatedSprite2D" parent="." index="6"]
 sprite_frames = SubResource("SpriteFrames_vg3q4")
 animation = &"Idle"
 autoplay = "Idle"
 
-[node name="Particles" type="Node2D" parent="." index="6"]
+[node name="Particles" type="Node2D" parent="." index="7"]
 
 [node name="WalkDust" type="GPUParticles2D" parent="Particles" index="0"]
 position = Vector2(0, 16)

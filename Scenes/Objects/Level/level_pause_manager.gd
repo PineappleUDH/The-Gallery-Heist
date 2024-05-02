@@ -9,6 +9,8 @@ func _exit_tree():
 	# in case of quiting while paused
 	get_tree().paused = false
 
+# TODO: separate menu pausing (ESC) from gameplay pausing. otherwise scripts that uses gameplay pause like SAUL letters
+#       will prevent player from pausing the game while also being unable to function when the player pauses the game first
 func pause(show_pause_menu : bool = false):
 	if get_tree().paused: return
 	

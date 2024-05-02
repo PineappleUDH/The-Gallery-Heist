@@ -31,6 +31,7 @@ var _default_collider_size : Vector2
 @onready var _jump_particles : GPUParticles2D = $Particles/Jump
 @onready var _damage_particles : GPUParticles2D = $Particles/Damge
 @onready var _bubbles_particles : GPUParticles2D = $Particles/Bubbles
+@onready var _splash_sprite : AnimatedSprite2D = $Splash
 
 # Set Variables for overall control feel
 var _facing : Vector2 = Vector2.RIGHT
@@ -56,8 +57,7 @@ const _max_air : int = 5
 var _air : int = _max_air
 var _was_on_water_surface : bool = false
 const _water_collider_size : Vector2 = Vector2(28, 14)
-const _water_splash = preload("res://Scenes/Objects/water_splash.tscn")
-const _splash_sprite_spawn_offset : Vector2 = Vector2(0, 12)
+const _splash_sprite_spawn_offset : Vector2 = Vector2(0, -12)
 
 # NOTE: both _dash_locks and _can_dash affects ability to dash. except the former is set by other scripts, and the latter is set by self
 var _dash_locks : int = 0
@@ -469,9 +469,7 @@ func _state_dash_ph_process(delta: float):
 		return
 
 func _state_swim_switch_to(from : String):
-	var _splash := _water_splash.instantiate()
-	get_tree().current_scene.add_child(_splash)
-	_splash.global_position = self.global_position - _splash_sprite_spawn_offset
+	_splash_sprite.splash(global_position + _splash_sprite_spawn_offset)
 	
 	# limit enter speed so if player is going super fast a damp effect is applied like real life
 	velocity = velocity.clamp(Vector2.ONE * -_max_swim_speed, Vector2.ONE * _max_swim_speed)

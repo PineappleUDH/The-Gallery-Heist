@@ -42,7 +42,7 @@ func _draw():
 
 func _on_body_entered(body : Node2D):
 	if body is Character && _launch_delay.is_stopped():
-		body.velocity.y = -_launch_force
+		body.velocity = Vector2.UP.rotated(rotation) * _launch_force
 		_animation.play("pressed")
 		
 		if body is Player:

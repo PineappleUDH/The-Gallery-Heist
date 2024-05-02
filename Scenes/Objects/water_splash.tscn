@@ -58,13 +58,20 @@ animations = [{
 "loop": false,
 "name": &"default",
 "speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"empty",
+"speed": 5.0
 }]
 
 [node name="Splash" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_2aque")
-autoplay = "default"
-frame = 6
-frame_progress = 1.0
+animation = &"empty"
+autoplay = "empty"
 script = ExtResource("2_pqsp3")
 
 [connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

@@ -8,6 +8,7 @@ extends Node2D
 			await ready
 		
 		_area_collider.shape.radius = _radius
+@export var _can_dodge : bool = true
 
 @onready var _eye_animator : AnimationPlayer = $Eye/AnimationPlayer
 @onready var _eye_sprite : Sprite2D = $Eye
@@ -38,17 +39,18 @@ func _process(delta : float):
 		
 		_pupil_sprite.position = direction * _pupil_max_offset
 	
-	if _player_inside_dodge:
-		# dodge player
-		var direction : Vector2 = (World.level.player.global_position - _eye_sprite.global_position).normalized()
-		_eye_sprite.position = lerp(
-			_eye_sprite.position, -direction * _dodge_area_collider.shape.radius / 2.0, _eye_dodge_lerp_speed * delta
-		)
-	elif _player_inside_dodge == false && _eye_sprite.position != Vector2.ZERO:
-		# go back to original pos
-		_eye_sprite.position = lerp(
-			_eye_sprite.position, Vector2.ZERO, _eye_dodge_lerp_speed * delta
-		)
+	if _can_dodge:
+		if _player_inside_dodge:
+			# dodge player
+			var direction : Vector2 = (World.level.player.global_position - _eye_sprite.global_position).normalized()
+			_eye_sprite.position = lerp(
+				_eye_sprite.position, -direction * _dodge_area_collider.shape.radius / 2.0, _eye_dodge_lerp_speed * delta
+			)
+		elif _player_inside_dodge == false && _eye_sprite.position != Vector2.ZERO:
+			# go back to original pos
+			_eye_sprite.position = lerp(
+				_eye_sprite.position, Vector2.ZERO, _eye_dodge_lerp_speed * delta
+			)
 
 func _on_animation_started(anim_name : StringName):
 	if is_node_ready() == false: return # this gets called with the starting animation before node is ready
