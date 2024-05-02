@@ -513,721 +513,721 @@ _toggle_editor_preview = false
 [node name="LaunchPad66" parent="Interactables" index="50" instance=ExtResource("9_bo58w")]
 position = Vector2(2400, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad67" parent="Interactables" index="51" instance=ExtResource("9_bo58w")]
 position = Vector2(2432, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad68" parent="Interactables" index="52" instance=ExtResource("9_bo58w")]
 position = Vector2(2464, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad69" parent="Interactables" index="53" instance=ExtResource("9_bo58w")]
 position = Vector2(2496, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad70" parent="Interactables" index="54" instance=ExtResource("9_bo58w")]
 position = Vector2(2528, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad71" parent="Interactables" index="55" instance=ExtResource("9_bo58w")]
 position = Vector2(2560, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad72" parent="Interactables" index="56" instance=ExtResource("9_bo58w")]
 position = Vector2(2592, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad73" parent="Interactables" index="57" instance=ExtResource("9_bo58w")]
 position = Vector2(2624, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad74" parent="Interactables" index="58" instance=ExtResource("9_bo58w")]
 position = Vector2(2656, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad75" parent="Interactables" index="59" instance=ExtResource("9_bo58w")]
 position = Vector2(2688, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad76" parent="Interactables" index="60" instance=ExtResource("9_bo58w")]
 position = Vector2(2560, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad77" parent="Interactables" index="61" instance=ExtResource("9_bo58w")]
 position = Vector2(2592, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad78" parent="Interactables" index="62" instance=ExtResource("9_bo58w")]
 position = Vector2(2624, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad79" parent="Interactables" index="63" instance=ExtResource("9_bo58w")]
 position = Vector2(2656, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad80" parent="Interactables" index="64" instance=ExtResource("9_bo58w")]
 position = Vector2(2688, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad81" parent="Interactables" index="65" instance=ExtResource("9_bo58w")]
 position = Vector2(2400, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad82" parent="Interactables" index="66" instance=ExtResource("9_bo58w")]
 position = Vector2(2432, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad83" parent="Interactables" index="67" instance=ExtResource("9_bo58w")]
 position = Vector2(2464, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad84" parent="Interactables" index="68" instance=ExtResource("9_bo58w")]
 position = Vector2(2496, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad85" parent="Interactables" index="69" instance=ExtResource("9_bo58w")]
 position = Vector2(2528, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad86" parent="Interactables" index="70" instance=ExtResource("9_bo58w")]
 position = Vector2(2560, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad87" parent="Interactables" index="71" instance=ExtResource("9_bo58w")]
 position = Vector2(2592, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad88" parent="Interactables" index="72" instance=ExtResource("9_bo58w")]
 position = Vector2(2624, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad89" parent="Interactables" index="73" instance=ExtResource("9_bo58w")]
 position = Vector2(2656, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad90" parent="Interactables" index="74" instance=ExtResource("9_bo58w")]
 position = Vector2(2688, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad91" parent="Interactables" index="75" instance=ExtResource("9_bo58w")]
 position = Vector2(2560, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad92" parent="Interactables" index="76" instance=ExtResource("9_bo58w")]
 position = Vector2(2592, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad93" parent="Interactables" index="77" instance=ExtResource("9_bo58w")]
 position = Vector2(2624, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad94" parent="Interactables" index="78" instance=ExtResource("9_bo58w")]
 position = Vector2(2656, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad95" parent="Interactables" index="79" instance=ExtResource("9_bo58w")]
 position = Vector2(2688, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad96" parent="Interactables" index="80" instance=ExtResource("9_bo58w")]
 position = Vector2(2720, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad97" parent="Interactables" index="81" instance=ExtResource("9_bo58w")]
 position = Vector2(2752, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad98" parent="Interactables" index="82" instance=ExtResource("9_bo58w")]
 position = Vector2(2784, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad99" parent="Interactables" index="83" instance=ExtResource("9_bo58w")]
 position = Vector2(2816, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad100" parent="Interactables" index="84" instance=ExtResource("9_bo58w")]
 position = Vector2(2848, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad101" parent="Interactables" index="85" instance=ExtResource("9_bo58w")]
 position = Vector2(2880, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad102" parent="Interactables" index="86" instance=ExtResource("9_bo58w")]
 position = Vector2(2912, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad103" parent="Interactables" index="87" instance=ExtResource("9_bo58w")]
 position = Vector2(2944, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad104" parent="Interactables" index="88" instance=ExtResource("9_bo58w")]
 position = Vector2(2976, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad105" parent="Interactables" index="89" instance=ExtResource("9_bo58w")]
 position = Vector2(3008, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad106" parent="Interactables" index="90" instance=ExtResource("9_bo58w")]
 position = Vector2(2880, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad107" parent="Interactables" index="91" instance=ExtResource("9_bo58w")]
 position = Vector2(2912, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad108" parent="Interactables" index="92" instance=ExtResource("9_bo58w")]
 position = Vector2(2944, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad109" parent="Interactables" index="93" instance=ExtResource("9_bo58w")]
 position = Vector2(2976, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad110" parent="Interactables" index="94" instance=ExtResource("9_bo58w")]
 position = Vector2(3008, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad111" parent="Interactables" index="95" instance=ExtResource("9_bo58w")]
 position = Vector2(2720, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad112" parent="Interactables" index="96" instance=ExtResource("9_bo58w")]
 position = Vector2(2752, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad113" parent="Interactables" index="97" instance=ExtResource("9_bo58w")]
 position = Vector2(2784, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad114" parent="Interactables" index="98" instance=ExtResource("9_bo58w")]
 position = Vector2(2816, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad115" parent="Interactables" index="99" instance=ExtResource("9_bo58w")]
 position = Vector2(2848, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad116" parent="Interactables" index="100" instance=ExtResource("9_bo58w")]
 position = Vector2(2880, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad117" parent="Interactables" index="101" instance=ExtResource("9_bo58w")]
 position = Vector2(2912, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad118" parent="Interactables" index="102" instance=ExtResource("9_bo58w")]
 position = Vector2(2944, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad119" parent="Interactables" index="103" instance=ExtResource("9_bo58w")]
 position = Vector2(2976, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad120" parent="Interactables" index="104" instance=ExtResource("9_bo58w")]
 position = Vector2(3008, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad121" parent="Interactables" index="105" instance=ExtResource("9_bo58w")]
 position = Vector2(2880, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad122" parent="Interactables" index="106" instance=ExtResource("9_bo58w")]
 position = Vector2(2912, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad123" parent="Interactables" index="107" instance=ExtResource("9_bo58w")]
 position = Vector2(2944, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad124" parent="Interactables" index="108" instance=ExtResource("9_bo58w")]
 position = Vector2(2976, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad125" parent="Interactables" index="109" instance=ExtResource("9_bo58w")]
 position = Vector2(3008, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad126" parent="Interactables" index="110" instance=ExtResource("9_bo58w")]
 position = Vector2(3040, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad127" parent="Interactables" index="111" instance=ExtResource("9_bo58w")]
 position = Vector2(3072, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad128" parent="Interactables" index="112" instance=ExtResource("9_bo58w")]
 position = Vector2(3104, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad129" parent="Interactables" index="113" instance=ExtResource("9_bo58w")]
 position = Vector2(3136, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad130" parent="Interactables" index="114" instance=ExtResource("9_bo58w")]
 position = Vector2(3168, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad131" parent="Interactables" index="115" instance=ExtResource("9_bo58w")]
 position = Vector2(3200, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad132" parent="Interactables" index="116" instance=ExtResource("9_bo58w")]
 position = Vector2(3232, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad133" parent="Interactables" index="117" instance=ExtResource("9_bo58w")]
 position = Vector2(3264, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad134" parent="Interactables" index="118" instance=ExtResource("9_bo58w")]
 position = Vector2(3296, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad135" parent="Interactables" index="119" instance=ExtResource("9_bo58w")]
 position = Vector2(3328, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad136" parent="Interactables" index="120" instance=ExtResource("9_bo58w")]
 position = Vector2(3200, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad137" parent="Interactables" index="121" instance=ExtResource("9_bo58w")]
 position = Vector2(3232, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad138" parent="Interactables" index="122" instance=ExtResource("9_bo58w")]
 position = Vector2(3264, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad139" parent="Interactables" index="123" instance=ExtResource("9_bo58w")]
 position = Vector2(3296, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad140" parent="Interactables" index="124" instance=ExtResource("9_bo58w")]
 position = Vector2(3328, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad141" parent="Interactables" index="125" instance=ExtResource("9_bo58w")]
 position = Vector2(3040, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad142" parent="Interactables" index="126" instance=ExtResource("9_bo58w")]
 position = Vector2(3072, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad143" parent="Interactables" index="127" instance=ExtResource("9_bo58w")]
 position = Vector2(3104, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad144" parent="Interactables" index="128" instance=ExtResource("9_bo58w")]
 position = Vector2(3136, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad145" parent="Interactables" index="129" instance=ExtResource("9_bo58w")]
 position = Vector2(3168, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad146" parent="Interactables" index="130" instance=ExtResource("9_bo58w")]
 position = Vector2(3200, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad147" parent="Interactables" index="131" instance=ExtResource("9_bo58w")]
 position = Vector2(3232, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad148" parent="Interactables" index="132" instance=ExtResource("9_bo58w")]
 position = Vector2(3264, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad149" parent="Interactables" index="133" instance=ExtResource("9_bo58w")]
 position = Vector2(3296, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad150" parent="Interactables" index="134" instance=ExtResource("9_bo58w")]
 position = Vector2(3328, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad151" parent="Interactables" index="135" instance=ExtResource("9_bo58w")]
 position = Vector2(3200, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad152" parent="Interactables" index="136" instance=ExtResource("9_bo58w")]
 position = Vector2(3232, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad153" parent="Interactables" index="137" instance=ExtResource("9_bo58w")]
 position = Vector2(3264, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad154" parent="Interactables" index="138" instance=ExtResource("9_bo58w")]
 position = Vector2(3296, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad155" parent="Interactables" index="139" instance=ExtResource("9_bo58w")]
 position = Vector2(3328, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad156" parent="Interactables" index="140" instance=ExtResource("9_bo58w")]
 position = Vector2(3360, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad157" parent="Interactables" index="141" instance=ExtResource("9_bo58w")]
 position = Vector2(3392, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad158" parent="Interactables" index="142" instance=ExtResource("9_bo58w")]
 position = Vector2(3424, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad159" parent="Interactables" index="143" instance=ExtResource("9_bo58w")]
 position = Vector2(3456, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad160" parent="Interactables" index="144" instance=ExtResource("9_bo58w")]
 position = Vector2(3488, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad161" parent="Interactables" index="145" instance=ExtResource("9_bo58w")]
 position = Vector2(3520, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad162" parent="Interactables" index="146" instance=ExtResource("9_bo58w")]
 position = Vector2(3552, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad163" parent="Interactables" index="147" instance=ExtResource("9_bo58w")]
 position = Vector2(3584, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad164" parent="Interactables" index="148" instance=ExtResource("9_bo58w")]
 position = Vector2(3616, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad165" parent="Interactables" index="149" instance=ExtResource("9_bo58w")]
 position = Vector2(3648, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad166" parent="Interactables" index="150" instance=ExtResource("9_bo58w")]
 position = Vector2(3520, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad167" parent="Interactables" index="151" instance=ExtResource("9_bo58w")]
 position = Vector2(3552, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad168" parent="Interactables" index="152" instance=ExtResource("9_bo58w")]
 position = Vector2(3584, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad169" parent="Interactables" index="153" instance=ExtResource("9_bo58w")]
 position = Vector2(3616, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad170" parent="Interactables" index="154" instance=ExtResource("9_bo58w")]
 position = Vector2(3648, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad171" parent="Interactables" index="155" instance=ExtResource("9_bo58w")]
 position = Vector2(3360, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad172" parent="Interactables" index="156" instance=ExtResource("9_bo58w")]
 position = Vector2(3392, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad173" parent="Interactables" index="157" instance=ExtResource("9_bo58w")]
 position = Vector2(3424, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad174" parent="Interactables" index="158" instance=ExtResource("9_bo58w")]
 position = Vector2(3456, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad175" parent="Interactables" index="159" instance=ExtResource("9_bo58w")]
 position = Vector2(3488, 224)
 rotation = -3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad176" parent="Interactables" index="160" instance=ExtResource("9_bo58w")]
 position = Vector2(3520, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad177" parent="Interactables" index="161" instance=ExtResource("9_bo58w")]
 position = Vector2(3552, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad178" parent="Interactables" index="162" instance=ExtResource("9_bo58w")]
 position = Vector2(3584, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad179" parent="Interactables" index="163" instance=ExtResource("9_bo58w")]
 position = Vector2(3616, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad180" parent="Interactables" index="164" instance=ExtResource("9_bo58w")]
 position = Vector2(3648, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad181" parent="Interactables" index="165" instance=ExtResource("9_bo58w")]
 position = Vector2(3520, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad182" parent="Interactables" index="166" instance=ExtResource("9_bo58w")]
 position = Vector2(3552, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad183" parent="Interactables" index="167" instance=ExtResource("9_bo58w")]
 position = Vector2(3584, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad184" parent="Interactables" index="168" instance=ExtResource("9_bo58w")]
 position = Vector2(3616, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="LaunchPad185" parent="Interactables" index="169" instance=ExtResource("9_bo58w")]
 position = Vector2(3648, 224)
 rotation = 3.14159
-_launch_force = -500.0
+_launch_force = 0.0
 _toggle_editor_preview = false
 
 [node name="DashDisabler" parent="Obstacles" index="0" instance=ExtResource("4_iavpp")]

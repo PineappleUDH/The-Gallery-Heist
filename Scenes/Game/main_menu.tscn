@@ -43,6 +43,21 @@ anim_offset_max = 1.0
 atlas = ExtResource("5_oq3r4")
 region = Rect2(0, 0, 100, 64)
 
+[sub_resource type="Animation" id="Animation_7rtk5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 100, 64)]
+}
+
 [sub_resource type="Animation" id="Animation_hsgob"]
 resource_name = "default"
 length = 1.2
@@ -60,7 +75,17 @@ tracks/0/keys = {
 "values": [Rect2(0, 0, 100, 64), Rect2(100, 0, 100, 64), Rect2(200, 0, 100, 64)]
 }
 
-[sub_resource type="Animation" id="Animation_7rtk5"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bysed"]
+_data = {
+"RESET": SubResource("Animation_7rtk5"),
+"default": SubResource("Animation_hsgob")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7ums"]
+atlas = ExtResource("9_owfla")
+region = Rect2(0, 0, 45, 116)
+
+[sub_resource type="Animation" id="Animation_jjlww"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -72,18 +97,8 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Rect2(0, 0, 100, 64)]
+"values": [Rect2(0, 0, 45, 116)]
 }
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_bysed"]
-_data = {
-"RESET": SubResource("Animation_7rtk5"),
-"default": SubResource("Animation_hsgob")
-}
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_o7ums"]
-atlas = ExtResource("9_owfla")
-region = Rect2(0, 0, 45, 116)
 
 [sub_resource type="Animation" id="Animation_it4nc"]
 resource_name = "default"
@@ -102,7 +117,17 @@ tracks/0/keys = {
 "values": [Rect2(0, 0, 45, 116), Rect2(45, 0, 45, 116), Rect2(90, 0, 45, 116), Rect2(135, 0, 45, 116)]
 }
 
-[sub_resource type="Animation" id="Animation_jjlww"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4e41e"]
+_data = {
+"RESET": SubResource("Animation_jjlww"),
+"default": SubResource("Animation_it4nc")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6528l"]
+atlas = ExtResource("12_r1m6j")
+region = Rect2(0, 0, 64, 34)
+
+[sub_resource type="Animation" id="Animation_48dx6"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -114,18 +139,8 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Rect2(0, 0, 45, 116)]
+"values": [Rect2(0, 0, 64, 34)]
 }
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4e41e"]
-_data = {
-"RESET": SubResource("Animation_jjlww"),
-"default": SubResource("Animation_it4nc")
-}
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6528l"]
-atlas = ExtResource("12_r1m6j")
-region = Rect2(0, 0, 64, 34)
 
 [sub_resource type="Animation" id="Animation_d1bje"]
 resource_name = "default"
@@ -142,21 +157,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [Rect2(0, 0, 64, 34), Rect2(64, 0, 64, 34), Rect2(128, 0, 64, 34)]
-}
-
-[sub_resource type="Animation" id="Animation_48dx6"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture:region")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Rect2(0, 0, 64, 34)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dyo7e"]
