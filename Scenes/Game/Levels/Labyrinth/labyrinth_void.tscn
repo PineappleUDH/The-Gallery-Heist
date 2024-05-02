@@ -97,7 +97,7 @@ rotation = -1.5708
 _count = 6
 
 [node name="Spikes3" parent="Obstacles" index="5" instance=ExtResource("4_sswum")]
-position = Vector2(976, -160)
+position = Vector2(968, -160)
 rotation = 1.5708
 
 [node name="Saul" parent="Characters" index="0"]

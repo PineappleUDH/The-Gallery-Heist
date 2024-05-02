@@ -5,7 +5,7 @@ extends Area2D
 @onready var _animation : AnimatedSprite2D = $Animation
 @export var _launch_force : float = 500.0 :
 	set(value):
-		_launch_force = value
+		_launch_force = max(value, 0.0)
 		queue_redraw()
 @export var _toggle_editor_preview : bool = true :
 	set(value):

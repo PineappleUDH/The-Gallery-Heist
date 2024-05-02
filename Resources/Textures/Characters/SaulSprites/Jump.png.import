@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5do3awtnco2e"
-path="res://.godot/imported/JumpAnticipation (AddinSachen).png-46932a49782bb965be31f003f2a5cd5f.ctex"
+uid="uid://bhv4ofhcrf0tn"
+path="res://.godot/imported/Jump.png-e7fdb65b5f8f4010361fed5a688ed04e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Textures/Characters/SaulSprites/JumpAnticipation (AddinSachen).png"
-dest_files=["res://.godot/imported/JumpAnticipation (AddinSachen).png-46932a49782bb965be31f003f2a5cd5f.ctex"]
+source_file="res://Resources/Textures/Characters/SaulSprites/Jump.png"
+dest_files=["res://.godot/imported/Jump.png-e7fdb65b5f8f4010361fed5a688ed04e.ctex"]
 
 [params]
 

@@ -27,6 +27,8 @@ func _on_resume_pressed():
 	unpause()
 
 func _on_restart_pressed():
+	# TODO: restart from checkpoint rather than this to not risk breaking levels that depend
+	#       on a setup() func or previous context
 	_pressed_sfx.play()
 	SceneManager.restart_scene()
 

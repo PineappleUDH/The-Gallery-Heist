@@ -1,17 +1,26 @@
 extends "res://Scenes/Objects/Collectables/collectable.gd"
 
-const _amount_healed : int = 1
+@onready var _collider : CollisionShape2D = $CollisionShape2D
 
-#@onready var _collected_sfx = $PersistentNodesContainer/Collected
-#@onready var _persistent_node = $PersistentNodesContainer
+const _amount_healed : int = 1
 
 func _ready():
 	_sin_height = 3
 	_sin_speed = 2
 	_idle_movement = IdleMovement.sin_wave
+	
+	await get_tree().process_frame
+	World.level.player.respawned.connect(_on_player_respawned)
 
 func _collected(player : Player):
 	player.heal(_amount_healed)
-	#_collected_sfx.play()
-	#_persistent_node.detach()
-	queue_free()
+	# sfx..
+	
+	# hide curry but don't delete it. when player dies and respawns
+	# healing items should respawn too
+	_collider.set_deferred("disabled", true)
+	hide()
+
+func _on_player_respawned():
+	_collider.disabled = false
+	show()

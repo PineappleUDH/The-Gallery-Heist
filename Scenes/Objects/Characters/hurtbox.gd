@@ -6,7 +6,7 @@ signal applied_damage
 @export var damage : int = 1
 @export var is_deadly : bool = false
 
-# TODO: add 'custom_damange_direction' for nodes that don't apply damage
+# TODO: add 'custom_damage_direction' for nodes that don't apply damage
 #       from their origin point like spikes which should always
 #       have a knockback direction of up
 

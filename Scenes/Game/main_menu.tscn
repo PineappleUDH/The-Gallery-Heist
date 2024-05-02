@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://b3ksngrr6nf1f"]
+[gd_scene load_steps=34 format=3 uid="uid://b3ksngrr6nf1f"]
 
 [ext_resource type="Script" path="res://Scenes/Game/main_menu.gd" id="1_vqpgv"]
 [ext_resource type="Texture2D" uid="uid://c67qpsqai1qwi" path="res://Resources/Textures/Main Menu/bg_1.png" id="2_8p8gt"]
@@ -9,7 +9,6 @@
 [ext_resource type="AudioStream" uid="uid://5gj12883hk0" path="res://Resources/Audio/SFX/UI/button_press.wav" id="6_7j4va"]
 [ext_resource type="Texture2D" uid="uid://bw8cj1ajmwgl8" path="res://Resources/Textures/Main Menu/1_3.png" id="6_qtnkq"]
 [ext_resource type="Texture2D" uid="uid://dy0kotwvmht4g" path="res://Resources/Textures/Main Menu/2_1.png" id="7_2edy2"]
-[ext_resource type="Texture2D" uid="uid://cep70cotrxojx" path="res://Resources/Textures/Main Menu/2_2.png" id="8_ncijm"]
 [ext_resource type="AudioStream" uid="uid://bcbul1x4fi8og" path="res://Resources/Audio/Music/main_menu.ogg" id="8_ugxx7"]
 [ext_resource type="Texture2D" uid="uid://buj77s3mx12rl" path="res://Resources/Textures/Main Menu/2_3.png" id="9_owfla"]
 [ext_resource type="Texture2D" uid="uid://bp4x4o3bihs7e" path="res://Resources/Textures/Main Menu/2_4.png" id="10_ijes1"]
@@ -19,7 +18,6 @@
 [ext_resource type="Texture2D" uid="uid://bru0geg71kcde" path="res://Resources/Textures/Main Menu/3_1.png" id="14_rikq5"]
 [ext_resource type="Texture2D" uid="uid://brhn3lk5w8l3j" path="res://Resources/Textures/Main Menu/3_2.png" id="15_y6p5s"]
 [ext_resource type="Texture2D" uid="uid://dsofj5wrlvfp5" path="res://Resources/Textures/Main Menu/3_3.png" id="16_c6631"]
-[ext_resource type="Texture2D" uid="uid://cr0abja5ipxlj" path="res://Resources/Textures/Main Menu/3_4.png" id="17_h2e0a"]
 [ext_resource type="FontFile" uid="uid://bsvbubhqv01qw" path="res://Resources/Fonts/hf-free-complete/futile-pro-v1/FutilePro.ttf" id="18_pwmmi"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_uf8ee"]
@@ -40,6 +38,132 @@ gravity = Vector3(0, 0, 0)
 scale_min = 0.9
 scale_max = 1.8
 anim_offset_max = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_luwf6"]
+atlas = ExtResource("5_oq3r4")
+region = Rect2(0, 0, 100, 64)
+
+[sub_resource type="Animation" id="Animation_hsgob"]
+resource_name = "default"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 0, 100, 64), Rect2(100, 0, 100, 64), Rect2(200, 0, 100, 64)]
+}
+
+[sub_resource type="Animation" id="Animation_7rtk5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 100, 64)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bysed"]
+_data = {
+"RESET": SubResource("Animation_7rtk5"),
+"default": SubResource("Animation_hsgob")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7ums"]
+atlas = ExtResource("9_owfla")
+region = Rect2(0, 0, 45, 116)
+
+[sub_resource type="Animation" id="Animation_it4nc"]
+resource_name = "default"
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 0, 45, 116), Rect2(45, 0, 45, 116), Rect2(90, 0, 45, 116), Rect2(135, 0, 45, 116)]
+}
+
+[sub_resource type="Animation" id="Animation_jjlww"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 45, 116)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4e41e"]
+_data = {
+"RESET": SubResource("Animation_jjlww"),
+"default": SubResource("Animation_it4nc")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6528l"]
+atlas = ExtResource("12_r1m6j")
+region = Rect2(0, 0, 64, 34)
+
+[sub_resource type="Animation" id="Animation_d1bje"]
+resource_name = "default"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 0, 64, 34), Rect2(64, 0, 64, 34), Rect2(128, 0, 64, 34)]
+}
+
+[sub_resource type="Animation" id="Animation_48dx6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 64, 34)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dyo7e"]
+_data = {
+"RESET": SubResource("Animation_48dx6"),
+"default": SubResource("Animation_d1bje")
+}
 
 [node name="MainMenu" type="MarginContainer"]
 anchors_preset = 15
@@ -92,15 +216,21 @@ texture = ExtResource("4_s5rd1")
 
 [node name="12" type="TextureRect" parent="Background"]
 layout_mode = 2
-offset_left = 20.0
-offset_top = 256.0
-offset_right = 84.0
-offset_bottom = 304.0
+offset_left = 13.0
+offset_top = 228.0
+offset_right = 113.0
+offset_bottom = 292.0
 scale = Vector2(2, 2)
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource("5_oq3r4")
+texture = SubResource("AtlasTexture_luwf6")
 stretch_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Background/12"]
+libraries = {
+"": SubResource("AnimationLibrary_bysed")
+}
+autoplay = "default"
 
 [node name="13" type="TextureRect" parent="Background"]
 layout_mode = 2
@@ -126,29 +256,23 @@ size_flags_vertical = 0
 texture = ExtResource("7_2edy2")
 stretch_mode = 2
 
-[node name="22" type="TextureRect" parent="Background"]
-layout_mode = 2
-offset_left = 104.0
-offset_top = 253.0
-offset_right = 152.0
-offset_bottom = 269.0
-scale = Vector2(2, 2)
-size_flags_horizontal = 0
-size_flags_vertical = 0
-texture = ExtResource("8_ncijm")
-stretch_mode = 2
-
 [node name="23" type="TextureRect" parent="Background"]
 layout_mode = 2
-offset_left = 548.0
-offset_top = 59.0
-offset_right = 580.0
-offset_bottom = 91.0
+offset_left = 530.0
+offset_top = 90.0
+offset_right = 575.0
+offset_bottom = 206.0
 scale = Vector2(2, 2)
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource("9_owfla")
+texture = SubResource("AtlasTexture_o7ums")
 stretch_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Background/23"]
+libraries = {
+"": SubResource("AnimationLibrary_4e41e")
+}
+autoplay = "default"
 
 [node name="24" type="TextureRect" parent="Background"]
 layout_mode = 2
@@ -183,8 +307,14 @@ offset_bottom = 320.0
 scale = Vector2(2, 2)
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource("12_r1m6j")
+texture = SubResource("AtlasTexture_6528l")
 stretch_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Background/26"]
+libraries = {
+"": SubResource("AnimationLibrary_dyo7e")
+}
+autoplay = "default"
 
 [node name="27" type="TextureRect" parent="Background"]
 layout_mode = 1
@@ -229,18 +359,6 @@ scale = Vector2(2, 2)
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("16_c6631")
-stretch_mode = 2
-
-[node name="34" type="TextureRect" parent="Background"]
-layout_mode = 2
-offset_left = 558.0
-offset_top = 286.0
-offset_right = 574.0
-offset_bottom = 302.0
-scale = Vector2(2, 2)
-size_flags_horizontal = 0
-size_flags_vertical = 0
-texture = ExtResource("17_h2e0a")
 stretch_mode = 2
 
 [node name="Menu" type="PanelContainer" parent="."]

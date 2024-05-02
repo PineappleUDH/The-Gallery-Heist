@@ -53,6 +53,7 @@ func show_letters_found(found_letters : Dictionary):
 			found_letters_nodes.append(_letters_container.get_child(i))
 			_letters_container.get_child(i).texture.region.position.x = 16
 		else:
+			# empty letter sprite
 			_letters_container.get_child(i).texture.region.position.x = 64
 	
 	_letters_container.show()

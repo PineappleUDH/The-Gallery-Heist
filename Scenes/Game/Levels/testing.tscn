@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cnyje7qf7f44u" path="res://Resources/Textures/VOID HELP ORGANIZE/BubbleUi.png" id="7_1kr0c"]
 [ext_resource type="PackedScene" uid="uid://bbfrw50tycm64" path="res://Scenes/Objects/Collectables/collectables_stack.tscn" id="7_pc1vt"]
 [ext_resource type="PackedScene" uid="uid://c31bicd5mqe8o" path="res://Scenes/Objects/Collectables/collectable_coin.tscn" id="8_loe2g"]
-[ext_resource type="TileSet" uid="uid://cmxmktpp6yr7f" path="res://testing_tileset_base.tres" id="8_wik0d"]
+[ext_resource type="TileSet" uid="uid://cmxmktpp6yr7f" path="res://Resources/Tilesets/testing_tileset_base.tres" id="8_wik0d"]
 [ext_resource type="PackedScene" uid="uid://hu5mofx88bpj" path="res://Scenes/Objects/Collectables/collectable_dash_refiller.tscn" id="9_pynbm"]
 [ext_resource type="FontFile" uid="uid://o4joh6rmlrrn" path="res://Resources/Fonts/hf-free-complete/matchup-pro-v1.1/MatchupPro.ttf" id="10_iovg4"]
 [ext_resource type="PackedScene" uid="uid://bol4qsyq1qr5t" path="res://Scenes/Objects/Obstacles/spikes.tscn" id="10_jd6g8"]
@@ -1362,7 +1362,7 @@ curve = SubResource("Curve2D_u407l")
 _speed_per_sec = 40.0
 
 [node name="Saul" parent="Characters" index="0"]
-position = Vector2(2914, 7832)
+position = Vector2(2163, -149)
 
 [node name="EnemyPatrolling" parent="Characters" index="1" instance=ExtResource("16_c4ebt")]
 position = Vector2(3638, 6236)

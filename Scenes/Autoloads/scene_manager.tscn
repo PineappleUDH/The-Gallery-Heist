@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://b1kjxca7t8px"]
+[gd_scene load_steps=5 format=3 uid="uid://b1kjxca7t8px"]
 
 [ext_resource type="Script" path="res://Scenes/Autoloads/scene_manager.gd" id="1_sq6w8"]
+[ext_resource type="Shader" path="res://Resources/Shaders/wiggly_verticies.gdshader" id="2_86ejg"]
+[ext_resource type="FontFile" uid="uid://bsvbubhqv01qw" path="res://Resources/Fonts/hf-free-complete/futile-pro-v1/FutilePro.ttf" id="3_tkvp1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4odap"]
+shader = ExtResource("2_86ejg")
+shader_parameter/speed = 2.5
+shader_parameter/scale = 5.0
 
 [node name="SceneManager" type="CanvasLayer"]
 process_mode = 3
@@ -29,10 +36,13 @@ layout_mode = 2
 color = Color(0, 0, 0, 1)
 
 [node name="Label" type="Label" parent="LoadingScreen"]
+material = SubResource("ShaderMaterial_4odap")
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_tkvp1")
 theme_override_font_sizes/font_size = 80
-text = "Loading.."
+text = "LOADING"
 
 [node name="MouseBlocker" type="Control" parent="."]
 layout_mode = 3
