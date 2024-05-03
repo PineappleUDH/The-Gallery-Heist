@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://b84n1i2bwxbmr"]
+[gd_scene load_steps=30 format=3 uid="uid://b84n1i2bwxbmr"]
 
 [ext_resource type="Script" path="res://Scenes/Objects/Level/level.gd" id="1_qee75"]
 [ext_resource type="Script" path="res://Scenes/Objects/Level/level_pause_manager.gd" id="2_2cj76"]
@@ -17,6 +17,7 @@
 [ext_resource type="FontFile" uid="uid://bsvbubhqv01qw" path="res://Resources/Fonts/hf-free-complete/futile-pro-v1/FutilePro.ttf" id="11_i74xb"]
 [ext_resource type="AudioStream" uid="uid://dsbmogobaeyng" path="res://Resources/Audio/SFX/UI/button_hover.wav" id="12_2gl1w"]
 [ext_resource type="AudioStream" uid="uid://5gj12883hk0" path="res://Resources/Audio/SFX/UI/button_press.wav" id="13_1ur6e"]
+[ext_resource type="Script" path="res://Scenes/Objects/Level/level_dialogue_player.gd" id="15_8anru"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dl2vj"]
 atlas = ExtResource("4_ljrpx")
@@ -63,6 +64,9 @@ region = Rect2(0, 0, 16, 16)
 resource_local_to_scene = true
 atlas = ExtResource("8_d8ooi")
 region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5hvhk"]
+bg_color = Color(0.160784, 0.160784, 0.160784, 1)
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_qee75")
@@ -191,6 +195,34 @@ pivot_offset = Vector2(160, 160)
 mouse_filter = 2
 stretch_mode = 5
 script = ExtResource("3_mds04")
+
+[node name="DialoguePlayer" type="MarginContainer" parent="UI"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+script = ExtResource("15_8anru")
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/DialoguePlayer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_5hvhk")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/DialoguePlayer/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[center]Dialogue example. it's just an example nothing to be taken so seriously or anything. now that we've established that none of this is serious I wish to confess about the dead body under my house. thank you for tuning in it's your host 3-dog! stay safe out there in the capital wasteland."
+fit_content = true
+visible_characters_behavior = 1
 
 [node name="PauseManager" type="MarginContainer" parent="UI"]
 process_mode = 3

@@ -13,6 +13,7 @@ signal interacted
 @onready var _cancel_slide_delay : Timer = $Timers/CancelSlideDelay
 @onready var _wall_grab_cooldown : Timer = $Timers/WallGrabCooldown
 @onready var _water_timer : Timer = $Timers/WaterTimer
+@onready var _look_offset_timer : Timer = $Timers/LookOffsetTimer
 
 @onready var _sprite : AnimatedSprite2D = $Sprite
 @onready var _dash_trail : Node2D = $DashTrail
@@ -30,11 +31,12 @@ var _default_collider_size : Vector2
 @onready var _jump_particles : GPUParticles2D = $Particles/Jump
 @onready var _damage_particles : GPUParticles2D = $Particles/Damge
 @onready var _bubbles_particles : GPUParticles2D = $Particles/Bubbles
+@onready var _splash_sprite : AnimatedSprite2D = $Splash
 
 # Set Variables for overall control feel
 var _facing : Vector2 = Vector2.RIGHT
 const _max_move_speed : float = 250.0
-const _max_fall_speed : float = 800.0
+const _max_fall_speed : float = 860.0
 const _accel : float = 450.0
 const _decel : float = 1000.0
 const _jump_force : float = 260.0
@@ -43,6 +45,9 @@ const _slide_speed : float = 60.0
 const _slide_speed_fast : float = 120.0
 const _walk_footstep_time : float = 0.6
 const _run_footstep_time : float = 0.3
+var _is_look_offset_applied : bool
+const _fall_anim_intensity_thresholds : Array = [0.0, _max_fall_speed * 0.3, _max_fall_speed * 0.7, _max_fall_speed] # when to play each fall animation. from least to most intense
+const _jump_anim_intensity_thresholds : Array = [_jump_force, _jump_force * 0.8, 0.0] # when to play each jump animation. from most to least intense
 
 const _max_swim_speed : float = 140.0
 const _out_of_water_push : float = 200.0
@@ -52,8 +57,7 @@ const _max_air : int = 5
 var _air : int = _max_air
 var _was_on_water_surface : bool = false
 const _water_collider_size : Vector2 = Vector2(28, 14)
-const _water_splash = preload("res://Scenes/Objects/water_splash.tscn")
-const _splash_sprite_spawn_offset : Vector2 = Vector2(0, 12)
+const _splash_sprite_spawn_offset : Vector2 = Vector2(0, -12)
 
 # NOTE: both _dash_locks and _can_dash affects ability to dash. except the former is set by other scripts, and the latter is set by self
 var _dash_locks : int = 0
@@ -61,8 +65,8 @@ var _can_dash : bool = true
 const _dash_speed: float = 300
 const _dash_shake_duration : float = 0.3
 
-const _wall_jump_force : float = 260.0
 const _wall_push_force : float = 230.0 # push is in the x axis, jump is in the y
+const _wall_jump_force : float = 260.0
 
 const _damage_shake_duration : float = 0.3
 const _damage_pause_time : float = 0.14
@@ -145,6 +149,7 @@ func take_damage(damage : int, from : Vector2, is_deadly : bool = false) -> bool
 	var old_health : int = _health
 	var applied : bool = super.take_damage(damage, from, is_deadly)
 	if applied:
+		_play_animation("Damaged")
 		World.level.interface.set_health(old_health, _health)
 		World.level.pause_manager.pause()
 		get_tree().create_timer(_damage_pause_time).timeout.connect(
@@ -205,17 +210,17 @@ func _get_ray_colliding_with_tilemap() -> Vector2:
 
 func _is_water_tile(global_pos : Vector2) -> bool:
 	var tileset : TileSet = World.level.tilemap.tile_set
-	var has_water_data : bool = false
+	# ensure tileset has "water" custom data first to avoid errors
+	var has_water_var : bool = false
 	for i in tileset.get_custom_data_layers_count():
 		if tileset.get_custom_data_layer_name(i) == "water":
-			has_water_data = true
+			has_water_var = true
 			break
-	if has_water_data == false: return false
+	if has_water_var == false: return false
 	
 	var layers_count : int = World.level.tilemap.get_layers_count()
 	for i in layers_count:
-		# check all layers for a water tile. pros:doesn't require custom tilemap setup
-		#                                    cons: additional processing
+		# check all layers for a water tile
 		var data : TileData = World.level.tilemap.get_cell_tile_data(
 			i, World.level.tilemap.local_to_map(global_pos)
 		)
@@ -223,6 +228,26 @@ func _is_water_tile(global_pos : Vector2) -> bool:
 			return true
 	
 	return false
+
+func _is_breathable_tile(global_pos : Vector2) -> bool:
+	if _is_water_tile(global_pos): return false # TODO: can we omit this check?
+	
+	var tileset : TileSet = World.level.tilemap.tile_set
+	if tileset.get_physics_layers_count() == 0: return true
+	
+	var layers_count : int = World.level.tilemap.get_layers_count()
+	for i in layers_count:
+		# check all layers for collidable tile
+		var data : TileData = World.level.tilemap.get_cell_tile_data(
+			i, World.level.tilemap.local_to_map(global_pos)
+		)
+		if data && data.get_collision_polygons_count(0) > 0:
+			# found a solid tile so not breathable. this makes 2 assumptions:
+			# 1- if a tile has a collider it's not breathable even if the collider doesn't cover the whole tile
+			# 2- only checks for physics layer 1 assuming that any solid layer will be put at idx 1 while other more "stylized" colliders (collide with enemy only etc..) will be at other indicies
+			return false
+	
+	return true
 
 func _set_can_dash(dash : bool):
 	# Note: use this instead of setting _can_dash directly
@@ -232,11 +257,13 @@ func _set_can_dash(dash : bool):
 		World.level.interface.set_dash(dash)
 
 func _state_normal_switch_from(to : String):
+	_look_offset_timer.stop()
+	_is_look_offset_applied = false
 	World.level.level_camera.player_look_offset(0)
-	_walk_dust_particles.emitting = false
 	_coyote_timer.stop()
 	_jump_buffer_timer.stop()
 	_footstep_timer.stop()
+	_walk_dust_particles.emitting = false
 
 func _state_normal_process(delta : float):
 	# animation
@@ -256,10 +283,22 @@ func _state_normal_process(delta : float):
 			_play_animation("Walk")
 		
 	else:
-		if velocity.y > 0:
-			_play_animation("Falling", true)
-		else:
-			_play_animation("Jump", true)
+		if velocity.y >= 0:
+			# falling
+			var fall_anim_idx : int
+			for i in range(_fall_anim_intensity_thresholds.size()-1, -1, -1):
+				if velocity.y >= _fall_anim_intensity_thresholds[i]:
+					fall_anim_idx = i
+					break 
+			_play_animation("Fall " + str(fall_anim_idx + 1), true)
+		elif velocity.y < 0:
+			# jumping
+			var jump_anim_idx : int
+			for i in _jump_anim_intensity_thresholds.size():
+				if -velocity.y >= _jump_anim_intensity_thresholds[i]:
+					jump_anim_idx = i
+					break
+			_play_animation("Jump " + str(jump_anim_idx + 1), true)
 
 func _state_normal_ph_process(delta : float):
 	# Enable gravity.
@@ -292,23 +331,29 @@ func _state_normal_ph_process(delta : float):
 				_footstep_timer.wait_time = _walk_footstep_time
 			
 		else:
+			# TODO: slide sfx for as long as we're slidding
 			#_footstep_timer.wait_time = ?
 			#_sfx["slide"].play()
 			pass
 		
 		_footstep_timer.start()
 	
-	# TODO: holding up or down shouldn't trigger a camera look offset imediately
-	#       add some delay time
+	# camera look offset
 	if velocity.x == 0 && is_on_floor() && _direction.y:
-		World.level.level_camera.player_look_offset(int(_direction.y))
+		if _is_look_offset_applied == false:
+			_is_look_offset_applied = true
+			_look_offset_timer.start()
+		elif _look_offset_timer.is_stopped() && _is_look_offset_applied:
+			World.level.level_camera.player_look_offset(int(_direction.y))
 	else:
+		_is_look_offset_applied = false
+		_look_offset_timer.stop()
 		World.level.level_camera.player_look_offset(0)
 	
 	# jump
 	var just_jumped : bool = false
 	if Input.is_action_just_pressed("jump"):
-		if is_on_floor() or not _coyote_timer.is_stopped():
+		if is_on_floor() or _coyote_timer.is_stopped() == false:
 			velocity.y = Utilities.soft_clamp(velocity.y, -_jump_force, _jump_force)
 			just_jumped = true
 			_jump_particles.restart()
@@ -316,23 +361,22 @@ func _state_normal_ph_process(delta : float):
 		elif is_on_floor() == false:
 			_jump_buffer_timer.start()
 	
-	var was_on_floor = is_on_floor()
+	var was_on_floor : bool = is_on_floor()
 	move_and_slide()
 	
-	# Coyote Timer
-	if was_on_floor and is_on_floor() == false:
-		if just_jumped == false:
-			# just fell off
-			_coyote_timer.start()
-	elif was_on_floor == false and is_on_floor():
+	# jump helpers
+	if was_on_floor == false and is_on_floor():
 		# just landed
-		_play_animation("Landing")
 		if _jump_buffer_timer.is_stopped() == false:
 			velocity.y = Utilities.soft_clamp(velocity.y, -_jump_force, _jump_force)
 			just_jumped = true
 			_jump_particles.restart()
 			_sfx["jump"].play()
+	elif was_on_floor and is_on_floor() == false and just_jumped == false:
+		# just fell off
+		_coyote_timer.start()
 	
+	# wall slide
 	if (is_on_floor() == false and Input.is_action_pressed("wall_grab") and
 	_wall_grab_cooldown.is_stopped()):
 		var ray_dir : Vector2 = _get_ray_colliding_with_tilemap()
@@ -343,6 +387,7 @@ func _state_normal_ph_process(delta : float):
 			_state_machine.change_state("wall_slide")
 			return
 	
+	# dashing
 	if (_can_dash == false && _dash_locks == 0 &&
 	_dash_cooldown.is_stopped() && is_on_floor()):
 		_set_can_dash(true)
@@ -368,7 +413,7 @@ func _state_wall_slide_ph_process(delta: float):
 		if Input.is_action_pressed("down"):
 			velocity.y = _slide_speed_fast
 		else:
-			velocity.y =  _slide_speed
+			velocity.y = _slide_speed
 	
 	# cancel sliding
 	if Input.is_action_just_released("wall_grab"):
@@ -424,9 +469,7 @@ func _state_dash_ph_process(delta: float):
 		return
 
 func _state_swim_switch_to(from : String):
-	var _splash := _water_splash.instantiate()
-	get_tree().current_scene.add_child(_splash)
-	_splash.global_position = self.global_position - _splash_sprite_spawn_offset
+	_splash_sprite.splash(global_position + _splash_sprite_spawn_offset)
 	
 	# limit enter speed so if player is going super fast a damp effect is applied like real life
 	velocity = velocity.clamp(Vector2.ONE * -_max_swim_speed, Vector2.ONE * _max_swim_speed)
@@ -473,16 +516,13 @@ func _state_swim_ph_process(delta : float):
 	
 	# surface
 	var is_on_surface : bool =\
-		# TODO: this only checks if the tile above is water or not. the tile could be solid
-		#       in which case we're NOT on surface
-		_is_water_tile(global_position - Vector2(0.0, World.level.tile_size)) == false
-	var is_close_to_surface : bool =\
-		# are you happy val? :(((((((
-		_is_water_tile(global_position - Vector2(0.0, World.level.tile_size * 3)) == false
+		_is_breathable_tile(global_position - Vector2(0.0, World.level.tile_size))
+	var is_3_tiles_from_surface : bool =\
+		_is_breathable_tile(global_position - Vector2(0.0, World.level.tile_size * 3))
 	
-	_bubbles_particles.emitting = (is_on_surface == false and is_close_to_surface == false)
+	_bubbles_particles.emitting = (is_on_surface == false and is_3_tiles_from_surface == false)
 	
-	if is_close_to_surface && Input.is_action_just_pressed("jump"):
+	if is_3_tiles_from_surface && Input.is_action_just_pressed("jump"):
 		# TODO: repurpose jump buffer timer for this
 		# sfx..
 		velocity.y = Utilities.soft_clamp(velocity.y, -_jump_force, _jump_force)

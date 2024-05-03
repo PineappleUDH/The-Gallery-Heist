@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cr0abja5ipxlj"
-path="res://.godot/imported/3_4.png-43a9567de898fce45a11652678d01ffe.ctex"
+uid="uid://dwo34cmhvt3ko"
+path="res://.godot/imported/Fall.png-564e9d71db17131b470d4705cf7c6834.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Textures/Main Menu/3_4.png"
-dest_files=["res://.godot/imported/3_4.png-43a9567de898fce45a11652678d01ffe.ctex"]
+source_file="res://Resources/Textures/Characters/SaulSprites/Fall.png"
+dest_files=["res://.godot/imported/Fall.png-564e9d71db17131b470d4705cf7c6834.ctex"]
 
 [params]
 

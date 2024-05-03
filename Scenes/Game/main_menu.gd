@@ -3,8 +3,8 @@ extends MarginContainer
 @onready var _parallax_order : Array[Array] = [
 	[$Background/Background],
 	[$"Background/11", $"Background/12", $"Background/13"],
-	[$"Background/21", $"Background/22", $"Background/23", $"Background/24", $"Background/25", $"Background/26", $"Background/27"],
-	[$"Background/31", $"Background/32", $"Background/33", $"Background/34"]
+	[$"Background/21", $"Background/23", $"Background/24", $"Background/25", $"Background/26", $"Background/27"],
+	[$"Background/31", $"Background/32", $"Background/33",]
 ]
 @onready var _menu : PanelContainer = $Menu
 @onready var _main_options_container : VBoxContainer = $Menu/MarginContainer/Main
@@ -83,6 +83,7 @@ func _input(event : InputEvent):
 			event.global_position - screen_size / 2.0
 		var parallax_offset : Vector2 = screen_size * _bg_parallax_factor
 		
+		# recalculate parallax
 		for i in _parallax_order.size():
 			for j in _parallax_order[i].size():
 				var control : Control = _parallax_order[i][j]
@@ -99,7 +100,7 @@ func _on_settings_pressed():
 	_main_options_container.hide()
 	_settings_container.show()
 
-# TODO: prevent using the same key for more than 1 action
+# TODO: if a key is already used in another action remove it from that action
 func _on_controls_pressed():
 	_pressed_sfx.play()
 	_main_options_container.hide()

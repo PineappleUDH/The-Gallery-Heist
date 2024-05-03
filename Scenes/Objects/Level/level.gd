@@ -12,6 +12,7 @@ enum SaulLetter {S, A, U, L}
 @onready var level_camera : LevelCamera = $LevelCamera
 @onready var tilemap : TileMap = $TileMap
 @onready var music_player : Node = $Audio/MusicPlayer
+@onready var dialogue_player : MarginContainer = $UI/DialoguePlayer
 const tile_size : int = 16
 
 @onready var _screen_transition : TextureRect = $UI/ScreenTransition

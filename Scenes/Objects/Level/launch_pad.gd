@@ -5,7 +5,7 @@ extends Area2D
 @onready var _animation : AnimatedSprite2D = $Animation
 @export var _launch_force : float = 500.0 :
 	set(value):
-		_launch_force = value
+		_launch_force = max(value, 0.0)
 		queue_redraw()
 @export var _toggle_editor_preview : bool = true :
 	set(value):
@@ -42,7 +42,7 @@ func _draw():
 
 func _on_body_entered(body : Node2D):
 	if body is Character && _launch_delay.is_stopped():
-		body.velocity.y = -_launch_force
+		body.velocity = Vector2.UP.rotated(rotation) * _launch_force
 		_animation.play("pressed")
 		
 		if body is Player:

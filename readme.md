@@ -1,0 +1,4 @@
+- game description and gifs
+- credits
+- dev process
+- final message to the bold
