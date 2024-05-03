@@ -52,12 +52,11 @@ _start_moving_right = true
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." index="0"]
 modulate = Color(0.301961, 0.607843, 0.901961, 1)
-position = Vector2(0, -15)
+position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_t15xf")
 animation = &"Idle"
 autoplay = "Idle"
 frame_progress = 0.424737
-flip_h = true
 
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2(0, -9)

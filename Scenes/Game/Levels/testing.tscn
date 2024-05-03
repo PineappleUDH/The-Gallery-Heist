@@ -1362,7 +1362,7 @@ curve = SubResource("Curve2D_u407l")
 _speed_per_sec = 40.0
 
 [node name="Saul" parent="Characters" index="0"]
-position = Vector2(2913, 7903)
+position = Vector2(2911, 7809)
 
 [node name="EnemyPatrolling" parent="Characters" index="1" instance=ExtResource("16_c4ebt")]
 position = Vector2(3638, 6236)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b84n1i2bwxbmr"]
+[gd_scene load_steps=31 format=3 uid="uid://b84n1i2bwxbmr"]
 
 [ext_resource type="Script" path="res://Scenes/Objects/Level/level.gd" id="1_qee75"]
 [ext_resource type="Script" path="res://Scenes/Objects/Level/level_pause_manager.gd" id="2_2cj76"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://d1m7v5rs23u0t" path="res://Resources/Textures/VOID HELP ORGANIZE/Coin.png" id="9_w8ljf"]
 [ext_resource type="FontFile" uid="uid://bsvbubhqv01qw" path="res://Resources/Fonts/hf-free-complete/futile-pro-v1/FutilePro.ttf" id="11_i74xb"]
 [ext_resource type="AudioStream" uid="uid://dsbmogobaeyng" path="res://Resources/Audio/SFX/UI/button_hover.wav" id="12_2gl1w"]
+[ext_resource type="Texture2D" uid="uid://xij6y4uunw06" path="res://Resources/Textures/dialogue_next.png" id="12_2vcwt"]
 [ext_resource type="AudioStream" uid="uid://5gj12883hk0" path="res://Resources/Audio/SFX/UI/button_press.wav" id="13_1ur6e"]
 [ext_resource type="Script" path="res://Scenes/Objects/Level/level_dialogue_player.gd" id="15_8anru"]
 
@@ -215,14 +216,35 @@ layout_mode = 2
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_5hvhk")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/DialoguePlayer/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/DialoguePlayer/PanelContainer"]
 layout_mode = 2
-size_flags_vertical = 4
+theme_override_constants/separation = -2
+
+[node name="Character" type="Label" parent="UI/DialoguePlayer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 20
+text = "Character Name"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/DialoguePlayer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
 text = "[center]Dialogue example. it's just an example nothing to be taken so seriously or anything. now that we've established that none of this is serious I wish to confess about the dead body under my house. thank you for tuning in it's your host 3-dog! stay safe out there in the capital wasteland."
 fit_content = true
 visible_characters_behavior = 1
+
+[node name="NextIcon" type="TextureRect" parent="UI/DialoguePlayer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("12_2vcwt")
+stretch_mode = 5
 
 [node name="PauseManager" type="MarginContainer" parent="UI"]
 process_mode = 3

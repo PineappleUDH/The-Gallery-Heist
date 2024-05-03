@@ -14,7 +14,7 @@ extends Area2D
 
 const _preview_color : Color = Color("ffffff64")
 
-# player uses same gravity value as project setting
+# character uses same gravity value as project setting
 var _player_gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 

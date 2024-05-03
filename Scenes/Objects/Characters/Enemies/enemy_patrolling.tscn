@@ -67,7 +67,6 @@ shape = SubResource("RectangleShape2D_6bbuj")
 [node name="Sprite" type="AnimatedSprite2D" parent="." index="2"]
 sprite_frames = SubResource("SpriteFrames_sdn57")
 autoplay = "default"
-flip_h = true
 
 [node name="Detectors" type="Node2D" parent="." index="3"]
 
