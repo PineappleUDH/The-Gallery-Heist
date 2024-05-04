@@ -51,7 +51,7 @@ func play_dialogue(dialogue_sequence : Array[Dialogue], is_blocking : bool):
 			push_warning("Attempting to play non-blocking dialogue while a blocking dialogue is playing. blocking dialogue is considered more important and therefore this will be ignored")
 			return
 		else:
-			# clear previous dialogue
+			# clear previous dialogue. nothing to do here code bellow should reset things
 			pass
 	
 	show()

@@ -11,7 +11,6 @@ const _loader_progress_check_interval : float = 0.5
 var _is_transitioning : bool
 
 
-# TODO: show loading percentage in loading screen
 func change_scene(scene_path : String, args : Dictionary = {}):
 	if _is_transitioning: return
 	_is_transitioning = true
