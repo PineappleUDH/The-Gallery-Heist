@@ -1,4 +1,4 @@
-[gd_scene load_steps=131 format=3 uid="uid://mlvn8cvywr4c"]
+[gd_scene load_steps=135 format=3 uid="uid://mlvn8cvywr4c"]
 
 [ext_resource type="PackedScene" uid="uid://b84n1i2bwxbmr" path="res://Scenes/Objects/Level/level.tscn" id="1_gs8pa"]
 [ext_resource type="Script" path="res://Scenes/Game/Levels/testing.gd" id="2_qem0p"]
@@ -47,6 +47,8 @@
 [ext_resource type="Resource" uid="uid://dxgewrusi42ac" path="res://Resources/Data/Art Data/snowy_day.tres" id="45_mbtiw"]
 [ext_resource type="Resource" uid="uid://cv4glr1xajb7x" path="res://Resources/Data/Art Data/taco.tres" id="46_fbn1o"]
 [ext_resource type="Resource" uid="uid://dghq4f4tdpjg1" path="res://Resources/Data/Art Data/the_moon_berry.tres" id="47_4s7pq"]
+[ext_resource type="PackedScene" uid="uid://dtk255m0bxqkj" path="res://Scenes/Objects/Triggers/trigger_dialogue.tscn" id="48_dsc7b"]
+[ext_resource type="Script" path="res://Resources/Scripts/dialogue.gd" id="49_7qecw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tu37i"]
 resource_local_to_scene = true
@@ -334,6 +336,14 @@ size = Vector2(616, 322.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ddihc"]
 size = Vector2(1286, 125)
+
+[sub_resource type="Resource" id="Resource_3m8mb"]
+script = ExtResource("49_7qecw")
+text = "This is going to be a challenge"
+character_name = "Saul"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4aowx"]
+size = Vector2(12, 64)
 
 [node name="Testing" instance=ExtResource("1_gs8pa")]
 script = ExtResource("2_qem0p")
@@ -1362,7 +1372,7 @@ curve = SubResource("Curve2D_u407l")
 _speed_per_sec = 40.0
 
 [node name="Saul" parent="Characters" index="0"]
-position = Vector2(2913, 7903)
+position = Vector2(2913, 7822)
 
 [node name="EnemyPatrolling" parent="Characters" index="1" instance=ExtResource("16_c4ebt")]
 position = Vector2(3638, 6236)
@@ -2319,3 +2329,11 @@ art_data = ExtResource("46_fbn1o")
 [node name="Artwork13" parent="." index="29" instance=ExtResource("34_kst6c")]
 position = Vector2(3949, 8031)
 art_data = ExtResource("47_4s7pq")
+
+[node name="TriggerDialogue" parent="." index="30" instance=ExtResource("48_dsc7b")]
+position = Vector2(4236, 7888)
+_sequence = Array[ExtResource("49_7qecw")]([SubResource("Resource_3m8mb")])
+_is_blocking = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerDialogue" index="0"]
+shape = SubResource("RectangleShape2D_4aowx")

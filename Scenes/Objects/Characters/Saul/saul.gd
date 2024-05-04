@@ -71,11 +71,14 @@ const _wall_jump_force : float = 260.0
 const _damage_shake_duration : float = 0.3
 const _damage_pause_time : float = 0.14
 
+var _dummy_locks : int = 0
+var _dummy_prev_state : String
+
 var _state_machine : StateMachine = StateMachine.new()
 
 func _ready():
 	_max_health = 4
-	_damage_cooldown_time = 2.0
+	_damage_cooldown_time = 1.6
 	_health = _max_health
 	_knockback = 130.0
 	
@@ -84,7 +87,8 @@ func _ready():
 	_state_machine.add_state("normal", Callable(), _state_normal_switch_from, _state_normal_process, _state_normal_ph_process)
 	_state_machine.add_state("dash", _state_dash_switch_to, _state_dash_switch_from, Callable(), _state_dash_ph_process)
 	_state_machine.add_state("wall_slide", _state_wall_slide_switch_to, _state_wall_slide_switch_from, Callable(), _state_wall_slide_ph_process)
-	_state_machine.add_state("swim", _state_swim_switch_to, _state_swim_switch_from,Callable(),_state_swim_ph_process)
+	_state_machine.add_state("swim", _state_swim_switch_to, _state_swim_switch_from, Callable(), _state_swim_ph_process)
+	_state_machine.add_state("dummy", _state_dummy_switch_to, Callable(), Callable(), Callable())
 	_state_machine.add_state("dead", _state_dead_switch_to, _state_dead_switch_from, Callable(), Callable())
 	_state_machine.change_state("normal")
 	
@@ -99,17 +103,31 @@ func _process(delta : float):
 	if _facing.x < 0:
 		_sprite.flip_h = true
 	
-	if _state_machine._curr_state != "dead":
+	if _state_machine.get_current_state() != "dead":
 		# interaction
 		if Input.is_action_just_pressed("interact"):
 			interacted.emit()
 		
 		# check water
-		if _state_machine._curr_state != "swim" && _is_water_tile(global_position):
+		if _state_machine.get_current_state() != "swim" && _is_water_tile(global_position):
 			_state_machine.change_state("swim")
 
 func _physics_process(delta : float):
 	_state_machine.state_physics_process(delta)
+
+func set_dummy_locks(lock : bool):
+	match lock:
+		true : _dummy_locks += 1
+		false : _dummy_locks -= 1
+	assert(_dummy_locks >= 0, "Bug detected, a lock is being removed without being added first.")
+	
+	if _dummy_locks == 0:
+		_state_machine.change_state(_dummy_prev_state)
+	
+	elif _dummy_locks > 0:
+		if _state_machine.get_current_state() != "dead":
+			_dummy_prev_state = _state_machine.get_current_state()
+			_state_machine.change_state("dummy")
 
 func can_dash():
 	return _can_dash && _dash_locks == 0
@@ -125,7 +143,6 @@ func set_dash_lock(lock : bool):
 	match lock:
 		true : _dash_locks += 1
 		false : _dash_locks -= 1
-	
 	assert(_dash_locks >= 0, "Bug detected, a lock is being removed without being added first.")
 	
 	if _dash_locks == 0:
@@ -144,7 +161,8 @@ func heal(amount : int):
 	World.level.interface.set_health(old_health, _health)
 
 func take_damage(damage : int, from : Vector2, is_deadly : bool = false) -> bool:
-	if _state_machine.get_current_state() == "dead": return false
+	if _state_machine.get_current_state() == "dead" || _state_machine.get_current_state() == "dummy":
+		return false
 	
 	var old_health : int = _health
 	var applied : bool = super.take_damage(damage, from, is_deadly)
@@ -171,9 +189,12 @@ func reset_from_checkpoint(checkpoint_position : Vector2):
 	
 	World.level.interface.set_health(_health, _max_health)
 	_health = _max_health
+	World.level.interface.set_air(_air, _max_air)
+	_air = _max_air
 	_facing = Vector2.RIGHT
 	_direction = Vector2.RIGHT
 	_dash_locks = 0
+	_dummy_locks = 0
 	_state_machine.change_state("normal")
 	
 	respawned.emit()
@@ -244,7 +265,7 @@ func _is_breathable_tile(global_pos : Vector2) -> bool:
 		if data && data.get_collision_polygons_count(0) > 0:
 			# found a solid tile so not breathable. this makes 2 assumptions:
 			# 1- if a tile has a collider it's not breathable even if the collider doesn't cover the whole tile
-			# 2- only checks for physics layer 1 assuming that any solid layer will be put at idx 1 while other more "stylized" colliders (collide with enemy only etc..) will be at other indicies
+			# 2- only checks for physics layer 0 assuming that any solid layer will be put at idx 0 while other more "stylized" colliders (collide with enemy only etc..) will be at other indicies
 			return false
 	
 	return true
@@ -481,16 +502,17 @@ func _state_swim_switch_to(from : String):
 	# TODO: muffle some sounds, would need to separate audio buses
 
 func _state_swim_switch_from(to : String):
-	# if player leaves water with a slow speed they'll fall right back leading to state continuously
-	# changing. this kicks the player up when they leave
-	velocity.y = Utilities.soft_clamp(velocity.y, -_out_of_water_push, _out_of_water_push)
-	_set_can_dash(true)
-	_collider.shape.size = _default_collider_size
-	_bubbles_particles.emitting = false
-	World.level.interface.set_air_active(false)
-	World.level.interface.set_air(_air, _max_air)
-	_air = _max_air
-	_water_timer.stop()
+	if to != "dummy":
+		# if player leaves water with a slow speed they'll fall right back leading to state continuously
+		# changing. this kicks the player up when they leave
+		velocity.y = Utilities.soft_clamp(velocity.y, -_out_of_water_push, _out_of_water_push)
+		_set_can_dash(true)
+		_collider.shape.size = _default_collider_size
+		_bubbles_particles.emitting = false
+		World.level.interface.set_air_active(false)
+		World.level.interface.set_air(_air, _max_air)
+		_air = _max_air
+		_water_timer.stop()
 
 func _state_swim_ph_process(delta : float):
 	# Movement Control
@@ -554,6 +576,21 @@ func _state_swim_ph_process(delta : float):
 	# check out of water
 	if _is_water_tile(global_position) == false:
 		_state_machine.change_state("normal")
+
+func _state_dummy_switch_to(from : String):
+	# NOTE: for now dummy state is used to stop player from receiving input, basically a state that intentionally does nothing
+	#       in the future we can use this to play some animation like an animation for collecting links
+	#       or a teleport animation without the player interupting.
+	velocity = Vector2.ZERO
+	match from:
+		# TODO: acount for player being in mid-air
+		#       also this needs to be tested with all states
+		"normal":
+			_play_animation("Idle")
+		"swim":
+			_play_animation("Water Idle")
+		"wall_slide":
+			_play_animation("Sliding")
 
 func _state_dead_switch_to(from : String):
 	velocity = Vector2.ZERO

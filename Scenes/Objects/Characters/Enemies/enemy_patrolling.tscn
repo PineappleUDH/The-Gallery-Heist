@@ -67,23 +67,26 @@ shape = SubResource("RectangleShape2D_6bbuj")
 [node name="Sprite" type="AnimatedSprite2D" parent="." index="2"]
 sprite_frames = SubResource("SpriteFrames_sdn57")
 autoplay = "default"
-flip_h = true
 
 [node name="Detectors" type="Node2D" parent="." index="3"]
 
 [node name="GapDetectLeft" type="RayCast2D" parent="Detectors" index="0"]
 position = Vector2(-17, 0)
 target_position = Vector2(0, 18)
+collision_mask = 2
 
 [node name="GapDetectRight" type="RayCast2D" parent="Detectors" index="1"]
 position = Vector2(17, 0)
 target_position = Vector2(0, 18)
+collision_mask = 2
 
 [node name="ObstacleDetectLeft" type="RayCast2D" parent="Detectors" index="2"]
 target_position = Vector2(-16, 0)
+collision_mask = 2
 
 [node name="ObstacleDetectRight" type="RayCast2D" parent="Detectors" index="3"]
 target_position = Vector2(16, 0)
+collision_mask = 2
 
 [node name="PlayerDetection" type="Area2D" parent="Detectors" index="4"]
 monitorable = false

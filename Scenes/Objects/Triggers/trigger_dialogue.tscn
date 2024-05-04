@@ -5,5 +5,7 @@
 
 [node name="TriggerDialogue" instance=ExtResource("1_72h7s")]
 script = ExtResource("2_kv2qf")
-_dialogue = null
-_play_once = true
+_sequence = Array[Resource("res://Resources/Scripts/dialogue.gd")]([])
+_is_blocking = false
+_randomize_order = false
+_play_each_dialogue_once = true

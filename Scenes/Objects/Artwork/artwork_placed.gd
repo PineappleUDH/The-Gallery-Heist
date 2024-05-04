@@ -23,4 +23,3 @@ func _update_artwork():
 	else:
 		sprite.texture = null
 		shape.shape.size = Vector2.ZERO
-		
