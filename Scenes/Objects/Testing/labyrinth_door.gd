@@ -17,7 +17,8 @@ func set_finished(finished : bool):
 		_sprite.play("closed")
 
 func _on_interactable_player_interacted():
-	level_entered.emit(_labyrinth_levels_path + _labyrinth_scene_name + ".tscn")
+	if _labyrinth_scene_name:
+		level_entered.emit(_labyrinth_levels_path + _labyrinth_scene_name + ".tscn")
 
 func _on_interactable_body_entered(body : Node2D):
 	if body is Player:

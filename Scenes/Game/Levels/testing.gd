@@ -55,6 +55,11 @@ func _ready():
 		_completed_labyrinth_doors[door.name] = false
 		door.level_entered.connect(_on_door_level_entered.bind(door.name))
 	
+	#await get_tree().create_timer(2.8).timeout
+	#dialogue_player.play_dialogue(
+		#[Dialogue.create("hi mom", "Void")] as Array[Dialogue], true
+	#)
+	
 	# temp while tesing projectiles
 	while true:
 		var projectile := _projectile_scene.instantiate()
