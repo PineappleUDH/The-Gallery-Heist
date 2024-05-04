@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://tx6swqaimuyw" path="res://Scenes/Objects/Collectables/collectable.tscn" id="1_am7an"]
 [ext_resource type="Script" path="res://Scenes/Objects/Collectables/collectable_SAUL.gd" id="1_u0t2j"]
-[ext_resource type="Texture2D" uid="uid://ccba6adr8r2fl" path="res://Resources/Textures/VOID HELP ORGANIZE/SAUL_letters_idle(Addin Sachen).png" id="2_wym7c"]
+[ext_resource type="Texture2D" uid="uid://ccba6adr8r2fl" path="res://Resources/Textures/Collectables/SAUL_letters_idle(Addin Sachen).png" id="2_wym7c"]
 [ext_resource type="PackedScene" uid="uid://wv1eoc7qi2wo" path="res://Scenes/Objects/persistent_nodes_container.tscn" id="4_nuaiu"]
 [ext_resource type="AudioStream" uid="uid://dj67a14jvrw6f" path="res://Resources/Audio/SFX/Pickups/coin_collected.wav" id="5_37a7x"]
 

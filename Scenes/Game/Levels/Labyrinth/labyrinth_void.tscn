@@ -1,8 +1,8 @@
 [gd_scene load_steps=18 format=3 uid="uid://c61js70woq2dv"]
 
 [ext_resource type="PackedScene" uid="uid://dqpmcakbk34h7" path="res://Scenes/Game/Levels/Labyrinth/labyrinth_base.tscn" id="1_5d4qv"]
-[ext_resource type="Texture2D" uid="uid://b57joaf4ixs1o" path="res://Resources/Textures/VOID HELP ORGANIZE/HeartUi(addin Sachen).png" id="2_muy7n"]
-[ext_resource type="Texture2D" uid="uid://cnyje7qf7f44u" path="res://Resources/Textures/VOID HELP ORGANIZE/BubbleUi.png" id="3_uwpeq"]
+[ext_resource type="Texture2D" uid="uid://b57joaf4ixs1o" path="res://Resources/Textures/UI/HeartUi(addin Sachen).png" id="2_muy7n"]
+[ext_resource type="Texture2D" uid="uid://cnyje7qf7f44u" path="res://Resources/Textures/UI/BubbleUi.png" id="3_uwpeq"]
 [ext_resource type="PackedScene" uid="uid://bol4qsyq1qr5t" path="res://Scenes/Objects/Obstacles/spikes.tscn" id="4_sswum"]
 [ext_resource type="PackedScene" uid="uid://c2hwbjr8y1al3" path="res://Scenes/Objects/Level/platform_path_object.tscn" id="5_wo6wk"]
 [ext_resource type="PackedScene" uid="uid://bbfrw50tycm64" path="res://Scenes/Objects/Collectables/collectables_stack.tscn" id="6_3e448"]

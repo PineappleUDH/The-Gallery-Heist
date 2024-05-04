@@ -11,4 +11,5 @@ static func create(text_ : String, character_name_ : String = "", portrait_ : Te
 	dialogue.text = text_
 	dialogue.character_name = character_name_
 	dialogue.portrait = portrait_
+	if portrait_ != null: push_warning("Portraits are not supported yet")
 	return dialogue

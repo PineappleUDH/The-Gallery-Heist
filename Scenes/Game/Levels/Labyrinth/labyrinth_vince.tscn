@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://ceqdfajcjcte8"]
 
 [ext_resource type="PackedScene" uid="uid://dqpmcakbk34h7" path="res://Scenes/Game/Levels/Labyrinth/labyrinth_base.tscn" id="1_donvw"]
-[ext_resource type="Texture2D" uid="uid://b57joaf4ixs1o" path="res://Resources/Textures/VOID HELP ORGANIZE/HeartUi(addin Sachen).png" id="2_e1y8k"]
-[ext_resource type="Texture2D" uid="uid://cnyje7qf7f44u" path="res://Resources/Textures/VOID HELP ORGANIZE/BubbleUi.png" id="3_pd7xn"]
+[ext_resource type="Texture2D" uid="uid://b57joaf4ixs1o" path="res://Resources/Textures/UI/HeartUi(addin Sachen).png" id="2_e1y8k"]
+[ext_resource type="Texture2D" uid="uid://cnyje7qf7f44u" path="res://Resources/Textures/UI/BubbleUi.png" id="3_pd7xn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0nv6h"]
 resource_local_to_scene = true

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scenes/Objects/Collectables/collectable_egg.gd" id="1_gean3"]
 [ext_resource type="PackedScene" uid="uid://tx6swqaimuyw" path="res://Scenes/Objects/Collectables/collectable.tscn" id="1_ne2yl"]
-[ext_resource type="Texture2D" uid="uid://jch2rkli4e3j" path="res://Resources/Textures/VOID HELP ORGANIZE/SAULEGG_Spin.png" id="2_8au5a"]
+[ext_resource type="Texture2D" uid="uid://jch2rkli4e3j" path="res://Resources/Textures/Collectables/SAULEGG_Spin.png" id="2_8au5a"]
 [ext_resource type="PackedScene" uid="uid://wv1eoc7qi2wo" path="res://Scenes/Objects/persistent_nodes_container.tscn" id="4_6nakc"]
 [ext_resource type="AudioStream" uid="uid://cuograoo8c1jn" path="res://Resources/Audio/SFX/Pickups/EGG.wav" id="5_00vi3"]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://chv1fxgahbhod"]
 
-[ext_resource type="Texture2D" uid="uid://cnyje7qf7f44u" path="res://Resources/Textures/VOID HELP ORGANIZE/BubbleUi.png" id="1_klrwu"]
+[ext_resource type="Texture2D" uid="uid://cnyje7qf7f44u" path="res://Resources/Textures/UI/BubbleUi.png" id="1_klrwu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ajoog"]
 resource_local_to_scene = true

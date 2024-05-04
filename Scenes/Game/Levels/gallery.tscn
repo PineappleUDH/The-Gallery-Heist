@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bbgah45f5xn5c"]
 
 [ext_resource type="PackedScene" uid="uid://b84n1i2bwxbmr" path="res://Scenes/Objects/Level/level.tscn" id="1_esp2y"]
-[ext_resource type="Texture2D" uid="uid://biaaj6ja3o556" path="res://Resources/Textures/Discord Level Tilesets/Tiles.png" id="2_bvfly"]
+[ext_resource type="Texture2D" uid="uid://biaaj6ja3o556" path="res://Resources/Textures/Tilesets/discord_tiles.png" id="2_bvfly"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wtdd3"]
 texture = ExtResource("2_bvfly")

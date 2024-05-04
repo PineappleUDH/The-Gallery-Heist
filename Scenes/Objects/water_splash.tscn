@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://c7thbq75e3db6"]
 
-[ext_resource type="Texture2D" uid="uid://cqxs8o5svjxva" path="res://Resources/Textures/VOID HELP ORGANIZE/Water_Enter_Splash (Addin Sachen).png" id="1_g48ks"]
+[ext_resource type="Texture2D" uid="uid://cqxs8o5svjxva" path="res://Resources/Textures/Characters/Player/Water_Enter_Splash (Addin Sachen).png" id="1_g48ks"]
 [ext_resource type="Script" path="res://Scenes/Objects/water_splash.gd" id="2_pqsp3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kxj3w"]

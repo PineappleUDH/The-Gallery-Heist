@@ -1,8 +1,8 @@
 [gd_scene load_steps=17 format=3 uid="uid://ldm175bcklux"]
 
 [ext_resource type="PackedScene" uid="uid://dqpmcakbk34h7" path="res://Scenes/Game/Levels/Labyrinth/labyrinth_base.tscn" id="1_nkhmu"]
-[ext_resource type="Texture2D" uid="uid://b57joaf4ixs1o" path="res://Resources/Textures/VOID HELP ORGANIZE/HeartUi(addin Sachen).png" id="2_p2sok"]
-[ext_resource type="Texture2D" uid="uid://cnyje7qf7f44u" path="res://Resources/Textures/VOID HELP ORGANIZE/BubbleUi.png" id="3_n23es"]
+[ext_resource type="Texture2D" uid="uid://b57joaf4ixs1o" path="res://Resources/Textures/UI/HeartUi(addin Sachen).png" id="2_p2sok"]
+[ext_resource type="Texture2D" uid="uid://cnyje7qf7f44u" path="res://Resources/Textures/UI/BubbleUi.png" id="3_n23es"]
 [ext_resource type="PackedScene" uid="uid://uc8w4v327aj" path="res://Scenes/Objects/Level/checkpoint.tscn" id="4_nk03m"]
 [ext_resource type="PackedScene" uid="uid://bol4qsyq1qr5t" path="res://Scenes/Objects/Obstacles/spikes.tscn" id="5_gw560"]
 [ext_resource type="PackedScene" uid="uid://cor2s0svaqrii" path="res://Scenes/Objects/Level/launch_pad.tscn" id="6_1n6l6"]

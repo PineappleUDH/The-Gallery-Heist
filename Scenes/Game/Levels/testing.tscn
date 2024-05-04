@@ -2,14 +2,14 @@
 
 [ext_resource type="PackedScene" uid="uid://b84n1i2bwxbmr" path="res://Scenes/Objects/Level/level.tscn" id="1_gs8pa"]
 [ext_resource type="Script" path="res://Scenes/Game/Levels/testing.gd" id="2_qem0p"]
-[ext_resource type="Texture2D" uid="uid://2wn4uvym38a4" path="res://Resources/Textures/PLACEHOLDERS/paralax_placeholder.png" id="3_tlrrv"]
-[ext_resource type="Texture2D" uid="uid://cynk2li7g5n7t" path="res://Resources/Textures/PLACEHOLDERS/paralax_placeholder2.png" id="4_fqv5c"]
+[ext_resource type="Texture2D" uid="uid://2wn4uvym38a4" path="res://Resources/Textures/Placeholder/paralax_placeholder.png" id="3_tlrrv"]
+[ext_resource type="Texture2D" uid="uid://cynk2li7g5n7t" path="res://Resources/Textures/Placeholder/paralax_placeholder2.png" id="4_fqv5c"]
 [ext_resource type="PackedScene" uid="uid://botpmwf2b2ybo" path="res://Scenes/Objects/Triggers/trigger_camera.tscn" id="5_7n87s"]
 [ext_resource type="PackedScene" uid="uid://d1q41lh23aowi" path="res://Scenes/Objects/Level/teleporter.tscn" id="5_dbose"]
-[ext_resource type="Texture2D" uid="uid://dhvw2y72gfnco" path="res://Resources/Textures/PLACEHOLDERS/paralax_placeholder3.png" id="5_ylcn2"]
-[ext_resource type="Texture2D" uid="uid://b57joaf4ixs1o" path="res://Resources/Textures/VOID HELP ORGANIZE/HeartUi(addin Sachen).png" id="6_8ra3k"]
+[ext_resource type="Texture2D" uid="uid://dhvw2y72gfnco" path="res://Resources/Textures/Placeholder/paralax_placeholder3.png" id="5_ylcn2"]
+[ext_resource type="Texture2D" uid="uid://b57joaf4ixs1o" path="res://Resources/Textures/UI/HeartUi(addin Sachen).png" id="6_8ra3k"]
 [ext_resource type="PackedScene" uid="uid://uc8w4v327aj" path="res://Scenes/Objects/Level/checkpoint.tscn" id="6_uddob"]
-[ext_resource type="Texture2D" uid="uid://cnyje7qf7f44u" path="res://Resources/Textures/VOID HELP ORGANIZE/BubbleUi.png" id="7_1kr0c"]
+[ext_resource type="Texture2D" uid="uid://cnyje7qf7f44u" path="res://Resources/Textures/UI/BubbleUi.png" id="7_1kr0c"]
 [ext_resource type="PackedScene" uid="uid://bbfrw50tycm64" path="res://Scenes/Objects/Collectables/collectables_stack.tscn" id="7_pc1vt"]
 [ext_resource type="PackedScene" uid="uid://c31bicd5mqe8o" path="res://Scenes/Objects/Collectables/collectable_coin.tscn" id="8_loe2g"]
 [ext_resource type="TileSet" uid="uid://cmxmktpp6yr7f" path="res://Resources/Tilesets/testing_tileset_base.tres" id="8_wik0d"]
@@ -26,7 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://duloprfswr82i" path="res://Scenes/Objects/Characters/Enemies/enemy_platform_hugger.tscn" id="22_ea78m"]
 [ext_resource type="PackedScene" uid="uid://dkn8trjyqlfdg" path="res://Scenes/Objects/Collectables/collectable_egg.tscn" id="22_tk00u"]
 [ext_resource type="PackedScene" uid="uid://dgj06rv8jjkh7" path="res://Scenes/Objects/Characters/Enemies/enemy_flying.tscn" id="23_jb4lp"]
-[ext_resource type="PackedScene" uid="uid://bj67wqgcm4ilf" path="res://Scenes/Game/Bosses/passion.tscn" id="28_711wc"]
+[ext_resource type="PackedScene" uid="uid://bj67wqgcm4ilf" path="res://Scenes/Objects/Characters/Bosses/passion.tscn" id="28_711wc"]
 [ext_resource type="PackedScene" uid="uid://c2hwbjr8y1al3" path="res://Scenes/Objects/Level/platform_path_object.tscn" id="29_5phno"]
 [ext_resource type="PackedScene" uid="uid://0865lawptlau" path="res://Scenes/Objects/Testing/labyrinth_door.tscn" id="29_l0rqj"]
 [ext_resource type="PackedScene" uid="uid://xr88hkbetrn" path="res://Scenes/Objects/Collectables/collectable_curry.tscn" id="30_fdf7o"]
@@ -339,8 +339,8 @@ size = Vector2(1286, 125)
 
 [sub_resource type="Resource" id="Resource_3m8mb"]
 script = ExtResource("49_7qecw")
-text = "This is going to be a challenge"
 character_name = "Saul"
+text = "This is going to be a challenge"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4aowx"]
 size = Vector2(12, 64)

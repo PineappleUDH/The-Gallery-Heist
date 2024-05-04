@@ -11,7 +11,7 @@ extends StaticBody2D
 		# sprites
 		for child : Sprite2D in _sprites_container.get_children():
 			child.queue_free()
-		var spike_texture : Texture2D = preload("res://Resources/Textures/PLACEHOLDERS/Spikeplaceholder.png")
+		var spike_texture : Texture2D = preload("res://Resources/Textures/Placeholder/Spikeplaceholder.png")
 		for i in _count:
 			var sprite : Sprite2D = Sprite2D.new()
 			sprite.texture = spike_texture

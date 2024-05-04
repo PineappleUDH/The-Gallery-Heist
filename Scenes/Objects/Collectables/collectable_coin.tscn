@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://tx6swqaimuyw" path="res://Scenes/Objects/Collectables/collectable.tscn" id="1_2unn2"]
 [ext_resource type="Script" path="res://Scenes/Objects/Collectables/collectable_coin.gd" id="2_dm6xu"]
-[ext_resource type="Texture2D" uid="uid://cpm0ivlpjrmp2" path="res://Resources/Textures/VOID HELP ORGANIZE/Coin_animated.png" id="3_0ihvt"]
+[ext_resource type="Texture2D" uid="uid://cpm0ivlpjrmp2" path="res://Resources/Textures/Collectables/Coin_animated.png" id="3_0ihvt"]
 [ext_resource type="PackedScene" uid="uid://wv1eoc7qi2wo" path="res://Scenes/Objects/persistent_nodes_container.tscn" id="4_k343i"]
 [ext_resource type="AudioStream" uid="uid://b4j0nkf474s73" path="res://Resources/Audio/SFX/Pickups/coin_collected2.wav" id="5_j6btx"]
 

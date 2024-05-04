@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://j6dd7mgd0p3w" path="res://Scenes/Objects/Characters/Enemies/enemy.tscn" id="1_pod7t"]
 [ext_resource type="Script" path="res://Scenes/Objects/Characters/Enemies/enemy_flying.gd" id="2_xnlyq"]
-[ext_resource type="Texture2D" uid="uid://1l2tkwbdm4uq" path="res://Resources/Textures/bunny.png" id="3_6g314"]
+[ext_resource type="Texture2D" uid="uid://1l2tkwbdm4uq" path="res://Resources/Textures/Characters/Enemies/bunny.png" id="3_6g314"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q05na"]
 radius = 2.0

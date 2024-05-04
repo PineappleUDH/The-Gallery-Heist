@@ -5,35 +5,35 @@
 [ext_resource type="PackedScene" uid="uid://crjtftvmkahqx" path="res://Scenes/Objects/Characters/Saul/saul.tscn" id="2_wyn7p"]
 [ext_resource type="Script" path="res://Scenes/Objects/Characters/Saul/level_ui.gd" id="3_kfuv0"]
 [ext_resource type="Script" path="res://Scenes/Objects/Level/level_transition.gd" id="3_mds04"]
+[ext_resource type="Texture2D" uid="uid://ccba6adr8r2fl" path="res://Resources/Textures/Collectables/SAUL_letters_idle(Addin Sachen).png" id="3_xavr2"]
 [ext_resource type="PackedScene" uid="uid://dhssfh3cjjl5q" path="res://Scenes/Objects/Level/level_camera.tscn" id="4_h0vsv"]
-[ext_resource type="Texture2D" uid="uid://ccba6adr8r2fl" path="res://Resources/Textures/VOID HELP ORGANIZE/SAUL_letters_idle(Addin Sachen).png" id="4_ljrpx"]
 [ext_resource type="Script" path="res://Scenes/Objects/Level/level_music_player.gd" id="5_j8si2"]
 [ext_resource type="PackedScene" uid="uid://bkxse4jv0yavi" path="res://Scenes/Objects/Interface/player_ui_heart.tscn" id="5_qry46"]
-[ext_resource type="Texture2D" uid="uid://b57joaf4ixs1o" path="res://Resources/Textures/VOID HELP ORGANIZE/HeartUi(addin Sachen).png" id="6_vp5gm"]
+[ext_resource type="Texture2D" uid="uid://d1m7v5rs23u0t" path="res://Resources/Textures/UI/Coin.png" id="6_gpqnc"]
+[ext_resource type="Texture2D" uid="uid://b57joaf4ixs1o" path="res://Resources/Textures/UI/HeartUi(addin Sachen).png" id="6_vp5gm"]
 [ext_resource type="PackedScene" uid="uid://chv1fxgahbhod" path="res://Scenes/Objects/Interface/player_ui_air.tscn" id="7_0jw55"]
-[ext_resource type="Texture2D" uid="uid://cnyje7qf7f44u" path="res://Resources/Textures/VOID HELP ORGANIZE/BubbleUi.png" id="8_d8ooi"]
+[ext_resource type="Texture2D" uid="uid://cnyje7qf7f44u" path="res://Resources/Textures/UI/BubbleUi.png" id="8_d8ooi"]
 [ext_resource type="PackedScene" uid="uid://4khqlsg3i7yc" path="res://Scenes/Objects/Interface/player_ui_dash.tscn" id="9_hgrx5"]
-[ext_resource type="Texture2D" uid="uid://d1m7v5rs23u0t" path="res://Resources/Textures/VOID HELP ORGANIZE/Coin.png" id="9_w8ljf"]
 [ext_resource type="FontFile" uid="uid://bsvbubhqv01qw" path="res://Resources/Fonts/hf-free-complete/futile-pro-v1/FutilePro.ttf" id="11_i74xb"]
 [ext_resource type="AudioStream" uid="uid://dsbmogobaeyng" path="res://Resources/Audio/SFX/UI/button_hover.wav" id="12_2gl1w"]
-[ext_resource type="Texture2D" uid="uid://xij6y4uunw06" path="res://Resources/Textures/dialogue_next.png" id="12_2vcwt"]
+[ext_resource type="Texture2D" uid="uid://xij6y4uunw06" path="res://Resources/Textures/UI/dialogue_next.png" id="12_my0ms"]
 [ext_resource type="AudioStream" uid="uid://5gj12883hk0" path="res://Resources/Audio/SFX/UI/button_press.wav" id="13_1ur6e"]
 [ext_resource type="Script" path="res://Scenes/Objects/Level/level_dialogue_player.gd" id="15_8anru"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dl2vj"]
-atlas = ExtResource("4_ljrpx")
+atlas = ExtResource("3_xavr2")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7addn"]
-atlas = ExtResource("4_ljrpx")
+atlas = ExtResource("3_xavr2")
 region = Rect2(16, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oiib4"]
-atlas = ExtResource("4_ljrpx")
+atlas = ExtResource("3_xavr2")
 region = Rect2(16, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2s25m"]
-atlas = ExtResource("4_ljrpx")
+atlas = ExtResource("3_xavr2")
 region = Rect2(16, 48, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tu37i"]
@@ -152,7 +152,7 @@ text = "0"
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("9_w8ljf")
+texture = ExtResource("6_gpqnc")
 stretch_mode = 5
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/Hud"]
@@ -204,10 +204,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 4
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 script = ExtResource("15_8anru")
 
 [node name="PanelContainer" type="PanelContainer" parent="UI/DialoguePlayer"]
@@ -243,7 +243,7 @@ visible_characters_behavior = 1
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-texture = ExtResource("12_2vcwt")
+texture = ExtResource("12_my0ms")
 stretch_mode = 5
 
 [node name="PauseManager" type="MarginContainer" parent="UI"]

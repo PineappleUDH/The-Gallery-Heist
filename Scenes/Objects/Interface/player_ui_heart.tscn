@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bkxse4jv0yavi"]
 
-[ext_resource type="Texture2D" uid="uid://b57joaf4ixs1o" path="res://Resources/Textures/VOID HELP ORGANIZE/HeartUi(addin Sachen).png" id="1_q3a2a"]
+[ext_resource type="Texture2D" uid="uid://b57joaf4ixs1o" path="res://Resources/Textures/UI/HeartUi(addin Sachen).png" id="1_q3a2a"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_chh7n"]
 resource_local_to_scene = true

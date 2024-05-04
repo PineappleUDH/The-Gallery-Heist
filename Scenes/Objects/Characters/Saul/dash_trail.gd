@@ -54,7 +54,7 @@ func set_active(active : bool, flip_h : bool = false):
 
 func _on_spawn_timer_timeout():
 	var sprite : Sprite2D = Sprite2D.new()
-	sprite.texture = preload("res://Resources/Textures/Characters/SaulSprites/dashsmear2 (AddinSachen).png")
+	sprite.texture = preload("res://Resources/Textures/Characters/Player/Saul/dashsmear2 (AddinSachen).png")
 	sprite.global_position = self.global_position
 	sprite.flip_h = _flip_h
 	get_tree().current_scene.add_child(sprite)
