@@ -327,21 +327,9 @@ layer_7/name = "FG Walls"
 layer_7/z_index = 5
 layer_7/tile_data = PackedInt32Array()
 
-[node name="Checkpoints" type="Node2D" parent="."]
-
-[node name="Interactables" type="Node2D" parent="."]
-
-[node name="Obstacles" type="Node2D" parent="."]
-
-[node name="Characters" type="Node2D" parent="."]
-
-[node name="Saul" parent="Characters" instance=ExtResource("2_wyn7p")]
-
-[node name="Collectables" type="Node2D" parent="."]
+[node name="Saul" parent="." instance=ExtResource("2_wyn7p")]
 
 [node name="LevelCamera" parent="." instance=ExtResource("4_h0vsv")]
-
-[node name="Triggers" type="Node2D" parent="."]
 
 [node name="Audio" type="Node" parent="."]
 

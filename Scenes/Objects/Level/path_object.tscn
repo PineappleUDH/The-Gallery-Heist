@@ -15,3 +15,8 @@ script = ExtResource("1_em6rl")
 remote_path = NodePath("../../AnimatableBody2D")
 update_rotation = false
 update_scale = false
+
+[node name="Delay" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Delay" to="." method="_on_delay_timeout"]

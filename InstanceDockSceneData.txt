@@ -59,5 +59,7 @@
 "scene": "res://Scenes/Objects/Triggers/trigger_camera.tscn"
 }, {
 "scene": "res://Scenes/Objects/Triggers/trigger_music.tscn"
+}, {
+"scene": "res://Scenes/Objects/Triggers/trigger_dialogue.tscn"
 }]
 }]

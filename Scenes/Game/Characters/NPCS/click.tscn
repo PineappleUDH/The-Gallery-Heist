@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqevb8bvlyvw8"]
+
+[ext_resource type="Script" path="res://Scenes/Game/Levels/Labyrinth/Click.gd" id="1_whu6v"]
+[ext_resource type="Texture2D" uid="uid://d0l7uhh7k31qm" path="res://Resources/Textures/Characters/NPCS/Click-Sheet.png" id="2_fc2bh"]
+
+[node name="Click" type="Area2D"]
+script = ExtResource("1_whu6v")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_fc2bh")
+hframes = 5
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

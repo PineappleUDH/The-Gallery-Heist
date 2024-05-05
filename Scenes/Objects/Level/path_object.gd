@@ -4,12 +4,16 @@ class_name PathObject
 @export var _loop : bool = true
 @export var _smooth_follow : bool = true
 @export var _speed_per_sec : float = 80.0
+@export var _delay_time : float = 0.0
 
+@onready var _delay = $Delay
 @onready var _path : PathFollow2D = $PathFollow2D
 
-
 func _ready():
-	# _speed is in pixel rather than ratio in order to easily control it and so
+	_delay.start(_delay_time)
+
+func _on_delay_timeout():
+		# _speed is in pixel rather than ratio in order to easily control it and so
 	# that chaning path length doesn't affect it
 	var speed_to_time : float = curve.get_baked_length() / _speed_per_sec
 	

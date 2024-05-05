@@ -6,7 +6,7 @@ signal score_changed
 enum SaulLetter {S, A, U, L}
 
 # level dependencies
-@onready var player : Player = $Characters/Saul
+@onready var player : Player = $Saul
 @onready var interface : CanvasLayer = $UI
 @onready var pause_manager : MarginContainer = $UI/PauseManager
 @onready var level_camera : LevelCamera = $LevelCamera
