@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cor2s0svaqrii" path="res://Scenes/Objects/Level/launch_pad.tscn" id="4_i2kkw"]
 [ext_resource type="PackedScene" uid="uid://uc8w4v327aj" path="res://Scenes/Objects/Level/checkpoint.tscn" id="4_jo124"]
 [ext_resource type="PackedScene" uid="uid://bol4qsyq1qr5t" path="res://Scenes/Objects/Obstacles/spikes.tscn" id="5_2mkgh"]
-[ext_resource type="PackedScene" uid="uid://o42v88vk2m88" path="res://Scenes/Game/Levels/unstable_platform.tscn" id="7_uh66d"]
+[ext_resource type="PackedScene" uid="uid://o42v88vk2m88" path="res://Scenes/Objects/Obstacles/unstable_platform.tscn" id="7_uh66d"]
 [ext_resource type="PackedScene" uid="uid://bnew5qdy6ki2r" path="res://Scenes/Objects/Obstacles/trap_path_object.tscn" id="8_sf0cs"]
 [ext_resource type="PackedScene" uid="uid://ks2b8lp58x7d" path="res://Scenes/Objects/Obstacles/hanging_spikes.tscn" id="9_ro32i"]
 [ext_resource type="PackedScene" uid="uid://dkn8trjyqlfdg" path="res://Scenes/Objects/Collectables/collectable_egg.tscn" id="10_5yfno"]

@@ -1,24 +1,62 @@
-[gd_scene load_steps=6 format=3 uid="uid://dgj06rv8jjkh7"]
+[gd_scene load_steps=11 format=3 uid="uid://dgj06rv8jjkh7"]
 
 [ext_resource type="PackedScene" uid="uid://j6dd7mgd0p3w" path="res://Scenes/Objects/Characters/Enemies/enemy.tscn" id="1_pod7t"]
 [ext_resource type="Script" path="res://Scenes/Objects/Characters/Enemies/enemy_flying.gd" id="2_xnlyq"]
-[ext_resource type="Texture2D" uid="uid://1l2tkwbdm4uq" path="res://Resources/Textures/Characters/Enemies/bunny.png" id="3_6g314"]
+[ext_resource type="Texture2D" uid="uid://1l2tkwbdm4uq" path="res://Resources/Textures/Characters/Enemies/bunny.png" id="3_ovyxb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4pk2b"]
+atlas = ExtResource("3_ovyxb")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uj1a5"]
+atlas = ExtResource("3_ovyxb")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_scvcr"]
+atlas = ExtResource("3_ovyxb")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n4wxd"]
+atlas = ExtResource("3_ovyxb")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c7brf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4pk2b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uj1a5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_scvcr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n4wxd")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q05na"]
 radius = 2.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rbf4w"]
-size = Vector2(30, 30)
+[sub_resource type="CircleShape2D" id="CircleShape2D_f8c0c"]
+radius = 13.0384
 
 [node name="EnemyFlying" instance=ExtResource("1_pod7t")]
 script = ExtResource("2_xnlyq")
 _max_speed = 180.0
 
-[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
-texture = ExtResource("3_6g314")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_c7brf")
+animation = &"Idle"
+autoplay = "Idle"
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource("CircleShape2D_q05na")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" index="0"]
-shape = SubResource("RectangleShape2D_rbf4w")
+shape = SubResource("CircleShape2D_f8c0c")

@@ -3,7 +3,7 @@ extends "res://Scenes/Objects/Characters/Enemies/enemy.gd"
 
 @export var _max_speed : float = 180.0
 
-@onready var _sprite : Sprite2D = $Sprite2D
+@onready var _sprite : AnimatedSprite2D = $AnimatedSprite2D
 
 const _acceleration : float = 350.0
 const _deceleration : float = 160.0

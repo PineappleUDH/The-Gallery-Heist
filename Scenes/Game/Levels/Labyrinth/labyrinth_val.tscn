@@ -14,9 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://uc8w4v327aj" path="res://Scenes/Objects/Level/checkpoint.tscn" id="11_hvely"]
 [ext_resource type="PackedScene" uid="uid://csjtjmh3bff76" path="res://Scenes/Objects/Level/launch_pad_path_object.tscn" id="12_1qqk3"]
 [ext_resource type="PackedScene" uid="uid://ks2b8lp58x7d" path="res://Scenes/Objects/Obstacles/hanging_spikes.tscn" id="14_nede3"]
-[ext_resource type="PackedScene" uid="uid://bqevb8bvlyvw8" path="res://Scenes/Game/Characters/NPCS/click.tscn" id="14_r7uya"]
 [ext_resource type="PackedScene" uid="uid://dtk255m0bxqkj" path="res://Scenes/Objects/Triggers/trigger_dialogue.tscn" id="15_bxrew"]
-[ext_resource type="PackedScene" uid="uid://o42v88vk2m88" path="res://Scenes/Game/Levels/unstable_platform.tscn" id="15_l428c"]
+[ext_resource type="PackedScene" uid="uid://o42v88vk2m88" path="res://Scenes/Objects/Obstacles/unstable_platform.tscn" id="15_l428c"]
+[ext_resource type="PackedScene" uid="uid://bhe0myvlbl6ro" path="res://Scenes/Objects/Characters/NPCs/npc_click.tscn" id="16_n4f5x"]
 [ext_resource type="PackedScene" uid="uid://dkn8trjyqlfdg" path="res://Scenes/Objects/Collectables/collectable_egg.tscn" id="16_of2fc"]
 [ext_resource type="Script" path="res://Resources/Scripts/dialogue.gd" id="16_xgfa4"]
 [ext_resource type="PackedScene" uid="uid://pmgu85vr3lrk" path="res://Scenes/Objects/Obstacles/killzone.tscn" id="17_j3onu"]
@@ -1559,10 +1559,7 @@ rotation = -1.5708
 
 [node name="NPCS" type="Node2D" parent="Characters" index="0"]
 
-[node name="Click" parent="Characters/NPCS" index="0" instance=ExtResource("14_r7uya")]
-position = Vector2(189, 24)
-
-[node name="TriggerDialogue" parent="Characters/NPCS" index="1" instance=ExtResource("15_bxrew")]
+[node name="TriggerDialogue" parent="Characters/NPCS" index="0" instance=ExtResource("15_bxrew")]
 position = Vector2(196, 40)
 _sequence = Array[ExtResource("16_xgfa4")]([SubResource("Resource_m5j7y"), SubResource("Resource_xgm0k"), SubResource("Resource_ftl5i")])
 _randomize_order = true
@@ -1571,6 +1568,9 @@ _play_each_dialogue_once = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Characters/NPCS/TriggerDialogue" index="0"]
 position = Vector2(4, -96)
 shape = SubResource("RectangleShape2D_ltfiv")
+
+[node name="NPCClick" parent="Characters/NPCS" index="1" instance=ExtResource("16_n4f5x")]
+position = Vector2(190, 24)
 
 [node name="Collectables" type="Node2D" parent="." index="7"]
 

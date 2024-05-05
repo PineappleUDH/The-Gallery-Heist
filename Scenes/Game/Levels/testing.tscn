@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://bol4qsyq1qr5t" path="res://Scenes/Objects/Obstacles/spikes.tscn" id="10_jd6g8"]
 [ext_resource type="PackedScene" uid="uid://ks2b8lp58x7d" path="res://Scenes/Objects/Obstacles/hanging_spikes.tscn" id="13_84u2b"]
 [ext_resource type="PackedScene" uid="uid://cor2s0svaqrii" path="res://Scenes/Objects/Level/launch_pad.tscn" id="13_b67fq"]
-[ext_resource type="PackedScene" uid="uid://o42v88vk2m88" path="res://Scenes/Game/Levels/unstable_platform.tscn" id="14_nssuu"]
+[ext_resource type="PackedScene" uid="uid://o42v88vk2m88" path="res://Scenes/Objects/Obstacles/unstable_platform.tscn" id="14_nssuu"]
 [ext_resource type="PackedScene" uid="uid://tx6swqaimuyw" path="res://Scenes/Objects/Collectables/collectable.tscn" id="15_qcc68"]
 [ext_resource type="PackedScene" uid="uid://dvik7v57h3mcf" path="res://Scenes/Objects/Characters/Enemies/enemy_patrolling.tscn" id="16_c4ebt"]
 [ext_resource type="PackedScene" uid="uid://7l87lw8fg00p" path="res://Scenes/Objects/Obstacles/dash_disabler.tscn" id="17_ntf35"]

@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dkn8trjyqlfdg" path="res://Scenes/Objects/Collectables/collectable_egg.tscn" id="11_4n6rg"]
 [ext_resource type="PackedScene" uid="uid://xr88hkbetrn" path="res://Scenes/Objects/Collectables/collectable_curry.tscn" id="12_jwkws"]
 [ext_resource type="PackedScene" uid="uid://7l87lw8fg00p" path="res://Scenes/Objects/Obstacles/dash_disabler.tscn" id="13_rh7u4"]
-[ext_resource type="PackedScene" uid="uid://o42v88vk2m88" path="res://Scenes/Game/Levels/unstable_platform.tscn" id="14_yi3rj"]
+[ext_resource type="PackedScene" uid="uid://o42v88vk2m88" path="res://Scenes/Objects/Obstacles/unstable_platform.tscn" id="14_yi3rj"]
 [ext_resource type="PackedScene" uid="uid://duloprfswr82i" path="res://Scenes/Objects/Characters/Enemies/enemy_platform_hugger.tscn" id="15_q6oki"]
 [ext_resource type="PackedScene" uid="uid://dvik7v57h3mcf" path="res://Scenes/Objects/Characters/Enemies/enemy_patrolling.tscn" id="16_o2qf7"]
 [ext_resource type="Texture2D" uid="uid://ctd82pcp45u3o" path="res://Resources/Textures/unstable_platform.png" id="17_bae8w"]

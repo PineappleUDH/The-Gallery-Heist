@@ -1,15 +1,15 @@
 @tool
 extends Area2D
 
-@export var _gravity : float
-@export var _damping : float = 1.0
-@export var _damage : int = 1 :
-	set(value):
-		_damage = max(value, 0)
 @export var _lifetime : float :
 	set(value):
 		_lifetime = max(value, 0.0)
-@export var _face_direction : bool = true
+@export var _damage : int = 1 :
+	set(value):
+		_damage = max(value, 0)
+@export var _gravity : float
+@export var _damping : float = 1.0
+@export var _rotate_to_face_direction : bool = true
 
 @onready var _lifetime_timer : Timer = $Lifetime
 
@@ -40,7 +40,7 @@ func _physics_process(delta : float):
 	_velocity *= _damping
 	position += _velocity
 	
-	if _face_direction:
+	if _rotate_to_face_direction:
 		rotation = _velocity.angle()
 
 # overrride

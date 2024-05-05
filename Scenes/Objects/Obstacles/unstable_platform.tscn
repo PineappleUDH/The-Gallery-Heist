@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://o42v88vk2m88"]
 
-[ext_resource type="Script" path="res://Scenes/Game/Levels/unstable_platform.gd" id="1_vm8bm"]
+[ext_resource type="Script" path="res://Scenes/Objects/Obstacles/unstable_platform.gd" id="1_vm8bm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_up0bv"]
 resource_local_to_scene = true

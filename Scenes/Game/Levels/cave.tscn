@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cor2s0svaqrii" path="res://Scenes/Objects/Level/launch_pad.tscn" id="6_gvk8w"]
 [ext_resource type="PackedScene" uid="uid://pmgu85vr3lrk" path="res://Scenes/Objects/Obstacles/killzone.tscn" id="6_pxyx7"]
 [ext_resource type="PackedScene" uid="uid://botpmwf2b2ybo" path="res://Scenes/Objects/Triggers/trigger_camera.tscn" id="7_f5anr"]
-[ext_resource type="PackedScene" uid="uid://o42v88vk2m88" path="res://Scenes/Game/Levels/unstable_platform.tscn" id="7_qpgok"]
+[ext_resource type="PackedScene" uid="uid://o42v88vk2m88" path="res://Scenes/Objects/Obstacles/unstable_platform.tscn" id="7_qpgok"]
 [ext_resource type="PackedScene" uid="uid://bol4qsyq1qr5t" path="res://Scenes/Objects/Obstacles/spikes.tscn" id="7_sgo8w"]
 [ext_resource type="PackedScene" uid="uid://dvik7v57h3mcf" path="res://Scenes/Objects/Characters/Enemies/enemy_patrolling.tscn" id="8_gbqx7"]
 [ext_resource type="PackedScene" uid="uid://hu5mofx88bpj" path="res://Scenes/Objects/Collectables/collectable_dash_refiller.tscn" id="11_862wo"]
