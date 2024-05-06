@@ -55,7 +55,6 @@ region = Rect2(0, 0, 16, 16)
 position = Vector2(707, -54)
 _collectable = ExtResource("7_ww68e")
 _horizontal_count = 4
-_spacing = 32
 
 [node name="Collectables#CollectableCoin" parent="." index="1" instance=ExtResource("7_ww68e")]
 position = Vector2(108, -109)

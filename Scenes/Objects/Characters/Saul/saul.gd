@@ -4,7 +4,7 @@ extends "res://Scenes/Objects/Characters/character.gd"
 signal respawned
 signal interacted
 
-@onready var _cling_time : Timer = $Timers/ClingTime
+@onready var _cling_timer : Timer = $Timers/ClingTime
 @onready var _coyote_timer : Timer = $Timers/CoyoteTimer
 @onready var _jump_buffer_timer : Timer = $Timers/JumpBufferTimer
 @onready var _dash_cooldown : Timer = $Timers/DashCooldown
@@ -23,7 +23,7 @@ var _default_collider_size : Vector2
 @onready var _sfx : Dictionary = {
 	"jump":$Sounds/Jump, "dash":$Sounds/Dash, "hit_wall":$Sounds/HitWall,
 	"died":$Sounds/Died, "footstep":$Sounds/Footstep,
-	"slide":$Sounds/Slide, "splash":$Sounds/Splash
+	"slide":$Sounds/Slide, "splash":$Sounds/Splash, "water_ambience":$Sounds/WaterAmbience
 }
 
 @onready var _walk_dust_particles : GPUParticles2D = $Particles/WalkDust
@@ -216,6 +216,15 @@ func _damage_taken(damage : int, die : bool):
 			_state_machine.change_state("normal")
 			return
 
+func _jump(force : float, replace_veloctiy : bool = false):
+	# a helper function that handles common jump logic, use this instead of applying jump force directly
+	if replace_veloctiy:
+		velocity.y = -force
+	else:
+		velocity.y = Utilities.soft_clamp(velocity.y, -force, force)
+	_jump_particles.restart()
+	_sfx["jump"].play()
+
 # use instead of _sprite.play() to avoid replaying the same animation from the start when it's already playing
 func _play_animation(anim_name : String, ignore_if_playing : bool = false):
 	if ignore_if_playing && anim_name == _sprite.animation:
@@ -251,7 +260,7 @@ func _is_water_tile(global_pos : Vector2) -> bool:
 	return false
 
 func _is_breathable_tile(global_pos : Vector2) -> bool:
-	if _is_water_tile(global_pos): return false # TODO: can we omit this check?
+	if _is_water_tile(global_pos): return false
 	
 	var tileset : TileSet = World.level.tilemap.tile_set
 	if tileset.get_physics_layers_count() == 0: return true
@@ -375,10 +384,8 @@ func _state_normal_ph_process(delta : float):
 	var just_jumped : bool = false
 	if Input.is_action_just_pressed("jump"):
 		if is_on_floor() or _coyote_timer.is_stopped() == false:
-			velocity.y = Utilities.soft_clamp(velocity.y, -_jump_force, _jump_force)
 			just_jumped = true
-			_jump_particles.restart()
-			_sfx["jump"].play()
+			_jump(_jump_force)
 		elif is_on_floor() == false:
 			_jump_buffer_timer.start()
 	
@@ -389,10 +396,8 @@ func _state_normal_ph_process(delta : float):
 	if was_on_floor == false and is_on_floor():
 		# just landed
 		if _jump_buffer_timer.is_stopped() == false:
-			velocity.y = Utilities.soft_clamp(velocity.y, -_jump_force, _jump_force)
 			just_jumped = true
-			_jump_particles.restart()
-			_sfx["jump"].play()
+			_jump(_jump_force)
 	elif was_on_floor and is_on_floor() == false and just_jumped == false:
 		# just fell off
 		_coyote_timer.start()
@@ -419,7 +424,7 @@ func _state_normal_ph_process(delta : float):
 
 func _state_wall_slide_switch_to(from : String):
 	velocity = Vector2(0,0)
-	_cling_time.start()
+	_cling_timer.start()
 	_play_animation("Cling")
 
 func _state_wall_slide_switch_from(to : String):
@@ -428,7 +433,7 @@ func _state_wall_slide_switch_from(to : String):
 	_wall_grab_cooldown.start()
 
 func _state_wall_slide_ph_process(delta: float):
-	if _cling_time.is_stopped():
+	if _cling_timer.is_stopped():
 		_slide_dust_particles.emitting = true
 		_play_animation("Sliding")
 		if Input.is_action_pressed("down"):
@@ -450,10 +455,9 @@ func _state_wall_slide_ph_process(delta: float):
 	
 	# jump off
 	if Input.is_action_just_pressed("jump"):
-		_sfx["jump"].play()
+		_jump(_jump_force, true)
 		_facing *= -1
 		velocity.x = _wall_push_force * _facing.x
-		velocity.y = -_wall_jump_force
 		_play_animation("Wall Jump", true)
 		_state_machine.change_state("normal")
 		return
@@ -479,13 +483,18 @@ func _state_dash_switch_to(from : String):
 
 func _state_dash_switch_from(to: String):
 	_dash_cooldown.start()
+	_dash_timer.stop()
 	_dash_trail.set_active(false)
 
 func _state_dash_ph_process(delta: float):
 	move_and_slide()
 	
 	if _dash_timer.is_stopped() or is_on_wall():
-		_dash_timer.stop()
+		_state_machine.change_state("normal")
+		return
+	
+	if is_on_floor() and Input.is_action_just_pressed("jump"):
+		_jump(_jump_force)
 		_state_machine.change_state("normal")
 		return
 
@@ -499,6 +508,7 @@ func _state_swim_switch_to(from : String):
 	_was_on_water_surface = true
 	_set_can_dash(false)
 	
+	_sfx["water_ambience"].play()
 	# TODO: muffle some sounds, would need to separate audio buses
 
 func _state_swim_switch_from(to : String):
@@ -506,13 +516,14 @@ func _state_swim_switch_from(to : String):
 		# if player leaves water with a slow speed they'll fall right back leading to state continuously
 		# changing. this kicks the player up when they leave
 		velocity.y = Utilities.soft_clamp(velocity.y, -_out_of_water_push, _out_of_water_push)
-		_set_can_dash(true)
 		_collider.shape.size = _default_collider_size
 		_bubbles_particles.emitting = false
 		World.level.interface.set_air_active(false)
 		World.level.interface.set_air(_air, _max_air)
+		_set_can_dash(true)
 		_air = _max_air
 		_water_timer.stop()
+		_sfx["water_ambience"].stop()
 
 func _state_swim_ph_process(delta : float):
 	# Movement Control
@@ -546,8 +557,7 @@ func _state_swim_ph_process(delta : float):
 	
 	if is_3_tiles_from_surface && Input.is_action_just_pressed("jump"):
 		# TODO: repurpose jump buffer timer for this
-		# sfx..
-		velocity.y = Utilities.soft_clamp(velocity.y, -_jump_force, _jump_force)
+		_jump(_jump_force)
 	
 	if is_on_surface:
 		if _was_on_water_surface == false:
@@ -594,11 +604,14 @@ func _state_dummy_switch_to(from : String):
 
 func _state_dead_switch_to(from : String):
 	velocity = Vector2.ZERO
-	_facing.x = 1 # ensure sprite is not flipped or the text will be backward
+	_facing.x = 1 # ensure sprite is not flipped or the death animation text will be backward
 	_collider.disabled = true
 	_sprite.flip_h = false
 	
 	_play_animation("Die")
+	# TODO: give camera a "dying" state to zoom in player and follow in a more custom way (World.level.level_camera.set_state_dying())
+	#       this would require making cam trigger ignore that state which means changing the state() variable in the trigger
+	#       for the level camera state enum to an array of strings which will break every camera trigger in the game
 	await _sprite.animation_finished
 	died.emit()
 

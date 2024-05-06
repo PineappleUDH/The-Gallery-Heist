@@ -31,9 +31,10 @@ enum _Pattern {grid, arc}
 	set(value):
 		_vertical_count = max(value, 1)
 		_setup_stack()
-@export var _spacing : int = 24 :
+@export var _spacing : Vector2i = Vector2i(24, 24):
 	set(value):
-		_spacing = max(value, 0)
+		_spacing.x = max(value.x, 0)
+		_spacing.y = max(value.y, 0)
 		_setup_stack()
 
 @export_group("Arc")
@@ -67,7 +68,7 @@ func _setup_stack():
 			for i in _horizontal_count:
 				for j in _vertical_count:
 					var instance : Collectable = _collectable.instantiate()
-					instance.global_position = Vector2(i * _spacing, j * _spacing)
+					instance.global_position = Vector2(i * _spacing.x, j * _spacing.y)
 					_stack_container.add_child(instance)
 		
 		_Pattern.arc:

@@ -341,6 +341,7 @@ layer_7/tile_data = PackedInt32Array()
 [node name="Audio" type="Node" parent="."]
 
 [node name="MusicPlayer" type="Node" parent="Audio"]
+process_mode = 3
 script = ExtResource("5_j8si2")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Audio/MusicPlayer"]

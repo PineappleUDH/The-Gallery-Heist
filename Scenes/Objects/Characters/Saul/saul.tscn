@@ -1,4 +1,4 @@
-[gd_scene load_steps=119 format=3 uid="uid://crjtftvmkahqx"]
+[gd_scene load_steps=122 format=3 uid="uid://crjtftvmkahqx"]
 
 [ext_resource type="PackedScene" uid="uid://bb8fvvxo2nhq1" path="res://Scenes/Objects/Characters/character.tscn" id="1_regtg"]
 [ext_resource type="Script" path="res://Scenes/Objects/Characters/Saul/saul.gd" id="2_rhth6"]
@@ -36,6 +36,7 @@
 [ext_resource type="AudioStream" uid="uid://hapit8gq4mdo" path="res://Resources/Audio/SFX/Player/splash.wav" id="32_p54kd"]
 [ext_resource type="AudioStream" uid="uid://coidgcixijus7" path="res://Resources/Audio/SFX/Player/splash2.wav" id="33_hms13"]
 [ext_resource type="AudioStream" uid="uid://bkkdnyjegrry1" path="res://Resources/Audio/SFX/Player/splash3.wav" id="34_35b8i"]
+[ext_resource type="AudioStream" uid="uid://ddi46xwcbtrcd" path="res://Resources/Audio/SFX/Player/water_ambience.wav" id="37_52ksu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ypg7h"]
 size = Vector2(13, 30)
@@ -43,6 +44,14 @@ size = Vector2(13, 30)
 [sub_resource type="AtlasTexture" id="AtlasTexture_euce1"]
 atlas = ExtResource("5_jhe1s")
 region = Rect2(16, 16, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4tfa3"]
+atlas = ExtResource("6_jcrio")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5uhwa"]
+atlas = ExtResource("6_jcrio")
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t5qkt"]
 atlas = ExtResource("7_mqoe0")
@@ -316,11 +325,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_jcrio")
+"texture": SubResource("AtlasTexture_4tfa3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5uhwa")
 }],
-"loop": false,
+"loop": true,
 "name": &"Damaged",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -659,13 +671,13 @@ region = Rect2(20, 0, 10, 10)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kf0yp"]
 particle_flag_disable_z = true
-emission_shape = 1
-emission_sphere_radius = 20.0
+emission_shape = 3
+emission_box_extents = Vector3(8, 1, 1)
 direction = Vector3(0, -1, 0)
 spread = 0.0
-initial_velocity_min = 20.0
-initial_velocity_max = 20.0
-gravity = Vector3(0, 150, 0)
+radial_velocity_min = 5.0
+radial_velocity_max = 25.0
+gravity = Vector3(0, 0, 0)
 scale_min = 0.3
 scale_max = 0.6
 
@@ -863,3 +875,7 @@ volume_db = -8.0
 [node name="Splash" type="AudioStreamPlayer2D" parent="Sounds" index="7"]
 stream = SubResource("AudioStreamRandomizer_sta5l")
 volume_db = -12.0
+
+[node name="WaterAmbience" type="AudioStreamPlayer" parent="Sounds" index="8"]
+stream = ExtResource("37_52ksu")
+volume_db = -6.0
