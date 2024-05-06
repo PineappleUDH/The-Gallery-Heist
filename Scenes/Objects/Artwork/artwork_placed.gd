@@ -14,7 +14,7 @@ extends Area2D
 		_update_artwork()
 
 func _update_artwork():
-	if is_inside_tree() == false:
+	if is_node_ready() == false:
 		await ready
 	
 	if art_data:

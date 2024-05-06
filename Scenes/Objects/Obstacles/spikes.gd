@@ -5,13 +5,13 @@ extends StaticBody2D
 	set(value):
 		_count = max(value, 1)
 		
-		if is_inside_tree() == false:
+		if is_node_ready() == false:
 			await ready
 		
 		# sprites
 		for child : Sprite2D in _sprites_container.get_children():
 			child.queue_free()
-		var spike_texture : Texture2D = preload("res://Resources/Textures/Placeholder/Spikeplaceholder.png")
+		var spike_texture : Texture2D = preload("res://Resources/Textures/Spike.png")
 		for i in _count:
 			var sprite : Sprite2D = Sprite2D.new()
 			sprite.texture = spike_texture

@@ -4,7 +4,7 @@ extends Node2D
 @export var _radius : float :
 	set(value):
 		_radius = max(value, 0.0)
-		if is_inside_tree() == false:
+		if is_node_ready() == false:
 			await ready
 		
 		_area_collider.shape.radius = _radius
@@ -13,7 +13,8 @@ extends Node2D
 @onready var _eye_animator : AnimationPlayer = $Eye/AnimationPlayer
 @onready var _eye_sprite : Sprite2D = $Eye
 @onready var _pupil_sprite : Sprite2D = $Eye/Pupil
-@onready var _particles : GPUParticles2D = $GPUParticles2D
+@onready var _target_particles : GPUParticles2D = $TargetParticles
+@onready var _circle_particles : GPUParticles2D = $CircleParticles
 @onready var _area_collider : CollisionShape2D = $Area2D/CollisionShape2D
 @onready var _dodge_area_collider : CollisionShape2D = $DodgeArea/CollisionShape2D
 
@@ -25,17 +26,25 @@ const _particles_amount_max_distance : float = 600.0 # particles amount won't in
 var _player_inside : bool = false
 var _player_inside_dodge : bool = false
 
+func _ready():
+	if Engine.is_editor_hint(): return
+	
+	_circle_particles.process_material.emission_ring_radius = _radius
+	_circle_particles.process_material.emission_ring_inner_radius = _radius
+
 func _process(delta : float):
+	if Engine.is_editor_hint(): return
+	
 	if _player_inside:
 		var direction : Vector2 = (World.level.player.global_position - _eye_sprite.global_position).normalized()
 		var distance : float = _eye_sprite.global_position.distance_to(World.level.player.global_position)
 		
-		_particles.process_material.emission_box_extents.y = distance / 2.0
+		_target_particles.process_material.emission_box_extents.y = distance / 2.0
 		# Note: godot doesn't allow changing particles amount without reseting github.com/godotengine/godot-proposals/issues/5939
 		#       a workaround is to set amount to max possible amount and use amount_ratio to show part of it
-		_particles.amount_ratio = remap(distance, 0.0, _particles_amount_max_distance, 0.0, 1.0)
-		_particles.position = direction * distance / 2.0
-		_particles.rotation = direction.angle() + PI/2.0
+		_target_particles.amount_ratio = remap(distance, 0.0, _particles_amount_max_distance, 0.0, 1.0)
+		_target_particles.position = direction * distance / 2.0 + _eye_sprite.position
+		_target_particles.rotation = direction.angle() + PI/2.0
 		
 		_pupil_sprite.position = direction * _pupil_max_offset
 	
@@ -66,9 +75,9 @@ func _on_body_entered(body : Node2D):
 		_eye_animator.play("opening")
 		_eye_animator.queue("open")
 		_player_inside = true
-		_particles.emitting = true
+		_target_particles.emitting = true
+		_circle_particles.emitting = true
 		body.set_dash_lock(true)
-		queue_redraw()
 
 func _on_body_exited(body : Node2D):
 	if body is Player:
@@ -76,9 +85,9 @@ func _on_body_exited(body : Node2D):
 		_eye_animator.play("closing")
 		_eye_animator.queue("closed")
 		_player_inside = false
-		_particles.emitting = false
+		_target_particles.emitting = false
+		_circle_particles.emitting = false
 		body.set_dash_lock(false)
-		queue_redraw()
 
 func _on_dodge_area_body_entered(body : Node2D):
 	if body is Player:

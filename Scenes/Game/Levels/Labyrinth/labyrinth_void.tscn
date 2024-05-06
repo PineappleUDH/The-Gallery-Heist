@@ -10,6 +10,15 @@
 [ext_resource type="PackedScene" uid="uid://pmgu85vr3lrk" path="res://Scenes/Objects/Obstacles/killzone.tscn" id="7_53ru2"]
 [ext_resource type="PackedScene" uid="uid://c31bicd5mqe8o" path="res://Scenes/Objects/Collectables/collectable_coin.tscn" id="7_ww68e"]
 
+[sub_resource type="Curve2D" id="Curve2D_yt6yt"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 438, 2, 0, 0, 0, 0, 40, 2)
+}
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f6t46"]
+size = Vector2(553, 20)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_0pej4"]
 resource_local_to_scene = true
 atlas = ExtResource("2_muy7n")
@@ -40,16 +49,43 @@ resource_local_to_scene = true
 atlas = ExtResource("3_uwpeq")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="Curve2D" id="Curve2D_yt6yt"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 438, 2, 0, 0, 0, 0, 40, 2)
-}
-point_count = 2
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f6t46"]
-size = Vector2(553, 20)
-
 [node name="LabyrinthBase" instance=ExtResource("1_5d4qv")]
+
+[node name="Collectables#CollectablesStack" parent="." index="0" instance=ExtResource("6_3e448")]
+position = Vector2(707, -54)
+_collectable = ExtResource("7_ww68e")
+_horizontal_count = 4
+_spacing = 32
+
+[node name="Collectables#CollectableCoin" parent="." index="1" instance=ExtResource("7_ww68e")]
+position = Vector2(108, -109)
+
+[node name="Obstacles#Spikes" parent="." index="2" instance=ExtResource("4_sswum")]
+position = Vector2(224, -136)
+_count = 2
+
+[node name="Obstacles#PathObject" parent="." index="3" instance=ExtResource("5_wo6wk")]
+position = Vector2(484, -34)
+curve = SubResource("Curve2D_yt6yt")
+_speed_per_sec = 60.0
+
+[node name="Obstacles#HangingSpikes" parent="." index="4" instance=ExtResource("6_y8itu")]
+position = Vector2(893, -223)
+
+[node name="Obstacles#Spikes2" parent="." index="5" instance=ExtResource("4_sswum")]
+position = Vector2(1016, 0)
+rotation = -1.5708
+_count = 6
+
+[node name="Obstacles#Spikes3" parent="." index="6" instance=ExtResource("4_sswum")]
+position = Vector2(968, -160)
+rotation = 1.5708
+
+[node name="Obstacles#Killzone" parent="." index="7" instance=ExtResource("7_53ru2")]
+position = Vector2(756, 36)
+
+[node name="Obstacles_Killzone#CollisionShape2D" type="CollisionShape2D" parent="Obstacles#Killzone" index="0"]
+shape = SubResource("RectangleShape2D_f6t46")
 
 [node name="PlayerUiHeart" parent="UI/Hud/HBoxContainer/Health" index="0"]
 texture = SubResource("AtlasTexture_0pej4")
@@ -69,48 +105,11 @@ texture = SubResource("AtlasTexture_vr5wa")
 [node name="PlayerUiAir3" parent="UI/Hud/MarginContainer/Air" index="2"]
 texture = SubResource("AtlasTexture_o57tu")
 
-[node name="TileMap" parent="." index="1"]
+[node name="TileMap" parent="." index="9"]
 layer_1/tile_data = PackedInt32Array(0, 65537, 1, 1, 65537, 1, 2, 65537, 1, 3, 65537, 1, 4, 65537, 1, 5, 65537, 1, 6, 65537, 1, 7, 65537, 1, 8, 65537, 1, 9, 65537, 1, 10, 65537, 1, 11, 65537, 1, 12, 65537, 1, 13, 65537, 1, 65535, 65537, 1, -589825, 65537, 1, -655361, 65537, 1, -720897, 65537, 1, -524289, 65537, 1, -458753, 65537, 1, -393217, 65537, 1, -327681, 65537, 1, -262145, 65537, 1, -196610, 65537, 1, -196611, 65537, 1, -196612, 65537, 1, -196613, 65537, 1, -196614, 65537, 1, -196615, 65537, 1, -196616, 65537, 1, -196617, 65537, 1, 65527, 65537, 1, 65528, 65537, 1, 65529, 65537, 1, 65530, 65537, 1, 65531, 65537, 1, 65532, 65537, 1, 65533, 65537, 1, 65534, 65537, 1, -196609, 65537, 1, -327666, 65537, 1, -393202, 65537, 1, -262130, 65537, 1, -196594, 65537, 1, -131058, 65537, 1, -65522, 65537, 1, 14, 65537, 1, -458738, 65537, 1, -524274, 65537, 1, 15, 65537, 1, 16, 65537, 1, 17, 65537, 1, 18, 65537, 1, 19, 65537, 1, 20, 65537, 1, 21, 65537, 1, 22, 65537, 1, 23, 65537, 1, 24, 65537, 1, 25, 65537, 1, 26, 65537, 1, 27, 65537, 1, 28, 65537, 1, 29, 65537, 1, -393208, 65537, 1, -393209, 65537, 1, -393210, 65537, 1, -917485, 65537, 1, -851969, 65537, 1, -786433, 65537, 1, -917504, 65537, 1, -917503, 65537, 1, -917502, 65537, 1, -917501, 65537, 1, -917500, 65537, 1, -917499, 65537, 1, -917498, 65537, 1, -917497, 65537, 1, -917496, 65537, 1, -917495, 65537, 1, -917494, 65537, 1, -917493, 65537, 1, -917492, 65537, 1, -917491, 65537, 1, -917490, 65537, 1, -917489, 65537, 1, -917488, 65537, 1, -917487, 65537, 1, -917486, 65537, 1, -196618, 65537, 1, -131082, 65537, 1, -65546, 65537, 1, -10, 65537, 1, 65526, 65537, 1, -393211, 65537, 1, -393212, 65537, 1, -393213, 65537, 1, -393214, 65537, 1, -393215, 65537, 1, -393216, 65537, 1, -524273, 65537, 1, -458737, 65537, 1, -393201, 65537, 1, -131057, 65537, 1, -196593, 65537, 1, -262129, 65537, 1, -327665, 65537, 1, -65521, 65537, 1, -458747, 65537, 1, -524283, 65537, 1, -589819, 65537, 1, -655355, 65537, 1, -720891, 65537, 1, -786427, 65537, 1, -851963, 65537, 1, -851964, 65537, 1, -851965, 65537, 1, -851966, 65537, 1, -851967, 65537, 1, -851968, 65537, 1, -786432, 65537, 1, -720896, 65537, 1, -655360, 65537, 1, -589824, 65537, 1, -524288, 65537, 1, -458752, 65537, 1, -655359, 65537, 1, -720895, 65537, 1, -786431, 65537, 1, -589823, 65537, 1, -524287, 65537, 1, -458751, 65537, 1, -524286, 65537, 1, -589822, 65537, 1, -655358, 65537, 1, -720894, 65537, 1, -786430, 65537, 1, -524285, 65537, 1, -458749, 65537, 1, -589821, 65537, 1, -655357, 65537, 1, -720892, 65537, 1, -786428, 65537, 1, -655356, 65537, 1, -589820, 65537, 1, -524284, 65537, 1, -458748, 65537, 1, -720893, 65537, 1, -786429, 65537, 1, -458750, 65537, 1, -851949, 65537, 1, -786413, 65537, 1, -720877, 65537, 1, -655341, 65537, 1, -589805, 65537, 1, -524269, 65537, 1, -458733, 65537, 1, -393197, 65537, 1, -327661, 65537, 1, -327660, 65537, 1, -393196, 65537, 1, -458732, 65537, 1, -524268, 65537, 1, -589804, 65537, 1, -655340, 65537, 1, -720876, 65537, 1, -786412, 65537, 1, -851948, 65537, 1, -917484, 65537, 1, -983020, 65537, 1, -1048556, 65537, 1, -1114092, 65537, 1, -1048517, 65537, 1, -982981, 65537, 1, -917445, 65537, 1, -851909, 65537, 1, -786373, 65537, 1, -720837, 65537, 1, -655301, 65537, 1, -589760, 65537, 1, -524224, 65537, 1, -458688, 65537, 1, -393152, 65537, 1, -327616, 65537, 1, -262080, 65537, 1, -196544, 65537, 1, -1114053, 65537, 1, -1114054, 65537, 1, -1114055, 65537, 1, -1114056, 65537, 1, -1114057, 65537, 1, -1114058, 65537, 1, -1114059, 65537, 1, -1114060, 65537, 1, -1114061, 65537, 1, -1114062, 65537, 1, -1114063, 65537, 1, -1114064, 65537, 1, -1114065, 65537, 1, -1114066, 65537, 1, -1114067, 65537, 1, -1114068, 65537, 1, -1114069, 65537, 1, -1114070, 65537, 1, -1114071, 65537, 1, -1114072, 65537, 1, -1114073, 65537, 1, -1114074, 65537, 1, -1114075, 65537, 1, -1114076, 65537, 1, -1114077, 65537, 1, -1114078, 65537, 1, -1114079, 65537, 1, -1114080, 65537, 1, -1114081, 65537, 1, -1114082, 65537, 1, -1114083, 65537, 1, -1114084, 65537, 1, -1114085, 65537, 1, -1114086, 65537, 1, -1114087, 65537, 1, -1114088, 65537, 1, -1114089, 65537, 1, -1114090, 65537, 1, -1114091, 65537, 1, -655296, 65537, 1, -720832, 65537, 1, -786368, 65537, 1, -851904, 65537, 1, -917440, 65537, 1, -982976, 65537, 1, -1048512, 65537, 1, -1114048, 65537, 1, -1179584, 65537, 1, -1245120, 65537, 1, -1310656, 65537, 1, -1376192, 65537, 1, -1441728, 65537, 1, -1507264, 65537, 1, -1572800, 65537, 1, -1638336, 65537, 1, -1703872, 65537, 1, -131008, 65537, 1, -65472, 65537, 1, -589765, 65537, 1)
 
-[node name="Spikes" parent="Obstacles" index="0" instance=ExtResource("4_sswum")]
-position = Vector2(224, -136)
-_count = 2
+[node name="Saul" parent="." index="10"]
+position = Vector2(0, -16)
 
-[node name="PathObject" parent="Obstacles" index="1" instance=ExtResource("5_wo6wk")]
-position = Vector2(484, -34)
-curve = SubResource("Curve2D_yt6yt")
-_speed_per_sec = 60.0
-
-[node name="HangingSpikes" parent="Obstacles" index="2" instance=ExtResource("6_y8itu")]
-position = Vector2(893, -223)
-
-[node name="Killzone" parent="Obstacles" index="3" instance=ExtResource("7_53ru2")]
-position = Vector2(493, 43)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Killzone" index="0"]
-position = Vector2(266.5, 0)
-shape = SubResource("RectangleShape2D_f6t46")
-
-[node name="Spikes2" parent="Obstacles" index="4" instance=ExtResource("4_sswum")]
-position = Vector2(1016, 0)
-rotation = -1.5708
-_count = 6
-
-[node name="Spikes3" parent="Obstacles" index="5" instance=ExtResource("4_sswum")]
-position = Vector2(968, -160)
-rotation = 1.5708
-
-[node name="Saul" parent="Characters" index="0"]
-position = Vector2(17, -22)
-
-[node name="CollectablesStack" parent="Collectables" index="0" instance=ExtResource("6_3e448")]
-position = Vector2(707, -54)
-_collectable = ExtResource("7_ww68e")
-_horizontal_count = 4
-_spacing = 32
-
-[node name="CollectableCoin" parent="Collectables" index="1" instance=ExtResource("7_ww68e")]
-position = Vector2(108, -109)
-
-[node name="CollectableLabyrinthKey" parent="." index="9"]
+[node name="CollectableLabyrinthKey" parent="." index="13"]
 position = Vector2(685, -346)

@@ -7,7 +7,7 @@ enum _State {restore, solid, destoy, empty}
 	set(value):
 		_count = max(value, 1)
 		
-		if is_inside_tree() == false:
+		if is_node_ready() == false:
 			await ready
 		
 		for sprite in _sprites_container.get_children():
