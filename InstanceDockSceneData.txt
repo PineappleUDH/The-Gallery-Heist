@@ -52,4 +52,13 @@
 }, {
 "scene": "res://Scenes/Objects/Characters/Enemies/enemy_platform_hugger.tscn"
 }]
+}, {
+"name": "Misc Tools",
+"scenes": [{
+"scene": "res://Scenes/Objects/Triggers/trigger_camera.tscn"
+}, {
+"scene": "res://Scenes/Objects/Triggers/trigger_dialogue.tscn"
+}, {
+"scene": "res://Scenes/Objects/Triggers/trigger_music.tscn"
+}]
 }]

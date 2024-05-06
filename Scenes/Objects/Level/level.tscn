@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://b84n1i2bwxbmr"]
+[gd_scene load_steps=32 format=3 uid="uid://b84n1i2bwxbmr"]
 
 [ext_resource type="Script" path="res://Scenes/Objects/Level/level.gd" id="1_qee75"]
 [ext_resource type="Script" path="res://Scenes/Objects/Level/level_pause_manager.gd" id="2_2cj76"]
@@ -17,6 +17,7 @@
 [ext_resource type="FontFile" uid="uid://bsvbubhqv01qw" path="res://Resources/Fonts/hf-free-complete/futile-pro-v1/FutilePro.ttf" id="11_i74xb"]
 [ext_resource type="AudioStream" uid="uid://dsbmogobaeyng" path="res://Resources/Audio/SFX/UI/button_hover.wav" id="12_2gl1w"]
 [ext_resource type="Texture2D" uid="uid://xij6y4uunw06" path="res://Resources/Textures/UI/dialogue_next.png" id="12_my0ms"]
+[ext_resource type="Texture2D" uid="uid://f464uusrqmbp" path="res://Resources/Textures/UI/Dialogue frame.png" id="12_yaomo"]
 [ext_resource type="AudioStream" uid="uid://5gj12883hk0" path="res://Resources/Audio/SFX/UI/button_press.wav" id="13_1ur6e"]
 [ext_resource type="Script" path="res://Scenes/Objects/Level/level_dialogue_player.gd" id="15_8anru"]
 
@@ -215,6 +216,14 @@ custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_5hvhk")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/DialoguePlayer/PanelContainer"]
+layout_mode = 2
+texture = ExtResource("12_yaomo")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/DialoguePlayer/PanelContainer"]
 layout_mode = 2
