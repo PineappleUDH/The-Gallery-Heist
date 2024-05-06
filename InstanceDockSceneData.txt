@@ -12,7 +12,7 @@
 "scene": "res://Scenes/Objects/Level/teleporter.tscn"
 }]
 }, {
-"name": "Obsticals",
+"name": "Obstacles",
 "scenes": [{
 "scene": "res://Scenes/Objects/Obstacles/spikes.tscn"
 }, {
@@ -25,6 +25,10 @@
 "scene": "res://Scenes/Objects/Obstacles/dash_disabler.tscn"
 }, {
 "scene": "res://Scenes/Objects/Obstacles/unstable_platform.tscn"
+}, {
+"scene": "res://Scenes/Objects/Obstacles/crusher.tscn"
+}, {
+"scene": "res://Scenes/Objects/Obstacles/killzone.tscn"
 }]
 }, {
 "name": "Collectables",
@@ -53,7 +57,7 @@
 "scene": "res://Scenes/Objects/Characters/Enemies/enemy_platform_hugger.tscn"
 }]
 }, {
-"name": "Misc Tools",
+"name": "Triggers",
 "scenes": [{
 "scene": "res://Scenes/Objects/Triggers/trigger_camera.tscn"
 }, {

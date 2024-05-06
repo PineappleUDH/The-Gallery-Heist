@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://co8ht47guhxnp"]
 
 [ext_resource type="PackedScene" uid="uid://ccpt2uxis4dqk" path="res://Scenes/Objects/Projectiles/projectile.tscn" id="1_4enos"]
-[ext_resource type="Script" path="res://Scenes/Objects/Projectiles/projectile_bomb.gd" id="2_4hug7"]
+[ext_resource type="Script" path="res://Scenes/Objects/Projectiles/projectile_flying_enemy_bomb.gd" id="2_4hug7"]
 [ext_resource type="Texture2D" uid="uid://dy24t2fkk51cp" path="res://Resources/Textures/projectile_bomb.png" id="3_ppx80"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oeda5"]
