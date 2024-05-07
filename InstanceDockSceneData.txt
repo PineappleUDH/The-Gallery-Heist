@@ -29,6 +29,8 @@
 "scene": "res://Scenes/Objects/Obstacles/crusher.tscn"
 }, {
 "scene": "res://Scenes/Objects/Obstacles/killzone.tscn"
+}, {
+"scene": "res://Scenes/Objects/Characters/hurtbox.tscn"
 }]
 }, {
 "name": "Collectables",
