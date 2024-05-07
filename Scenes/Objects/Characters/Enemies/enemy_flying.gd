@@ -37,11 +37,10 @@ func _ready():
 func _physics_process(delta : float):
 	if Engine.is_editor_hint(): return
 	
-	var dir : Vector2 =\
-		(_path_points[_path_target_point] - global_position).normalized()
+	_direction = (_path_points[_path_target_point] - global_position).normalized()
 	# accelerate
-	velocity.x = Utilities.soft_clamp(velocity.x, dir.x * _acceleration * delta, _max_speed)
-	velocity.y = Utilities.soft_clamp(velocity.y, dir.y * _acceleration * delta, _max_speed)
+	velocity.x = Utilities.soft_clamp(velocity.x, _direction.x * _acceleration * delta, _max_speed)
+	velocity.y = Utilities.soft_clamp(velocity.y, _direction.y * _acceleration * delta, _max_speed)
 	
 	# decelerate
 	velocity.x = Utilities.soft_clamp(velocity.x, -sign(velocity.x) * _deceleration * delta, 0.0)

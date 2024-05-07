@@ -11,4 +11,4 @@ func _collected(player : Player):
 	World.level.add_score()
 	_collected_sfx.play()
 	_presistent_node.detach()
-	queue_free()
+	super._collected(player)

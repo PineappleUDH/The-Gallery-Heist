@@ -46,9 +46,9 @@ enum _Pattern {grid, arc}
 	set(value):
 		_curve_bump = value
 		_setup_stack()
-@export var _coins_count : int = 1 :
+@export var _arc_count : int = 1 :
 	set(value):
-		_coins_count = max(value, 1)
+		_arc_count = max(value, 1)
 		_setup_stack()
 
 @onready var _stack_container : Node2D = $Stack
@@ -77,8 +77,8 @@ func _setup_stack():
 			var p3 : Vector2 = _end_point
 			var p2 : Vector2 = (_end_point / 2) + (p3 - p1).normalized().rotated(-PI/2) * _curve_bump
 			
-			for i in _coins_count:
-				var t : float = remap(i, 0, _coins_count-1, 0.0, 1.0)
+			for i in _arc_count:
+				var t : float = remap(i, 0, _arc_count-1, 0.0, 1.0)
 				var c1 : Vector2 = p1.lerp(p2, t)
 				var c2 : Vector2 = p2.lerp(p3, t)
 				var final : Vector2 = c1.lerp(c2, t)
@@ -93,6 +93,6 @@ func _validate_property(property: Dictionary):
 			if _pattern != _Pattern.grid:
 				property["usage"] = PROPERTY_USAGE_NO_EDITOR
 		
-		"_end_point", "_curve_bump", "_coins_count":
+		"_end_point", "_curve_bump", "_arc_count":
 			if _pattern != _Pattern.arc:
 				property["usage"] = PROPERTY_USAGE_NO_EDITOR

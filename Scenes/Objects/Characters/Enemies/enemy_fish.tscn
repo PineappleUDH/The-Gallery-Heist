@@ -1,0 +1,80 @@
+[gd_scene load_steps=11 format=3 uid="uid://b8gnhh4nqy3vh"]
+
+[ext_resource type="PackedScene" uid="uid://j6dd7mgd0p3w" path="res://Scenes/Objects/Characters/Enemies/enemy.tscn" id="1_xlpgf"]
+[ext_resource type="Script" path="res://Scenes/Objects/Characters/Enemies/enemy_fish.gd" id="2_kx5j3"]
+[ext_resource type="Texture2D" uid="uid://b2ixk73378h2h" path="res://Resources/Textures/Characters/Enemies/fish.png" id="3_khomo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dae1m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x0r7j"]
+atlas = ExtResource("3_khomo")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_57of6"]
+atlas = ExtResource("3_khomo")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l70ts"]
+atlas = ExtResource("3_khomo")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p138r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x0r7j")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_57of6")
+}],
+"loop": true,
+"name": &"dying",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l70ts")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o2wul"]
+radius = 12.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aduex"]
+radius = 120.0
+
+[node name="EnemyFish" instance=ExtResource("1_xlpgf")]
+script = ExtResource("2_kx5j3")
+_detection_radius = 120.0
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_dae1m")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_p138r")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" index="0"]
+shape = SubResource("CircleShape2D_o2wul")
+
+[node name="OutOfWaterDamageTimer" type="Timer" parent="Timers" index="1"]
+wait_time = 1.5
+
+[node name="DetectionArea" type="Area2D" parent="." index="5"]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" index="0"]
+shape = SubResource("CircleShape2D_aduex")
+
+[connection signal="timeout" from="Timers/OutOfWaterDamageTimer" to="." method="_on_out_of_water_damage_timer_timeout"]
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

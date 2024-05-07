@@ -14,7 +14,7 @@ func setup(args : Dictionary):
 
 func _ready():
 	super._ready()
-	_labyrinth_key.key_collected.connect(_on_labyrinth_key_collected)
+	_labyrinth_key.collected.connect(_on_labyrinth_key_collected)
 
 func _on_labyrinth_key_collected():
 	for door_name : String in _completed_doors.keys():

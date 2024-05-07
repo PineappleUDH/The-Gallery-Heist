@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://b84n1i2bwxbmr"]
+[gd_scene load_steps=33 format=3 uid="uid://b84n1i2bwxbmr"]
 
 [ext_resource type="Script" path="res://Scenes/Objects/Level/level.gd" id="1_qee75"]
 [ext_resource type="Script" path="res://Scenes/Objects/Level/level_pause_manager.gd" id="2_2cj76"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://xij6y4uunw06" path="res://Resources/Textures/UI/dialogue_next.png" id="12_my0ms"]
 [ext_resource type="Texture2D" uid="uid://f464uusrqmbp" path="res://Resources/Textures/UI/Dialogue frame.png" id="12_yaomo"]
 [ext_resource type="AudioStream" uid="uid://5gj12883hk0" path="res://Resources/Audio/SFX/UI/button_press.wav" id="13_1ur6e"]
+[ext_resource type="FontFile" uid="uid://dw550q5egkyls" path="res://Resources/Fonts/hf-free-complete/compass-pro-v1.1/CompassPro.ttf" id="13_xil8q"]
 [ext_resource type="Script" path="res://Scenes/Objects/Level/level_dialogue_player.gd" id="15_8anru"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dl2vj"]
@@ -240,7 +241,11 @@ text = "Character Name"
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/DialoguePlayer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("13_xil8q")
+theme_override_fonts/bold_font = ExtResource("11_i74xb")
 theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 20
+theme_override_font_sizes/italics_font_size = 20
 bbcode_enabled = true
 text = "[center]Dialogue example. it's just an example nothing to be taken so seriously or anything. now that we've established that none of this is serious I wish to confess about the dead body under my house. thank you for tuning in it's your host 3-dog! stay safe out there in the capital wasteland."
 fit_content = true

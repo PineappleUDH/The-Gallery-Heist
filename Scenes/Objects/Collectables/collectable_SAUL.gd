@@ -30,4 +30,4 @@ func _collected(player : Player):
 	World.level.pause_manager.unpause()
 	World.level.found_letter(_letter)
 	_persistent_node.detach()
-	queue_free()
+	super._collected(player)

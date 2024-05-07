@@ -1,6 +1,8 @@
 class_name Collectable
 extends Area2D
 
+signal collected
+
 enum IdleMovement {none, sin_wave, shake}
 
 @onready var _start_pos : Vector2 = global_position
@@ -26,6 +28,7 @@ func _process(delta : float):
 
 # override
 func _collected(player : Player):
+	collected.emit()
 	queue_free()
 
 func _on_body_entered(body : Node2D):

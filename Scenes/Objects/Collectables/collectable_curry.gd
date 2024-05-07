@@ -14,6 +14,7 @@ func _ready():
 
 func _collected(player : Player):
 	player.heal(_amount_healed)
+	collected.emit()
 	# sfx..
 	
 	# hide curry but don't delete it. when player dies and respawns

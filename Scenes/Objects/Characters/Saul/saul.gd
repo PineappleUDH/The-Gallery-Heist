@@ -50,6 +50,7 @@ const _fall_anim_intensity_thresholds : Array = [0.0, _max_fall_speed * 0.3, _ma
 const _jump_anim_intensity_thresholds : Array = [_jump_force, _jump_force * 0.8, 0.0] # when to play each jump animation. from most to least intense
 
 const _max_swim_speed : float = 140.0
+const _water_enter_max_speed : float = 80.0
 const _out_of_water_push : float = 200.0
 const _water_accel : float = 320.0
 const _water_decel : float = 150.0
@@ -109,7 +110,7 @@ func _process(delta : float):
 			interacted.emit()
 		
 		# check water
-		if _state_machine.get_current_state() != "swim" && _is_water_tile(global_position):
+		if _state_machine.get_current_state() != "swim" && World.level.is_water_tile(global_position):
 			_state_machine.change_state("swim")
 
 func _physics_process(delta : float):
@@ -237,47 +238,6 @@ func _get_ray_colliding_with_tilemap() -> Vector2:
 	elif _detect_right.is_colliding() and _detect_right.get_collider() is TileMap:
 		return Vector2.RIGHT
 	return Vector2.ZERO
-
-func _is_water_tile(global_pos : Vector2) -> bool:
-	var tileset : TileSet = World.level.tilemap.tile_set
-	# ensure tileset has "water" custom data first to avoid errors
-	var has_water_var : bool = false
-	for i in tileset.get_custom_data_layers_count():
-		if tileset.get_custom_data_layer_name(i) == "water":
-			has_water_var = true
-			break
-	if has_water_var == false: return false
-	
-	var layers_count : int = World.level.tilemap.get_layers_count()
-	for i in layers_count:
-		# check all layers for a water tile
-		var data : TileData = World.level.tilemap.get_cell_tile_data(
-			i, World.level.tilemap.local_to_map(global_pos)
-		)
-		if data && data.get_custom_data("water") == true:
-			return true
-	
-	return false
-
-func _is_breathable_tile(global_pos : Vector2) -> bool:
-	if _is_water_tile(global_pos): return false
-	
-	var tileset : TileSet = World.level.tilemap.tile_set
-	if tileset.get_physics_layers_count() == 0: return true
-	
-	var layers_count : int = World.level.tilemap.get_layers_count()
-	for i in layers_count:
-		# check all layers for collidable tile
-		var data : TileData = World.level.tilemap.get_cell_tile_data(
-			i, World.level.tilemap.local_to_map(global_pos)
-		)
-		if data && data.get_collision_polygons_count(0) > 0:
-			# found a solid tile so not breathable. this makes 2 assumptions:
-			# 1- if a tile has a collider it's not breathable even if the collider doesn't cover the whole tile
-			# 2- only checks for physics layer 0 assuming that any solid layer will be put at idx 0 while other more "stylized" colliders (collide with enemy only etc..) will be at other indicies
-			return false
-	
-	return true
 
 func _set_can_dash(dash : bool):
 	# Note: use this instead of setting _can_dash directly
@@ -502,7 +462,7 @@ func _state_swim_switch_to(from : String):
 	_splash_sprite.splash(global_position + _splash_sprite_spawn_offset)
 	
 	# limit enter speed so if player is going super fast a damp effect is applied like real life
-	velocity = velocity.clamp(Vector2.ONE * -_max_swim_speed, Vector2.ONE * _max_swim_speed)
+	velocity = velocity.clamp(Vector2.ONE * -_water_enter_max_speed, Vector2.ONE * _water_enter_max_speed)
 	_sfx["splash"].play()
 	_collider.shape.size = _water_collider_size
 	_was_on_water_surface = true
@@ -549,9 +509,9 @@ func _state_swim_ph_process(delta : float):
 	
 	# surface
 	var is_on_surface : bool =\
-		_is_breathable_tile(global_position - Vector2(0.0, World.level.tile_size))
+		World.level.is_breathable_tile(global_position - Vector2(0.0, World.level.tile_size))
 	var is_3_tiles_from_surface : bool =\
-		_is_breathable_tile(global_position - Vector2(0.0, World.level.tile_size * 3))
+		World.level.is_breathable_tile(global_position - Vector2(0.0, World.level.tile_size * 3))
 	
 	_bubbles_particles.emitting = (is_on_surface == false and is_3_tiles_from_surface == false)
 	
@@ -584,7 +544,7 @@ func _state_swim_ph_process(delta : float):
 	_was_on_water_surface = is_on_surface
 	
 	# check out of water
-	if _is_water_tile(global_position) == false:
+	if World.level.is_water_tile(global_position) == false:
 		_state_machine.change_state("normal")
 
 func _state_dummy_switch_to(from : String):
