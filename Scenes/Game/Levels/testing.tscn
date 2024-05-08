@@ -545,7 +545,7 @@ shape = SubResource("RectangleShape2D_6dwmu")
 position = Vector2(4536, 7915)
 scale = Vector2(1, 0.994444)
 curve = SubResource("Curve2D_e4adi")
-_speed_per_sec = 40.0
+_speed_per_sec = 30.0
 
 [node name="TriggerMusic" parent="." index="15" instance=ExtResource("31_lctc7")]
 position = Vector2(115, -106)
@@ -1618,7 +1618,7 @@ position = Vector2(4752, 7816)
 
 [node name="LabyrinthDoor7" parent="Labyrinth/Doors" index="6" instance=ExtResource("29_l0rqj")]
 position = Vector2(4752, 7704)
-_labyrinth_scene_name = "labyrinth_vince"
+_labyrinth_scene_name = "labyrinth_vinz"
 
 [node name="LabyrinthDoor8" parent="Labyrinth/Doors" index="7" instance=ExtResource("29_l0rqj")]
 position = Vector2(4624, 7704)
@@ -2219,7 +2219,7 @@ offset_right = 4461.0
 offset_bottom = 7870.0
 theme_override_fonts/font = ExtResource("10_iovg4")
 theme_override_font_sizes/font_size = 32
-text = "Vince"
+text = "Vinz"
 horizontal_alignment = 1
 
 [node name="Label4" type="Label" parent="Labels/Test4Labyrinth" index="25"]
