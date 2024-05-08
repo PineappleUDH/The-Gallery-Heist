@@ -1,9 +1,13 @@
 extends Path2D
 class_name PathObject
 
+## makes platform move back and forth between start and end point, when off the platform will teleport back to the start after reahcing the end
 @export var _loop : bool = true
+## use smoothness when the platform reaches the end,
 @export var _smooth_follow : bool = true
+## speed per second :)
 @export var _speed_per_sec : float = 80.0
+## a delay before the platform starts moving
 @export var _delay_time : float = 0.0
 
 @onready var _delay = $Delay

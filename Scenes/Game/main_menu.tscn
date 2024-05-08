@@ -273,6 +273,7 @@ libraries = {
 "": SubResource("AnimationLibrary_4e41e")
 }
 autoplay = "default"
+speed_scale = 3.0
 
 [node name="24" type="TextureRect" parent="Background"]
 layout_mode = 2

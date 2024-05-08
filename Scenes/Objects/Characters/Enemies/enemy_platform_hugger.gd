@@ -1,5 +1,6 @@
 extends "res://Scenes/Objects/Characters/Enemies/enemy.gd"
 
+## if true the enemy will go right at the start, otherwise it will go left
 @export var _start_moving_right : bool = true # TODO: editor hint of starting direction
 
 @onready var _sprite : AnimatedSprite2D = $Sprite

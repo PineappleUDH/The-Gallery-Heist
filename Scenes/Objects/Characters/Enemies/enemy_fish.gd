@@ -1,6 +1,7 @@
 @tool
 extends "res://Scenes/Objects/Characters/Enemies/enemy.gd"
 
+## how far can this enemy detect the player from
 @export var _detection_radius : float = 120.0 :
 	set(value):
 		_detection_radius = max(value, 0.0)

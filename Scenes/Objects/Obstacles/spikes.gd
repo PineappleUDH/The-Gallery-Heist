@@ -1,6 +1,7 @@
 @tool
 extends StaticBody2D
 
+## the number of spikes
 @export var _count : int :
 	set(value):
 		_count = max(value, 1)

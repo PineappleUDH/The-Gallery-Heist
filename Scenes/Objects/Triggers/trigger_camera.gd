@@ -2,44 +2,54 @@
 class_name TriggerCamera
 extends "res://Scenes/Objects/Triggers/trigger.gd"
 
+## change the camera state
 @export var _change_state : bool = false :
 	set(value):
 		_change_state = value
 		queue_redraw()
 		notify_property_list_changed()
+## change the camera zoom
 @export var _change_zoom : bool = false :
 	set(value):
 		_change_zoom = value
 		notify_property_list_changed()
+## change the camera lock along the x or y axis
 @export var _change_lock : bool = false :
 	set(value):
 		_change_lock = value
 		notify_property_list_changed()
 
 @export_group("Camera State")
+## the camera state to apply
 @export var _trigger_state : LevelCamera.CameraState :
 	set(value):
 		_trigger_state = value
 		queue_redraw()
 		notify_property_list_changed()
+## the global position where the camera will idle at
 @export var _idle_position : Vector2 :
 	set(value):
 		_idle_position = value
 		queue_redraw()
 
 @export_group("Axis Lock")
+## if true removes any locks along the x axis, otherwise sets a start and end point along the x axis that the camera will be limited to
 @export var _release_x_bound : bool = true :
 	set(value):
 		_release_x_bound = value
 		notify_property_list_changed()
+## if true removes any locks along the y axis, otherwise sets a start and end point along the y axis that the camera will be limited to
 @export var _release_y_bound : bool = true :
 	set(value):
 		_release_y_bound = value
 		notify_property_list_changed()
+## the lock limits start and end point along the x axis
 @export var _x_bound : Vector2
+## the lock limits start and end point along the y axis
 @export var _y_bound : Vector2
 
 @export_group("Camera Properties")
+## the camera zoom
 @export var _zoom : Vector2 = Vector2.ONE :
 	set(value):
 		_zoom = value

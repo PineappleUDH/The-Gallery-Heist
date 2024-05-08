@@ -1,5 +1,11 @@
 extends "res://Scenes/Objects/Characters/Enemies/enemy.gd"
 
+## the movement speed
+@export var _wander_speed : float = 50.0
+## if true this enemy will charge toward the player when spotted
+@export var _is_charger : bool = false
+## the chargning speed if charger is true
+@export var _charge_speed : float = 100.0
 
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 @onready var _sprite : AnimatedSprite2D = $Sprite
@@ -13,9 +19,6 @@ extends "res://Scenes/Objects/Characters/Enemies/enemy.gd"
 var _player : Player
 var _player_detected : bool = false
 var _state_machine : StateMachine = StateMachine.new()
-@export var _is_charger : bool = false
-@export var _wander_speed : float = 50.0
-@export var _charge_speed : float = 100.0
 
 func _ready():
 	_max_health = 2

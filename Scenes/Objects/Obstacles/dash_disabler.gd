@@ -1,6 +1,7 @@
 @tool
 extends Node2D
 
+## the radius of the dash disabler effect
 @export var _radius : float :
 	set(value):
 		_radius = max(value, 0.0)
@@ -8,6 +9,7 @@ extends Node2D
 			await ready
 		
 		_area_collider.shape.radius = _radius
+## if on the sprite will try to move away from the player when close. this is just a visual effect and doesn't change how the disabler works
 @export var _can_dodge : bool = true
 
 @onready var _eye_animator : AnimationPlayer = $Eye/AnimationPlayer

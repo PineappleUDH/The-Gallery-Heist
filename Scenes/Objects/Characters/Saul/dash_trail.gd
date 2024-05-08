@@ -32,7 +32,7 @@ func _process(delta : float):
 		sprite.scale = Vector2.ONE * remap(dict["timer"], _sprite_lifetime, 0.0, 1.2, 0.0)
 		
 		# color ramps, we map lifetime to _color_ramp array. use the number as index and decimal as lerp value
-		var ramp_array_value : float = remap(dict["timer"], _sprite_lifetime, 0.0, 0.0, _color_ramp.size())
+		var ramp_array_value : float = remap(dict["timer"], _sprite_lifetime, 0.0, 0.0, _color_ramp.size()-1)
 		var ramp_idx : int = floor(ramp_array_value)
 		var ramp_next_idx : int = ramp_idx + 1
 		if ramp_next_idx < _color_ramp.size():

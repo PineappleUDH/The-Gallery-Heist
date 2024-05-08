@@ -1,6 +1,7 @@
 @tool
 extends "res://Scenes/Objects/Characters/Enemies/enemy.gd"
 
+## the max speed this enemy can accelerate to
 @export var _max_speed : float = 180.0
 
 @onready var _sprite : AnimatedSprite2D = $AnimatedSprite2D

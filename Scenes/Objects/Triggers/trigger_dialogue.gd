@@ -1,8 +1,12 @@
 extends "res://Scenes/Objects/Triggers/trigger.gd"
 
+## an array of dialogues, increase the size and add "New Dialogue" in each sloth
 @export var _sequence : Array[Dialogue] # TODO: array of sequences instead
+## if true blocks the player movement while the dialogue plays
 @export var _is_blocking : bool = false
+## if true and there are multiple dialogues a dialogue will be randomly picked each time this triggers
 @export var _randomize_order : bool = false
+## if true each time a dialogue plays it will be removed from the list as to not play again
 @export var _play_each_dialogue_once : bool = true
 
 var _last_ordered_dialogue_idx : int = -1

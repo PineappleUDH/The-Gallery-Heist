@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c61js70woq2dv"]
+[gd_scene load_steps=20 format=3 uid="uid://c61js70woq2dv"]
 
 [ext_resource type="PackedScene" uid="uid://dqpmcakbk34h7" path="res://Scenes/Game/Levels/Labyrinth/labyrinth_base.tscn" id="1_5d4qv"]
 [ext_resource type="Texture2D" uid="uid://b57joaf4ixs1o" path="res://Resources/Textures/UI/HeartUi(addin Sachen).png" id="2_muy7n"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://pmgu85vr3lrk" path="res://Scenes/Objects/Obstacles/killzone.tscn" id="7_53ru2"]
 [ext_resource type="PackedScene" uid="uid://c31bicd5mqe8o" path="res://Scenes/Objects/Collectables/collectable_coin.tscn" id="7_ww68e"]
 [ext_resource type="PackedScene" uid="uid://b8gnhh4nqy3vh" path="res://Scenes/Objects/Characters/Enemies/enemy_fish.tscn" id="10_c7x2o"]
+[ext_resource type="PackedScene" uid="uid://bv3uxfqb2vode" path="res://Scenes/Objects/Obstacles/crusher.tscn" id="11_fjmq8"]
 
 [sub_resource type="Curve2D" id="Curve2D_yt6yt"]
 _data = {
@@ -117,3 +118,16 @@ position = Vector2(685, -346)
 
 [node name="EnemyFish" parent="." index="14" instance=ExtResource("10_c7x2o")]
 position = Vector2(-459, 92)
+
+[node name="Crusher" parent="." index="15" instance=ExtResource("11_fjmq8")]
+position = Vector2(152, -71)
+_max_extent = 30.0
+_crush_speed = 50.0
+_cooldown_time = 0.0
+
+[node name="Crusher2" parent="." index="16" instance=ExtResource("11_fjmq8")]
+position = Vector2(184, -71)
+_max_extent = 30.0
+_crush_speed = 50.0
+_cooldown_time = 0.0
+_starting_offset_factor = 1.0

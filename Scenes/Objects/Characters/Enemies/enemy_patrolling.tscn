@@ -52,8 +52,8 @@ size = Vector2(800, 30)
 
 [node name="EnemyPatrolling" instance=ExtResource("1_p5n53")]
 script = ExtResource("2_0h1ht")
-_is_charger = false
 _wander_speed = 50.0
+_is_charger = false
 _charge_speed = 100.0
 
 [node name="CollisionShape2D" parent="." index="0"]

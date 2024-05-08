@@ -1,8 +1,11 @@
 class_name Dialogue
 extends Resource
 
+## an opional character name
 @export var character_name : String = ""
+## the dialogue text
 @export_multiline var text : String
+## an optional portrait texture
 @export var portrait : Texture2D = null
 
 static func create(text_ : String, character_name_ : String = "", portrait_ : Texture2D = null) -> Dialogue:

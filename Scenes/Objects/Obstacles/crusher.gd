@@ -1,23 +1,30 @@
 @tool
 extends AnimatableBody2D
 
+## how many tiles wide the crusher should be
 @export var _width : int :
 	set(value):
 		_width = max(value, 2)
 		_build_crusher()
+## how many tiles high the crusher should be
 @export var _height : int :
 	set(value):
 		_height = max(value, 2)
 		_build_crusher()
+## the max point that the crusher will reach before retracting back
 @export var _max_extent : float :
 	set(value):
 		_max_extent = max(value, 0.0)
 		_build_crusher()
+## speed of the crush
 @export var _crush_speed : float = 50.0
+## speed of the retraction after cushing
 @export var _retract_speed : float = 30.0
+## cooldown time after a crush or retraction where the crusher will not move
 @export var _cooldown_time : float = 1.0 :
 	set(value):
 		_cooldown_time = max(value, 0.0)
+## the start factor between the crushers position and max extent, setting this to 1 will start the crusher at the max extent
 @export_range(0, 1) var _starting_offset_factor : float :
 	set(value):
 		_starting_offset_factor = value
@@ -38,7 +45,6 @@ const _offset_color : Color = Color.WHITE
 var _end_pos : Vector2
 var _state : _State = _State.crushing
 
-
 func _ready():
 	if Engine.is_editor_hint(): return
 	
@@ -46,32 +52,44 @@ func _ready():
 	_end_pos = _starting_pos + Vector2.DOWN.rotated(rotation) * _max_extent
 	global_position = lerp(_starting_pos, _end_pos, _starting_offset_factor)
 	
-	_cooldown_timer.wait_time = _cooldown_time
+	if _cooldown_time:
+		_cooldown_timer.wait_time = _cooldown_time
+	
+	# TODO: crusher goes out of sync at the very start. putting 2 crushers next
+	#       to each other with the same variables and with one having a starting offset or 0 and the other 1
+	#       shows the out of sync, it only happens at the very start for some reason and only
+	#       when a scene containing the crusher is the starting scene. waiting for a bit
+	#       before starting the crusher seems to fix it but it's hacky and stupid
+	set_process(false)
+	await get_tree().process_frame
+	await get_tree().process_frame
+	await get_tree().process_frame
+	await get_tree().process_frame
+	set_process(true)
 
 func _process(delta : float):
 	if Engine.is_editor_hint(): return
 	
-	match _state:
-		_State.crushing:
-			global_position = global_position.move_toward(_end_pos, _crush_speed * delta)
-			if global_position == _end_pos:
-				_state = _State.cooldown
-				_cooldown_timer.start()
+	if _state == _State.crushing || _state == _State.retracting:
+		var speed : float =\
+			(_crush_speed if _state == _State.crushing else _retract_speed) * delta
+		var target_pos : Vector2 = _end_pos if _state == _State.crushing else _starting_pos
+		global_position = global_position.move_toward(target_pos, speed)
+		
+		if global_position == target_pos:
+			_state = _State.cooldown
 			
-		_State.retracting:
-			global_position = global_position.move_toward(_starting_pos, _retract_speed * delta)
+			if _cooldown_time:
+				_cooldown_timer.start()
+		
+	elif _state ==_State.cooldown:
+		if _cooldown_timer.is_stopped():
 			if global_position == _starting_pos:
-				_state = _State.cooldown
-				_cooldown_timer.start()
-			
-		_State.cooldown:
-			if _cooldown_timer.is_stopped():
-				if global_position == _starting_pos:
-					# crush
-					_state = _State.crushing
-				else:
-					# retract
-					_state = _State.retracting
+				# crush
+				_state = _State.crushing
+			else:
+				# retract
+				_state = _State.retracting
 
 func _draw():
 	if Engine.is_editor_hint() == false: return

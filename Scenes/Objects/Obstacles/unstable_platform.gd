@@ -3,6 +3,7 @@ extends StaticBody2D
 
 enum _State {restore, solid, destoy, empty}
 
+## the number of tiles in the platform
 @export var _count : int :
 	set(value):
 		_count = max(value, 1)

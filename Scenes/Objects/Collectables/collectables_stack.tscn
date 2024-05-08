@@ -4,5 +4,7 @@
 
 [node name="CollectablesStack" type="Node2D"]
 script = ExtResource("1_v86xg")
+_zigzag_points = 2
+_zigzag_object_per_point = 1
 
 [node name="Stack" type="Node2D" parent="."]
