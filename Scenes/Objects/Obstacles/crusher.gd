@@ -34,6 +34,7 @@ enum _State {crushing, cooldown, retracting}
 
 @onready var _sprites_container : Node2D = $Sprites
 @onready var _collider : CollisionShape2D = $CollisionShape2D
+@onready var _hurtbox : Area2D = $HurtBox
 @onready var _hurtbox_collider : CollisionShape2D = $HurtBox/CollisionShape2D
 @onready var _cooldown_timer : Timer = $CooldownTimer
 
@@ -47,6 +48,8 @@ var _state : _State = _State.crushing
 
 func _ready():
 	if Engine.is_editor_hint(): return
+	
+	_hurtbox.custom_knockback_direction = Vector2.DOWN.rotated(rotation)
 	
 	# starting offset
 	_end_pos = _starting_pos + Vector2.DOWN.rotated(rotation) * _max_extent

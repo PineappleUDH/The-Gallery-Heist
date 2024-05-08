@@ -56,7 +56,7 @@ func _on_body_entered(body : Node2D):
 	
 	if body is PhysicsBody2D || body is TileMap:
 		if body is Character:
-			body.take_damage(_damage, global_position)
+			body.take_damage(_damage, (body.global_position - global_position).normalized())
 			_impact(body)
 		else:
 			_impact(null)

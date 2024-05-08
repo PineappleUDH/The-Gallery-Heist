@@ -55,8 +55,8 @@ func _process(delta : float):
 func _physics_process(delta : float):
 	_state_machine.state_physics_process(delta)
 
-func take_damage(damage : int, from : Vector2, is_deadly : bool = false) -> bool:
-	return super.take_damage(damage, from, is_deadly)
+func take_damage(damage : int, knockback_direction : Vector2, is_deadly : bool = false) -> bool:
+	return super.take_damage(damage, knockback_direction, is_deadly)
 
 func _state_wander_switch_to(from: String):
 	velocity = Vector2(0,0) 

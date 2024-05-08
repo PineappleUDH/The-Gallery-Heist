@@ -1,7 +1,14 @@
+@tool
 extends "res://Scenes/Objects/Characters/Enemies/enemy.gd"
 
 ## if true the enemy will go right at the start, otherwise it will go left
-@export var _start_moving_right : bool = true # TODO: editor hint of starting direction
+@export var _start_moving_right : bool :
+	set(value):
+		_start_moving_right = value
+		
+		if is_node_ready() == false:
+			await ready
+		_sprite.flip_h = !value
 
 @onready var _sprite : AnimatedSprite2D = $Sprite
 @onready var _hole_ray : RayCast2D = $HoleRay
@@ -14,6 +21,8 @@ var _rotation_target : float
 
 
 func _ready():
+	if Engine.is_editor_hint(): return
+	
 	_max_health = 2
 	_damage_cooldown_time = 1.0
 	_health = _max_health
@@ -28,6 +37,8 @@ func _ready():
 		_sprite.flip_h = true
 
 func _physics_process(delta : float):
+	if Engine.is_editor_hint(): return
+	
 	if _is_rotating:
 		velocity = Vector2.ZERO
 		if _rotation_target > rotation:

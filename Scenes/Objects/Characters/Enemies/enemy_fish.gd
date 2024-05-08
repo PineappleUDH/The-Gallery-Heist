@@ -63,7 +63,7 @@ func _on_detection_area_body_exited(body : Node2D):
 		_is_player_detected = false
 
 func _on_out_of_water_damage_timer_timeout():
-	take_damage(1, Vector2.ZERO)
+	take_damage(1, Vector2.UP)
 
 func _state_normal_process(delta : float):
 	if _is_player_detected:

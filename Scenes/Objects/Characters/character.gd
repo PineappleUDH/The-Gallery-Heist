@@ -26,8 +26,7 @@ func _process(delta : float):
 		modulate.a = (sin(_damage_cooldown_timer.time_left * 10.0) + 1.0) / 2.0
 
 # override
-func take_damage(damage : int, from : Vector2, is_deadly : bool = false) -> bool:
-	# TODO: use a separate function for deadly damage, no point doing take_damage(0, 0, 0, true)
+func take_damage(damage : int, knockback_direction : Vector2, is_deadly : bool = false) -> bool:
 	if _is_invincible: return false
 	
 	var cooldown : bool = _damage_cooldown_timer.is_stopped() == false
@@ -41,7 +40,7 @@ func take_damage(damage : int, from : Vector2, is_deadly : bool = false) -> bool
 		return false
 	
 	if _health > 0:
-		velocity -= (from - global_position).normalized() * _knockback
+		velocity += knockback_direction * _knockback
 		_damage_cooldown_timer.wait_time = _damage_cooldown_time
 		_damage_cooldown_timer.start()
 		_damage_taken(damage, false)

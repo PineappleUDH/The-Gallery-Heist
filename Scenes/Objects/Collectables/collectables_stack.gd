@@ -136,14 +136,14 @@ func _setup_stack():
 				var point_ctbl_spacing : Vector2
 				if _zigzag_vertical:
 					point_center = Vector2(
-						0 if is_even else _zigzag_width,
+						0.0 if is_even else _zigzag_width,
 						p * _zigzag_height
 					)
 					point_ctbl_spacing = Vector2(0.0, _zigzag_object_spacing)
 				else:
 					point_center = Vector2(
 						p * _zigzag_height,
-						0 if is_even else _zigzag_width
+						0.0 if is_even else _zigzag_width
 					)
 					point_ctbl_spacing = Vector2(_zigzag_object_spacing, 0.0)
 				

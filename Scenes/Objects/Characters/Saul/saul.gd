@@ -59,6 +59,7 @@ var _air : int = _max_air
 var _was_on_water_surface : bool = false
 const _water_collider_size : Vector2 = Vector2(28, 14)
 const _splash_sprite_spawn_offset : Vector2 = Vector2(0, -12)
+var _water_muffle_effect : AudioEffectLowPassFilter = AudioEffectLowPassFilter.new()
 
 # NOTE: both _dash_locks and _can_dash affects ability to dash. except the former is set by other scripts, and the latter is set by self
 var _dash_locks : int = 0
@@ -75,6 +76,7 @@ const _damage_pause_time : float = 0.14
 var _dummy_locks : int = 0
 var _dummy_prev_state : String
 
+const _master_bus_idx : int = 0
 var _state_machine : StateMachine = StateMachine.new()
 
 func _ready():
@@ -84,6 +86,7 @@ func _ready():
 	_knockback = 130.0
 	
 	_default_collider_size = _collider.shape.size
+	_water_muffle_effect.cutoff_hz = 640
 	
 	_state_machine.add_state("normal", Callable(), _state_normal_switch_from, _state_normal_process, _state_normal_ph_process)
 	_state_machine.add_state("dash", _state_dash_switch_to, _state_dash_switch_from, Callable(), _state_dash_ph_process)
@@ -115,6 +118,13 @@ func _process(delta : float):
 
 func _physics_process(delta : float):
 	_state_machine.state_physics_process(delta)
+
+func _exit_tree():
+	# in case we exit scene while player is in water
+	for i in AudioServer.get_bus_effect_count(_master_bus_idx):
+		if AudioServer.get_bus_effect(_master_bus_idx, i) == _water_muffle_effect:
+			AudioServer.remove_bus_effect(_master_bus_idx, i)
+			break
 
 func set_dummy_locks(lock : bool):
 	match lock:
@@ -161,12 +171,12 @@ func heal(amount : int):
 	_health = min(_health + amount, _max_health)
 	World.level.interface.set_health(old_health, _health)
 
-func take_damage(damage : int, from : Vector2, is_deadly : bool = false) -> bool:
+func take_damage(damage : int, knockback_direction : Vector2, is_deadly : bool = false) -> bool:
 	if _state_machine.get_current_state() == "dead" || _state_machine.get_current_state() == "dummy":
 		return false
 	
 	var old_health : int = _health
-	var applied : bool = super.take_damage(damage, from, is_deadly)
+	var applied : bool = super.take_damage(damage, knockback_direction, is_deadly)
 	if applied:
 		_play_animation("Damaged")
 		World.level.interface.set_health(old_health, _health)
@@ -469,7 +479,8 @@ func _state_swim_switch_to(from : String):
 	_set_can_dash(false)
 	
 	_sfx["water_ambience"].play()
-	# TODO: muffle some sounds, would need to separate audio buses
+	# TODO: muffle sounds, should separate audio buses for at least Music and UI sounds
+	AudioServer.add_bus_effect(_master_bus_idx, _water_muffle_effect)
 
 func _state_swim_switch_from(to : String):
 	if to != "dummy":
@@ -484,6 +495,8 @@ func _state_swim_switch_from(to : String):
 		_air = _max_air
 		_water_timer.stop()
 		_sfx["water_ambience"].stop()
+	
+	AudioServer.remove_bus_effect(0, 0)
 
 func _state_swim_ph_process(delta : float):
 	# Movement Control
@@ -539,7 +552,7 @@ func _state_swim_ph_process(delta : float):
 				_air -= 1
 			else:
 				# damage time :)
-				take_damage(1, Vector2.DOWN)
+				take_damage(1, Vector2.UP)
 	
 	_was_on_water_surface = is_on_surface
 	
