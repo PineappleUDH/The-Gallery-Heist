@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b8gnhh4nqy3vh"]
+[gd_scene load_steps=14 format=3 uid="uid://b8gnhh4nqy3vh"]
 
 [ext_resource type="PackedScene" uid="uid://j6dd7mgd0p3w" path="res://Scenes/Objects/Characters/Enemies/enemy.tscn" id="1_xlpgf"]
 [ext_resource type="Script" path="res://Scenes/Objects/Characters/Enemies/enemy_fish.gd" id="2_kx5j3"]
@@ -14,9 +14,13 @@ region = Rect2(96, 16, 32, 32)
 atlas = ExtResource("3_k2q41")
 region = Rect2(128, 16, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_t1682"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2xldq"]
 atlas = ExtResource("3_k2q41")
 region = Rect2(160, 16, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o0rss"]
+atlas = ExtResource("3_k2q41")
+region = Rect2(192, 16, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gcle3"]
 atlas = ExtResource("3_k2q41")
@@ -41,11 +45,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_t1682")
+"texture": SubResource("AtlasTexture_2xldq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o0rss")
 }],
 "loop": true,
 "name": &"dying",
-"speed": 5.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -76,7 +83,7 @@ shape = SubResource("CircleShape2D_dae1m")
 sprite_frames = SubResource("SpriteFrames_p138r")
 animation = &"dying"
 autoplay = "idle"
-frame_progress = 0.312074
+frame_progress = 0.605992
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource("CircleShape2D_o2wul")
