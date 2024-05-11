@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbpyphyhd6g2d"]
+
+[ext_resource type="Script" path="res://Scenes/Objects/Affordances/locked_door_key.gd" id="1_lxmf1"]
+[ext_resource type="Texture2D" uid="uid://ccjnsoxmxl8w8" path="res://Resources/Textures/Collectables/labyrinth_key.png" id="2_ir4ua"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y5sis"]
+radius = 8.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_232x5"]
+atlas = ExtResource("2_ir4ua")
+region = Rect2(0, 0, 16, 16)
+
+[node name="LockedDoorKey" type="Area2D"]
+script = ExtResource("1_lxmf1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_y5sis")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.917647, 0.462745, 0.305882, 1)
+texture = SubResource("AtlasTexture_232x5")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

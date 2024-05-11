@@ -10,6 +10,10 @@
 "scene": "res://Scenes/Objects/Affordances/platform_path_object.tscn"
 }, {
 "scene": "res://Scenes/Objects/Affordances/teleporter.tscn"
+}, {
+"scene": "res://Scenes/Objects/Affordances/locked_door.tscn"
+}, {
+"scene": "res://Scenes/Objects/Affordances/locked_door_key.tscn"
 }]
 }, {
 "name": "Obstacles",

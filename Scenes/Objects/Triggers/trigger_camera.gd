@@ -76,6 +76,7 @@ func _draw():
 		)
 	
 	# TODO: visialize axis lock, and take it into accout when visualizing idle state rect
+	#       also queue a redraw when global position changes
 
 # TODO: if player enters trigger A and then enters trigger B while
 #       also partly inside trigger A, B will apply but if the player
