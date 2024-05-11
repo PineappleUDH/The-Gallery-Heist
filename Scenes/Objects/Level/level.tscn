@@ -354,6 +354,7 @@ process_mode = 3
 script = ExtResource("5_j8si2")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Audio/MusicPlayer"]
+bus = &"Music"
 
 [node name="ScheduleTimer" type="Timer" parent="Audio/MusicPlayer"]
 one_shot = true

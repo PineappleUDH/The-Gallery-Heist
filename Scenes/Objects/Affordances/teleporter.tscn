@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://d1q41lh23aowi"]
 
-[ext_resource type="Script" path="res://Scenes/Objects/Level/teleporter.gd" id="1_5njoc"]
+[ext_resource type="Script" path="res://Scenes/Objects/Affordances/teleporter.gd" id="1_5njoc"]
 [ext_resource type="Texture2D" uid="uid://cpxed2j3x1oe" path="res://Resources/Textures/teleporter-Sheet.png" id="1_dvx3h"]
-[ext_resource type="PackedScene" uid="uid://yhv4t8nblpu0" path="res://Scenes/Objects/Level/interactable.tscn" id="3_8jw11"]
+[ext_resource type="PackedScene" uid="uid://yhv4t8nblpu0" path="res://Scenes/Objects/interactable.tscn" id="3_8jw11"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_boflo"]
 size = Vector2(36, 11)

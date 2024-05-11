@@ -1,5 +1,5 @@
 @tool
-extends "res://Scenes/Objects/Level/path_object.gd"
+extends "res://Scenes/Objects/Affordances/path_object.gd"
 
 @onready var _rope : Line2D = $rope
 

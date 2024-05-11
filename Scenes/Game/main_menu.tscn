@@ -429,21 +429,35 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 6
 
-[node name="Label2" type="Label" parent="Menu/MarginContainer/Settings/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/MarginContainer/Settings/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label2" type="Label" parent="Menu/MarginContainer/Settings/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Fullscreen"
 horizontal_alignment = 1
 
-[node name="Fullscreen" type="CheckBox" parent="Menu/MarginContainer/Settings/VBoxContainer"]
+[node name="Fullscreen" type="CheckBox" parent="Menu/MarginContainer/Settings/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="Label" type="Label" parent="Menu/MarginContainer/Settings/VBoxContainer"]
 layout_mode = 2
-text = "Volume"
+text = "Overall Volume"
 horizontal_alignment = 1
 
-[node name="Volume" type="HSlider" parent="Menu/MarginContainer/Settings/VBoxContainer"]
+[node name="OverallVolume" type="HSlider" parent="Menu/MarginContainer/Settings/VBoxContainer"]
+layout_mode = 2
+min_value = -72.0
+max_value = 6.0
+
+[node name="Label3" type="Label" parent="Menu/MarginContainer/Settings/VBoxContainer"]
+layout_mode = 2
+text = "Music Volume"
+horizontal_alignment = 1
+
+[node name="MusicVolume" type="HSlider" parent="Menu/MarginContainer/Settings/VBoxContainer"]
 layout_mode = 2
 min_value = -72.0
 max_value = 6.0
@@ -503,6 +517,7 @@ stream = ExtResource("6_7j4va")
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_ugxx7")
 autoplay = true
+bus = &"Music"
 
 [connection signal="mouse_entered" from="Menu/MarginContainer/Main/VBoxContainer/Play" to="." method="_on_button_hovered"]
 [connection signal="pressed" from="Menu/MarginContainer/Main/VBoxContainer/Play" to="." method="_on_play_pressed"]
@@ -512,8 +527,9 @@ autoplay = true
 [connection signal="pressed" from="Menu/MarginContainer/Main/VBoxContainer/Controls" to="." method="_on_controls_pressed"]
 [connection signal="mouse_entered" from="Menu/MarginContainer/Main/VBoxContainer/Quit" to="." method="_on_button_hovered"]
 [connection signal="pressed" from="Menu/MarginContainer/Main/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
-[connection signal="toggled" from="Menu/MarginContainer/Settings/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_toggled"]
-[connection signal="value_changed" from="Menu/MarginContainer/Settings/VBoxContainer/Volume" to="." method="_on_volume_changed"]
+[connection signal="toggled" from="Menu/MarginContainer/Settings/VBoxContainer/HBoxContainer/Fullscreen" to="." method="_on_fullscreen_toggled"]
+[connection signal="value_changed" from="Menu/MarginContainer/Settings/VBoxContainer/OverallVolume" to="." method="_on_overall_volume_changed"]
+[connection signal="value_changed" from="Menu/MarginContainer/Settings/VBoxContainer/MusicVolume" to="." method="_on_music_volume_changed"]
 [connection signal="mouse_entered" from="Menu/MarginContainer/Settings/Done" to="." method="_on_button_hovered"]
 [connection signal="pressed" from="Menu/MarginContainer/Settings/Done" to="." method="_on_settings_done_pressed"]
 [connection signal="mouse_entered" from="Menu/MarginContainer/Controls/HBoxContainer/Reset" to="." method="_on_button_hovered"]

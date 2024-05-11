@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://blsc4n2kimiwc"]
 
 [ext_resource type="Theme" uid="uid://wrmkwmpmiew" path="res://Resources/Godot/keybind_theme.tres" id="1_f5sim"]
-[ext_resource type="Script" path="res://Scenes/Objects/single_keybind.gd" id="2_5b85j"]
+[ext_resource type="Script" path="res://Scenes/Objects/Interface/single_keybind.gd" id="2_5b85j"]
 
 [node name="SingleKeybind" type="PanelContainer"]
 offset_right = 335.0

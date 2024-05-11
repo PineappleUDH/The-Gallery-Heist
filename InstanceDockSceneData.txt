@@ -1,15 +1,15 @@
 [{
 "name": "Affordances",
 "scenes": [{
-"scene": "res://Scenes/Objects/Level/checkpoint.tscn"
+"scene": "res://Scenes/Objects/Affordances/checkpoint.tscn"
 }, {
-"scene": "res://Scenes/Objects/Level/launch_pad.tscn"
+"scene": "res://Scenes/Objects/Affordances/launch_pad.tscn"
 }, {
-"scene": "res://Scenes/Objects/Level/launch_pad_path_object.tscn"
+"scene": "res://Scenes/Objects/Affordances/launch_pad_path_object.tscn"
 }, {
-"scene": "res://Scenes/Objects/Level/platform_path_object.tscn"
+"scene": "res://Scenes/Objects/Affordances/platform_path_object.tscn"
 }, {
-"scene": "res://Scenes/Objects/Level/teleporter.tscn"
+"scene": "res://Scenes/Objects/Affordances/teleporter.tscn"
 }]
 }, {
 "name": "Obstacles",

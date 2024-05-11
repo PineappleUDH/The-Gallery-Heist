@@ -1,6 +1,6 @@
 [gd_scene load_steps=27 format=3 uid="uid://uc8w4v327aj"]
 
-[ext_resource type="Script" path="res://Scenes/Objects/Level/checkpoint.gd" id="1_0uyco"]
+[ext_resource type="Script" path="res://Scenes/Objects/Affordances/checkpoint.gd" id="1_0uyco"]
 [ext_resource type="Texture2D" uid="uid://bm3kpjljb2t02" path="res://Resources/Textures/Checkpoint_Activating.png" id="2_6khb0"]
 [ext_resource type="Texture2D" uid="uid://dsrak25si1d2r" path="res://Resources/Textures/Checkpoint_Activated.png" id="3_egpau"]
 [ext_resource type="Texture2D" uid="uid://d88velhv2jao" path="res://Resources/Textures/Characters/Player/Saul/Hologram.png" id="3_kek0u"]

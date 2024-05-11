@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scenes/Objects/Testing/labyrinth_door.gd" id="1_064bn"]
 [ext_resource type="Texture2D" uid="uid://5okrg4q3tbqq" path="res://Resources/Textures/Labyrinth Door.png" id="1_q70uu"]
-[ext_resource type="PackedScene" uid="uid://yhv4t8nblpu0" path="res://Scenes/Objects/Level/interactable.tscn" id="3_ai340"]
+[ext_resource type="PackedScene" uid="uid://yhv4t8nblpu0" path="res://Scenes/Objects/interactable.tscn" id="3_ai340"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_texmv"]
 atlas = ExtResource("1_q70uu")

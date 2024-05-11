@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bnew5qdy6ki2r"]
 
-[ext_resource type="PackedScene" uid="uid://ce6rpr8fcsibk" path="res://Scenes/Objects/Level/path_object.tscn" id="1_pqb3b"]
+[ext_resource type="PackedScene" uid="uid://ce6rpr8fcsibk" path="res://Scenes/Objects/Affordances/path_object.tscn" id="1_pqb3b"]
 [ext_resource type="Script" path="res://Scenes/Objects/Obstacles/trap_path_object.gd" id="2_83q1i"]
 [ext_resource type="PackedScene" uid="uid://ks2b8lp58x7d" path="res://Scenes/Objects/Obstacles/hanging_spikes.tscn" id="3_lu4ug"]
 

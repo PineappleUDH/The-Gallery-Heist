@@ -15,7 +15,7 @@ extends MarginContainer
 @onready var _hovered_sfx : AudioStreamPlayer = $Hovered
 @onready var _pressed_sfx : AudioStreamPlayer = $Pressed
 
-const _single_keybind_ui_scene : PackedScene = preload("res://Scenes/Objects/single_keybind.tscn")
+const _single_keybind_ui_scene : PackedScene = preload("res://Scenes/Objects/Interface/single_keybind.tscn")
 var _keybinds_file_path = "user://keybinds.json" # format: [{"action":action name, "events":[input event, ..]}, ..]
 
 var _parallax_starting_pos : Array[Array]
@@ -25,6 +25,7 @@ const _popup_tween_menu_time : float = 1.5
 static var _default_input_map : Array[Dictionary]
 const _bg_parallax_factor : float = 0.000004 # this is a factor of the screen size
 const _master_bus_idx : int = 0
+const _music_bus_idx : int = 1
 
 
 func _ready():
@@ -159,9 +160,15 @@ func _on_controls_done_pressed():
 	file.store_string(JSON.stringify(json_data, "\t"))
 	file.close()
 
-func _on_volume_changed(value : float):
+func _on_overall_volume_changed(value : float):
 	AudioServer.set_bus_volume_db(
 		_master_bus_idx,
+		value
+	)
+
+func _on_music_volume_changed(value : float):
+	AudioServer.set_bus_volume_db(
+		_music_bus_idx,
 		value
 	)
 
