@@ -69,6 +69,7 @@ _count = 2
 position = Vector2(484, -34)
 curve = SubResource("Curve2D_yt6yt")
 _speed_per_sec = 60.0
+_starting_offset_ratio = 1.0
 
 [node name="Obstacles#HangingSpikes" parent="." index="4" instance=ExtResource("6_y8itu")]
 position = Vector2(893, -223)
@@ -120,14 +121,19 @@ position = Vector2(685, -346)
 position = Vector2(-459, 92)
 
 [node name="Crusher" parent="." index="15" instance=ExtResource("11_fjmq8")]
-position = Vector2(152, -71)
-_max_extent = 30.0
-_crush_speed = 50.0
-_cooldown_time = 0.0
+position = Vector2(56, -72)
+_width = 3
+_max_extent = 64.0
+_crush_speed = 100.0
+_retract_speed = 80.0
+_cooldown_time = Vector2(1, 2)
 
 [node name="Crusher2" parent="." index="16" instance=ExtResource("11_fjmq8")]
-position = Vector2(184, -71)
-_max_extent = 30.0
-_crush_speed = 50.0
-_cooldown_time = 0.0
+position = Vector2(216, -72)
+rotation = 1.5708
+_width = 3
+_max_extent = 64.0
+_crush_speed = 100.0
+_retract_speed = 80.0
+_cooldown_time = Vector2(1, 2)
 _starting_offset_factor = 1.0

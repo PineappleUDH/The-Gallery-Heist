@@ -3,6 +3,7 @@ extends MarginContainer
 @onready var _character_name_label : Label = $PanelContainer/VBoxContainer/Character
 @onready var _text : RichTextLabel = $PanelContainer/VBoxContainer/RichTextLabel
 @onready var _next_icon : TextureRect = $PanelContainer/NextIcon
+@onready var _skip_prevention_cooldown : Timer = $SkipPreventionCooldown
 
 const _char_time : float = 0.06
 var _char_timer : float
@@ -13,9 +14,6 @@ var _is_dialogue_blocking : bool
 var _is_building_text : bool
 var _total_text_characters : int
 
-# TODO: consider a short cooldown timer right after text is fully shown the ignores the next_dialogue input
-#       so players don't accidentaly skip dialogue while trying to show all text
-
 func _ready():
 	set_process(false)
 
@@ -24,7 +22,7 @@ func _input(event : InputEvent):
 		if _is_building_text:
 			# show all text
 			_show_all_text()
-		else:
+		elif _is_building_text == false && _skip_prevention_cooldown.is_stopped():
 			# next
 			_next_dialogue_in_sequence()
 
@@ -50,9 +48,6 @@ func play_dialogue(dialogue_sequence : Array[Dialogue], is_blocking : bool):
 			# non-blocking dialogue can't replace blocking dialogue since the latter is more important
 			push_warning("Attempting to play non-blocking dialogue while a blocking dialogue is playing. blocking dialogue is considered more important and therefore this will be ignored")
 			return
-		else:
-			# clear previous dialogue. nothing to do here code bellow should reset things
-			pass
 	
 	show()
 	_is_dialogue_blocking = is_blocking
@@ -81,7 +76,7 @@ func _next_dialogue_in_sequence():
 	_text.visible_characters = 0
 	_character_name_label.text = _dialogue.character_name
 	
-	_dialogue.portrait # TODO
+	# TODO: _dialogue.portrait
 	
 	set_process(true)
 	_next_icon.hide()
@@ -93,3 +88,7 @@ func _show_all_text():
 	_is_building_text = false
 	_text.visible_ratio = 1
 	set_process(false)
+	
+	# short cooldown timer right after text is fully shown that ignores the next_dialogue input
+	# so players don't accidentaly skip dialogue while trying to show all text
+	_skip_prevention_cooldown.start()

@@ -3,10 +3,12 @@ extends Area2D
 
 @onready var _launch_delay : Timer = $LaunchDelay
 @onready var _animation : AnimatedSprite2D = $Animation
+## how strong the launch pad will push characters
 @export var _launch_force : float = 500.0 :
 	set(value):
 		_launch_force = max(value, 0.0)
 		queue_redraw()
+## if off hides the editor preview
 @export var _toggle_editor_preview : bool = true :
 	set(value):
 		_toggle_editor_preview = value

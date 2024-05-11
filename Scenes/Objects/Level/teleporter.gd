@@ -1,6 +1,7 @@
 extends Area2D
 class_name Teleporter
 
+## the teleporter to teleport to drag and drop from the Scene panel
 @export var _target_teleporter : Teleporter
 
 @onready var output_location : Node2D = $OutputLocation

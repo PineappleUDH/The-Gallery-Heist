@@ -258,6 +258,10 @@ size_flags_vertical = 8
 texture = ExtResource("12_my0ms")
 stretch_mode = 5
 
+[node name="SkipPreventionCooldown" type="Timer" parent="UI/DialoguePlayer"]
+wait_time = 0.22
+one_shot = true
+
 [node name="PauseManager" type="MarginContainer" parent="UI"]
 process_mode = 3
 visible = false

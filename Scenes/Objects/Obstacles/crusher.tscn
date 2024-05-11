@@ -5,30 +5,29 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xs5kd"]
 resource_local_to_scene = true
-size = Vector2(32, 32)
+size = Vector2(32, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dsc87"]
 resource_local_to_scene = true
-size = Vector2(32, 16)
+size = Vector2(32, 4)
 
 [node name="Crusher" type="AnimatableBody2D"]
 sync_to_physics = false
 script = ExtResource("1_sexx8")
 _width = 2
-_height = 2
-_crush_speed = 80.0
-_retract_speed = 50.0
+
+[node name="ChainSprites" type="Node2D" parent="."]
 
 [node name="Sprites" type="Node2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(8, 8)
+position = Vector2(8, 0)
 shape = SubResource("RectangleShape2D_xs5kd")
 
 [node name="HurtBox" parent="." instance=ExtResource("2_4yjvd")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(8, 32)
+position = Vector2(8, 10)
 shape = SubResource("RectangleShape2D_dsc87")
 
 [node name="CooldownTimer" type="Timer" parent="."]
