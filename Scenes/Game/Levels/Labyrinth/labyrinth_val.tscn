@@ -2115,16 +2115,12 @@ position = Vector2(616, 762)
 _width = 3
 _max_extent = 90.0
 _crush_speed = 500.0
-_retract_speed = 30.0
-_cooldown_time = 3.0
 
 [node name="Crusher2" parent="." index="27" instance=ExtResource("32_1aex5")]
 position = Vector2(744, 762)
 _width = 3
 _max_extent = 90.0
 _crush_speed = 500.0
-_retract_speed = 30.0
-_cooldown_time = 3.0
 _starting_offset_factor = 0.5
 
 [node name="Crusher3" parent="." index="28" instance=ExtResource("32_1aex5")]
@@ -2132,8 +2128,6 @@ position = Vector2(904, 760)
 _width = 3
 _max_extent = 90.0
 _crush_speed = 500.0
-_retract_speed = 30.0
-_cooldown_time = 3.0
 _starting_offset_factor = 1.0
 
 [node name="EnemyFish2" parent="." index="29" instance=ExtResource("33_cc650")]

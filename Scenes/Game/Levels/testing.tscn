@@ -2316,3 +2316,14 @@ position = Vector2(2912, 7902)
 
 [node name="LevelCamera" parent="." index="120"]
 position = Vector2(3111, 7914)
+
+[node name="Label" type="Label" parent="." index="122"]
+offset_left = 4711.0
+offset_top = 7743.0
+offset_right = 4795.0
+offset_bottom = 7769.0
+theme_override_fonts/font = ExtResource("10_iovg4")
+theme_override_font_sizes/font_size = 16
+text = "PineappleUDH"
+horizontal_alignment = 1
+vertical_alignment = 1
