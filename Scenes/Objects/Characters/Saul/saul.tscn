@@ -21,7 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://djjnknhd3px7v" path="res://Resources/Textures/Characters/Player/Saul/Wall_Jump (AddinSachen)-Sheet.png" id="19_jrosr"]
 [ext_resource type="Texture2D" uid="uid://bvwrlyelrr3qw" path="res://Resources/Textures/Characters/Player/Saul/water_idle.png" id="20_dbr0l"]
 [ext_resource type="Texture2D" uid="uid://40ofd147r3ud" path="res://Resources/Textures/Characters/Player/Saul/water_swim.png" id="21_u4mgo"]
-[ext_resource type="Texture2D" uid="uid://c3n18ttqpyhnu" path="res://Resources/Godot/particles atlas.tres" id="22_7s8ad"]
+[ext_resource type="Texture2D" uid="uid://c1ye2vsbrhk7x" path="res://Resources/Textures/Particles/particles-Sheet.png" id="22_3d6lp"]
 [ext_resource type="Texture2D" uid="uid://dx0ea2i1opwsi" path="res://Resources/Textures/Particles/bubbles sprite (Addin Sachen).png" id="23_14irh"]
 [ext_resource type="AudioStream" uid="uid://dpg46pasbhqyu" path="res://Resources/Audio/SFX/Player/jump1.wav" id="23_afgeb"]
 [ext_resource type="AudioStream" uid="uid://cqinx1if47psh" path="res://Resources/Audio/SFX/Player/jump2.wav" id="24_mecrg"]
@@ -641,11 +641,8 @@ initial_velocity_max = 5.0
 gravity = Vector3(0, 0, 0)
 scale_min = 0.5
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_e1gwq"]
-load_path = "res://.godot/imported/particles-Sheet.png-ff03683ea4b368a2c4600cc449697963.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mwvod"]
-atlas = SubResource("CompressedTexture2D_e1gwq")
+[sub_resource type="AtlasTexture" id="AtlasTexture_75brh"]
+atlas = ExtResource("22_3d6lp")
 region = Rect2(50, 0, 10, 10)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f7upe"]
@@ -654,6 +651,10 @@ emission_shape = 1
 emission_sphere_radius = 8.0
 gravity = Vector3(0, 0, 0)
 scale_min = 0.5
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vju2v"]
+atlas = ExtResource("22_3d6lp")
+region = Rect2(20, 0, 10, 10)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eh6px"]
 particle_flag_disable_z = true
@@ -665,8 +666,8 @@ gravity = Vector3(0, 0, 0)
 damping_min = 50.0
 damping_max = 50.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_grqm6"]
-atlas = SubResource("CompressedTexture2D_e1gwq")
+[sub_resource type="AtlasTexture" id="AtlasTexture_q43k6"]
+atlas = ExtResource("22_3d6lp")
 region = Rect2(20, 0, 10, 10)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kf0yp"]
@@ -681,8 +682,8 @@ gravity = Vector3(0, 0, 0)
 scale_min = 0.3
 scale_max = 0.6
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_blgdw"]
-atlas = SubResource("CompressedTexture2D_e1gwq")
+[sub_resource type="AtlasTexture" id="AtlasTexture_322s5"]
+atlas = ExtResource("22_3d6lp")
 region = Rect2(10, 0, 10, 10)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_velti"]
@@ -812,7 +813,7 @@ autoplay = "Idle"
 position = Vector2(0, 16)
 emitting = false
 process_material = SubResource("ParticleProcessMaterial_y8iht")
-texture = SubResource("AtlasTexture_mwvod")
+texture = SubResource("AtlasTexture_75brh")
 lifetime = 0.5
 
 [node name="SlideDust" type="GPUParticles2D" parent="Particles" index="1"]
@@ -820,14 +821,14 @@ z_index = -1
 emitting = false
 amount = 5
 process_material = SubResource("ParticleProcessMaterial_f7upe")
-texture = ExtResource("22_7s8ad")
+texture = SubResource("AtlasTexture_vju2v")
 lifetime = 0.9
 
 [node name="Damge" type="GPUParticles2D" parent="Particles" index="2"]
 emitting = false
 amount = 100
 process_material = SubResource("ParticleProcessMaterial_eh6px")
-texture = SubResource("AtlasTexture_grqm6")
+texture = SubResource("AtlasTexture_q43k6")
 one_shot = true
 explosiveness = 1.0
 
@@ -836,7 +837,7 @@ position = Vector2(0, 13)
 emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_kf0yp")
-texture = SubResource("AtlasTexture_blgdw")
+texture = SubResource("AtlasTexture_322s5")
 one_shot = true
 explosiveness = 1.0
 

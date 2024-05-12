@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://d88velhv2jao" path="res://Resources/Textures/Characters/Player/Saul/Hologram.png" id="3_kek0u"]
 [ext_resource type="Texture2D" uid="uid://cfld3k6vsfwld" path="res://Resources/Textures/Checpoint_Inactive.png" id="4_noqhl"]
 [ext_resource type="Shader" path="res://Resources/Shaders/glitchy.gdshader" id="5_ah12y"]
+[ext_resource type="Texture2D" uid="uid://c1ye2vsbrhk7x" path="res://Resources/Textures/Particles/particles-Sheet.png" id="7_udt6b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3hut0"]
 size = Vector2(26, 28)
@@ -127,11 +128,8 @@ gravity = Vector3(0, 0, 0)
 scale_max = 3.0
 scale_curve = SubResource("CurveTexture_030ff")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hbwhq"]
-load_path = "res://.godot/imported/particles-Sheet.png-ff03683ea4b368a2c4600cc449697963.ctex"
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_w5na0"]
-atlas = SubResource("CompressedTexture2D_hbwhq")
+atlas = ExtResource("7_udt6b")
 region = Rect2(0, 0, 10, 10)
 
 [node name="Checkpoint" type="Area2D"]
