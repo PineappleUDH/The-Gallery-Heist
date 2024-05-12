@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://bv3uxfqb2vode"]
+[gd_scene load_steps=4 format=3 uid="uid://bv3uxfqb2vode"]
 
 [ext_resource type="Script" path="res://Scenes/Objects/Obstacles/crusher.gd" id="1_sexx8"]
-[ext_resource type="PackedScene" uid="uid://caabhgsckx3p8" path="res://Scenes/Objects/Characters/hurtbox.tscn" id="2_4yjvd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xs5kd"]
 resource_local_to_scene = true
@@ -18,17 +17,26 @@ _width = 2
 
 [node name="ChainSprites" type="Node2D" parent="."]
 
-[node name="Sprites" type="Node2D" parent="."]
+[node name="BaseSprites" type="Node2D" parent="."]
+
+[node name="CrusherSprites" type="Node2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(8, 0)
 shape = SubResource("RectangleShape2D_xs5kd")
 
-[node name="HurtBox" parent="." instance=ExtResource("2_4yjvd")]
+[node name="DamageArea" type="Area2D" parent="."]
+monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
 position = Vector2(8, 10)
 shape = SubResource("RectangleShape2D_dsc87")
 
 [node name="CooldownTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="AnimationTimer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[connection signal="timeout" from="AnimationTimer" to="." method="_on_animation_timer_timeout"]

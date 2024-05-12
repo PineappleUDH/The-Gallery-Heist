@@ -1,16 +1,25 @@
+@tool
 extends Area2D
 
 signal applied_damage
 
+## if true only deals damage to player
 @export var _target_player_only : bool = false
+## the damage value to apply
 @export var damage : int = 1
-@export var is_deadly : bool = false
-## for damagine objects that knocks-back in a specific direction like spikes
+## kills in one hit
+@export var is_deadly : bool = false :
+	set(value):
+		is_deadly = value
+		notify_property_list_changed()
+## for damaging objects that knocks-back in a specific direction like spikes
 @export var custom_knockback_direction : Vector2 = Vector2.ZERO
 
 var _collision_center : Vector2 = Vector2.ZERO
 
 func _ready():
+	if Engine.is_editor_hint(): return
+	
 	set_physics_process(false)
 	
 	# calculate collision center to use for knockback direction. without this we can only apply the knockback
@@ -28,6 +37,8 @@ func _ready():
 	_collision_center /= shapes_count
 
 func _physics_process(delta : float):
+	if Engine.is_editor_hint(): return
+	
 	if monitoring:
 		for body : Node2D in get_overlapping_bodies():
 			if _is_valid_damage_receiver(body):
@@ -63,3 +74,8 @@ func _check_characters_in_area():
 func _is_valid_damage_receiver(body : Node2D) -> bool:
 	return (body != get_parent() && body is Character &&
 		(_target_player_only == false || (_target_player_only && body is Player)))
+
+func _validate_property(property : Dictionary):
+	if property["name"] == "damage":
+		if is_deadly:
+			property["usage"] = PROPERTY_USAGE_NO_EDITOR
