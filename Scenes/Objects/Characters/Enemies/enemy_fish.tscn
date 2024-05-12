@@ -70,7 +70,8 @@ animations = [{
 radius = 12.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aduex"]
-radius = 90.0
+resource_local_to_scene = true
+radius = 120.0
 
 [node name="EnemyFish" instance=ExtResource("1_xlpgf")]
 script = ExtResource("2_kx5j3")

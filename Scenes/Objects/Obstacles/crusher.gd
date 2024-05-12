@@ -28,28 +28,50 @@ extends AnimatableBody2D
 
 enum _State {crushing, cooldown, retracting}
 
-@onready var _sprites_container : Node2D = $Sprites
-@onready var _chain_sprites_container : Node2D = $ChainSprites
+@onready var _chain_sprites : Node2D = $ChainSprites
+@onready var _base_sprites : Node2D = $BaseSprites
+@onready var _crusher_sprites : Node2D = $CrusherSprites
 @onready var _collider : CollisionShape2D = $CollisionShape2D
-@onready var _hurtbox : Area2D = $HurtBox
-@onready var _hurtbox_collider : CollisionShape2D = $HurtBox/CollisionShape2D
+@onready var _damage_area : Area2D = $DamageArea
+@onready var _damage_area_collider : CollisionShape2D = $DamageArea/CollisionShape2D
 @onready var _cooldown_timer : Timer = $CooldownTimer
 
-const _crusher_texture : Texture2D = preload("res://Resources/Textures/crusher.png")
-const _crush_height_color : Color = Color("ffffff64")
-const _offset_color : Color = Color.WHITE
-const _hutbox_height : float = World.level.tile_size / 4.0
+var _textures : Dictionary # {name:AtlasTexture}
+const _hurtbox_height : float = World.level.tile_size / 4.0
 const _half_tile : Vector2 = Vector2.ONE * World.level.tile_size / 2.0
 
 var _state : _State = _State.crushing
 @onready var _starting_pos : Vector2 = global_position
 var _end_pos : Vector2
-var _chains_count : int = 0
+var _animation_offset_sign : int = 1
+var _knockback_direction : Vector2
+
+const _debug_height_color : Color = Color("ffffff64")
+const _debug_offset_color : Color = Color.WHITE
+
 
 func _ready():
+	# setup textures. all crusher textures in one place to take advantage of reference counting
+	# so we only need to animate one base_center texture for example and all sprites using base_center texture will animate
+	var setup_texture : Callable = func(region_position : Vector2) -> AtlasTexture:
+		var texture : AtlasTexture = AtlasTexture.new()
+		texture.atlas = preload("res://Resources/Textures/crusher.png")
+		texture.region.position = region_position
+		texture.region.size = Vector2.ONE * World.level.tile_size
+		return texture
+	
+	_textures["base_left"] = setup_texture.call(Vector2(0, World.level.tile_size))
+	_textures["base_center"] = setup_texture.call(Vector2(World.level.tile_size, World.level.tile_size))
+	_textures["base_right"] = setup_texture.call(Vector2(World.level.tile_size * 2, World.level.tile_size))
+	_textures["chain"] = setup_texture.call(Vector2(0, World.level.tile_size * 2))
+	_textures["spike"] = setup_texture.call(Vector2(0, World.level.tile_size * 4))
+	_textures["crusher_left"] = setup_texture.call(Vector2(0, World.level.tile_size * 3))
+	_textures["crusher_center"] = setup_texture.call(Vector2(World.level.tile_size, World.level.tile_size * 3))
+	_textures["crusher_right"] = setup_texture.call(Vector2(World.level.tile_size * 2, World.level.tile_size * 3))
+	
 	if Engine.is_editor_hint(): return
 	
-	_hurtbox.custom_knockback_direction = Vector2.DOWN.rotated(rotation)
+	_knockback_direction = Vector2.DOWN.rotated(rotation)
 	
 	# starting pos
 	_end_pos = _starting_pos + Vector2.DOWN.rotated(rotation) * _max_extent
@@ -70,51 +92,31 @@ func _ready():
 func _process(delta : float):
 	if Engine.is_editor_hint(): return
 	
-	# only deal damage when crushing
-	_hurtbox_collider.disabled = !_state == _State.crushing
-	
 	if _state == _State.crushing || _state == _State.retracting:
 		# position
 		var speed : float =\
 			(_crush_speed if _state == _State.crushing else _retract_speed) * delta
 		var target_pos : Vector2 = _end_pos if _state == _State.crushing else _starting_pos
 		global_position = global_position.move_toward(target_pos, speed)
-		_chain_sprites_container.global_position = _starting_pos
+		
+		# don't move chain and base sprites containers
+		_chain_sprites.global_position = _starting_pos
+		_base_sprites.global_position = _starting_pos
+		
+		# move chain sprites individually
+		# we instantiated all potential sprites at start so we don't remove and add sprites at runtime
+		for i in range(0, _chain_sprites.get_child_count(), 2):
+			for j in 2:
+				var chain_sprite : Sprite2D = _chain_sprites.get_child(i+j)
+				chain_sprite.position = Vector2(
+					0 if j == 0 else (_width-1) * World.level.tile_size,
+					min((i / 2.0) * World.level.tile_size, (global_position - _starting_pos).length())
+				)
 		
 		var starting_pos_diff : Vector2 = global_position - _starting_pos
 		# expand collider to prevent passing through chains
 		_collider.shape.size.y = World.level.tile_size + starting_pos_diff.length()
 		_collider.position = -starting_pos_diff.rotated(-rotation) - _half_tile + _collider.shape.size / 2.0
-		
-		# chains
-		# NOTE: for each chain we spawn 2 chain sprites, one for right edge and one for left
-		#       that's why chains count is doubled (j in 2) when adding or removing sprites
-		var new_chains_count : int = floor((starting_pos_diff / World.level.tile_size).length()) + 1
-		if new_chains_count > _chains_count:
-			# add more chains
-			for i in new_chains_count - _chains_count:
-				for j in 2:
-					var sprite : Sprite2D = Sprite2D.new()
-					sprite.texture = AtlasTexture.new()
-					sprite.texture.atlas = _crusher_texture
-					sprite.texture.region = Rect2(Vector2.ZERO, Vector2.ONE * World.level.tile_size)
-					_chain_sprites_container.add_child(sprite)
-					sprite.position = Vector2(
-						0 if j == 0 else (_width-1) * World.level.tile_size,
-						(_chains_count + i) * World.level.tile_size
-					)
-		
-		elif new_chains_count < _chains_count:
-			# remove chains
-			for i in _chains_count - new_chains_count:
-				for j in 2:
-					var target_child : Sprite2D = _chain_sprites_container.get_child(
-						_chain_sprites_container.get_child_count()-1 - i
-					)
-					target_child.queue_free()
-					_chain_sprites_container.remove_child(target_child)
-		
-		_chains_count = new_chains_count
 		
 		if global_position == target_pos:
 			if _state == _State.crushing && _cooldown_time.x:
@@ -135,6 +137,47 @@ func _process(delta : float):
 				# retract
 				_state = _State.retracting
 
+func _physics_process(delta : float):
+	if Engine.is_editor_hint(): return
+	
+	# only deal damage when squeezing character against a solid object
+	# TODO: current attempt at crushing detection, it appears that get_slide_collission() doesn't
+	#       count collisions after the solver moves the body out of geometry so we can't detect
+	#       both crusher and tilemap at the same time. delaying this to another time to save my sanity
+	#       for now the crusher kills on contact
+	#if _state == _State.crushing:
+		#for node in _damage_area.get_overlapping_bodies():
+			#if node is Character:
+				#if node.get_slide_collision_count() >= 2:
+					#var collision_normals : Dictionary = {} # {body:combined_col_normal, ..}
+					#for i in node.get_slide_collision_count():
+						#var col : KinematicCollision2D = node.get_slide_collision(i)
+						#if collision_normals.has(col.get_collider()) == false:
+							#collision_normals[col.get_collider()] = Vector2.ZERO
+						#collision_normals[col.get_collider()] += col.get_normal()
+					#
+					#for collider in collision_normals.keys():
+						#collision_normals[collider] = collision_normals[collider].normalized()
+					#
+					#var collision_magnitudes : Vector2 = Vector2.ZERO
+					#for collider in collision_normals.keys():
+						#collision_magnitudes += collision_normals[collider]
+					
+					#if collision_normals.keys().size() > 1:
+						#prints(
+							#node.get_slide_collision_count(), 
+							#collision_magnitudes, 
+							#collision_magnitudes.length()
+						#)
+					
+					#if collision_magnitudes.length() < 0.5:
+					#	node.take_damage(0, _knockback_direction, true)
+	
+	if _state == _State.crushing:
+		for node in _damage_area.get_overlapping_bodies():
+			if node is Character:
+				node.take_damage(0, _knockback_direction, true)
+
 func _draw():
 	if Engine.is_editor_hint() == false: return
 	
@@ -146,49 +189,78 @@ func _draw():
 	# crush height
 	draw_line(
 		starting_pos,
-		end_pos, _crush_height_color, World.level.tile_size
+		end_pos, _debug_height_color, World.level.tile_size
 	)
 	
 	# starting offset
 	draw_line(
 		starting_pos,
-		lerp(starting_pos, end_pos, _starting_offset_factor), _offset_color, World.level.tile_size
+		lerp(starting_pos, end_pos, _starting_offset_factor), _debug_offset_color, World.level.tile_size
 	)
 
 func _build_crusher():
 	if is_node_ready() == false:
 		await ready
 	
-	for sprite : Sprite2D in _sprites_container.get_children():
+	# cleanup sprites
+	for sprite : Sprite2D in _crusher_sprites.get_children():
+		sprite.queue_free()
+	for sprite : Sprite2D in _base_sprites.get_children():
 		sprite.queue_free()
 	
-	# sprites
+	# base and crusher sprites
 	for w in _width:
-		var sprite : Sprite2D = Sprite2D.new()
-		sprite.position = Vector2(w * World.level.tile_size, 0.0)
-		sprite.texture = AtlasTexture.new()
-		sprite.texture.atlas = _crusher_texture
-		sprite.texture.region.size = Vector2.ONE * World.level.tile_size
-		_sprites_container.add_child(sprite)
-		
+		var base_sprite : Sprite2D = Sprite2D.new()
+		base_sprite.position = Vector2(w * World.level.tile_size, 0.0)
 		if w == 0: # left
-			sprite.texture.region.position = Vector2(0, World.level.tile_size)
+			base_sprite.texture = _textures["base_left"]
 		elif w == _width-1: # right
-			sprite.texture.region.position = Vector2(2 * World.level.tile_size, World.level.tile_size)
+			base_sprite.texture = _textures["base_right"]
 		else: # center
-			sprite.texture.region.position = Vector2(1 * World.level.tile_size, World.level.tile_size)
+			base_sprite.texture = _textures["base_center"]
+		_base_sprites.add_child(base_sprite)
+		
+		var crusher_sprite : Sprite2D = Sprite2D.new()
+		crusher_sprite.position = base_sprite.position
+		if w == 0: # left
+			crusher_sprite.texture = _textures["crusher_left"]
+		elif w == _width-1: # right
+			crusher_sprite.texture = _textures["crusher_right"]
+		else: # center
+			crusher_sprite.texture = _textures["crusher_center"]
+		_crusher_sprites.add_child(crusher_sprite)
+		
+		var crusher_spike_sprite : Sprite2D = Sprite2D.new()
+		crusher_spike_sprite.position = base_sprite.position + Vector2(0.0, World.level.tile_size)
+		crusher_spike_sprite.texture = _textures["spike"]
+		_crusher_sprites.add_child(crusher_spike_sprite)
+	
+	# chain sprites
+	for i in int(_max_extent / World.level.tile_size) - 2:
+		for j in 2: # 2 for left and right sprites
+			var chain_sprite : Sprite2D = Sprite2D.new()
+			chain_sprite.texture = _textures["chain"]
+			_chain_sprites.add_child(chain_sprite)
 	
 	# colliders
 	_collider.shape.size = Vector2(_width * World.level.tile_size, World.level.tile_size)
 	_collider.position = -_half_tile + _collider.shape.size / 2.0
 	
-	_hurtbox_collider.shape.size = Vector2(
+	_damage_area_collider.shape.size = Vector2(
 		_width * World.level.tile_size,
-		_hutbox_height
+		_hurtbox_height
 	)
-	_hurtbox_collider.position = -_half_tile + Vector2(
-		_hurtbox_collider.shape.size.x / 2.0,
-		World.level.tile_size + _hutbox_height / 2.0
+	_damage_area_collider.position = -_half_tile + Vector2(
+		_damage_area_collider.shape.size.x / 2.0,
+		World.level.tile_size + _hurtbox_height / 2.0
 	)
 	
 	queue_redraw()
+
+func _on_animation_timer_timeout():
+	# manual animation using _animation_offset_sign as a shift multiplier
+	# that's what I get for wanting maximum customization
+	for texture_name : String in _textures.keys():
+		_textures[texture_name].region.position.x += World.level.tile_size * 3 * _animation_offset_sign
+	
+	_animation_offset_sign = -_animation_offset_sign
