@@ -1617,6 +1617,7 @@ _labyrinth_scene_name = "labyrinth_val"
 
 [node name="LabyrinthDoor6" parent="Labyrinth/Doors" index="5" instance=ExtResource("29_l0rqj")]
 position = Vector2(4752, 7816)
+_labyrinth_scene_name = "labyrinth_pineappleudh"
 
 [node name="LabyrinthDoor7" parent="Labyrinth/Doors" index="6" instance=ExtResource("29_l0rqj")]
 position = Vector2(4752, 7704)
